@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">MarketDillo</string>
+    <string name="hint_correo">Correo</string>
+    <string name="hint_correo2">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_password2">Confirmar contraseña</string>
+    <string name="button_login">Iniciar Sesión</string>
+    <string name="crear_cuenta">¿No tienes cuenta? Crea una aquí</string>
+    <string name="crear_cuenta2">Crear Cuenta</string>
+    <string name="hint_nombres">Nombres</string>
+    <string name="hint_apellidos">Apellidos</string>
+    <string name="hint_celular">Celular</string>
+    <string name="hint_didentidad">Documento de identidad</string>
+    <string name="hint_fechanacimiento">Fecha de nacimiento</string>
+    <string name="hint_direccion">Dirección</string>
+    <string name="title_activity_mercadillos">Mercadillos</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_vista_productos_mercadillo">VistaProductosMercadillo</string>
+    <string name="title_activity_ejemplo">ejemplo</string>
+    <string name="title_activity_vista_campesino">VistaCampesino</string>
+</resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="81dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="2sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView autosizing"
+        android:textAppearance="?attr/textAppearanceListItem"
+        tools:text="Manzana" />
+
+    <TextView
+        android:id="@+id/descripcion"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="81dp"
+        android:layout_marginTop="25dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView autosizing"
+        tools:ignore="UnknownId"
+        tools:text="Descripcion" />
+
+    <TextView
+        android:id = "@+id/precio"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descripcion"
+        android:layout_marginLeft="81dp"
+        android:layout_marginTop="2dp"
+        android:text="$ 1000-lb" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="#008577"
+        android:textColor="#ffff"
+        android:textAllCaps="false"
+        android:layout_marginRight="10dp"
+        android:text="Agregar"
+        android:textSize="15sp"/>
+
+
+
+</RelativeLayout>

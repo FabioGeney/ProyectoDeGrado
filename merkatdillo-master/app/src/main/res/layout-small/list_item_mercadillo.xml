@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:autoSizeTextType="uniform"
+        tools:text="Mercadillo de frutas" />
+
+    <TextView
+        android:id="@+id/costoEnvio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nombre"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="5dp"
+        tools:ignore="UnknownId"
+        tools:text="Envio $5000" />
+
+
+    <TextView
+        android:id="@+id/calificacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/costoEnvio"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="6dp"
+        android:textColor="#ffbf00"
+        tools:text="4,5" />
+
+    <TextView
+        android:id="@+id/tiempoEnvio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="174dp"
+        android:layout_below="@+id/nombre"
+        android:layout_marginTop="5dp"
+        tools:text="50 min"
+        />
+
+    <ImageView
+        android:id="@+id/calif"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_below="@+id/costoEnvio"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="11dp"
+        app:srcCompat="@drawable/ic_estrella"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageView
+        android:id="@+id/favorito"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        app:srcCompat="@drawable/ic_favorito"
+        tools:ignore="VectorDrawableCompat" />
+
+</RelativeLayout>

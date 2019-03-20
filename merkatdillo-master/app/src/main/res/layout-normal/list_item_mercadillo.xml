@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="81dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="2sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView autosizing"
+        android:textAppearance="?attr/textAppearanceListItem"
+        tools:text="Mercadillo de frutas" />
+
+    <TextView
+        android:id="@+id/costoEnvio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nombre"
+        android:layout_marginLeft="81dp"
+        android:layout_marginTop="4dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView autosizing"
+        tools:ignore="UnknownId"
+        tools:text="Envio $5000" />
+
+    <TextView
+        android:id="@+id/calificacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentRight="true"
+        android:textColor="#ffbf00"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="2sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView autosizing"
+        tools:ignore="UnknownId"
+        tools:text="4,5" />
+
+    <TextView
+        android:id="@+id/tiempoEnvio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nombre"
+        android:layout_marginLeft="174dp"
+        android:layout_marginTop="4dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="2sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView autoszing"
+        tools:ignore="UnknownId"
+        tools:text="50 min" />
+
+    <ImageView
+        android:id="@+id/calif"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="90dp"
+        app:srcCompat="@drawable/ic_estrella"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageView
+        android:id="@+id/favorito"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        app:srcCompat="@drawable/ic_favorito"
+        tools:ignore="VectorDrawableCompat"/>
+
+
+</RelativeLayout>

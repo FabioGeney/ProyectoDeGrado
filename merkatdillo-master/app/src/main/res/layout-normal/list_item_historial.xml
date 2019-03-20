@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/nombre"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="81dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="2sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView autosizing"
+        android:textAppearance="?attr/textAppearanceListItem"
+        tools:text="Mercadillo de frutas" />
+
+    <TextView
+        android:id="@+id/fecha"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nombre"
+        android:layout_marginLeft="81dp"
+        android:layout_marginTop="4dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView autosizing"
+        tools:ignore="UnknownId"
+        tools:text="30 de enero, 2019" />
+
+    <Button
+        android:id="@+id/detalles"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="81dp"
+        android:layout_marginTop="50dp"
+        android:background="#008577"
+        android:text="Ver detalles"
+        android:textAllCaps="false"
+        android:textColor="#ffff"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/pedir"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="40dp"
+        android:background="#008577"
+        android:text="Pedir de nuevo"
+        android:textAllCaps="false"
+        android:textColor="#ffff"
+        android:textSize="12sp" />
+
+
+
+
+
+
+</RelativeLayout>

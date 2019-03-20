@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PtsCampesinoFragment">
+
+    <ListView
+        android:id="@+id/producto_list_camp"
+        android:layout_width="match_parent"
+        android:layout_height="445dp"
+        android:divider="#B4B1B1"
+        android:dividerHeight="1dp"/>
+
+
+</FrameLayout>

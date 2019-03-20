@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mercadillos"
+            android:icon="@drawable/ic_menu_mercadillos"
+            android:title="Mercadillos" />
+        <item
+            android:id="@+id/pedidos"
+            android:icon="@drawable/ic_menu_pedidos"
+            android:title="Pedidos" />
+        <item
+            android:id="@+id/historial"
+            android:icon="@drawable/ic_menu_historial"
+            android:title="Historial" />
+        <item
+            android:id="@+id/nav_favoritos"
+            android:icon="@drawable/ic_menu_favoritos"
+            android:title="Favoritos" />
+        <item
+            android:id="@+id/confi"
+            android:icon="@drawable/ic_menu_conf"
+            android:title="Configuración" />
+    </group>
+
+
+
+</menu>

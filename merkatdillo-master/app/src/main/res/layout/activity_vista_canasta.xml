@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VistaCanasta">
+    <include android:id="@+id/toolbar" layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="111dp"
+        android:layout_below="@+id/toolbar">
+
+        <TextView
+            android:id="@+id/nombreMercadillo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Mercadillo de frutas"
+            android:textAppearance="?attr/textAppearanceListItem"/>
+
+        <TextView
+            android:id="@+id/envio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nombreMercadillo"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Envio $4000" />
+
+        <TextView
+            android:id="@+id/tiempo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nombreMercadillo"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/envio"
+            android:layout_toRightOf="@+id/envio"
+            android:text="40 min" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nombreMercadillo"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="49dp"
+            android:text="Forma de Pago"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/metodoPago"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nombreMercadillo"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="58dp"
+            android:layout_marginTop="49dp"
+            android:text="Elegir"
+             />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nombreMercadillo"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="95dp"
+            android:text="Dirección de entrega"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/direccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Cr 28 # 43-54 Apto 101"
+             />
+        <ListView
+            android:layout_marginTop="15dp"
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/direccion">
+        </ListView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:text="Total"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="22dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:text="$ 100 000"
+            />
+
+        <Button
+            android:id="@+id/finalizar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
+            android:textAllCaps="false"
+            android:text="Enviar Pedido"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

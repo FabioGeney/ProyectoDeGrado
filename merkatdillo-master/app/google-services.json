@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "856796292768",
+    "firebase_url": "https://basedatosmarketdillo.firebaseio.com",
+    "project_id": "basedatosmarketdillo",
+    "storage_bucket": "basedatosmarketdillo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856796292768:android:aa7b8d401844fb1f",
+        "android_client_info": {
+          "package_name": "com.proyecto.marketdillo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856796292768-ehlp6v83mre1trnkarvaortlsnq88d5d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.marketdillo",
+            "certificate_hash": "5882149d21ecb795968080728961ac75f6192929"
+          }
+        },
+        {
+          "client_id": "856796292768-ec6atf9roge8lelcnsovbh0cuhapbm7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFP2xFM3b094sTOhkmD_naG1K3VdQUdBc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856796292768-ec6atf9roge8lelcnsovbh0cuhapbm7o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
