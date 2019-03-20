@@ -17,12 +17,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CrearCuentaActivity extends AppCompatActivity {
 
     private static final String TAG = "CrearCuentaActivity";
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private EditText edtnombres;
     private EditText edtapellidos;
