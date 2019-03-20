@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class PedidosAdapter extends ArrayAdapter<Pedidos> {
@@ -38,7 +40,7 @@ public class PedidosAdapter extends ArrayAdapter<Pedidos> {
         TextView total = convertView.findViewById(R.id.total);
         Pedidos pedido = getItem(position);
 
-        imagen.setImageResource(pedido.getImagen());
+        Picasso.with(context).load(pedido.getImagen()).fit().into(imagen);
         nombre.setText( pedido.getNombreMercadillo());
         estado.setText(pedido.getEstado() );
         total.setText( "$ " + pedido.getTotal());

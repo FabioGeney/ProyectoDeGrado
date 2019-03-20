@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class HistorialAdapter extends ArrayAdapter<Historial> {
@@ -42,7 +44,7 @@ public class HistorialAdapter extends ArrayAdapter<Historial> {
         TextView fechaPedido = (TextView)convertView.findViewById(R.id.fecha);
         Historial historial = getItem(position);
 
-        imagen.setImageResource(historial.getImagen());
+        Picasso.with(context).load(historial.getImagen()).fit().into(imagen);
         nombre.setText( historial.getNombreMercadillo());
         fechaPedido.setText( historial.getFecha() );
 

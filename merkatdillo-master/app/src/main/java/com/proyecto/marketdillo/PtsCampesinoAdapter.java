@@ -10,12 +10,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class PtsCampesinoAdapter extends ArrayAdapter<Producto> {
-
+    Context context;
     public PtsCampesinoAdapter(Context context, List<Producto> objects) {
         super(context, 0, objects);
+        this.context = context;
     }
 
     @SuppressLint("ResourceAsColor")
@@ -39,7 +42,7 @@ public class PtsCampesinoAdapter extends ArrayAdapter<Producto> {
         ImageButton borrar = convertView.findViewById(R.id.borrar);
         Producto producto = getItem(position);
 
-        imagen.setImageResource(producto.getImagen());
+        Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
         nombre.setText( producto.getNombre());
         descripcion.setText( producto.getDescripcion() );
         costoCantidad.setText(producto.getPrecioCantidad());

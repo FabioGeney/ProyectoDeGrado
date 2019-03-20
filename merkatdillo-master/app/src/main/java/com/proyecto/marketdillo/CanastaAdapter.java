@@ -10,13 +10,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class CanastaAdapter extends ArrayAdapter<Canasta> {
-
+    Context context;
     public CanastaAdapter(Context context, List<Canasta> objects) {
         super(context, 0, objects);
-
+        this.context = context;
     }
 
     @SuppressLint("ResourceAsColor")
@@ -40,8 +42,7 @@ public class CanastaAdapter extends ArrayAdapter<Canasta> {
         final TextView cantidad = convertView.findViewById(R.id.cantidad);
 
         final Canasta canasta = getItem(position);
-
-        imagen.setImageResource(canasta.getImagen());
+        Picasso.with(context).load(canasta.getImagen()).fit().into(imagen);
         nombre.setText( canasta.getNombreProducto());
         precioProducto.setText( "$ " + canasta.getPrecioProducto());
          cantidad.setText("1");

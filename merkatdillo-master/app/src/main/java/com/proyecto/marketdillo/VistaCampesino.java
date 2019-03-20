@@ -28,8 +28,8 @@ public class VistaCampesino extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                PtsCampesinoFragment ptsFragment = new PtsCampesinoFragment();
+                ptsFragment.saveProducto(new Producto("Nombre","descripcion","$3500 por lb", R.mipmap.ic_fruit));
             }
         });
 

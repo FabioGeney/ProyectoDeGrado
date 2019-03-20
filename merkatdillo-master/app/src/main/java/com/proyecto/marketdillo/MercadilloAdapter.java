@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class MercadilloAdapter extends ArrayAdapter<Mercadillo> {
@@ -43,7 +45,7 @@ public class MercadilloAdapter extends ArrayAdapter<Mercadillo> {
         TextView calificacion = convertView.findViewById(R.id.calificacion);
         Mercadillo mercadillo = getItem(position);
 
-        imagen.setImageResource(mercadillo.getImagen());
+        Picasso.with(context).load(mercadillo.getImagen()).fit().into(imagen);
         nombre.setText( mercadillo.getNombre());
         costoEnvio.setText("Envio $ " +mercadillo.getCostoEnvio() );
         tiempoEnvio.setText( mercadillo.getTiempoEntrega());

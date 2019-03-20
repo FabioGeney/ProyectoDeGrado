@@ -9,12 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class ProductoAdapter extends ArrayAdapter<Producto> {
+    Context context ;
 
     public ProductoAdapter(Context context, List<Producto> objects) {
         super(context, 0, objects);
+        this.context = context;
     }
 
     @SuppressLint("ResourceAsColor")
@@ -36,7 +40,7 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
         TextView costoCantidad = (TextView)convertView.findViewById(R.id.precio);
         Producto producto = getItem(position);
 
-        imagen.setImageResource(producto.getImagen());
+        Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
         nombre.setText( producto.getNombre());
         descripcion.setText( producto.getDescripcion() );
         costoCantidad.setText(producto.getPrecioCantidad());

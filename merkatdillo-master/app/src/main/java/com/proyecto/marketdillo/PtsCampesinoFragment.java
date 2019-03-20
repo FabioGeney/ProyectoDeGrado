@@ -63,7 +63,7 @@ public class PtsCampesinoFragment extends Fragment {
 
         return root;
     }
-    private void saveProducto(Producto producto) {
+    public void saveProducto(Producto producto) {
         producto1.put(producto.getNombre(), producto);
     }
     public List<Producto> getProducto() {
