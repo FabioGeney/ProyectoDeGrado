@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CrearCuentaActivity extends AppCompatActivity {
 
@@ -62,15 +66,12 @@ public class CrearCuentaActivity extends AppCompatActivity {
         btncrearcuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cuentanueva(edtemail.getText().toString(), edtpassword.getText().toString());
+                cuentanueva();
             }
         });
 
         edtemail.addTextChangedListener(loginTextWatcher);
         edtpassword.addTextChangedListener(loginTextWatcher);
-
-
-
 
 
     }
@@ -91,17 +92,46 @@ public class CrearCuentaActivity extends AppCompatActivity {
         };
     }
 
-    private void cuentanueva(String email, String password){
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(CrearCuentaActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
-                } else{
-                    Toast.makeText(CrearCuentaActivity.this, "Error creando cuenta", Toast.LENGTH_SHORT).show();
+    private void cuentanueva(){
+        String nombres = edtnombres.getText().toString();
+        String apellidos = edtapellidos.getText().toString();
+        String email = edtemail.getText().toString();
+        String celular = edtcelular.getText().toString();
+        String fecha = edtfechanacimiento.getText().toString();
+        String didentidad = edtdidentidad.getText().toString();
+        String direccion = edtdireccion.getText().toString();
+        String password = edtpassword.getText().toString();
+        String password2 = edtpassword2.getText().toString();
+        if(password.equals(password2)){
+            final Map<String, Object> user = new HashMap<>();
+            user.put("nombre",nombres);
+            user.put("apellidos",apellidos);
+            user.put("email",email);
+            user.put("celular",celular);
+            user.put("fecha",fecha);
+            user.put("doc.identidad",didentidad);
+            user.put("direccion",direccion);
+            user.put("password",password);
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                        user.put("id",firebaseUser.getUid());
+                        db.collection("Campesino").document().set(user);
+                        Toast.makeText(CrearCuentaActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(CrearCuentaActivity.this, MainActivity.class);
+                        startActivity(i);
+                    } else{
+                        Toast.makeText(CrearCuentaActivity.this, "Error creando cuenta", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }else {
+            Toast.makeText(CrearCuentaActivity.this, "Las contraseñas son diferentes, por favor vuelve a intentarlo", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     private TextWatcher loginTextWatcher = new TextWatcher() {
