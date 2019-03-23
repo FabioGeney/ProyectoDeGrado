@@ -2,18 +2,30 @@ package com.proyecto.marketdillo;
 
 
 import android.content.Intent;
-import android.media.MediaCas;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -22,9 +34,11 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class MercadilloFragment extends Fragment {
-    private ListView mercadilloList;
-    private MercadilloAdapter mercadilloAdapter;
-    private HashMap<String, Mercadillo> mercadillos1 = new HashMap<>();
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mercadilloAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Mercadillo> mercadillos1;
+
 
 
 
@@ -51,31 +65,54 @@ public class MercadilloFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_mercadillo, container, false);
-        Mercadillo p = new Mercadillo("Mecadillo de frutas ", "50 min", 4, 4500, R.mipmap.ic_merca_image);
-        saveMercadillo(p);
-        saveMercadillo(new Mercadillo("Fruteria la 31 ", "40 min", 4, 4000, R.mipmap.ic_merca_image));
-        // Instancia del ListView.
-        mercadilloList = (ListView) root.findViewById(R.id.mercadillo_list);
-        // Inicializar el adaptador con la fuente de datos.
-        mercadilloAdapter = new MercadilloAdapter(getActivity(), getMercadillos());
-        //Relacionando la lista con el adaptador
-        mercadilloList.setAdapter(mercadilloAdapter);
+        mercadillos1 = getMercadillos();
 
-        mercadilloList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);
-                startActivity(intent);
-            }
-        });
+        layoutManager = new LinearLayoutManager(getContext());
+        // Instancia del ListView.
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.mercadillo_Recycler);
+
         return root;
     }
-    private void saveMercadillo(Mercadillo mercadillo) {
-        mercadillos1.put(mercadillo.getNombre(), mercadillo);
-    }
-    public List<Mercadillo> getMercadillos() {
-        return new ArrayList<>(mercadillos1.values());
-    }
 
+    public List<Mercadillo> getMercadillos() {
+        final ArrayList<Mercadillo> mercadillos = new ArrayList<>();
+        mercadillos.add(new Mercadillo("Mercadillo de frutas", "40 min", "4.5", "4500", R.mipmap.ic_merca_image));
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Mercadillo")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Mercadillo mercadillo = document.toObject(Mercadillo.class);
+
+                                mercadillo.setImagen(R.mipmap.ic_merca_image);
+                                mercadillos.add(mercadillo);
+
+                            }
+                            // Inicializar el adaptador con la fuente de datos.
+
+                            mercadilloAdapter = new MercadilloAdapter(mercadillos1, R.layout.list_item_mercadillo, new MercadilloAdapter.OnItemClickListener() {
+                                @Override
+                                public void OnItemClick(Mercadillo mercadillo, int posicion) {
+                                    Toast.makeText(getContext(), mercadillo.getNombre(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            //Relacionando la lista con el adaptador
+                            mRecyclerView.setLayoutManager(layoutManager);
+                            mRecyclerView.setAdapter(mercadilloAdapter);
+
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        return mercadillos;
+    }
 
 }

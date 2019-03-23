@@ -3,17 +3,23 @@ package com.proyecto.marketdillo;
 public class Mercadillo {
     private String id;
     private String nombre;
+    private String calificacion;
     private String tiempoEntrega;
-    private float calificacion;
-    private int costoEnvio;
+    private String costoEnvio;
     private int imagen;
 
     Mercadillo(){
 
 
     };
+    public Mercadillo( String nombre, String calificacion, String tiempoEntrga, String costoEnvio){
+        this.nombre = nombre;
+        this.tiempoEntrega = tiempoEntrga;
+        this.calificacion = calificacion;
+        this.costoEnvio = costoEnvio;
+    }
 
-    public Mercadillo( String nombre, String tiempoEntrga, float calificacion, int costoEnvio, int imagen){
+    public Mercadillo( String nombre, String tiempoEntrga, String calificacion, String costoEnvio, int imagen){
         this.nombre = nombre;
         this.tiempoEntrega = tiempoEntrga;
         this.calificacion = calificacion;
@@ -21,7 +27,7 @@ public class Mercadillo {
         this.imagen = imagen;
     }
 
-    public Mercadillo( String id, String nombre, String tiempoEntrga, float calificacion, int costoEnvio, int imagen){
+    public Mercadillo( String id, String nombre, String tiempoEntrga, String calificacion, String costoEnvio, int imagen){
         this.id = id;
         this.nombre = nombre;
         this.tiempoEntrega = tiempoEntrga;
@@ -30,11 +36,11 @@ public class Mercadillo {
         this.imagen = imagen;
     }
 
-    public float getCalificacion() {
+    public String getCalificacion() {
         return calificacion;
     }
 
-    public int getCostoEnvio() {
+    public String getCostoEnvio() {
         return costoEnvio;
     }
 
@@ -46,7 +52,7 @@ public class Mercadillo {
         return imagen;
     }
 
-    public String getNombre() {
+    public  String getNombre() {
         return nombre;
     }
 
@@ -58,11 +64,11 @@ public class Mercadillo {
         this.imagen = imagen;
     }
 
-    public void setCalificacion(float calificacion) {
+    public void setCalificacion(String calificacion) {
         this.calificacion = calificacion;
     }
 
-    public void setCostoEnvio(int costoEnvio) {
+    public void setCostoEnvio(String costoEnvio) {
         this.costoEnvio = costoEnvio;
     }
 
@@ -78,16 +84,7 @@ public class Mercadillo {
         this.tiempoEntrega = tiempoEntrega;
     }
 
-    @Override
-    public String toString() {
-        return "Mercadillo{" +
-                "ID='" + id + '\'' +
-                "Nombre='" + nombre + '\'' +
-                ", TiempoEntrga='" + tiempoEntrega + '\'' +
-                ", Calificacion='" + calificacion + '\'' +
-                ", CostoEnvio='" + costoEnvio + '\'' +
-                '}';
-    }
+
 
 }
 
