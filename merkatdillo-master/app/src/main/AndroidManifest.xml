@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".VistaCampesino"
             android:label="@string/title_activity_vista_campesino"
@@ -53,13 +54,19 @@
             android:name=".VistaUsuarios"
             android:label="@string/title_activity_mercadillos"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/ThemeMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".BottomActivity">
+
         </activity>
     </application>
 

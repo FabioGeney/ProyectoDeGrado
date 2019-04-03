@@ -26,4 +26,7 @@
     <string name="title_activity_vista_productos_mercadillo">VistaProductosMercadillo</string>
     <string name="title_activity_ejemplo">ejemplo</string>
     <string name="title_activity_vista_campesino">VistaCampesino</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_vitrina">Vitrina</string>
+    <string name="title_start">Empezar</string>
 </resources>

@@ -13,4 +13,5 @@
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorDivider2">#E0E0E0</color>
+    <color name="backgroundtext_card">#53292929</color>
 </resources>

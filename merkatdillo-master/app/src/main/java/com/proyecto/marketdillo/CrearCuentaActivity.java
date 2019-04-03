@@ -2,12 +2,14 @@ package com.proyecto.marketdillo;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +43,9 @@ public class CrearCuentaActivity extends AppCompatActivity {
     private EditText edtpassword;
     private EditText edtpassword2;
 
+    private TextInputLayout textInputLayoutNombres;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +65,9 @@ public class CrearCuentaActivity extends AppCompatActivity {
         btncrearcuenta = findViewById(R.id.btncrearcuenta);
         edtpassword = findViewById(R.id.edtpassword);
         edtpassword2 = findViewById(R.id.edtpassword2);
+
+        textInputLayoutNombres = findViewById(R.id.textInputLayoutNombres);
+
 
         initialize();
 
@@ -152,11 +160,22 @@ public class CrearCuentaActivity extends AppCompatActivity {
             String didentidadentrada = edtdidentidad.getText().toString().trim();
             String direccionentrada = edtdireccion.getText().toString().trim();
             btncrearcuenta.setEnabled(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty());
+            if(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty()){
+                btncrearcuenta.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
+            }else {
 
+
+            }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
+            if(!btncrearcuenta.isEnabled()){
+                btncrearcuenta.setBackgroundColor(getResources().getColor(R.color.colorDivider));
+            }else {
+
+
+            }
 
         }
     };
