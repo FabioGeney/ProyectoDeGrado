@@ -12,11 +12,13 @@
     <string name="hint_celular">Celular</string>
     <string name="hint_didentidad">Documento de identidad</string>
     <string name="hint_fechanacimiento">Fecha de nacimiento</string>
-    <string name="hint_direccion">Dirección</string>
+    <string name="hint_direccion">Dirección de entrega</string>
+    <string name="hint_direccion2">Dirección de tu finca</string>
     <string name="hint_mercadillo">Dale un nombre a tu Mercadillo</string>
-    <string name="hint_tiempoaprox">Tiempo aproximado a Bucaramanga</string>
-    <string name="tx_productor">¿<u>Eres productor</u>?</string>
-    <string name="tx_comprador">¿Eres comprador?</string>
+    <string name="hint_tiempoaprox">Tiempo aproximado de entrega</string>
+    <string name="tx_productor">¿<u>Eres</u> <u>productor</u>?</string>
+    <string name="tx_comprador">¿<u>Eres</u> <u>comprador</u>?</string>
+    <string name="txt_unete">Únete ya a MerkatDillo!</string>
     <string name="title_activity_mercadillos">Mercadillos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

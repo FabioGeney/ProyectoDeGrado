@@ -187,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="18"
-                    android:hint="@string/hint_direccion"
+                    android:hint="@string/hint_direccion2"
                     android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
