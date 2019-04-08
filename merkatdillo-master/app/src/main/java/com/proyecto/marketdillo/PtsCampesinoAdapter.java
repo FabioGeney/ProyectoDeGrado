@@ -2,6 +2,8 @@ package com.proyecto.marketdillo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,46 +11,106 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class PtsCampesinoAdapter extends ArrayAdapter<Producto> {
-    Context context;
-    public PtsCampesinoAdapter(Context context, List<Producto> objects) {
-        super(context, 0, objects);
-        this.context = context;
+public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapter.ViewHolder> {
+
+    private List<Producto> productos;
+    private int layout;
+    private OnItemClickListener itemClickListener;
+    private Context context;
+
+    public  PtsCampesinoAdapter(List<Producto> productos, int layout, OnItemClickListener itemClickListener ){
+        this.productos = productos;
+        this.layout = layout;
+        this.itemClickListener = itemClickListener;
+    }
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(layout, viewGroup, false);
+        context = viewGroup.getContext();
+        ViewHolder viewHolder = new ViewHolder(v);
+        return viewHolder;
     }
 
-    @SuppressLint("ResourceAsColor")
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Obtener inflater.
-        LayoutInflater inflater = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        viewHolder.bind(productos.get(i),itemClickListener);
+    }
 
-        // ¿Existe el view actual?
-        if (null == convertView) {
-            convertView = inflater.inflate(
-                    R.layout.list_item_campesino_prdto,
-                    parent,
-                    false);
+    @Override
+    public int getItemCount() {
+        return productos.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView imagen;
+        public TextView nombre;
+        public TextView descripcion;
+        public TextView costoCantidad ;
+        public ImageButton editar;
+        public ImageButton borrar ;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imagen = (ImageView) itemView.findViewById(R.id.imagen);
+            nombre = (TextView) itemView.findViewById(R.id.nombre);
+            descripcion = (TextView)itemView.findViewById(R.id.descripcion);
+            costoCantidad = (TextView)itemView.findViewById(R.id.precio);
+            editar = itemView.findViewById(R.id.editar);
+            borrar = itemView.findViewById(R.id.borrar);
         }
-        ImageView imagen = (ImageView) convertView.findViewById(R.id.imagen);
-        TextView nombre = (TextView) convertView.findViewById(R.id.nombre);
-        TextView descripcion = (TextView)convertView.findViewById(R.id.descripcion);
-        TextView costoCantidad = (TextView)convertView.findViewById(R.id.precio);
-        ImageButton editar = convertView.findViewById(R.id.editar);
-        ImageButton borrar = convertView.findViewById(R.id.borrar);
-        Producto producto = getItem(position);
+        public void bind( final Producto producto, final OnItemClickListener listener){
+            Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
+            nombre.setText( producto.getNombre());
+            descripcion.setText( producto.getDescripcion() );
+            costoCantidad.setText(producto.getPrecioCantidad());
 
-        Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
-        nombre.setText( producto.getNombre());
-        descripcion.setText( producto.getDescripcion() );
-        costoCantidad.setText(producto.getPrecioCantidad());
 
-        this.notifyDataSetChanged();
+            borrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("Producto").document(producto.getNombre())
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(context, "Producto eliminado", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
-        return convertView;
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.OnItemClick(producto, getAdapterPosition());
+                }
+            });
+
+
+        }
+
+
+    }
+
+    public interface OnItemClickListener{
+        void OnItemClick(Producto producto, int posicion);
+
     }
 }

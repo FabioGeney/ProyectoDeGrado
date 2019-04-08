@@ -139,8 +139,7 @@ public class MainActivity extends AppCompatActivity {
             if(!correoentrada.isEmpty() && !claveentrada.isEmpty()){
                 btninicio.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             }else {
-
-
+                btninicio.setBackgroundColor(getResources().getColor(R.color.colorDivider));
             }
         }
 
@@ -149,8 +148,7 @@ public class MainActivity extends AppCompatActivity {
             if(!btninicio.isEnabled()){
                 btninicio.setBackgroundColor(getResources().getColor(R.color.colorDivider));
             }else {
-
-
+                btninicio.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             }
 
 

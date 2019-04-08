@@ -22,12 +22,7 @@
         android:id="@+id/nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="2sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:text="TextView autosizing"
+        android:layout_marginLeft="180dp"
         android:textAppearance="?attr/textAppearanceListItem"
         tools:text="Mercadillo de frutas" />
 
@@ -35,12 +30,9 @@
         android:id="@+id/costoEnvio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="50dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:text="TextView autosizing"
+        android:layout_below="@+id/nombre"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="13dp"
         tools:ignore="UnknownId"
         tools:text="Envio $5000" />
 
@@ -52,11 +44,6 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:textColor="#ffbf00"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="2sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:text="TextView autosizing"
         tools:ignore="UnknownId"
         tools:text="4,5" />
 
@@ -64,13 +51,9 @@
         android:id="@+id/tiempoEnvio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="50dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="2sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:text="TextView autoszing"
+        android:layout_below="@+id/nombre"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="13dp"
         tools:ignore="UnknownId"
         tools:text="50 min" />
 

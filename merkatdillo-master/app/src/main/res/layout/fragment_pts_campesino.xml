@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PtsCampesinoFragment">
 
-    <ListView
-        android:id="@+id/producto_list_camp"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_Recycler"
         android:layout_width="match_parent"
-        android:layout_height="445dp"
-        android:divider="#B4B1B1"
-        android:dividerHeight="1dp"/>
+        android:layout_height="match_parent"
+        android:elevation="3dp"
+        />
 
 
-</FrameLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_agregar"
+        tools:ignore="MissingConstraints,VectorDrawableCompat" />
+
+
+</android.support.constraint.ConstraintLayout>
