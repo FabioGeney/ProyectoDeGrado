@@ -119,14 +119,15 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         String email = edtemail.getText().toString();
         String celular = edtcelular.getText().toString();
         String fecha = edtfechanacimiento.getText().toString();
-        String didentidad = edtdidentidad.getText().toString();
+        final String didentidad = edtdidentidad.getText().toString();
         String direccion = edtdireccion.getText().toString();
-        String mercadillo = edtmercadillo.getText().toString();
+        String mercadillos = edtmercadillo.getText().toString();
         String tiempoaprox = edttiempoaprox.getText().toString();
         String password = edtpassword.getText().toString();
         String password2 = edtpassword2.getText().toString();
         if(password.equals(password2)){
             final Map<String, Object> user = new HashMap<>();
+            final Map<String, Object> mercadillo = new HashMap<>();
             user.put("nombre",nombres);
             user.put("apellidos",apellidos);
             user.put("email",email);
@@ -134,8 +135,8 @@ public class CrearCampesinoActivity extends AppCompatActivity {
             user.put("fecha",fecha);
             user.put("doc.identidad",didentidad);
             user.put("direccion",direccion);
-            user.put("mercadillo",mercadillo);
-            user.put("envio",tiempoaprox);
+            mercadillo.put("nombreMercadillo",mercadillos);
+            mercadillo.put("tiempoEntrega",tiempoaprox);
             user.put("password",password);
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -143,7 +144,9 @@ public class CrearCampesinoActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         user.put("id",firebaseUser.getUid());
-                        db.collection("Campesino").document().set(user);
+                        mercadillo.put("id",firebaseUser.getUid());
+                        db.collection("Campesino").document(didentidad).set(user);
+                        db.collection("Mercadillo").document().set(mercadillo);
                         Toast.makeText(CrearCampesinoActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(CrearCampesinoActivity.this, MainActivity.class);
                         startActivity(i);
