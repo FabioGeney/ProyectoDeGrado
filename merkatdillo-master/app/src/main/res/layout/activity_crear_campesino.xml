@@ -2,25 +2,26 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CrearCuentaActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".CrearCampesinoActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:verticalScrollbarPosition="defaultPosition">
+        android:verticalScrollbarPosition="defaultPosition"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include android:id="@+id/toolbar2"
-                layout="@layout/toolbar"/>
+            <include
+                android:id="@+id/toolbar2"
+                layout="@layout/toolbar" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayoutNombres"
@@ -191,6 +192,44 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutMercadillo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtmercadillo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="18"
+                    android:hint="@string/hint_mercadillo"
+                    android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutTiempoAprox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edttiempoaprox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="18"
+                    android:hint="@string/hint_tiempoaprox"
+                    android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayoutContraseña"
@@ -244,7 +283,7 @@
                 android:id="@+id/btncrearcuenta"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="107dp"
+                android:layout_marginTop="20dp"
                 android:enabled="false"
                 android:text="@string/crear_cuenta2"
                 android:theme="@style/RaisedButton" />

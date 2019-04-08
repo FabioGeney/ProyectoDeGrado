@@ -25,9 +25,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CrearCuentaActivity extends AppCompatActivity {
+public class CrearCampesinoActivity extends AppCompatActivity {
 
-    private static final String TAG = "CrearCuentaActivity";
+    private static final String TAG = "CrearCampesinoActivity";
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -39,6 +39,8 @@ public class CrearCuentaActivity extends AppCompatActivity {
     private EditText edtfechanacimiento;
     private EditText edtdidentidad;
     private EditText edtdireccion;
+    private EditText edtmercadillo;
+    private EditText edttiempoaprox;
     private Button btncrearcuenta;
     private EditText edtpassword;
     private EditText edtpassword2;
@@ -49,7 +51,7 @@ public class CrearCuentaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_cuenta);
+        setContentView(R.layout.activity_crear_campesino);
         Toolbar toolbar2 = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar2);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,6 +64,8 @@ public class CrearCuentaActivity extends AppCompatActivity {
         edtfechanacimiento = findViewById(R.id.edtfechanacimiento);
         edtdidentidad = findViewById(R.id.edtdidentidad);
         edtdireccion = findViewById(R.id.edtdireccion);
+        edtmercadillo = findViewById(R.id.edtmercadillo);
+        edttiempoaprox = findViewById(R.id.edttiempoaprox);
         btncrearcuenta = findViewById(R.id.btncrearcuenta);
         edtpassword = findViewById(R.id.edtpassword);
         edtpassword2 = findViewById(R.id.edtpassword2);
@@ -85,6 +89,8 @@ public class CrearCuentaActivity extends AppCompatActivity {
         edtfechanacimiento.addTextChangedListener(loginTextWatcher);
         edtdidentidad.addTextChangedListener(loginTextWatcher);
         edtdireccion.addTextChangedListener(loginTextWatcher);
+        edtmercadillo.addTextChangedListener(loginTextWatcher);
+        edttiempoaprox.addTextChangedListener(loginTextWatcher);
         edtpassword.addTextChangedListener(loginTextWatcher);
         edtpassword2.addTextChangedListener(loginTextWatcher);
 
@@ -115,6 +121,8 @@ public class CrearCuentaActivity extends AppCompatActivity {
         String fecha = edtfechanacimiento.getText().toString();
         String didentidad = edtdidentidad.getText().toString();
         String direccion = edtdireccion.getText().toString();
+        String mercadillo = edtmercadillo.getText().toString();
+        String tiempoaprox = edttiempoaprox.getText().toString();
         String password = edtpassword.getText().toString();
         String password2 = edtpassword2.getText().toString();
         if(password.equals(password2)){
@@ -126,6 +134,8 @@ public class CrearCuentaActivity extends AppCompatActivity {
             user.put("fecha",fecha);
             user.put("doc.identidad",didentidad);
             user.put("direccion",direccion);
+            user.put("mercadillo",mercadillo);
+            user.put("envio",tiempoaprox);
             user.put("password",password);
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -133,17 +143,17 @@ public class CrearCuentaActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         user.put("id",firebaseUser.getUid());
-                        db.collection("Consumidor").document().set(user);
-                        Toast.makeText(CrearCuentaActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(CrearCuentaActivity.this, MainActivity.class);
+                        db.collection("Campesino").document().set(user);
+                        Toast.makeText(CrearCampesinoActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(CrearCampesinoActivity.this, MainActivity.class);
                         startActivity(i);
                     } else{
-                        Toast.makeText(CrearCuentaActivity.this, "Error creando cuenta", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CrearCampesinoActivity.this, "Error creando cuenta", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }else {
-            Toast.makeText(CrearCuentaActivity.this, "Las contraseñas son diferentes, por favor vuelve a intentarlo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CrearCampesinoActivity.this, "Las contraseñas son diferentes, por favor vuelve a intentarlo", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -166,8 +176,10 @@ public class CrearCuentaActivity extends AppCompatActivity {
             String fechaentrada = edtfechanacimiento.getText().toString().trim();
             String didentidadentrada = edtdidentidad.getText().toString().trim();
             String direccionentrada = edtdireccion.getText().toString().trim();
-            btncrearcuenta.setEnabled(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty());
-            if(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty()){
+            String mercadilloentrada = edtmercadillo.getText().toString().trim();
+            String tiempoaproxentrada = edttiempoaprox.getText().toString().trim();
+            btncrearcuenta.setEnabled(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty());
+            if(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty()){
                 btncrearcuenta.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             }else {
 
