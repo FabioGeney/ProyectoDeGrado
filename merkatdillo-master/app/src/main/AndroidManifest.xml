@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity
             android:name=".VistaCampesino"
             android:label="@string/title_activity_vista_campesino"
@@ -57,6 +56,11 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/ThemeMainActivity">
+
+        </activity>
+        <activity
+            android:name=".BottomActivity"
+            android:theme="@style/Color">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,9 +68,13 @@
             </intent-filter>
 
         </activity>
-        <activity
-            android:name=".BottomActivity">
-
+        <activity android:name=".CrearCampesinoActivity"
+            android:theme="@style/ThemeMainActivity"
+            android:parentActivityName=".MainActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
     </application>
 

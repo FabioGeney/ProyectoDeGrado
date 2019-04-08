@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btninicio;
     private TextView txcrearcuenta;
+    private TextView txproductor;
     private EditText edtemail;
     private EditText edtpassword;
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         btninicio = findViewById(R.id.btninicio);
         txcrearcuenta = findViewById(R.id.txcrearcuenta);
+        txproductor = findViewById(R.id.txproductor);
         edtemail = findViewById(R.id.edtemail);
         edtpassword = findViewById(R.id.edtpassword);
 
@@ -61,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent( MainActivity.this, CrearCuentaActivity.class);
+                startActivity(i);
+            }
+        });
+
+        txproductor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent( MainActivity.this, CrearCampesinoActivity.class);
                 startActivity(i);
             }
         });

@@ -36,5 +36,12 @@
 
     </style>
 
+    <style name="Color" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <item name="colorAccent">#8BC34A</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
 
 </resources>

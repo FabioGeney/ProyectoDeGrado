@@ -5,7 +5,7 @@
     <string name="hint_password">Contraseña</string>
     <string name="hint_password2">Confirmar contraseña</string>
     <string name="button_login">Iniciar Sesión</string>
-    <string name="crear_cuenta">¿No tienes cuenta? Crea una aquí</string>
+    <string name="crear_cuenta">¿No tienes cuenta? Crea una:</string>
     <string name="crear_cuenta2">Crear Cuenta</string>
     <string name="hint_nombres">Nombres</string>
     <string name="hint_apellidos">Apellidos</string>
@@ -13,6 +13,10 @@
     <string name="hint_didentidad">Documento de identidad</string>
     <string name="hint_fechanacimiento">Fecha de nacimiento</string>
     <string name="hint_direccion">Dirección</string>
+    <string name="hint_mercadillo">Dale un nombre a tu Mercadillo</string>
+    <string name="hint_tiempoaprox">Tiempo aproximado a Bucaramanga</string>
+    <string name="tx_productor">¿<u>Eres productor</u>?</string>
+    <string name="tx_comprador">¿Eres comprador?</string>
     <string name="title_activity_mercadillos">Mercadillos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
