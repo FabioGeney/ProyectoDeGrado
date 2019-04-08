@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,8 +29,8 @@ public class VistaCampesino extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PtsCampesinoFragment ptsFragment = new PtsCampesinoFragment();
-                ptsFragment.saveProducto(new Producto("Nombre","descripcion","$3500 por lb", R.mipmap.ic_fruit));
+                Intent intent = new Intent(VistaCampesino.this, CrearProducto.class);
+                startActivity(intent);
             }
         });
 
@@ -41,6 +42,9 @@ public class VistaCampesino extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.campesinos_content, new PtsCampesinoFragment()).commit();
     }
 
     @Override

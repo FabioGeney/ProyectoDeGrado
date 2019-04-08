@@ -22,7 +22,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
@@ -88,13 +87,11 @@ public class MercadilloFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Mercadillo mercadillo = document.toObject(Mercadillo.class);
-
                                 mercadillo.setImagen(R.mipmap.ic_merca_image);
                                 mercadillos.add(mercadillo);
 
                             }
                             // Inicializar el adaptador con la fuente de datos.
-
                             mercadilloAdapter = new MercadilloAdapter(mercadillos1, R.layout.list_item_mercadillo, new MercadilloAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Mercadillo mercadillo, int posicion) {
