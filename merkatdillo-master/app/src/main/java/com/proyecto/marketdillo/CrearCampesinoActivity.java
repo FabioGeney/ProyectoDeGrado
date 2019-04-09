@@ -124,8 +124,8 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         String fecha = edtfechanacimiento.getText().toString();
         final String didentidad = edtdidentidad.getText().toString();
         String direccion = edtdireccion.getText().toString();
-        String mercadillos = edtmercadillo.getText().toString();
-        String tiempoaprox = edttiempoaprox.getText().toString();
+        final String mercadillos = edtmercadillo.getText().toString();
+        final String tiempoaprox = edttiempoaprox.getText().toString();
         String password = edtpassword.getText().toString();
         String password2 = edtpassword2.getText().toString();
         if(password.equals(password2)){
@@ -138,8 +138,6 @@ public class CrearCampesinoActivity extends AppCompatActivity {
             user.put("fecha",fecha);
             user.put("doc.identidad",didentidad);
             user.put("direccion",direccion);
-            mercadillo.put("nombre",mercadillos);
-            mercadillo.put("tiempoEntrega",tiempoaprox);
             user.put("password",password);
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -148,6 +146,9 @@ public class CrearCampesinoActivity extends AppCompatActivity {
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         user.put("id",firebaseUser.getUid());
                         mercadillo.put("id",firebaseUser.getUid());
+                        mercadillo.put("nombre",mercadillos);
+                        mercadillo.put("tiempoEntrega", tiempoaprox);
+                        mercadillo.put("calificacion", "--");
                         db.collection("Campesino").document(didentidad).set(user);
                         db.collection("Mercadillo").document().set(mercadillo);
                         Toast.makeText(CrearCampesinoActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
