@@ -100,10 +100,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.775"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/txcrearcuenta"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.670" />
+        app:layout_constraintVertical_bias="0.67" />
 
     <TextView
         android:id="@+id/o"
@@ -119,14 +119,13 @@
         android:textColor="@color/colorPrimary2"
         android:textSize="@dimen/tamañotextocuenta"
         android:textStyle="bold"
-        app:layout_constraintRight_toRightOf="@id/txcrearcuenta"
-        app:layout_constraintLeft_toLeftOf="@id/txproductor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txproductor"
+        app:layout_constraintLeft_toLeftOf="@id/txproductor"
+        app:layout_constraintRight_toRightOf="@id/txcrearcuenta"
+        app:layout_constraintStart_toEndOf="@+id/txcrearcuenta"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.670" />
+        app:layout_constraintVertical_bias="0.67" />
 
     <TextView
         android:id="@+id/txcrearcuenta"
@@ -142,10 +141,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.260"
+        app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.670" />
+        app:layout_constraintVertical_bias="0.67" />
 
 
 </android.support.constraint.ConstraintLayout>
