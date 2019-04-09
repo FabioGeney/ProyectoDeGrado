@@ -20,6 +20,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -127,6 +130,7 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         String password2 = edtpassword2.getText().toString();
         if(password.equals(password2)){
             final Map<String, Object> user = new HashMap<>();
+            final Map<String, Object> mercadilloCamp = new HashMap<>();
             user.put("nombre",nombres);
             user.put("apellidos",apellidos);
             user.put("email",email);
@@ -134,8 +138,8 @@ public class CrearCampesinoActivity extends AppCompatActivity {
             user.put("fecha",fecha);
             user.put("doc.identidad",didentidad);
             user.put("direccion",direccion);
-            user.put("mercadillo",mercadillo);
-            user.put("envio",tiempoaprox);
+            mercadilloCamp.put("mercadillo",mercadillo);
+            mercadilloCamp.put("envio",tiempoaprox);
             user.put("password",password);
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -143,7 +147,9 @@ public class CrearCampesinoActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         user.put("id",firebaseUser.getUid());
+                        mercadilloCamp.put("id",firebaseUser.getUid());
                         db.collection("Campesino").document().set(user);
+
                         Toast.makeText(CrearCampesinoActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(CrearCampesinoActivity.this, MainActivity.class);
                         startActivity(i);

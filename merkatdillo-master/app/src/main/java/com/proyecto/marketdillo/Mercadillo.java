@@ -2,7 +2,7 @@ package com.proyecto.marketdillo;
 
 public class Mercadillo {
     private String id;
-    private String nombre;
+    private String nombreMercadillo;
     private String calificacion;
     private String tiempoEntrega;
     private String costoEnvio;
@@ -12,25 +12,34 @@ public class Mercadillo {
 
 
     };
-    public Mercadillo( String nombre, String calificacion, String tiempoEntrga, String costoEnvio){
-        this.nombre = nombre;
-        this.tiempoEntrega = tiempoEntrga;
+
+    public Mercadillo( String id, String nombreMercadillo, String tiempoEntrega){
+        this.id=id;
+        this.nombreMercadillo = nombreMercadillo;
+        this.tiempoEntrega = tiempoEntrega;
+
+
+    }
+
+    public Mercadillo( String nombreMercadillo, String calificacion, String tiempoEntrega, String costoEnvio){
+        this.nombreMercadillo = nombreMercadillo;
+        this.tiempoEntrega = tiempoEntrega;
         this.calificacion = calificacion;
         this.costoEnvio = costoEnvio;
     }
 
-    public Mercadillo( String nombre, String tiempoEntrga, String calificacion, String costoEnvio, int imagen){
-        this.nombre = nombre;
-        this.tiempoEntrega = tiempoEntrga;
+    public Mercadillo( String nombreMercadillo, String tiempoEntrega, String calificacion, String costoEnvio, int imagen){
+        this.nombreMercadillo = nombreMercadillo;
+        this.tiempoEntrega = tiempoEntrega;
         this.calificacion = calificacion;
         this.costoEnvio = costoEnvio;
         this.imagen = imagen;
     }
 
-    public Mercadillo( String id, String nombre, String tiempoEntrga, String calificacion, String costoEnvio, int imagen){
+    public Mercadillo( String id, String nombreMercadillo, String tiempoEntrega, String calificacion, String costoEnvio, int imagen){
         this.id = id;
-        this.nombre = nombre;
-        this.tiempoEntrega = tiempoEntrga;
+        this.nombreMercadillo = nombreMercadillo;
+        this.tiempoEntrega = tiempoEntrega;
         this.calificacion = calificacion;
         this.costoEnvio = costoEnvio;
         this.imagen = imagen;
@@ -53,7 +62,7 @@ public class Mercadillo {
     }
 
     public  String getNombre() {
-        return nombre;
+        return nombreMercadillo;
     }
 
     public String getTiempoEntrega() {
@@ -77,7 +86,7 @@ public class Mercadillo {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombreMercadillo = nombre;
     }
 
     public void setTiempoEntrega(String tiempoEntrega) {
