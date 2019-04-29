@@ -9,16 +9,17 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/slideViewPager"
         android:layout_width="match_parent"
-        android:layout_height="670dp">
+        android:layout_height="620dp">
 
     </android.support.v4.view.ViewPager>
 
     <LinearLayout
         android:id="@+id/dotsLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:layout_below="@+id/slideViewPager"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="horizontal">
 
     </LinearLayout>
 
