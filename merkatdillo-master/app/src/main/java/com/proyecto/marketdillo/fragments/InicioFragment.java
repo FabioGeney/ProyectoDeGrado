@@ -16,6 +16,8 @@ import com.proyecto.marketdillo.SliderAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Este fragment es el primer fragment, el cual va el slider para ver varias imagenes del inicio de la app,
+ * que trata de explicar las funcionalidades que tiene y su uso general.
  */
 public class InicioFragment extends Fragment{
 
@@ -30,7 +32,8 @@ public class InicioFragment extends Fragment{
     }
 
 
-
+    /*En un fragment se inicializa diferente, toca usar un root para poder inflar, encontrar vistas, etc
+    * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class InicioFragment extends Fragment{
 
         return root;
     }
-
+    /*Codigo para agregar los puntos y la posicion del slider en el que se encuentra en determinado momento*/
     public void addDotsIndicator(int position){
 
         dots = new TextView[3];
@@ -55,7 +58,7 @@ public class InicioFragment extends Fragment{
         for(int i = 0; i < dots.length; i++){
 
             dots[i] = new TextView(getActivity());
-            dots[i].setText(Html.fromHtml("&#8226"));
+            dots[i].setText(Html.fromHtml("&#8226")); /*la fuente es para la forma de los puntos*/
             dots[i].setTextSize(35);
             dots[i].setTextColor(getResources().getColor(R.color.colorTransparentWhite));
             dotsLayout.addView(dots[i]);
@@ -67,7 +70,7 @@ public class InicioFragment extends Fragment{
             dots[position].setTextColor(getResources().getColor(R.color.colorPrimary2));
         }
     }
-
+    /*Se usa este metodo para que escuche y se sepa en que pagina esta al seleccionar cada slide*/
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int i, float v, int i1) {

@@ -12,6 +12,12 @@ import com.proyecto.marketdillo.fragments.EmpezarFragment;
 import com.proyecto.marketdillo.fragments.InicioFragment;
 import com.proyecto.marketdillo.fragments.VitrinaFragment;
 
+/*Esta es la clase donde va el fragment manager, que da soporte a
+los fragment InicioFragment, VitrinaFragment y EmpezarFragment, a su
+vez se utiliza un bottom navigation y se utilizan 3 botones, cada uno
+para un fragment diferente
+* */
+
 public class BottomActivity extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -26,7 +32,8 @@ public class BottomActivity extends AppCompatActivity
 
         loadFragment(new InicioFragment());
     }
-
+    /*llama al fragment manager, el cual empieza la transaccion y reemplaza el fragment
+    * deseado a usar*/
     private boolean loadFragment (Fragment fragment){
         if(fragment != null){
             getSupportFragmentManager().beginTransaction()
@@ -37,7 +44,8 @@ public class BottomActivity extends AppCompatActivity
         return false;
 
     }
-
+    /*Usa un switch dependiendo del fragment que se escoja y crea una instancia del fragment que se clickeo
+    * */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 

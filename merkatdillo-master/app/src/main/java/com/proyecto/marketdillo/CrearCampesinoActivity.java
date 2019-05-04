@@ -27,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/*clase usada para crear la cuenta de un campesino*/
 public class CrearCampesinoActivity extends AppCompatActivity {
 
     private static final String TAG = "CrearCampesinoActivity";
@@ -77,7 +77,7 @@ public class CrearCampesinoActivity extends AppCompatActivity {
 
 
         initialize();
-
+        /*boton para crear cuenta, llama al metodo cuentanueva*/
         btncrearcuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +99,7 @@ public class CrearCampesinoActivity extends AppCompatActivity {
 
 
     }
-
+    /*inicializa la instancia de autenticacion de firebase*/
     private void initialize(){
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -115,7 +115,8 @@ public class CrearCampesinoActivity extends AppCompatActivity {
             }
         };
     }
-
+    /*Se llena el formulario con los campos pedidos, luego se agregan y se llama a un hashmap con un llave valor, que en
+     * la base de datos se crea con la informacion ingresada. Al crearse la cuenta, ya esta disponible poder acceder a la app*/
     private void cuentanueva(){
         String nombres = edtnombres.getText().toString();
         String apellidos = edtapellidos.getText().toString();
@@ -165,7 +166,8 @@ public class CrearCampesinoActivity extends AppCompatActivity {
 
 
     }
-
+    /*Habilita el boton de crear cuenta hasta que todas los campos esten llenos y las contraseñas sean iguales, despues de que se habilite
+     * ahi si podra clickear el boton de crear cuenta*/
     private TextWatcher loginTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

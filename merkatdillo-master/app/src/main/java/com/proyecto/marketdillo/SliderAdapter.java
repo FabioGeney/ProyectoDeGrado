@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+/*Clase creada para poder usar un slider*/
 public class SliderAdapter extends PagerAdapter {
 
     Context context;
     LayoutInflater layoutInflater;
-
+    /*Aqui va la informacion que se va a mostrar en el slider*/
     public SliderAdapter(Context context){
         this.context = context;
     }
@@ -49,7 +49,7 @@ public class SliderAdapter extends PagerAdapter {
     public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
         return view == (ConstraintLayout) o;
     }
-
+    /*Instanciar e inicializar los textview y el imageview de este slide adapter*/
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
@@ -68,7 +68,7 @@ public class SliderAdapter extends PagerAdapter {
 
         return view;
     }
-
+    /*Para ir borrando cada vista anterior del slider, y solo dejar la actual*/
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((ConstraintLayout)object);

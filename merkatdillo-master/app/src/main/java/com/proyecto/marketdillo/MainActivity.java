@@ -21,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/*Se le da el nombre de main activity porque es donde se inicia sesion*/
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         edtpassword = findViewById(R.id.edtpassword);
 
         initialize();
-
+        /*el boton y el clicklistener, q al clickear llama al metodo iniciar sesion, con el email y la contraseña*/
         btninicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        /*al oprimir el textview lo envia al activity de crear cuenta del comprador*/
         txcrearcuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        /*al oprimir el textview lo envia al activity de crear cuenta del campesino*/
         txproductor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
 
         edtemail.addTextChangedListener(loginTextWatcher);
         edtpassword.addTextChangedListener(loginTextWatcher);
-
+        /*se agrega el metodo addTextChangedListener y de parametro el loginTextWatcher para que haga
+         * realidad el codigo puesto mas abajo */
 
     }
-
+    /*se inicializa la instancia de firebase para autenticar*/
     private void initialize(){
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -97,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
-
+    /*metodo para iniciar sesion con los parametros de email y password, autentica con firebase y revisa si
+    * existe tal cuenta en la base de datos*/
     private void inicio(String email, String password){
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -112,19 +115,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    /*agregar el listener*/
     @Override
     protected void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(authStateListener);
     }
-
+    /*quitar el listener*/
     @Override
     protected void onStop() {
         super.onStop();
         firebaseAuth.removeAuthStateListener(authStateListener);
     }
-
+    /*Codigo para habilitar el boton de inicio, solo se habilita hasta que los dos textview esten llenos
+     * y cambia de color. Se deshabilita cuando no hay nada escrito en los dos textview o solo en un textview */
     private TextWatcher loginTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
