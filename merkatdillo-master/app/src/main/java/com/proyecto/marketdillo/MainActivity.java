@@ -20,6 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import static android.support.constraint.Constraints.TAG;
 
 /*Se le da el nombre de main activity porque es donde se inicia sesion*/
 public class MainActivity extends AppCompatActivity {
@@ -101,14 +106,13 @@ public class MainActivity extends AppCompatActivity {
     }
     /*metodo para iniciar sesion con los parametros de email y password, autentica con firebase y revisa si
     * existe tal cuenta en la base de datos*/
-    private void inicio(String email, String password){
+    private void inicio(final String email, String password){
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(MainActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this, VistaUsuarios.class);
-                    startActivity(i);
+                    getTipo(email);
                 } else{
                     Toast.makeText(MainActivity.this, "Error iniciando cuenta", Toast.LENGTH_SHORT).show();
                 }
@@ -158,4 +162,25 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    private void getTipo( String correo){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Campesino").whereEqualTo("email",correo)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Intent i1 = new Intent(MainActivity.this, VistaCampesino.class);
+                            startActivity(i1);
+
+                        }else{
+                            Intent i = new Intent(MainActivity.this, VistaUsuarios.class);
+                            startActivity(i);
+                        }
+
+                    }
+                });
+
+    }
 }

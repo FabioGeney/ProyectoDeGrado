@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="81dp"
         android:layout_marginTop="25dp"
-        android:maxLength="23"
+        android:maxLength="21"
         tools:ignore="UnknownId"
         tools:text="Descripcion" />
 
