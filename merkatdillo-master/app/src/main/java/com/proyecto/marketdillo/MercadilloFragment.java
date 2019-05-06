@@ -97,6 +97,7 @@ public class MercadilloFragment extends Fragment {
                                 public void OnItemClick(Mercadillo mercadillo, int posicion) {
                                     Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);
                                     intent.putExtra("id", mercadillo.getId());
+                                    intent.putExtra("nombre", mercadillo.getNombre());
                                     startActivity(intent);
                                 }
                             });

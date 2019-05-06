@@ -32,10 +32,6 @@
         android:layout_below="@+id/nombre"
         android:layout_marginLeft="67dp"
         android:layout_marginTop="4dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:text="TextView autosizing"
         tools:ignore="UnknownId"
         tools:text="Descripcion" />
 
@@ -46,6 +42,7 @@
         android:layout_below="@+id/descripcion"
         android:layout_marginLeft="67dp"
         android:layout_marginTop="6dp"
+        android:textAppearance="?attr/textAppearanceListItem"
         android:text="$ 1000-lb" />
 
     <Button

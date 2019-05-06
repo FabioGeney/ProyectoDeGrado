@@ -20,37 +20,29 @@
 
     <TextView
         android:id="@+id/nombre"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="101dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="2sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:text="TextView autosizing"
         android:textAppearance="?attr/textAppearanceListItem"
         tools:text="Manzana" />
 
     <TextView
         android:id="@+id/descripcion"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="101dp"
         android:layout_marginTop="25dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:text="TextView autosizing"
         tools:ignore="UnknownId"
         tools:text="Descripcion" />
 
     <TextView
-        android:id = "@+id/precio"
-        android:layout_width="120dp"
+        android:id="@+id/precio"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_below="@+id/descripcion"
         android:layout_marginLeft="101dp"
         android:layout_marginTop="10dp"
+        android:textAppearance="?attr/textAppearanceListItem"
         android:text="$ 1000-lb" />
 
     <Button

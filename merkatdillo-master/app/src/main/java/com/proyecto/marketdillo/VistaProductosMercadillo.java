@@ -43,8 +43,8 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        this.setTitle("Mercadillo de frutas");
+        String nombreMercadillo = getIntent().getExtras().getString("nombre");
+        this.setTitle(nombreMercadillo);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +67,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
 
     public List<Producto> getProductos(){
         final ArrayList<Producto> request = new ArrayList<>();
-        request.add(new Producto("manzana", "manzna fresaca", "$3500 por libra", R.mipmap.ic_fruit));
+        request.add(new Producto("manzana", "Testeando ancho del EdiText para que no se pase hasta el boton", "$3500 por libra", R.drawable.fruit));
         String id = getIntent().getExtras().getString("id");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Producto").whereEqualTo("id",id)
@@ -79,7 +79,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Producto producto = document.toObject(Producto.class);
-                                producto.setImagen(R.mipmap.ic_merca_image);
+                                producto.setImagen(R.drawable.fruit);
                                 request.add(producto);
 
                             }
