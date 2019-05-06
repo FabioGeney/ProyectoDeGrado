@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /*clase usada para crear la cuenta de un campesino*/
 public class CrearCampesinoActivity extends AppCompatActivity {
@@ -166,6 +167,7 @@ public class CrearCampesinoActivity extends AppCompatActivity {
 
 
     }
+
     /*Habilita el boton de crear cuenta hasta que todas los campos esten llenos y las contraseñas sean iguales, despues de que se habilite
      * ahi si podra clickear el boton de crear cuenta*/
     private TextWatcher loginTextWatcher = new TextWatcher() {

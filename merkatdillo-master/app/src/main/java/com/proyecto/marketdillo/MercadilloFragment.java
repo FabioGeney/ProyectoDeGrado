@@ -95,7 +95,9 @@ public class MercadilloFragment extends Fragment {
                             mercadilloAdapter = new MercadilloAdapter(mercadillos1, R.layout.list_item_mercadillo, new MercadilloAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Mercadillo mercadillo, int posicion) {
-                                    Toast.makeText(getContext(), mercadillo.getNombre(), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);
+                                    intent.putExtra("id", mercadillo.getId());
+                                    startActivity(intent);
                                 }
                             });
                             //Relacionando la lista con el adaptador
