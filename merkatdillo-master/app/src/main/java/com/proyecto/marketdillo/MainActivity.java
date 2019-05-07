@@ -177,16 +177,35 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                         }else{
-                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                         if(usuario!=null && usuario.getTipoUsuario().equals("consumidor")){
                             Intent intent = new Intent(MainActivity.this, VistaUsuarios.class);
                             startActivity(intent);
+                        }
+                    }
+        });
+
+        db.collection("Campesino").whereEqualTo("email",correo)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                usuario = document.toObject(Usuario.class);
+                                usuario.setTipoUsuario("campesino");
+                            }
+
                         }else{
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                        if(usuario!=null && usuario.getTipoUsuario().equals("campesino")){
                             Intent intent = new Intent(MainActivity.this, VistaCampesino.class);
                             startActivity(intent);
                         }
                     }
-        });
+                });
+
     }
 }
