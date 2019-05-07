@@ -69,12 +69,16 @@ public class VistaCanasta extends AppCompatActivity {
     }
 
     private List<Canasta> getCanastas(){
-        ArrayList<Canasta> canasta = new ArrayList<>();
-        canasta.add(new Canasta("Manzana", 3000, 1, R.drawable.fruit));
-        canasta.add(new Canasta("Pera", 5000, 1, R.drawable.fruit));
-        canasta.add(new Canasta("Mango", 3000, 1, R.drawable.fruit));
-        canasta.add(new Canasta("Piña", 4000, 1, R.drawable.fruit));
-        canasta.add(new Canasta("Lulo", 1000, 1, R.drawable.fruit));
+        //llama al singleton de canasta para acceder a la informaccion
+        SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+        final  ArrayList<Canasta> canasta = new ArrayList<>();
+        //obtiene los productos del singleton de canasta
+        ArrayList<Producto> productos = singletonCanasta.getCanastas();
+        //recorre el arreglo de los productos seleccionados por el consumidor para llenar la lista de productos de la canasta
+        for(Producto producto:productos){
+          canasta.add(new Canasta(producto.getNombre(), Integer.parseInt(producto.getPrecioCantidad()) , 1, R.drawable.fruit));
+        }
+
         return canasta;
     }
 }

@@ -46,6 +46,7 @@
         android:text="$ 1000-lb" />
 
     <Button
+        android:id="@+id/agregar"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_below="@+id/precio"

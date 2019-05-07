@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
+    private SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
 
     public  ProductoAdapter(List<Producto> productos, int layout, OnItemClickListener itemClickListener ){
         this.productos = productos;
@@ -53,6 +55,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         public TextView nombre ;
         public TextView descripcion;
         public TextView costoCantidad;
+        public Button agregar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +63,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             nombre = (TextView) itemView.findViewById(R.id.nombre);
             descripcion = (TextView)itemView.findViewById(R.id.descripcion);
             costoCantidad = (TextView)itemView.findViewById(R.id.precio);
+            agregar = itemView.findViewById(R.id.agregar);
+
 
         }
         public void bind( final Producto producto, final OnItemClickListener listener){
@@ -67,6 +72,13 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             nombre.setText( producto.getNombre());
             descripcion.setText( producto.getDescripcion() );
             costoCantidad.setText(producto.getPrecioCantidad());
+            agregar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    singletonCanasta.setCanastas(producto);
+                }
+            });
+
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

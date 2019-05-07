@@ -68,7 +68,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
 
     public List<Producto> getProductos(){
         final ArrayList<Producto> request = new ArrayList<>();
-        request.add(new Producto("manzana", "Testeando ancho del EdiText para que no se pase hasta el boton", "$3500 por libra", R.drawable.fruit));
+        request.add(new Producto("manzana", "Testeando ancho del EdiText para que no se pase hasta el boton", "3500", R.drawable.fruit));
         String id = getIntent().getExtras().getString("id");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Producto").whereEqualTo("id",id)
