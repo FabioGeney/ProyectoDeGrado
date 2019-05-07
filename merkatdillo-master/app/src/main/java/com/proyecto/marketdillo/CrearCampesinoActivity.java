@@ -138,7 +138,7 @@ public class CrearCampesinoActivity extends AppCompatActivity {
             user.put("email",email);
             user.put("celular",celular);
             user.put("fecha",fecha);
-            user.put("doc.identidad",didentidad);
+            user.put("doc_identidad",didentidad);
             user.put("direccion",direccion);
             user.put("password",password);
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

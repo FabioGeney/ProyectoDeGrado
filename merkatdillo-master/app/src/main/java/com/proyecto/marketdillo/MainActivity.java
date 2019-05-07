@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txproductor;
     private EditText edtemail;
     private EditText edtpassword;
-
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,22 +165,28 @@ public class MainActivity extends AppCompatActivity {
 
     private void getTipo( String correo){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Campesino").whereEqualTo("email",correo)
+        db.collection("Consumidor").whereEqualTo("email",correo)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            Intent i1 = new Intent(MainActivity.this, VistaCampesino.class);
-                            startActivity(i1);
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                               usuario = document.toObject(Usuario.class);
+                               usuario.setTipoUsuario("consumidor");
+                            }
 
                         }else{
-                            Intent i = new Intent(MainActivity.this, VistaUsuarios.class);
-                            startActivity(i);
+                            Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-
+                        if(usuario!=null && usuario.getTipoUsuario().equals("consumidor")){
+                            Intent intent = new Intent(MainActivity.this, VistaUsuarios.class);
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(MainActivity.this, VistaCampesino.class);
+                            startActivity(intent);
+                        }
                     }
-                });
-
+        });
     }
 }
