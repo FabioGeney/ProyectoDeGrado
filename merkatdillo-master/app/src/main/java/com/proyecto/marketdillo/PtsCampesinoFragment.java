@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SimpleCursorTreeAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,13 +41,14 @@ public class PtsCampesinoFragment extends Fragment {
     private RecyclerView.Adapter ptsAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Producto> productos;
+    private String id;
 
 
 
     public PtsCampesinoFragment() {
+
         // Required empty public constructor
     }
-
 
     public static PtsCampesinoFragment newInstance(/*parámetros*/) {
         PtsCampesinoFragment fragment = new PtsCampesinoFragment();
@@ -66,7 +68,9 @@ public class PtsCampesinoFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_pts_campesino, container, false);
-
+        // toma el objeto Usuario que ha sido mandados por VistaCampesino para consultar los productos de dicho usuario
+        Usuario usuario = (Usuario) getArguments().getSerializable("usuario");
+        id = usuario.getId();
         productos = getProducto();
         // Instancia del ListView.
         mRecyclerView =  root.findViewById(R.id.list_Recycler);
@@ -82,7 +86,7 @@ public class PtsCampesinoFragment extends Fragment {
         final ArrayList<Producto> p = new ArrayList<>();
         p.add(new Producto("Manzana", "la descripcion es muy grande ", "$3000 por lb", R.mipmap.ic_fruit));
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Producto")
+        db.collection("Producto").whereEqualTo("id",id)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

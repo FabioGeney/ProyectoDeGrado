@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class VistaCampesino extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,12 +25,18 @@ public class VistaCampesino extends AppCompatActivity
         setContentView(R.layout.activity_vista_campesino);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //llama el objeto que se le envia desde MainActivity
+        final Usuario usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+
         this.setTitle("Mercadillo de frutas");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VistaCampesino.this, CrearProducto.class);
+
+                //envia datos del id del campesino, para almacenar los productos con su id
+                intent.putExtra("id", usuario.getId());
                 startActivity(intent);
             }
         });
@@ -43,8 +50,15 @@ public class VistaCampesino extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Enviar id del Campesino a PtsFragment para consultar los productos del campesino
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("usuario", usuario);
+        PtsCampesinoFragment ptsCampesinoFragment = new PtsCampesinoFragment();
+        ptsCampesinoFragment.setArguments(bundle);
+
+
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.campesinos_content, new PtsCampesinoFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.campesinos_content, ptsCampesinoFragment).commit();
     }
 
     @Override

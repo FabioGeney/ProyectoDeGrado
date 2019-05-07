@@ -24,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
+
 import static android.support.constraint.Constraints.TAG;
 
 /*Se le da el nombre de main activity porque es donde se inicia sesion*/
@@ -181,7 +183,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if(usuario!=null && usuario.getTipoUsuario().equals("consumidor")){
                             Intent intent = new Intent(MainActivity.this, VistaUsuarios.class);
+                            intent.putExtra("usuario", (Serializable) usuario);
                             startActivity(intent);
+
                         }
                     }
         });
@@ -202,10 +206,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if(usuario!=null && usuario.getTipoUsuario().equals("campesino")){
                             Intent intent = new Intent(MainActivity.this, VistaCampesino.class);
+                            intent.putExtra("usuario", (Serializable) usuario);
                             startActivity(intent);
                         }
                     }
                 });
-
     }
 }

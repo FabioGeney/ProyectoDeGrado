@@ -43,6 +43,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //cambia titulo del activity, con datos del MercadillsoFragment
         String nombreMercadillo = getIntent().getExtras().getString("nombre");
         this.setTitle(nombreMercadillo);
 

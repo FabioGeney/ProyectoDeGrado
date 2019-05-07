@@ -1,6 +1,8 @@
 package com.proyecto.marketdillo;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private String nombre;
     private String apellidos;
     private String email;
