@@ -183,7 +183,16 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if(usuario!=null && usuario.getTipoUsuario().equals("consumidor")){
                             Intent intent = new Intent(MainActivity.this, VistaUsuarios.class);
-                            intent.putExtra("usuario", (Serializable) usuario);
+                            SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                            singletonUsuario.setNombre(usuario.getNombre());
+                            singletonUsuario.setApellidos(usuario.getApellidos());
+                            singletonUsuario.setEmail(usuario.getEmail());
+                            singletonUsuario.setCelular(usuario.getCelular());
+                            singletonUsuario.setFecha(usuario.getFecha());
+                            singletonUsuario.setDoc_identidad(usuario.getDoc_identidad());
+                            singletonUsuario.setDireccion(usuario.getDireccion());
+                            singletonUsuario.setId(usuario.getId());
+
                             startActivity(intent);
 
                         }
@@ -206,7 +215,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if(usuario!=null && usuario.getTipoUsuario().equals("campesino")){
                             Intent intent = new Intent(MainActivity.this, VistaCampesino.class);
-                            intent.putExtra("usuario", (Serializable) usuario);
+                            SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                            singletonUsuario.setNombre(usuario.getNombre());
+                            singletonUsuario.setApellidos(usuario.getApellidos());
+                            singletonUsuario.setEmail(usuario.getEmail());
+                            singletonUsuario.setCelular(usuario.getCelular());
+                            singletonUsuario.setFecha(usuario.getFecha());
+                            singletonUsuario.setDoc_identidad(usuario.getDoc_identidad());
+                            singletonUsuario.setDireccion(usuario.getDireccion());
+                            singletonUsuario.setId(usuario.getId());
                             startActivity(intent);
                         }
                     }

@@ -13,20 +13,9 @@ public class Usuario implements Serializable {
     private String password;
     private String id;
     private String tipoUsuario;
+    private static Usuario usuario;
 
     public Usuario(){
-
-    }
-
-    public Usuario(String nombre, String apellidos, String email, String celular, String fecha, String direccion, String password, String id) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.email = email;
-        this.celular = celular;
-        this.fecha = fecha;
-        this.direccion = direccion;
-        this.password = password;
-        this.id = id;
 
     }
 
@@ -40,6 +29,13 @@ public class Usuario implements Serializable {
         this.direccion = direccion;
         this.password = password;
         this.id = id;
+    }
+
+    public static Usuario getInstance(String nombre, String apellidos, String email, String celular, String fecha, String doc_identidad, String direccion,  String id){
+        if(usuario == null){
+            usuario = new Usuario(nombre, apellidos, email, celular, fecha, doc_identidad, direccion, "", id);
+        }
+        return usuario;
     }
 
     public void setNombre(String nombre) {

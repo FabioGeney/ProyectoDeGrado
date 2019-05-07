@@ -41,8 +41,6 @@ public class PtsCampesinoFragment extends Fragment {
     private RecyclerView.Adapter ptsAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Producto> productos;
-    private String id;
-
 
 
     public PtsCampesinoFragment() {
@@ -69,8 +67,6 @@ public class PtsCampesinoFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_pts_campesino, container, false);
         // toma el objeto Usuario que ha sido mandados por VistaCampesino para consultar los productos de dicho usuario
-        Usuario usuario = (Usuario) getArguments().getSerializable("usuario");
-        id = usuario.getId();
         productos = getProducto();
         // Instancia del ListView.
         mRecyclerView =  root.findViewById(R.id.list_Recycler);
@@ -83,6 +79,9 @@ public class PtsCampesinoFragment extends Fragment {
         return root;
     }
     public List<Producto> getProducto() {
+
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+        String id = singletonUsuario.getId();
         final ArrayList<Producto> p = new ArrayList<>();
         p.add(new Producto("Manzana", "la descripcion es muy grande ", "$3000 por lb", R.mipmap.ic_fruit));
         FirebaseFirestore db = FirebaseFirestore.getInstance();

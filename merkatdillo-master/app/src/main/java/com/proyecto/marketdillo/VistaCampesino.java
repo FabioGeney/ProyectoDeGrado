@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 public class VistaCampesino extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +26,8 @@ public class VistaCampesino extends AppCompatActivity
         setContentView(R.layout.activity_vista_campesino);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //llama el objeto que se le envia desde MainActivity
-        final Usuario usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
+        //Modifica titulo del Toolbar
         this.setTitle("Mercadillo de frutas");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +36,7 @@ public class VistaCampesino extends AppCompatActivity
                 Intent intent = new Intent(VistaCampesino.this, CrearProducto.class);
 
                 //envia datos del id del campesino, para almacenar los productos con su id
-                intent.putExtra("id", usuario.getId());
+                intent.putExtra("id", singletonUsuario.getId());
                 startActivity(intent);
             }
         });
@@ -51,10 +51,8 @@ public class VistaCampesino extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Enviar id del Campesino a PtsFragment para consultar los productos del campesino
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("usuario", usuario);
+
         PtsCampesinoFragment ptsCampesinoFragment = new PtsCampesinoFragment();
-        ptsCampesinoFragment.setArguments(bundle);
 
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -101,7 +99,10 @@ public class VistaCampesino extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.mimercadillo) {
-            fragmentManager.beginTransaction().replace(R.id.campesinos_content, new PtsCampesinoFragment()).commit();
+            Bundle bundle = new Bundle();
+
+            PtsCampesinoFragment ptsCampesinoFragment = new PtsCampesinoFragment();
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content, ptsCampesinoFragment).commit();
         } else if (id == R.id.pedidos) {
 
         } else if (id == R.id.historial) {

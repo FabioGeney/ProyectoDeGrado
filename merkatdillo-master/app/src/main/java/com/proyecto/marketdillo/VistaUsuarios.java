@@ -21,6 +21,7 @@ import android.view.MenuItem;
 public class VistaUsuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
+    private String direccion;
     Menu menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +29,8 @@ public class VistaUsuarios extends AppCompatActivity
         setContentView(R.layout.activity_mercadillos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //llama el objeto que se le envia desde MainActivity
-        Usuario usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        //llama singleton para obtener datos
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -38,7 +39,8 @@ public class VistaUsuarios extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         //Cambia el titulo del Activity
-        this.setTitle(usuario.getDireccion());
+        direccion = singletonUsuario.getDireccion();
+        this.setTitle(direccion);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -91,7 +93,7 @@ public class VistaUsuarios extends AppCompatActivity
 
         if (id == R.id.mercadillos) {
             fragmentManager.beginTransaction().replace(R.id.mercadillos_container, new MercadilloFragment()).commit();
-            this.setTitle("Cr 28 #45-51");
+            this.setTitle(direccion);
             menu.findItem(R.id.search).setVisible(true);
 
 
