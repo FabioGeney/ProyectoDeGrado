@@ -27,11 +27,11 @@ public class VistaCanasta extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        canasta.add(new Canasta("Manzana", 3000, 1, R.mipmap.ic_fruit));
-        canasta.add(new Canasta("Pera", 5000, 1, R.mipmap.ic_fruit));
-        canasta.add(new Canasta("Mango", 3000, 1, R.mipmap.ic_fruit));
-        canasta.add(new Canasta("Piña", 4000, 1, R.mipmap.ic_fruit));
-        canasta.add(new Canasta("Lulo", 1000, 1, R.mipmap.ic_fruit));
+        canasta.add(new Canasta("Manzana", 3000, 1, R.drawable.fruit));
+        canasta.add(new Canasta("Pera", 5000, 1, R.drawable.fruit));
+        canasta.add(new Canasta("Mango", 3000, 1, R.drawable.fruit));
+        canasta.add(new Canasta("Piña", 4000, 1, R.drawable.fruit));
+        canasta.add(new Canasta("Lulo", 1000, 1, R.drawable.fruit));
 
         listView = findViewById(R.id.listview);
         canastaAdapter = new CanastaAdapter(this, canasta);
