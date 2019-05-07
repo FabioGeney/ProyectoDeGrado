@@ -83,13 +83,13 @@
             android:layout_marginTop="5dp"
             android:text="Cr 28 # 43-54 Apto 101"
              />
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:layout_marginTop="15dp"
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/direccion">
-        </ListView>
+        </android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>
 
