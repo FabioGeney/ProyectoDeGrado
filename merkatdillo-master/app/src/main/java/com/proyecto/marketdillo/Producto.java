@@ -1,6 +1,8 @@
 package com.proyecto.marketdillo;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable{
     private String id;
     private String nombre;
     private String descripcion;
@@ -8,6 +10,7 @@ public class Producto {
     private String tipo;
     private String cantidad;
     private int imagen;
+    private int contador = 0;
 
     Producto(){
 
@@ -39,6 +42,14 @@ public class Producto {
         this.precioCantidad = precioCantidad;
         this.imagen = imagen;
     };
+
+    public int getContador() {
+        return contador;
+    }
+
+    public void setContador(int contador) {
+        this.contador = contador;
+    }
 
     public void setId(String id) {
         this.id = id;

@@ -20,6 +20,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.io.Serializable;
+
+import static android.support.constraint.Constraints.TAG;
 
 /*Se le da el nombre de main activity porque es donde se inicia sesion*/
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txproductor;
     private EditText edtemail;
     private EditText edtpassword;
-
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,14 +108,13 @@ public class MainActivity extends AppCompatActivity {
     }
     /*metodo para iniciar sesion con los parametros de email y password, autentica con firebase y revisa si
     * existe tal cuenta en la base de datos*/
-    private void inicio(String email, String password){
+    private void inicio(final String email, String password){
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(MainActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this, VistaUsuarios.class);
-                    startActivity(i);
+                    getTipo(email);
                 } else{
                     Toast.makeText(MainActivity.this, "Error iniciando cuenta", Toast.LENGTH_SHORT).show();
                 }
@@ -158,4 +164,69 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    private void getTipo( String correo){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Consumidor").whereEqualTo("email",correo)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                               usuario = document.toObject(Usuario.class);
+                               usuario.setTipoUsuario("consumidor");
+                            }
+
+                        }else{
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                        if(usuario!=null && usuario.getTipoUsuario().equals("consumidor")){
+                            Intent intent = new Intent(MainActivity.this, VistaUsuarios.class);
+                            SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                            singletonUsuario.setNombre(usuario.getNombre());
+                            singletonUsuario.setApellidos(usuario.getApellidos());
+                            singletonUsuario.setEmail(usuario.getEmail());
+                            singletonUsuario.setCelular(usuario.getCelular());
+                            singletonUsuario.setFecha(usuario.getFecha());
+                            singletonUsuario.setDoc_identidad(usuario.getDoc_identidad());
+                            singletonUsuario.setDireccion(usuario.getDireccion());
+                            singletonUsuario.setId(usuario.getId());
+
+                            startActivity(intent);
+
+                        }
+                    }
+        });
+
+        db.collection("Campesino").whereEqualTo("email",correo)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                usuario = document.toObject(Usuario.class);
+                                usuario.setTipoUsuario("campesino");
+                            }
+
+                        }else{
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                        if(usuario!=null && usuario.getTipoUsuario().equals("campesino")){
+                            Intent intent = new Intent(MainActivity.this, VistaCampesino.class);
+                            SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                            singletonUsuario.setNombre(usuario.getNombre());
+                            singletonUsuario.setApellidos(usuario.getApellidos());
+                            singletonUsuario.setEmail(usuario.getEmail());
+                            singletonUsuario.setCelular(usuario.getCelular());
+                            singletonUsuario.setFecha(usuario.getFecha());
+                            singletonUsuario.setDoc_identidad(usuario.getDoc_identidad());
+                            singletonUsuario.setDireccion(usuario.getDireccion());
+                            singletonUsuario.setId(usuario.getId());
+                            startActivity(intent);
+                        }
+                    }
+                });
+    }
 }

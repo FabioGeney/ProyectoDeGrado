@@ -65,8 +65,6 @@ public class PedidosFragment extends Fragment {
         pedidosList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);
-                startActivity(intent);
             }
         });
         return root;

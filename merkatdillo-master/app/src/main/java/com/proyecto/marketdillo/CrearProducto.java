@@ -35,6 +35,7 @@ public class CrearProducto extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "CrearProducto";
+    private String idCampesino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class CrearProducto extends AppCompatActivity {
         edtCantidad = findViewById(R.id.edtcantidad);
         precioCantidad = findViewById(R.id.edtprecio);
         guardar = findViewById(R.id.btnguardar);
+
+        idCampesino = getIntent().getExtras().getString("id");
 
         initialize();
         guardar.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +84,7 @@ public class CrearProducto extends AppCompatActivity {
         producto.put("cantidad",cantidad);
         producto.put("precioCantidad",cantidadP);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        producto.put("id",firebaseUser.getUid());
+        producto.put("id",idCampesino);
         db.collection("Producto").document().set(producto);
         Toast.makeText(CrearProducto.this, "Producto Guardado", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(CrearProducto.this, VistaCampesino.class);

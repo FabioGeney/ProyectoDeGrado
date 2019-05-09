@@ -15,11 +15,35 @@
       },
       "oauth_client": [
         {
-          "client_id": "856796292768-ehlp6v83mre1trnkarvaortlsnq88d5d.apps.googleusercontent.com",
+          "client_id": "856796292768-f1unr9aiaukef9o8rjcv8of8o3kmp17u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.proyecto.marketdillo",
-            "certificate_hash": "5882149d21ecb795968080728961ac75f6192929"
+            "certificate_hash": "17ed98fa85ebef276b1995b76e23a6b8902cf624"
+          }
+        },
+        {
+          "client_id": "856796292768-6jcmevkd9rghlnlgedbsmbsoqt9ea20e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.marketdillo",
+            "certificate_hash": "79b753b3da5e79bded62098e3c473986d741444b"
+          }
+        },
+        {
+          "client_id": "856796292768-pogtiv3dtgpc7ag20ppkn679k0423kba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.marketdillo",
+            "certificate_hash": "f3c3cbc5d8057955ff51614805e40f4b2efa83cf"
+          }
+        },
+        {
+          "client_id": "856796292768-8qm93dsl91rvoqdqeb86djmpii22pks0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.marketdillo",
+            "certificate_hash": "93443047bff12bece456b88cefba82ed5ff9b0dc"
           }
         },
         {
@@ -33,20 +57,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "856796292768-ec6atf9roge8lelcnsovbh0cuhapbm7o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

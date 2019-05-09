@@ -21,6 +21,7 @@ import android.view.MenuItem;
 public class VistaUsuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
+    private String direccion;
     Menu menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +29,18 @@ public class VistaUsuarios extends AppCompatActivity
         setContentView(R.layout.activity_mercadillos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //llama singleton para obtener datos
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        this.setTitle("Cr 28 #45-51");
+        //Cambia el titulo del Activity
+        direccion = singletonUsuario.getDireccion();
+        this.setTitle(direccion);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -87,7 +93,7 @@ public class VistaUsuarios extends AppCompatActivity
 
         if (id == R.id.mercadillos) {
             fragmentManager.beginTransaction().replace(R.id.mercadillos_container, new MercadilloFragment()).commit();
-            this.setTitle("Cr 28 #45-51");
+            this.setTitle(direccion);
             menu.findItem(R.id.search).setVisible(true);
 
 

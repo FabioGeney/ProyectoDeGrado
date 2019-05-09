@@ -54,13 +54,7 @@ public class ProductoFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_producto, container, false);
 
-        saveProducto(new Producto("Manzana", " la descripcion es muy grande y no se q mas poner", "$3000lb", 1));
-        // Instancia del ListView.
-        productoList = (ListView) root.findViewById(R.id.producto_list);
-        // Inicializar el adaptador con la fuente de datos.
-        productoAdapter = new ProductoAdapter(getActivity(), getProducto());
-        //Relacionando la lista con el adaptador
-        productoList.setAdapter(productoAdapter);
+
 
         return root;
     }
