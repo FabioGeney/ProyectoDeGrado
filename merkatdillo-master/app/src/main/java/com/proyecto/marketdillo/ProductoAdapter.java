@@ -75,7 +75,13 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             agregar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    singletonCanasta.setCanastas(producto);
+                    if(producto.getContador() ==0){
+                        producto.setContador(1);
+                        singletonCanasta.setCanastas(producto);
+                    }else{
+                        singletonCanasta.setContador(producto);
+                    }
+
                 }
             });
 

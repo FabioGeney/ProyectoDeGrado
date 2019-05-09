@@ -87,8 +87,10 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
                             // Inicializar el adaptador con la fuente de datos.
                             productoAdapter = new ProductoAdapter(productos, R.layout.list_item_productos, new ProductoAdapter.OnItemClickListener() {
                                 @Override
-                                public void OnItemClick(Producto mercadillo, int posicion) {
-
+                                public void OnItemClick(Producto producto, int posicion) {
+                                    Intent intent = new Intent(VistaProductosMercadillo.this, VistaProducto.class);
+                                    intent.putExtra("producto", producto);
+                                    startActivity(intent);
                                 }
                             });
                             //Relacionando la lista con el adaptador

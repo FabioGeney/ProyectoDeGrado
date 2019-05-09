@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EdgeEffect;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
+    private EditText editText;
 
     public  CanastaAdapter(List<Canasta> canastas, int layout, OnItemClickListener itemClickListener ){
         this.canastas = canastas;
@@ -68,7 +71,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
             Picasso.with(context).load(canasta.getImagen()).fit().into(imagen);
             nombre.setText( canasta.getNombreProducto());
             precioProducto.setText( "$ " + canasta.getPrecioProducto());
-            cantidad.setText("1");
+            cantidad.setText(""+canasta.getCantidad());
 
             add.setOnClickListener(new View.OnClickListener() {
                 @Override

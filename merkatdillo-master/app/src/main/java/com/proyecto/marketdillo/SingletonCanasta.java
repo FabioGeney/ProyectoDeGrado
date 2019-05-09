@@ -34,4 +34,14 @@ public class SingletonCanasta {
     public void setCanastas(Producto producto) {
         canastas.add(producto);
     }
+
+    public void setContador(Producto producto){
+        for(Producto producto1:canastas){
+            if(producto1==producto){
+                producto.setContador(producto1.getContador()+1);
+                canastas.remove(producto1);
+                canastas.add(producto);
+            }
+        }
+    }
 }
