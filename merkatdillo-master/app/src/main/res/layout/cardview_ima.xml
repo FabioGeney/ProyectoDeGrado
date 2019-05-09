@@ -5,7 +5,8 @@
     android:id="@+id/cardview"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_cardview"
-    cardview:cardCornerRadius="@dimen/cornerradio">
+    cardview:cardCornerRadius="@dimen/cornerradio"
+    android:layout_marginBottom="@dimen/activity_vertical_margin">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:background="@color/backgroundtext_card">
 
             <TextView
-                android:id="@+id/usernamecard"
+                android:id="@+id/nameprod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Limones"
@@ -46,15 +47,15 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorIcons"
                     android:textSize="@dimen/tamañotextocard2"
-                    android:text="Hace"/>
+                    android:text="Precio"/>
 
                 <TextView
-                    android:id="@+id/tiempocard"
+                    android:id="@+id/preciocard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorIcons"
                     android:textSize="@dimen/tamañotextocard2"
-                    android:text="4 días"
+                    android:text="$5.000"
                     android:layout_marginLeft="5dp"/>
 
             </LinearLayout>
@@ -66,6 +67,7 @@
                 android:layout_marginTop="20dp">
 
                 <TextView
+                    android:id="@+id/user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorIcons"
