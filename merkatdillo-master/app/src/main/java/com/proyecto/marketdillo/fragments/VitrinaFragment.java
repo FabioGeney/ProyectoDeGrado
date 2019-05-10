@@ -3,6 +3,7 @@ package com.proyecto.marketdillo.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,10 +32,10 @@ public class VitrinaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_vitrina, container, false);
         RecyclerView imagenesRecycler = (RecyclerView) view.findViewById(R.id.imagenRecycler);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
 
-        imagenesRecycler.setLayoutManager(linearLayoutManager);
+        imagenesRecycler.setLayoutManager(gridLayoutManager);
 
         ImagenAdapter imagenAdapter = new ImagenAdapter(getImagenes(), R.layout.cardview_ima, getActivity());
 
@@ -45,6 +46,18 @@ public class VitrinaFragment extends Fragment {
 
     public ArrayList<ImagenCard> getImagenes(){
         ArrayList<ImagenCard> imagenes = new ArrayList<>();
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Limon", "2000", "Finca Fabio"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Sandia", "5000", "Finca Maria"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Papaya", "3000", "Finca Pedro"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Limon", "2000", "Finca Fabio"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Sandia", "5000", "Finca Maria"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Papaya", "3000", "Finca Pedro"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Limon", "2000", "Finca Fabio"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Sandia", "5000", "Finca Maria"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Papaya", "3000", "Finca Pedro"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Limon", "2000", "Finca Fabio"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Sandia", "5000", "Finca Maria"));
+        imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Papaya", "3000", "Finca Pedro"));
         imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Limon", "2000", "Finca Fabio"));
         imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Sandia", "5000", "Finca Maria"));
         imagenes.add(new ImagenCard("https://www.educationquizzes.com/library/KS3-Geography/river-1-1.jpg", "Papaya", "3000", "Finca Pedro"));
