@@ -18,7 +18,8 @@
     <string name="hint_tiempoaprox">Tiempo aproximado de entrega</string>
     <string name="tx_productor">¿<u>Eres</u> <u>productor</u>?</string>
     <string name="tx_comprador">¿<u>Eres</u> <u>comprador</u>?</string>
-    <string name="txt_unete">Únete ya a MerkatDillo!</string>
+    <string name="txt_unete">Únete ya a <u>MerkatDillo!</u></string>
+    <string name="txt_observar">Mira los productos de nuestros campesinos</string>
     <string name="title_activity_mercadillos">Mercadillos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

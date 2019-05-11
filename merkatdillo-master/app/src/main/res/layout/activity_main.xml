@@ -65,6 +65,9 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:enabled="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/button_login"
         android:theme="@style/RaisedButton"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,7 +106,10 @@
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toEndOf="@+id/txcrearcuenta"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.67"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"/>
 
     <TextView
         android:id="@+id/o"
@@ -144,7 +150,10 @@
         app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.67"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"/>
 
 
 </android.support.constraint.ConstraintLayout>

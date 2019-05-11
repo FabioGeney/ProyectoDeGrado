@@ -3,6 +3,7 @@ package com.proyecto.marketdillo.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +35,7 @@ public class VitrinaFragment extends Fragment {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-
+        imagenesRecycler.setItemAnimator(new DefaultItemAnimator());
         imagenesRecycler.setLayoutManager(gridLayoutManager);
 
         ImagenAdapter imagenAdapter = new ImagenAdapter(getImagenes(), R.layout.cardview_ima, getActivity());
