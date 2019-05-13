@@ -27,6 +27,9 @@ public class VistaCampesino extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //almacena los datos del singleton en el objeto usuario
+        final Usuario usuario = singletonUsuario.getUsuario();
+
         //Modifica titulo del Toolbar
         this.setTitle("Mercadillo de frutas");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -36,7 +39,7 @@ public class VistaCampesino extends AppCompatActivity
                 Intent intent = new Intent(VistaCampesino.this, CrearProducto.class);
 
                 //envia datos del id del campesino, para almacenar los productos con su id
-                intent.putExtra("id", singletonUsuario.getId());
+                intent.putExtra("id", usuario.getId());
                 startActivity(intent);
             }
         });
@@ -96,13 +99,12 @@ public class VistaCampesino extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        //crea fragmentManager para llamar fragments segun la opcion seleccionada
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.mimercadillo) {
-            Bundle bundle = new Bundle();
 
-            PtsCampesinoFragment ptsCampesinoFragment = new PtsCampesinoFragment();
-            fragmentManager.beginTransaction().replace(R.id.campesinos_content, ptsCampesinoFragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content,  new PtsCampesinoFragment()).commit();
         } else if (id == R.id.pedidos) {
 
         } else if (id == R.id.historial) {

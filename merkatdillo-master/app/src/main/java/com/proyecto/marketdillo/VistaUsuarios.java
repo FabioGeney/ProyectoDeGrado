@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,32 +18,46 @@ import android.support.v7.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class VistaUsuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
     private String direccion;
+    private TextView nombreUsuario;
     Menu menu;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mercadillos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //llama singleton para obtener datos
+        //llama singleton para obtener datos del usuario
         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
-
+        //almacena los datos del singleton en la variable usuario
+        Usuario usuario = singletonUsuario.getUsuario();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        //Cambia el titulo del Activity
-        direccion = singletonUsuario.getDireccion();
+        //Cambia el titulo del Activity por la direccion del usuario
+        direccion = usuario.getDireccion();
         this.setTitle(direccion);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        //instancia el header del navigationView para modificar editTex
+        View header = navigationView.getHeaderView(0);
+        //instancia editText del header
+        nombreUsuario = header.findViewById(R.id.nombre_usuario);
+        //cambia los valores del TextView
+        nombreUsuario.setText(usuario.getNombre());
         navigationView.setNavigationItemSelectedListener(this);
+        // crea un FragmentManager para llamar al FragmentMercadillo
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.mercadillos_container, new MercadilloFragment()).commit();
     }
@@ -88,7 +103,7 @@ public class VistaUsuarios extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        //crea fragmentManager para llamar fragments segun la opcion seleccionada
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.mercadillos) {

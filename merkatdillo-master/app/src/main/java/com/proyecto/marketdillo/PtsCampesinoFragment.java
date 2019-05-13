@@ -78,10 +78,14 @@ public class PtsCampesinoFragment extends Fragment {
 
         return root;
     }
+    //obtiene los productos del campesino en la base de daos
     public List<Producto> getProducto() {
-
+        //llama al singletonUsuario para obtener los datos del usuario
         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
-        String id = singletonUsuario.getId();
+        //almacena en el objeo usuario los datos del singleton
+        Usuario usuario = singletonUsuario.getUsuario();
+        //obtiene la id del usuario
+        String id = usuario.getId();
         final ArrayList<Producto> p = new ArrayList<>();
         p.add(new Producto("Manzana", "la descripcion es muy grande ", "$3000 por lb", R.mipmap.ic_fruit));
         FirebaseFirestore db = FirebaseFirestore.getInstance();

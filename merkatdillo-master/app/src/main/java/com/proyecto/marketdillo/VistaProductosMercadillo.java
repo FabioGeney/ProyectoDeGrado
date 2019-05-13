@@ -34,6 +34,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
     private RecyclerView.Adapter productoAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Producto> productos;
+    private Mercadillo mercadillo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,12 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Llama al singletonMercadillo para obtener los datos almacenados
+        SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
+        //almacena los datos del singleton en la variable mercadillo
+        mercadillo = singletonMercadillo.getMercadillo();
         //cambia titulo del activity, con datos del MercadillsoFragment
-        String nombreMercadillo = getIntent().getExtras().getString("nombre");
+        String nombreMercadillo = mercadillo.getNombre();
         this.setTitle(nombreMercadillo);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -69,7 +74,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
     public List<Producto> getProductos(){
         final ArrayList<Producto> request = new ArrayList<>();
         request.add(new Producto("manzana", "Testeando ancho del EdiText para que no se pase hasta el boton", "3500", R.drawable.fruit));
-        String id = getIntent().getExtras().getString("id");
+        String id = mercadillo.getId();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Producto").whereEqualTo("id",id)
                 .get()

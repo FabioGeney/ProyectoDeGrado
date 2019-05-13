@@ -2,7 +2,7 @@ package com.proyecto.marketdillo;
 
 import java.io.Serializable;
 
-public class Usuario implements Serializable {
+public class Usuario  {
     private String nombre;
     private String apellidos;
     private String email;
@@ -13,7 +13,7 @@ public class Usuario implements Serializable {
     private String password;
     private String id;
     private String tipoUsuario;
-    private static Usuario usuario;
+
 
     public Usuario(){
 
@@ -31,12 +31,6 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public static Usuario getInstance(String nombre, String apellidos, String email, String celular, String fecha, String doc_identidad, String direccion,  String id){
-        if(usuario == null){
-            usuario = new Usuario(nombre, apellidos, email, celular, fecha, doc_identidad, direccion, "", id);
-        }
-        return usuario;
-    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

@@ -96,8 +96,10 @@ public class MercadilloFragment extends Fragment {
                                 @Override
                                 public void OnItemClick(Mercadillo mercadillo, int posicion) {
                                     Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);
-                                    intent.putExtra("id", mercadillo.getId());
-                                    intent.putExtra("nombre", mercadillo.getNombre());
+                                    //crea el singleotnMercadillo para almacenar en memoria los detos del mercadillo seleccionado por el usuario
+                                    SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
+                                    //en caso de que ya haya un mercadillo almacenado será reemplazado por otro seleccionado por el usuario
+                                    singletonMercadillo.setMercadillo(mercadillo);
                                     startActivity(intent);
                                 }
                             });

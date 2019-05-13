@@ -9,7 +9,7 @@ public class SingletonCanasta {
         return singletonCanasta;
     }
 
-    public static void setSingletonUsuario(SingletonCanasta singletonUsuario){
+    public static void setSingletonCanasta(SingletonCanasta singletonUsuario){
         SingletonCanasta.singletonCanasta = singletonUsuario;
     }
 
@@ -23,7 +23,7 @@ public class SingletonCanasta {
         return singletonCanasta;
     }
 
-    public static void setSingletonCanasta(SingletonCanasta singletonCanasta) {
+    public static void setSingletonSingletonCanasta(SingletonCanasta singletonCanasta) {
         SingletonCanasta.singletonCanasta = singletonCanasta;
     }
 
