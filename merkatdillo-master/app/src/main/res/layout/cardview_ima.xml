@@ -23,7 +23,6 @@
             android:id="@+id/picturecard"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_cardview"
-            android:background="@drawable/limone"
             android:scaleType="centerCrop" />
 
         <LinearLayout

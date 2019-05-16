@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.proyecto.marketdillo.Producto;
 import com.proyecto.marketdillo.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,7 @@ public class ImagenAdapter extends RecyclerView.Adapter<ImagenAdapter.ImagenView
         imagenViewHolder.mercadillo.setText(imagen.getMercadillo());
         imagenViewHolder.nombre.setText(imagen.getNombre());
         imagenViewHolder.precioCantidad.setText(imagen.getPrecioCantidad());
+        Picasso.with(activity).load(imagen.getImagen()).into(imagenViewHolder.imagen);
     }
 
     @Override

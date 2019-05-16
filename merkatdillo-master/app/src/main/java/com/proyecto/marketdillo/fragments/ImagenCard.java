@@ -2,23 +2,23 @@ package com.proyecto.marketdillo.fragments;
 
 public class ImagenCard {
 
-    private String imagen;
+    private int imagen;
     private String nombre;
     private String precioCantidad;
     private String mercadillo;
 
-    public ImagenCard(String imagen, String nombre, String precioCantidad, String mercadillo) {
+    public ImagenCard(int imagen, String nombre, String precioCantidad, String mercadillo) {
         this.imagen = imagen;
         this.nombre = nombre;
         this.precioCantidad = precioCantidad;
         this.mercadillo = mercadillo;
     }
 
-    public String getImagen() {
+    public int getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(int imagen) {
         this.imagen = imagen;
     }
 
