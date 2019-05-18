@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.proyecto.marketdillo.BottomActivity;
 import com.proyecto.marketdillo.Producto;
 import com.proyecto.marketdillo.R;
 import com.squareup.picasso.Picasso;
@@ -41,6 +43,14 @@ public class ImagenAdapter extends RecyclerView.Adapter<ImagenAdapter.ImagenView
         imagenViewHolder.nombre.setText(imagen.getNombre());
         imagenViewHolder.precioCantidad.setText(imagen.getPrecioCantidad());
         Picasso.with(activity).load(imagen.getImagen()).into(imagenViewHolder.imagen);
+
+        imagenViewHolder.imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(activity, ImagenDetalle.class);
+                activity.startActivity(i);
+            }
+        });
     }
 
     @Override

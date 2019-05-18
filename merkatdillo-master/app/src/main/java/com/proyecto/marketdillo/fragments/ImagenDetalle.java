@@ -17,4 +17,10 @@ public class ImagenDetalle extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.setTitle("Productos");
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

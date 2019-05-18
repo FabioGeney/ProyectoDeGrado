@@ -6,8 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ImagenDetalle">
 
-    <include android:id="@+id/toolbar3"
-        layout="@layout/toolbar"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        app:titleTextColor="@color/colorPrimary2"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.Toolbar>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -82,6 +91,19 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="351dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/colorDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 
 </android.support.constraint.ConstraintLayout>

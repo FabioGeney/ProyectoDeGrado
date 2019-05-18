@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".fragments.ImagenDetalle"></activity>
+        <activity android:name=".fragments.ImagenDetalle"
+            android:parentActivityName=".BottomActivity"
+            android:theme="@style/ThemeMainActivityH">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BottomActivity" />
+        </activity>
         <activity android:name=".VistaProducto" />
         <activity
             android:name=".CrearProducto"
