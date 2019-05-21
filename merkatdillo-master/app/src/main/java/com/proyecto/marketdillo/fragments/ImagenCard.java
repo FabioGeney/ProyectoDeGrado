@@ -1,18 +1,34 @@
 package com.proyecto.marketdillo.fragments;
 
-public class ImagenCard {
+import java.io.Serializable;
+
+public class ImagenCard implements Serializable {
 
     private int imagen;
     private String nombre;
     private String precioCantidad;
     private String mercadillo;
+    private String id;
+    private String descripcion;
 
-    public ImagenCard(int imagen, String nombre, String precioCantidad, String mercadillo) {
+    public ImagenCard() {
+    };
+
+    ImagenCard(int imagen, String nombre, String precioCantidad, String mercadillo) {
         this.imagen = imagen;
         this.nombre = nombre;
         this.precioCantidad = precioCantidad;
         this.mercadillo = mercadillo;
-    }
+    };
+
+    ImagenCard(String id, String nombre, String descripcion, String precioCantidad, int imagen){
+
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precioCantidad = precioCantidad;
+        this.imagen = imagen;
+    };
 
     public int getImagen() {
         return imagen;
@@ -45,4 +61,6 @@ public class ImagenCard {
     public void setMercadillo(String mercadillo) {
         this.mercadillo = mercadillo;
     }
+
+
 }

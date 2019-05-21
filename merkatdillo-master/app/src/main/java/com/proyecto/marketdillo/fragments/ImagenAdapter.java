@@ -16,17 +16,20 @@ import com.proyecto.marketdillo.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ImagenAdapter extends RecyclerView.Adapter<ImagenAdapter.ImagenViewHolder> {
 
-    private ArrayList<ImagenCard> imagenes;
+    private List<ImagenCard> imagenes;
     private int layout;
     private Activity activity;
+    private OnItemClickListener itemClickListener;
 
-    public ImagenAdapter(ArrayList<ImagenCard> imagenes, int layout, Activity activity) {
+    public ImagenAdapter(List<ImagenCard> imagenes, int layout, Activity activity, OnItemClickListener itemClickListener) {
         this.imagenes = imagenes;
         this.layout = layout;
         this.activity = activity;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -43,14 +46,15 @@ public class ImagenAdapter extends RecyclerView.Adapter<ImagenAdapter.ImagenView
         imagenViewHolder.nombre.setText(imagen.getNombre());
         imagenViewHolder.precioCantidad.setText(imagen.getPrecioCantidad());
         Picasso.with(activity).load(imagen.getImagen()).into(imagenViewHolder.imagen);
+        imagenViewHolder.bind(imagenes.get(i), itemClickListener);
 
-        imagenViewHolder.imagen.setOnClickListener(new View.OnClickListener() {
+        /*imagenViewHolder.imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(activity, ImagenDetalle.class);
                 activity.startActivity(i);
             }
-        });
+        });*/
     }
 
     @Override
@@ -72,9 +76,24 @@ public class ImagenAdapter extends RecyclerView.Adapter<ImagenAdapter.ImagenView
             precioCantidad = itemView.findViewById(R.id.preciocard);
             mercadillo = itemView.findViewById(R.id.user);
 
+        }
+
+        public void bind(final ImagenCard imagen, final OnItemClickListener listener){
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.OnItemClick(imagen, getAdapterPosition());
+                }
+            });
 
 
         }
+    }
+
+    public interface OnItemClickListener{
+        void OnItemClick(ImagenCard imagen, int posicion);
+
     }
 
 }

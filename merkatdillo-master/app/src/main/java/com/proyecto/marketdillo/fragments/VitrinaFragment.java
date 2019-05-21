@@ -1,24 +1,43 @@
 package com.proyecto.marketdillo.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.proyecto.marketdillo.Producto;
 import com.proyecto.marketdillo.R;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.support.constraint.Constraints.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class VitrinaFragment extends Fragment {
+
+    private List<ImagenCard> imagenes1;
+    private ImagenAdapter imagenAdapter;
+    private RecyclerView imagenesRecycler;
+    private GridLayoutManager gridLayoutManager;
 
 
     public VitrinaFragment() {
@@ -31,32 +50,54 @@ public class VitrinaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_vitrina, container, false);
-        RecyclerView imagenesRecycler = (RecyclerView) view.findViewById(R.id.imagenRecycler);
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        imagenesRecycler = (RecyclerView) view.findViewById(R.id.imagenRecycler);
+        imagenes1 = getImagenes();
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         imagenesRecycler.setItemAnimator(new DefaultItemAnimator());
-        imagenesRecycler.setLayoutManager(gridLayoutManager);
 
-        ImagenAdapter imagenAdapter = new ImagenAdapter(getImagenes(), R.layout.cardview_ima, getActivity());
 
-        imagenesRecycler.setAdapter(imagenAdapter);
+
+        /*ImagenAdapter imagenAdapter = new ImagenAdapter(getImagenes(), R.layout.cardview_ima, getActivity());
+
+        imagenesRecycler.setAdapter(imagenAdapter);*/
 
         return view;
     }
 
     public ArrayList<ImagenCard> getImagenes(){
-        ArrayList<ImagenCard> imagenes = new ArrayList<>();
+        final ArrayList<ImagenCard> imagenes = new ArrayList<>();
         imagenes.add(new ImagenCard(R.drawable.limone, "Limon", "2000", "Finca Fabio"));
-        imagenes.add(new ImagenCard(R.drawable.limone, "Sandia", "5000", "Finca Maria"));
-        imagenes.add(new ImagenCard(R.drawable.limone, "Papaya", "3000", "Finca Pedro"));
-        imagenes.add(new ImagenCard(R.drawable.limone, "Limon", "2000", "Finca Fabio"));
-        imagenes.add(new ImagenCard(R.drawable.limone, "Sandia", "5000", "Finca Maria"));
-        imagenes.add(new ImagenCard(R.drawable.limone, "Papaya", "3000", "Finca Pedro"));
-        imagenes.add(new ImagenCard(R.drawable.limone, "Limon", "2000", "Finca Fabio"));
-        imagenes.add(new ImagenCard(R.drawable.limone, "Sandia", "5000", "Finca Maria"));
-        imagenes.add(new ImagenCard(R.drawable.limone, "Papaya", "3000", "Finca Pedro"));
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Producto").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document : task.getResult()){
+
+                        ImagenCard imagen = document.toObject(ImagenCard.class);
+                        imagen.setImagen(R.drawable.limone);
+                        imagenes.add(imagen);
+                    }
+
+                    imagenAdapter = new ImagenAdapter(imagenes1, R.layout.cardview_ima, getActivity(), new ImagenAdapter.OnItemClickListener() {
+                        @Override
+                        public void OnItemClick(ImagenCard imagen, int posicion) {
+                            Intent i = new Intent(getContext(), ImagenDetalle.class);
+                            startActivity(i);
+                            i.putExtra("imagen", imagen);
+                            Toast.makeText(getContext(), imagen.getNombre() + imagen.getMercadillo() + imagen.getPrecioCantidad(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                    imagenesRecycler.setAdapter(imagenAdapter);
+                    imagenesRecycler.setLayoutManager(gridLayoutManager);
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
         return imagenes;
     }
 
