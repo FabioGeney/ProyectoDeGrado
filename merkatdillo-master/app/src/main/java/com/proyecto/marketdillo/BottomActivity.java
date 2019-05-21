@@ -1,12 +1,16 @@
 package com.proyecto.marketdillo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.proyecto.marketdillo.fragments.EmpezarFragment;
 import com.proyecto.marketdillo.fragments.InicioFragment;
@@ -21,6 +25,8 @@ para un fragment diferente
 public class BottomActivity extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private boolean twice = false;
+    private final String TAG = this.getClass().getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,5 +74,31 @@ public class BottomActivity extends AppCompatActivity
         }
 
         return loadFragment(fragment);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Log.d(TAG, "click");
+
+        if(twice){
+            Intent i = new Intent(Intent.ACTION_MAIN);
+            i.addCategory(Intent.CATEGORY_HOME);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+            System.exit(0);
+        }
+        twice = true;
+        Log.d(TAG, "twice" + twice);
+
+        Toast.makeText(BottomActivity.this, "Vuelva a oprimir para salir", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                twice = false;
+                Log.d(TAG, "twice" + twice);
+            }
+        }, 2000);
     }
 }
