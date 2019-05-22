@@ -40,7 +40,7 @@ public class PedidosAdapter extends ArrayAdapter<Pedidos> {
         TextView total = convertView.findViewById(R.id.total);
         Pedidos pedido = getItem(position);
 
-        Picasso.with(context).load(pedido.getImagen()).fit().into(imagen);
+        //Picasso.with(context).load(pedido.getImagen()).fit().into(imagen);
         nombre.setText( pedido.getNombreMercadillo());
         estado.setText(pedido.getEstado() );
         total.setText( "$ " + pedido.getTotal());

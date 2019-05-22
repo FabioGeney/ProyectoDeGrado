@@ -50,6 +50,10 @@ public class Producto implements Serializable{
         return idCollection;
     }
 
+    public String getIdCollection() {
+        return idCollection;
+    }
+
     public void setIdDocument(String idCollection) {
         this.idCollection = idCollection;
     }
