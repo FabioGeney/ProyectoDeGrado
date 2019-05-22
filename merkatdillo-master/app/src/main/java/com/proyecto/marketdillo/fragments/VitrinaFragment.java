@@ -85,10 +85,8 @@ public class VitrinaFragment extends Fragment {
                         @Override
                         public void OnItemClick(ImagenCard imagen, int posicion) {
                             Intent i = new Intent(getContext(), ImagenDetalle.class);
-                            startActivity(i);
                             i.putExtra("imagen", imagen);
-                            Toast.makeText(getContext(), imagen.getNombre() + imagen.getMercadillo() + imagen.getPrecioCantidad(), Toast.LENGTH_SHORT).show();
-
+                            startActivity(i);
                         }
                     });
                     imagenesRecycler.setAdapter(imagenAdapter);
