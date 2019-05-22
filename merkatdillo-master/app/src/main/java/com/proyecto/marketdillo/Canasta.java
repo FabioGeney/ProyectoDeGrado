@@ -1,5 +1,5 @@
 package com.proyecto.marketdillo;
-
+//modelo para mostrar la lista de productos en la canasta
 public class Canasta {
     private String id;
     private String nombreProducto;

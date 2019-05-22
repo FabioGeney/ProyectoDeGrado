@@ -3,7 +3,10 @@ package com.proyecto.marketdillo;
 import java.io.Serializable;
 
 public class Producto implements Serializable{
+    //id del campesino
     private String id;
+    // id del
+    private String idCollection;
     private String nombre;
     private String descripcion;
     private String precioCantidad;
@@ -42,6 +45,14 @@ public class Producto implements Serializable{
         this.precioCantidad = precioCantidad;
         this.imagen = imagen;
     };
+
+    public String getIdDocument() {
+        return idCollection;
+    }
+
+    public void setIdDocument(String idCollection) {
+        this.idCollection = idCollection;
+    }
 
     public int getContador() {
         return contador;

@@ -25,7 +25,8 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
-    private EditText editText;
+    public TextView textTotal;
+    private int total = 0;
 
     public  CanastaAdapter(List<Canasta> canastas, int layout, OnItemClickListener itemClickListener ){
         this.canastas = canastas;
@@ -66,29 +67,31 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
             nombre =  itemView.findViewById(R.id.nombre);
             precioProducto = itemView.findViewById(R.id.precio);
             cantidad = itemView.findViewById(R.id.cantidad);
+            textTotal = ((VistaCanasta)context).findViewById(R.id.total);
+
         }
         public void bind( final Canasta canasta, final OnItemClickListener listener){
             Picasso.with(context).load(canasta.getImagen()).fit().into(imagen);
             nombre.setText( canasta.getNombreProducto());
             precioProducto.setText( "$ " + canasta.getPrecioProducto());
             cantidad.setText(""+canasta.getCantidad());
-
+            getTotal();
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     canasta.setCantidad( canasta.getCantidad() + 1);
                     cantidad.setText(""+ canasta.getCantidad());
+                    setTotal(canasta, true);
                 }
             });
 
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(canasta.getCantidad()  == 1)
-                    {
-                    }else {
+                    if(canasta.getCantidad()  != 1) {
                         canasta.setCantidad(canasta.getCantidad() - 1);
-                        cantidad.setText(""+canasta.getCantidad());
+                        cantidad.setText("" + canasta.getCantidad());
+                        setTotal(canasta, false);
                     }
                 }
             });
@@ -107,6 +110,25 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     public interface OnItemClickListener{
         void OnItemClick(Canasta mercadillo, int posicion);
 
+    }
+
+    private void getTotal(){
+
+       for(Canasta canasta : canastas){
+          total = total + canasta.getPrecioProducto();
+       }
+
+       textTotal.setText("$ "+total);
+    }
+
+    private void setTotal(Canasta canasta, boolean index){
+
+        if(index){
+            total = total + canasta.getPrecioProducto();
+        }else{
+            total = total - canasta.getPrecioProducto();
+        }
+        textTotal.setText("$ "+total);
     }
 }
 

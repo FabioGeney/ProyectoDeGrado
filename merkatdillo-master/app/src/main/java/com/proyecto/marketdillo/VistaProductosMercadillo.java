@@ -52,6 +52,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         String nombreMercadillo = mercadillo.getNombre();
         this.setTitle(nombreMercadillo);
 
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +75,9 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
     public List<Producto> getProductos(){
         final ArrayList<Producto> request = new ArrayList<>();
         request.add(new Producto("manzana", "Testeando ancho del EdiText para que no se pase hasta el boton", "3500", R.drawable.fruit));
+        //obtienen la id del mecadillo
         String id = mercadillo.getId();
+        //hace consulta en la base de datos para buscar los prodcutos del mercadillo
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Producto").whereEqualTo("id",id)
                 .get()
@@ -84,8 +87,11 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
+                                //si encuentra almacena la indormacion de la base de datos en el objeto
                                 Producto producto = document.toObject(Producto.class);
                                 producto.setImagen(R.drawable.fruit);
+                                producto.setIdDocument(document.getId());
+                                //agrega porducto de la base de dato al arreglo
                                 request.add(producto);
 
                             }
@@ -93,7 +99,9 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
                             productoAdapter = new ProductoAdapter(productos, R.layout.list_item_productos, new ProductoAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Producto producto, int posicion) {
+                                    //al hacer click en un mercadillo se va a otro activity
                                     Intent intent = new Intent(VistaProductosMercadillo.this, VistaProducto.class);
+                                    //envia informacion del mercadillo al otro activity
                                     intent.putExtra("producto", producto);
                                     startActivity(intent);
                                 }
