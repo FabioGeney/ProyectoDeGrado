@@ -1,7 +1,12 @@
 package com.proyecto.marketdillo;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +42,9 @@ public class CrearProducto extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "CrearProducto";
     private String idCampesino;
+    private File f;
+
+    private final int PICTURE_FROM_CAMERA = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,7 @@ public class CrearProducto extends AppCompatActivity {
         edtCantidad = findViewById(R.id.edtcantidad);
         precioCantidad = findViewById(R.id.edtprecio);
         guardar = findViewById(R.id.btnguardar);
+        imagen = findViewById(R.id.imagen);
 
         idCampesino = getIntent().getExtras().getString("id");
 
@@ -62,17 +72,43 @@ public class CrearProducto extends AppCompatActivity {
             }
         });
 
+        imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent camara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                /*
+                camara.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(f));
+                camara.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1);*/
+                startActivity(Intent.createChooser(camara, "Elige la opción"));
+            }
+        });
+
         edtNombre.addTextChangedListener(loginTextWatcher);
         edtDescripcion.addTextChangedListener(loginTextWatcher);
         edtCantidad.addTextChangedListener(loginTextWatcher);
         precioCantidad.addTextChangedListener(loginTextWatcher);
 
-
-
-
-
     }
-    
+
+/*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        switch (requestCode) {
+            case PICTURE_FROM_CAMERA
+
+                if(resultCode == Activity.RESULT_OK){
+                    String result = data.toUri(0);
+                    Toast.makeText(this, "Result " +result, Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "No seleccionó la imagen, intente de nuevo", Toast.LENGTH_SHORT).show();
+                }
+                break;
+                default:
+                    super.onActivityResult(requestCode, resultCode, data);
+        }
+    }*/
+
     private void guardarProducto(){
         String nombre = edtNombre.getText().toString();
         String descripcion = edtDescripcion.getText().toString();
