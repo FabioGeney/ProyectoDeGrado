@@ -54,7 +54,7 @@ public class PedidosFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_pedidos, container, false);
-        savePedidos(new Pedidos("Mercadillo de verduras", "En camino", R.mipmap.ic_merca_image, "50 000"));
+        // savePedidos(new Pedidos("Mercadillo de verduras", "En camino", R.mipmap.ic_merca_image, "50 000"));
         // Instancia del ListView.
         pedidosList = (ListView) root.findViewById(R.id.pedidos_list);
         // Inicializar el adaptador con la fuente de datos.

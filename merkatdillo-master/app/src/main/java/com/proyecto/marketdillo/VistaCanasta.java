@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,9 +17,13 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VistaCanasta extends AppCompatActivity {
 
@@ -27,7 +32,11 @@ public class VistaCanasta extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private List<Canasta> canastas;
 
-
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference enviarPedido = db.collection("Pedido");
+    private Mercadillo mercadillo;
+    private Usuario usuario;
+    private TextView total;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,18 +44,19 @@ public class VistaCanasta extends AppCompatActivity {
 
         //instancia singleton
         SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
-        Mercadillo mercadillo = singletonMercadillo.getMercadillo();
+        mercadillo = singletonMercadillo.getMercadillo();
 
         //singleton usuario
 
         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
-        Usuario usuario = singletonUsuario.getUsuario();
+        usuario = singletonUsuario.getUsuario();
 
         //Crea e inicializa variables
         TextView nomreMercadillo = findViewById(R.id.nombreMercadillo);
         TextView envio = findViewById(R.id.envio);
         TextView tiempo = findViewById(R.id.tiempo);
         TextView direccion = findViewById(R.id.direccion);
+        total = findViewById(R.id.total);
         Button enviar = findViewById(R.id.finalizar);
 
         enviar.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +134,27 @@ public class VistaCanasta extends AppCompatActivity {
     }
 
     private void enviarPedido(){
-        
+        String idCampesino = mercadillo.getId();
+        String idConsumidor = usuario.getId();
+        String nombreMercadillo = mercadillo.getNombre();
+        String direccionEntrega = usuario.getDireccion();
+        String estado = "creado";
+        String precio = total.getText().toString();
+        Map<String, String> productos = new HashMap<>();
+
+        SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+        ArrayList<Producto> canasta = singletonCanasta.getCanastas();
+
+
+        for (Producto producto : canasta){
+            productos.put(producto.getIdCollection(), ""+producto.getContador());
+
+        }
+
+        Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreMercadillo, direccionEntrega,estado ,productos, precio);
+
+        enviarPedido.add(pedido);
+        Intent intent = new Intent(VistaCanasta.this, VistaUsuarios.class );
+        startActivity(intent);
     }
 }
