@@ -1,6 +1,8 @@
 package com.proyecto.marketdillo;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
@@ -43,6 +45,9 @@ public class CrearProducto extends AppCompatActivity {
     private static final String TAG = "CrearProducto";
     private String idCampesino;
     private File f;
+    private String eleccionusuario;
+    private int REQUEST_CAMERA = 0;
+    private int SELECT_FILE = 1;
 
     private final int PICTURE_FROM_CAMERA = 50;
 
@@ -75,11 +80,14 @@ public class CrearProducto extends AppCompatActivity {
         imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent camara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //seleccionarImagen();
+
+                //Intent camara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //startActivity(Intent.createChooser(camara, "Elige la opción"));
                 /*
                 camara.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(f));
                 camara.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1);*/
-                startActivity(Intent.createChooser(camara, "Elige la opción"));
+
             }
         });
 
@@ -90,6 +98,53 @@ public class CrearProducto extends AppCompatActivity {
 
     }
 
+
+/*
+    private void seleccionarImagen(){
+
+        final CharSequence[] items = {"Tomar foto", "Galería", "Cancelar"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Agrega Foto");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                boolean result = Utility.checkPermission(this);
+
+                if (items[item].equals("Tomar foto")) {
+                    eleccionusuario = "Tomar foto";
+
+                    if(result) {
+                        camaraIntent();
+                    } else
+                        Toast.makeText(CrearProducto.this, "No se pudo, intente de nuevo", Toast.LENGTH_SHORT).show();
+                } else if (items[item].equals("Galería")){
+                    eleccionusuario = "Galería";
+
+                    if(result) {
+                        galeriaIntent();
+                    } else
+                        Toast.makeText(CrearProducto.this, "No se pudo, intente de nuevo", Toast.LENGTH_SHORT).show();
+                } else if (items[item].equals("Cancelar")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void galeriaIntent(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Seleccione Archivo"), SELECT_FILE);
+    }
+
+    private void camaraIntent(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+*/
 /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
