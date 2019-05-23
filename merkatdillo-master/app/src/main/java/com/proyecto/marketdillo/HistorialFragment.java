@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,9 +28,10 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class HistorialFragment extends Fragment {
-    private ListView historialList;
-    private HistorialAdapter historialAdapter;
-    private HashMap<String, Historial> historial1 = new HashMap<>();
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter historialAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Pedidos> historialList;
 
 
 
@@ -55,28 +59,28 @@ public class HistorialFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_historial, container, false);
 
-        saveHistorial(new Historial("Mercadillo de frutas", "30 de agosto,2018", R.mipmap.ic_merca_image));
+        historialList = getHistorial();
+        layoutManager = new LinearLayoutManager(getContext());
         // Instancia del ListView.
-        historialList = (ListView) root.findViewById(R.id.historial_list);
-        // Inicializar el adaptador con la fuente de datos.
-        historialAdapter = new HistorialAdapter(getActivity(), getHistorial());
-        //Relacionando la lista con el adaptador
-        historialList.setAdapter(historialAdapter);
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.historial_recycler);
 
-        historialList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        historialAdapter = new HistorialAdapter(historialList, R.layout.list_item_mercadillo, new HistorialAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), VistaProductosMercadillo.class);
-                startActivity(intent);
+            public void OnItemClick(Pedidos pedidos, int posicion) {
             }
         });
+
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(historialAdapter);
+
+
         return root;
-    }
-    private void saveHistorial(Historial historial) {
-        historial1.put(historial.getNombreMercadillo(), historial);
 
     }
-    public List<Historial> getHistorial() {
-        return new ArrayList<>(historial1.values());
+    private ArrayList<Pedidos> getHistorial() {
+        ArrayList<Pedidos> pedidos = new ArrayList<>();
+
+        return pedidos;
     }
+
 }

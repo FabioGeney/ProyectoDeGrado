@@ -23,13 +23,7 @@
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="151dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="20sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:text="TextView autosizing"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="25sp"
         tools:text="Mercadillo de frutas" />
 
     <TextView

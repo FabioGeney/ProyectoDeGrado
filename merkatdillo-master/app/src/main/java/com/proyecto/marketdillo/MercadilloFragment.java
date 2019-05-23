@@ -39,8 +39,6 @@ public class MercadilloFragment extends Fragment {
     private List<Mercadillo> mercadillos1;
 
 
-
-
     public MercadilloFragment() {
         // Required empty public constructor
     }
