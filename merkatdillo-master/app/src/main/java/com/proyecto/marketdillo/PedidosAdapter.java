@@ -1,12 +1,11 @@
 package com.proyecto.marketdillo;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,44 +13,70 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class PedidosAdapter extends ArrayAdapter<Pedidos> {
-    Context context;
-    public PedidosAdapter(Context context, List<Pedidos> objects) {
-        super(context, 0, objects);
-        this.context = context;
+public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHolder> {
+
+    private List<Pedidos> pedidos;
+    private int layout;
+    private OnItemClickListener itemClickListener;
+    private Context context;
+
+    public  PedidosAdapter(List<Pedidos> pedidos, int layout, OnItemClickListener itemClickListener ){
+        this.pedidos = pedidos;
+        this.layout = layout;
+        this.itemClickListener = itemClickListener;
+    }
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(layout, viewGroup, false);
+        context = viewGroup.getContext();
+        ViewHolder viewHolder = new ViewHolder(v);
+        return viewHolder;
     }
 
-    @SuppressLint("ResourceAsColor")
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Obtener inflater.
-        LayoutInflater inflater = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        viewHolder.bind(pedidos.get(i),itemClickListener);
+    }
 
-        // ¿Existe el view actual?
-        if (null == convertView) {
-            convertView = inflater.inflate(
-                    R.layout.list_item_pedidos,
-                    parent,
-                    false);
+    @Override
+    public int getItemCount() {
+        return pedidos.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+
+        public TextView nombre ;
+        public TextView total ;
+        public TextView estado ;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            nombre = (TextView) itemView.findViewById(R.id.nombre);
+            estado = (TextView)itemView.findViewById(R.id.estado);
+            total = itemView.findViewById(R.id.total);
+
         }
-        ImageView imagen = (ImageView) convertView.findViewById(R.id.imagen);
-        TextView nombre = (TextView) convertView.findViewById(R.id.nombre);
-        TextView estado = (TextView)convertView.findViewById(R.id.estado);
-        TextView total = convertView.findViewById(R.id.total);
-        Pedidos pedido = getItem(position);
+        public void bind( final Pedidos pedidos, final OnItemClickListener listener){
 
-        //Picasso.with(context).load(pedido.getImagen()).fit().into(imagen);
-        nombre.setText( pedido.getNombreMercadillo());
-        estado.setText(pedido.getEstado() );
-        total.setText( "$ " + pedido.getTotal());
-        this.notifyDataSetChanged();
+            nombre.setText(pedidos.getNombreMercadillo());
+            estado.setText("Estado: "+ pedidos.getEstado());
+            total.setText(pedidos.getTotal());
 
-        new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        };
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.OnItemClick(pedidos, getAdapterPosition());
+                }
+            });
 
-        return convertView;
+
+        }
+    }
+
+    public interface OnItemClickListener{
+        void OnItemClick(Pedidos pedidos, int posicion);
+
     }
 }

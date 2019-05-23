@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistorialFragment">
+    >
 
-    <ListView
-        android:id="@+id/pedidos_list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pedidos_recycler"
         android:layout_width="match_parent"
-        android:layout_height="445dp"
-        android:divider="#B4B1B1"
-        android:dividerHeight="1dp"/>
+        android:layout_height="match_parent"
+        android:elevation="3dp"
+        />
 
 </FrameLayout>

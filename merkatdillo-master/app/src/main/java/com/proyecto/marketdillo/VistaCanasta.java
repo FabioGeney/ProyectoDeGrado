@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -14,13 +15,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,6 +146,10 @@ public class VistaCanasta extends AppCompatActivity {
         String estado = "creado";
         String precio = total.getText().toString();
         Map<String, String> productos = new HashMap<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+
+        String fecha = dateFormat.format(date);
 
         SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
         ArrayList<Producto> canasta = singletonCanasta.getCanastas();
@@ -151,7 +160,7 @@ public class VistaCanasta extends AppCompatActivity {
 
         }
 
-        Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreMercadillo, direccionEntrega,estado ,productos, precio);
+        Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreMercadillo, direccionEntrega,estado ,productos, precio, fecha);
 
         enviarPedido.add(pedido);
         Intent intent = new Intent(VistaCanasta.this, VistaUsuarios.class );

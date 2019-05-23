@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import java.util.Date;
 import java.util.Map;
 
 public class Pedidos {
@@ -11,11 +12,12 @@ public class Pedidos {
     private String estado;
     private Map<String, String> productos;
     private String total;
+    private String fecha;
 
     public Pedidos() {
     }
 
-    public Pedidos(String idCampesino, String idConsumidor, String nombreMercadillo, String direccionEntrega, String estado, Map<String, String> productos, String total) {
+    public Pedidos(String idCampesino, String idConsumidor, String nombreMercadillo, String direccionEntrega, String estado, Map<String, String> productos, String total, String fecha) {
         this.idCampesino = idCampesino;
         this.idConsumidor = idConsumidor;
         NombreMercadillo = nombreMercadillo;
@@ -23,6 +25,15 @@ public class Pedidos {
         this.estado = estado;
         this.productos = productos;
         this.total = total;
+        this.fecha = fecha;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getIdCampesino() {
