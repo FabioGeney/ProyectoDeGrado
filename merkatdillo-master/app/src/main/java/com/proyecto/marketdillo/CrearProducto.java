@@ -80,7 +80,7 @@ public class CrearProducto extends AppCompatActivity {
         imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //seleccionarImagen();
+                seleccionarImagen();
 
                 //Intent camara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //startActivity(Intent.createChooser(camara, "Elige la opción"));
@@ -98,18 +98,15 @@ public class CrearProducto extends AppCompatActivity {
 
     }
 
-
-/*
     private void seleccionarImagen(){
 
         final CharSequence[] items = {"Tomar foto", "Galería", "Cancelar"};
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Agrega Foto");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(this);
+                boolean result = Utility.checkPermission(CrearProducto.this);
 
                 if (items[item].equals("Tomar foto")) {
                     eleccionusuario = "Tomar foto";
@@ -144,7 +141,7 @@ public class CrearProducto extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
-*/
+
 /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
