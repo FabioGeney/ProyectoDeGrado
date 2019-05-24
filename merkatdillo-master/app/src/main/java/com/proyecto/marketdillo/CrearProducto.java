@@ -30,7 +30,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -56,6 +61,10 @@ public class CrearProducto extends AppCompatActivity {
     private String eleccionusuario;
     private int REQUEST_CAMERA = 0;
     private int SELECT_FILE = 1;
+    private  Uri mImagenUri;
+    private StorageReference hStorageRef;
+    private DatabaseReference hDatabaseRef;
+
 
     private final int PICTURE_FROM_CAMERA = 50;
 
@@ -74,6 +83,9 @@ public class CrearProducto extends AppCompatActivity {
         precioCantidad = findViewById(R.id.edtprecio);
         guardar = findViewById(R.id.btnguardar);
         imagen = findViewById(R.id.imagen);
+
+        hStorageRef = FirebaseStorage.getInstance().getReference("Subidas");
+        hDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
         idCampesino = getIntent().getExtras().getString("id");
 
@@ -170,11 +182,12 @@ public class CrearProducto extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK){
-            if(requestCode == SELECT_FILE)
+        if(resultCode == Activity.RESULT_OK /*"Mirar esta linea posiblemente ayuda mas" && data != null && data.getData() != null*/){
+            if(requestCode == SELECT_FILE) {
                 onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
+            } else if (requestCode == REQUEST_CAMERA) {
                 onCaptureImageResult(data);
+            }
         }
     }
 
@@ -197,6 +210,7 @@ public class CrearProducto extends AppCompatActivity {
             e.printStackTrace();
         }
         imagen.setImageBitmap(thumbnail);
+        mImagenUri = data.getData();
     }
 
     private void onSelectFromGalleryResult(Intent data){
@@ -210,6 +224,7 @@ public class CrearProducto extends AppCompatActivity {
             }
         }
         imagen.setImageBitmap(b);
+        mImagenUri = data.getData();
     }
     
     /*
