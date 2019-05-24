@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,17 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -64,21 +74,45 @@ public class HistorialFragment extends Fragment {
         // Instancia del ListView.
         mRecyclerView = (RecyclerView) root.findViewById(R.id.historial_recycler);
 
-        historialAdapter = new HistorialAdapter(historialList, R.layout.list_item_mercadillo, new HistorialAdapter.OnItemClickListener() {
-            @Override
-            public void OnItemClick(Pedidos pedidos, int posicion) {
-            }
-        });
 
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(historialAdapter);
 
 
         return root;
 
     }
     private ArrayList<Pedidos> getHistorial() {
-        ArrayList<Pedidos> pedidos = new ArrayList<>();
+        final ArrayList<Pedidos> pedidos = new ArrayList<>();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Pedido")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Pedidos pedido = document.toObject(Pedidos.class);
+                                pedidos.add(pedido);
+
+                            }
+                            // Inicializar el adaptador con la fuente de datos.
+                            historialAdapter = new HistorialAdapter(historialList, R.layout.list_item_historial, new HistorialAdapter.OnItemClickListener() {
+                                @Override
+                                public void OnItemClick(Pedidos pedidos, int posicion) {
+
+                                }
+                            });
+
+                            mRecyclerView.setLayoutManager(layoutManager);
+                            mRecyclerView.setAdapter(historialAdapter);
+
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
         return pedidos;
     }

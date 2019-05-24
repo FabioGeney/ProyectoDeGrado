@@ -145,23 +145,15 @@ public class VistaCanasta extends AppCompatActivity {
         String direccionEntrega = usuario.getDireccion();
         String estado = "creado";
         String precio = total.getText().toString();
-        Map<String, String> productos = new HashMap<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
 
         String fecha = dateFormat.format(date);
-
         SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
         ArrayList<Producto> canasta = singletonCanasta.getCanastas();
 
-
-        for (Producto producto : canasta){
-            productos.put(producto.getIdCollection(), ""+producto.getContador());
-
-        }
-
-        Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreMercadillo, direccionEntrega,estado ,productos, precio, fecha);
-
+        Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreMercadillo, direccionEntrega,estado ,canasta, precio, fecha);
+        Toast.makeText(this, ""+ canasta.size(), Toast.LENGTH_SHORT).show();
         enviarPedido.add(pedido);
         Intent intent = new Intent(VistaCanasta.this, VistaUsuarios.class );
         startActivity(intent);

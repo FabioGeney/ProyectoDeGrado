@@ -63,16 +63,16 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.View
             nombre = (itemView.findViewById(R.id.nombre));
             fechaPedido = itemView.findViewById(R.id.fecha);
         }
-        public void bind( final Pedidos pedidos, final OnItemClickListener listener){
+        public void bind( final Pedidos pedido, final OnItemClickListener listener){
 
             Picasso.with(context).load(R.mipmap.ic_merca_image).fit().into(imagen);
-            nombre.setText(pedidos.getNombreMercadillo());
-            fechaPedido.setText(pedidos.getFecha());
+            nombre.setText(pedido.getNombreMercadillo());
+            fechaPedido.setText(pedido.getFecha());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.OnItemClick(pedidos, getAdapterPosition());
+                    listener.OnItemClick(pedido, getAdapterPosition());
                 }
             });
 
@@ -81,7 +81,7 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.View
     }
 
     public interface OnItemClickListener{
-        void OnItemClick(Pedidos pedidos, int posicion);
+        void OnItemClick(Pedidos pedido, int posicion);
 
     }
 }

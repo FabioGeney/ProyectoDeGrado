@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SingletonCanasta {
 
@@ -43,5 +44,11 @@ public class SingletonCanasta {
                 canastas.add(producto);
             }
         }
+    }
+    public void setProductosCanasta(List<Producto> canastas){
+        for(Producto producto: canastas){
+            this.canastas.add(producto);
+        }
+
     }
 }

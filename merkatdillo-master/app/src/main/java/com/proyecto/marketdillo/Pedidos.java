@@ -1,7 +1,9 @@
 package com.proyecto.marketdillo;
 
-import java.util.Date;
-import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Pedidos {
 
@@ -10,14 +12,14 @@ public class Pedidos {
     private String NombreMercadillo;
     private String direccionEntrega;
     private String estado;
-    private Map<String, String> productos;
+    private List<Producto> productos;
     private String total;
     private String fecha;
 
     public Pedidos() {
     }
 
-    public Pedidos(String idCampesino, String idConsumidor, String nombreMercadillo, String direccionEntrega, String estado, Map<String, String> productos, String total, String fecha) {
+    public Pedidos(String idCampesino, String idConsumidor, String nombreMercadillo, String direccionEntrega, String estado, List<Producto> productos, String total, String fecha) {
         this.idCampesino = idCampesino;
         this.idConsumidor = idConsumidor;
         NombreMercadillo = nombreMercadillo;
@@ -76,11 +78,11 @@ public class Pedidos {
         this.estado = estado;
     }
 
-    public Map<String, String> getProductos() {
+    public List<Producto> getProductos() {
         return productos;
     }
 
-    public void setProductos(Map<String, String> productos) {
+    public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
 

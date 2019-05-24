@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "856796292768-i9dbumf32k1e6dbcflrvtqf0reqcvf4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.marketdillo",
+            "certificate_hash": "f74f65fdaece3aa4253aec28267d3987a71f63a7"
+          }
+        },
+        {
+          "client_id": "856796292768-diipm3tjisgf37894ppkn3c49k6q5egi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.marketdillo",
+            "certificate_hash": "5c1c9b4690e94b29ce5d4c7b9e53845d3dc1f988"
+          }
+        },
+        {
+          "client_id": "856796292768-jh6b98s6qc8rsk9u2mv2l8od1j2gi52m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.marketdillo",
+            "certificate_hash": "f2fd16a1a20ce5ac629b0d52ef33efc30ce77d0e"
+          }
+        },
+        {
           "client_id": "856796292768-f1unr9aiaukef9o8rjcv8of8o3kmp17u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

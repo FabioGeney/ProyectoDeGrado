@@ -97,6 +97,10 @@ public class PedidosFragment extends Fragment {
                             pedidosAdapter = new PedidosAdapter(pedidos, R.layout.list_item_pedido, new PedidosAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Pedidos pedidos, int posicion) {
+                                    SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+                                    singletonCanasta.setProductosCanasta(pedidos.getProductos());
+                                    Intent intent = new Intent(getContext(), VistaDetalles.class);
+                                    //startActivity(intent);
 
                                 }
                             });
