@@ -24,11 +24,6 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="101dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="2sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:text="TextView autosizing"
         android:textAppearance="?attr/textAppearanceListItem"
         tools:text="Manzana" />
 

@@ -1,14 +1,11 @@
 package com.proyecto.marketdillo;
 
-
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,16 +13,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.ViewHolder> {
 
-public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.ViewHolder> {
-
-    private List<Pedidos> pedidos;
+    private List<Canasta> canastas;
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
 
-    public HistorialAdapter(List<Pedidos> mercadillos, int layout, OnItemClickListener itemClickListener ){
-        this.pedidos = mercadillos;
+
+
+    public  DetallesAdapter(List<Canasta> canastas, int layout, OnItemClickListener itemClickListener ){
+        this.canastas = canastas;
         this.layout = layout;
         this.itemClickListener = itemClickListener;
     }
@@ -40,36 +38,39 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.bind(pedidos.get(i),itemClickListener);
+        viewHolder.bind(canastas.get(i),itemClickListener);
     }
 
     @Override
     public int getItemCount() {
-        return pedidos.size();
+        return canastas.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         public ImageView imagen;
-        public TextView nombre ;
-        public TextView fechaPedido;
+        public TextView nombre;
+        public TextView precioProducto;
+        public TextView cantidad;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            imagen =  itemView.findViewById(R.id.imagen);
+            nombre =  itemView.findViewById(R.id.nombre);
+            precioProducto = itemView.findViewById(R.id.precio);
+            cantidad = itemView.findViewById(R.id.cantidad);
 
-            imagen = itemView.findViewById(R.id.imagen);
-            nombre = (itemView.findViewById(R.id.nombre));
-            fechaPedido = itemView.findViewById(R.id.fecha);
+
         }
-        public void bind( final Pedidos pedido, final OnItemClickListener listener){
+        public void bind( final Canasta canasta, final OnItemClickListener listener){
+            Picasso.with(context).load(canasta.getImagen()).fit().into(imagen);
+            nombre.setText( canasta.getNombreProducto());
+            precioProducto.setText( "$ " + canasta.getPrecioProducto());
+            cantidad.setText("x "+canasta.getCantidad());
 
-            Picasso.with(context).load(R.mipmap.ic_merca_image).fit().into(imagen);
-            nombre.setText(pedido.getNombreMercadillo());
-            fechaPedido.setText(pedido.getFecha());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.OnItemClick(pedido, getAdapterPosition());
+                    listener.OnItemClick(canasta, getAdapterPosition());
                 }
             });
 
@@ -78,7 +79,8 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.View
     }
 
     public interface OnItemClickListener{
-        void OnItemClick(Pedidos pedido, int posicion);
+        void OnItemClick(Canasta canasta, int posicion);
 
     }
+
 }

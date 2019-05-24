@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombre"
         android:layout_marginLeft="141dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="4dp"
         android:autoSizeMaxTextSize="100sp"
         android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
@@ -44,34 +44,15 @@
         tools:ignore="UnknownId"
         tools:text="30 de enero, 2019" />
 
-    <Button
-        android:id="@+id/detalles"
-        android:layout_width="130dp"
-        android:layout_height="35dp"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="45dp"
         android:layout_marginRight="10dp"
-        android:background="#008577"
-        android:text="Ver detalles"
-        android:textAllCaps="false"
-        android:textColor="#ffff"
-        android:textSize="12sp" />
-
-    <Button
-        android:id="@+id/pedir"
-        android:layout_width="130dp"
-        android:layout_height="35dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:background="#008577"
-        android:text="Pedir de nuevo"
-        android:textAllCaps="false"
-        android:textColor="#ffff"
-        android:textSize="12sp" />
-
-
-
+        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/ic_keyboard_arrow" />
 
 
 </RelativeLayout>

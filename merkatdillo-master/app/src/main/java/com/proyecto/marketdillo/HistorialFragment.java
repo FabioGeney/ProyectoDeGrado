@@ -91,16 +91,20 @@ public class HistorialFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
                                 Pedidos pedido = document.toObject(Pedidos.class);
                                 pedidos.add(pedido);
-
                             }
                             // Inicializar el adaptador con la fuente de datos.
                             historialAdapter = new HistorialAdapter(historialList, R.layout.list_item_historial, new HistorialAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Pedidos pedidos, int posicion) {
-
+                                    SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+                                    singletonCanasta.setProductosCanasta(pedidos.getProductos());
+                                    Intent intent = new Intent(getContext(), VistaDetalles.class);
+                                    intent.putExtra("nombre", pedidos.getNombreMercadillo());
+                                    intent.putExtra("direccion", pedidos.getDireccionEntrega());
+                                    intent.putExtra("total", pedidos.getTotal());
+                                    startActivity(intent);
                                 }
                             });
 
