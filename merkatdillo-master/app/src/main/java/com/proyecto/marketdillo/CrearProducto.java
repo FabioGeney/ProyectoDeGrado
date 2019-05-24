@@ -3,6 +3,7 @@ package com.proyecto.marketdillo;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,12 +21,15 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +38,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -61,10 +67,10 @@ public class CrearProducto extends AppCompatActivity {
     private String eleccionusuario;
     private int REQUEST_CAMERA = 0;
     private int SELECT_FILE = 1;
-    private  Uri mImagenUri;
+    private  Uri hImagenUri;
     private StorageReference hStorageRef;
     private DatabaseReference hDatabaseRef;
-
+    private String picture;
 
     private final int PICTURE_FROM_CAMERA = 50;
 
@@ -85,7 +91,7 @@ public class CrearProducto extends AppCompatActivity {
         imagen = findViewById(R.id.imagen);
 
         hStorageRef = FirebaseStorage.getInstance().getReference("Subidas");
-        hDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        hDatabaseRef = FirebaseDatabase.getInstance().getReference("Subidas");
 
         idCampesino = getIntent().getExtras().getString("id");
 
@@ -101,13 +107,6 @@ public class CrearProducto extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 seleccionarImagen();
-
-                //Intent camara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                //startActivity(Intent.createChooser(camara, "Elige la opción"));
-                /*
-                camara.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(f));
-                camara.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1);*/
-
             }
         });
 
@@ -210,7 +209,7 @@ public class CrearProducto extends AppCompatActivity {
             e.printStackTrace();
         }
         imagen.setImageBitmap(thumbnail);
-        mImagenUri = data.getData();
+        hImagenUri = data.getData();
     }
 
     private void onSelectFromGalleryResult(Intent data){
@@ -224,29 +223,45 @@ public class CrearProducto extends AppCompatActivity {
             }
         }
         imagen.setImageBitmap(b);
-        mImagenUri = data.getData();
+        hImagenUri = data.getData();
     }
-    
-    /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        switch (requestCode) {
-            case PICTURE_FROM_CAMERA
+    private String getFileExtension(Uri uri){
+        ContentResolver c = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(c.getType(uri));
+    }
 
-                if(resultCode == Activity.RESULT_OK){
-                    String result = data.toUri(0);
-                    Toast.makeText(this, "Result " +result, Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this, "No seleccionó la imagen, intente de nuevo", Toast.LENGTH_SHORT).show();
+    private void uploadFile(){
+        if(hImagenUri != null){
+
+            StorageReference fileReference = hStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(hImagenUri));
+
+            fileReference.putFile(hImagenUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(CrearProducto.this, "Imagen cargada", Toast.LENGTH_SHORT).show();
+                    picture = taskSnapshot.getStorage().getDownloadUrl().toString();
+                    /*String uploadId = hDatabaseRef.push().getKey();
+                    hDatabaseRef.child(uploadId).setValue(picture);*/
                 }
-                break;
-                default:
-                    super.onActivityResult(requestCode, resultCode, data);
+            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(CrearProducto.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                }
+            });
+
+        } else {
+
         }
-    }*/
-
-
+    }
 
     private void guardarProducto(){
         String nombre = edtNombre.getText().toString();

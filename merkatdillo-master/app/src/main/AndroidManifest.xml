@@ -28,7 +28,7 @@
         <activity
             android:name=".CrearProducto"
             android:parentActivityName=".VistaCampesino"
-            android:theme="@style/ThemeMainActivity">
+            android:theme="@style/ThemeMainActivityH">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaCampesino" />
