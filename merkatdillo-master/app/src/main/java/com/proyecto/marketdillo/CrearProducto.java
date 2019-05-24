@@ -6,7 +6,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -30,7 +32,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -160,16 +166,52 @@ public class CrearProducto extends AppCompatActivity {
         }
     }
 
-    /*@Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == SELECT_FILE)
-
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
         }
-    }*/
+    }
 
+    private void onCaptureImageResult(Intent data){
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+        File destination = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + "jpg");
+
+        FileOutputStream f;
+        try {
+            destination.createNewFile();
+            f = new FileOutputStream(destination);
+            f.write(bytes.toByteArray());
+            f.close();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        imagen.setImageBitmap(thumbnail);
+    }
+
+    private void onSelectFromGalleryResult(Intent data){
+        Bitmap b = null;
+
+        if(data != null){
+            try {
+                b = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        imagen.setImageBitmap(b);
+    }
+    
     /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
