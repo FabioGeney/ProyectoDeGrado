@@ -100,6 +100,7 @@ public class CrearProducto extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 guardarProducto();
+                uploadFile();
             }
         });
 
@@ -121,7 +122,7 @@ public class CrearProducto extends AppCompatActivity {
 
         final CharSequence[] items = {"Tomar foto", "Galería", "Cancelar"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Agrega Foto");
+        builder.setTitle("Agregar Foto");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
@@ -133,14 +134,14 @@ public class CrearProducto extends AppCompatActivity {
                     if(result) {
                         camaraIntent();
                     } else
-                        Toast.makeText(CrearProducto.this, "No se pudo, intente de nuevo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CrearProducto.this, "Intente de nuevo", Toast.LENGTH_SHORT).show();
                 } else if (items[item].equals("Galería")){
                     eleccionusuario = "Galería";
 
                     if(result) {
                         galeriaIntent();
                     } else
-                        Toast.makeText(CrearProducto.this, "No se pudo, intente de nuevo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CrearProducto.this, "Intente de nuevo", Toast.LENGTH_SHORT).show();
                 } else if (items[item].equals("Cancelar")) {
                     dialog.dismiss();
                 }
@@ -182,11 +183,10 @@ public class CrearProducto extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == Activity.RESULT_OK /*"Mirar esta linea posiblemente ayuda mas" && data != null && data.getData() != null*/){
-            if(requestCode == SELECT_FILE) {
+            if(requestCode == SELECT_FILE)
                 onSelectFromGalleryResult(data);
-            } else if (requestCode == REQUEST_CAMERA) {
+            else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
-            }
         }
     }
 
@@ -195,8 +195,7 @@ public class CrearProducto extends AppCompatActivity {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-        File destination = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + "jpg");
-
+        File destination = new File(/*Enviroment.getExternalStorageDirectory(),*/getApplicationContext().getFilesDir().getPath(), System.currentTimeMillis() + "jpg");
         FileOutputStream f;
         try {
             destination.createNewFile();
