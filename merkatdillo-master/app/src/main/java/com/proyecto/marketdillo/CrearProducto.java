@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -55,6 +56,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +82,8 @@ public class CrearProducto extends AppCompatActivity {
     private StorageReference hStorageRef;
     private DatabaseReference hDatabaseRef;
     private String picture;
+    private String photoPath;
+    private Intent intentL;
 
     private final int PICTURE_FROM_CAMERA = 50;
 
@@ -167,8 +172,8 @@ public class CrearProducto extends AppCompatActivity {
 
     private void camaraIntent(){
         requestStoragePermission();
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
+        intentL = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intentL, REQUEST_CAMERA);
     }
 
     @Override
@@ -220,7 +225,7 @@ public class CrearProducto extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK /*"Mirar esta linea posiblemente ayuda mas" && data != null && data.getData() != null*/){
+        if(resultCode == Activity.RESULT_OK){
             if(requestCode == SELECT_FILE)
                 onSelectFromGalleryResult(data);
             else if (requestCode == REQUEST_CAMERA)
@@ -232,9 +237,26 @@ public class CrearProducto extends AppCompatActivity {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File destination = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), System.currentTimeMillis() + "jpg");
+
+        File photoFile = null;
         FileOutputStream fo;
+
         try {
+            photoFile = createImageFile();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Error occurred while creating the File
+        }
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+
+            String authorities = getApplicationContext().getPackageName() + ".fileprovider";
+            Uri imageUri = FileProvider.getUriForFile(this, authorities, photoFile);
+            intentL.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
+        }
+
+        /*try {
             destination.createNewFile();
             fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
@@ -243,9 +265,31 @@ public class CrearProducto extends AppCompatActivity {
             e.printStackTrace();
         } catch (IOException e){
             e.printStackTrace();
-        }
+        }*/
         imagen.setImageBitmap(thumbnail);
-        hImagenUri = data.getData();
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File ima = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        // Save a file: path for use with ACTION_VIEW intents
+        photoPath = ima.getAbsolutePath();
+        return ima;
+    }
+
+    private void galleryAddPic(){
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(photoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
     }
 
     private void onSelectFromGalleryResult(Intent data){
@@ -300,6 +344,7 @@ public class CrearProducto extends AppCompatActivity {
     }
 
     private void guardarProducto(){
+
         uploadFile();
         String nombre = edtNombre.getText().toString();
         String descripcion = edtDescripcion.getText().toString();
@@ -316,8 +361,6 @@ public class CrearProducto extends AppCompatActivity {
         Toast.makeText(CrearProducto.this, "Producto Guardado", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(CrearProducto.this, VistaCampesino.class);
         startActivity(i);
-
-
     }
 
     private void initialize(){
