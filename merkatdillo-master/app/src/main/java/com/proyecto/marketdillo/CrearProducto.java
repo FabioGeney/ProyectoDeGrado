@@ -172,7 +172,7 @@ public class CrearProducto extends AppCompatActivity {
 
     private void camaraIntent(){
         requestStoragePermission();
-        /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager()) != null){
             File photoFile = null;
             try {
@@ -185,11 +185,11 @@ public class CrearProducto extends AppCompatActivity {
             if (photoFile != null) {
                 String authorities = getApplicationContext().getPackageName() + ".fileprovider";
                 Uri imageUri = FileProvider.getUriForFile(this, authorities, photoFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                intent.putExtra("data", imageUri);
                 startActivityForResult(intent, REQUEST_CAMERA);
-                hImagenUri = imageUri;
+                //hImagenUri = imageUri;
             }
-        }*/
+        }
     }
 
     @Override
@@ -245,15 +245,16 @@ public class CrearProducto extends AppCompatActivity {
             if(requestCode == SELECT_FILE) {
                 onSelectFromGalleryResult(data);
             }else if (requestCode == REQUEST_CAMERA) {
-                onCaptureImageResult(data);
+                Bundle extras = data.getExtras();
+                Bitmap thumbnail = (Bitmap) extras.get("data");
+                imagen.setImageBitmap(thumbnail);
+                hImagenUri = data.getData();
             }
         }
     }
 
     private void onCaptureImageResult(Intent data){
-        Bundle extras = data.getExtras();
-        Bitmap thumbnail = (Bitmap) extras.get("data");
-        imagen.setImageBitmap(thumbnail);
+
         /*try {
             photoFile = createImageFile();
         } catch (IOException ex) {
