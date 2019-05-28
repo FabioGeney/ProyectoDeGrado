@@ -172,8 +172,24 @@ public class CrearProducto extends AppCompatActivity {
 
     private void camaraIntent(){
         requestStoragePermission();
-        intentL = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intentL, REQUEST_CAMERA);
+        /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getPackageManager()) != null){
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                String authorities = getApplicationContext().getPackageName() + ".fileprovider";
+                Uri imageUri = FileProvider.getUriForFile(this, authorities, photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                startActivityForResult(intent, REQUEST_CAMERA);
+                hImagenUri = imageUri;
+            }
+        }*/
     }
 
     @Override
@@ -226,22 +242,19 @@ public class CrearProducto extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == Activity.RESULT_OK){
-            if(requestCode == SELECT_FILE)
+            if(requestCode == SELECT_FILE) {
                 onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
+            }else if (requestCode == REQUEST_CAMERA) {
                 onCaptureImageResult(data);
+            }
         }
     }
 
     private void onCaptureImageResult(Intent data){
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-
-        File photoFile = null;
-        FileOutputStream fo;
-
-        try {
+        Bundle extras = data.getExtras();
+        Bitmap thumbnail = (Bitmap) extras.get("data");
+        imagen.setImageBitmap(thumbnail);
+        /*try {
             photoFile = createImageFile();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -256,7 +269,7 @@ public class CrearProducto extends AppCompatActivity {
 
         }
 
-        /*try {
+        try {
             destination.createNewFile();
             fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
@@ -266,7 +279,6 @@ public class CrearProducto extends AppCompatActivity {
         } catch (IOException e){
             e.printStackTrace();
         }*/
-        imagen.setImageBitmap(thumbnail);
     }
 
     private File createImageFile() throws IOException {
