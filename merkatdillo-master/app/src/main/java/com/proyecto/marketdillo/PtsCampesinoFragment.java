@@ -87,7 +87,7 @@ public class PtsCampesinoFragment extends Fragment {
         //obtiene la id del usuario
         String id = usuario.getId();
         final ArrayList<Producto> p = new ArrayList<>();
-        p.add(new Producto("Manzana", "la descripcion es muy grande ", "$3000 por lb", R.mipmap.ic_fruit));
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Producto").whereEqualTo("id",id)
                 .get()
@@ -98,7 +98,6 @@ public class PtsCampesinoFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Producto producto = document.toObject(Producto.class);
-                                producto.setImagen(R.mipmap.ic_fruit);
                                 p.add(producto);
 
                             }

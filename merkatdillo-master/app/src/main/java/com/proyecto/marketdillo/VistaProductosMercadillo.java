@@ -74,7 +74,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
 
     public List<Producto> getProductos(){
         final ArrayList<Producto> request = new ArrayList<>();
-        request.add(new Producto("manzana", "Testeando ancho del EdiText para que no se pase hasta el boton", "3500", R.drawable.fruit));
+        //request.add(new Producto("manzana", "Testeando ancho del EdiText para que no se pase hasta el boton", "3500", R.drawable.fruit));
         //obtienen la id del mecadillo
         String id = mercadillo.getId();
         //hace consulta en la base de datos para buscar los prodcutos del mercadillo
@@ -89,8 +89,6 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
 
                                 //si encuentra almacena la indormacion de la base de datos en el objeto
                                 Producto producto = document.toObject(Producto.class);
-                                producto.setImagen(R.drawable.fruit);
-                                producto.setIdDocument(document.getId());
                                 //agrega porducto de la base de dato al arreglo
                                 request.add(producto);
 
@@ -101,6 +99,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
                                 public void OnItemClick(Producto producto, int posicion) {
                                     //al hacer click en un mercadillo se va a otro activity
                                     Intent intent = new Intent(VistaProductosMercadillo.this, VistaProducto.class);
+                                    Toast.makeText(VistaProductosMercadillo.this,producto.getImagen(), Toast.LENGTH_SHORT).show();
                                     //envia informacion del mercadillo al otro activity
                                     intent.putExtra("producto", producto);
                                     startActivity(intent);

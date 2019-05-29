@@ -71,7 +71,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
             nombre.setText( producto.getNombre());
             descripcion.setText( producto.getDescripcion() );
-            costoCantidad.setText(producto.getPrecioCantidad());
+            costoCantidad.setText(Integer.toString(producto.getPrecioCantidad()));
             agregar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

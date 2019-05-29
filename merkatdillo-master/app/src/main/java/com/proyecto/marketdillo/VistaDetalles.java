@@ -76,7 +76,7 @@ public class VistaDetalles extends AppCompatActivity {
         ArrayList<Producto> productos = singletonCanasta.getCanastas();
         //recorre el arreglo de los productos seleccionados por el consumidor para llenar la lista de productos de la canasta
         for(Producto producto:productos){
-            canasta.add(new Canasta(producto.getNombre(), Integer.parseInt(producto.getPrecioCantidad()) , producto.getContador(), R.drawable.fruit));
+            canasta.add(new Canasta(producto.getNombre(), producto.getPrecioCantidad() , producto.getContador(), R.drawable.fruit));
         }
 
         return canasta;

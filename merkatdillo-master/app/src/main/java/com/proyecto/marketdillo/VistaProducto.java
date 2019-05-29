@@ -40,7 +40,7 @@ public class VistaProducto extends AppCompatActivity {
 
         //obtiene datos enviados por VistaProdutosMercadillos y setea variables
         descripcion.setText(producto.getDescripcion());
-        int img = producto.getImagen();
+        String img = producto.getImagen();
         Picasso.with(this).load(img).fit().into(imagen);
 
         agregar.setOnClickListener(new View.OnClickListener() {

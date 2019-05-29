@@ -115,7 +115,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     private void getTotal(){
 
        for(Canasta canasta : canastas){
-          total = total + canasta.getPrecioProducto();
+          total = total + canasta.getPrecioProducto()*canasta.getCantidad();
        }
 
        textTotal.setText("$ "+total);

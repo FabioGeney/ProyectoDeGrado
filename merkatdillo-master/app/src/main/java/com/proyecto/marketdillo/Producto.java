@@ -5,35 +5,34 @@ import java.io.Serializable;
 public class Producto implements Serializable{
     //id del campesino
     private String id;
-    // id del
-    private String idCollection;
+
     private String nombre;
     private String descripcion;
-    private String precioCantidad;
+    private int precio;
     private String tipo;
     private String cantidad;
-    private int imagen;
+    private String imagen;
     private int contador = 0;
 
     Producto(){
 
     };
 
-    public Producto(String nombre, int contador, int imagen) {
+    public Producto(String nombre, int contador, String imagen) {
         this.nombre = nombre;
         this.contador = contador;
         this.imagen = imagen;
     }
 
-    Producto(String nombre, String descripcion, String precioCantidad, int imagen){
+    Producto(String nombre, String descripcion, int precio, String imagen){
 
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.precioCantidad = precioCantidad;
+        this.precio = precio;
         this.imagen = imagen;
     };
-
-    Producto( String nombre, String descripcion, String precioCantidad, String tipo, String cantidad, int imagen) {
+    /*
+    Producto( String nombre, String descripcion, String precioCantidad, String tipo, String cantidad, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -42,27 +41,17 @@ public class Producto implements Serializable{
         this.cantidad = cantidad;
         this.imagen = imagen;
     }
-
-    Producto(String id, String nombre, String descripcion, String precioCantidad, int imagen){
+    */
+    Producto(String id, String nombre, String descripcion, int precio, String cantidad, String imagen){
 
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.precioCantidad = precioCantidad;
+        this.precio = precio;
+        this.cantidad = cantidad;
         this.imagen = imagen;
     };
 
-    public String getIdDocument() {
-        return idCollection;
-    }
-
-    public String getIdCollection() {
-        return idCollection;
-    }
-
-    public void setIdDocument(String idCollection) {
-        this.idCollection = idCollection;
-    }
 
     public int getContador() {
         return contador;
@@ -84,11 +73,11 @@ public class Producto implements Serializable{
         this.descripcion = descripcion;
     }
 
-    public void setPrecioCantidad(String precioCantidad) {
-        this.precioCantidad = precioCantidad;
+    public void setPrecioCantidad(int precio) {
+        this.precio = precio;
     }
 
-    public void setImagen(int imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
@@ -104,11 +93,11 @@ public class Producto implements Serializable{
         return descripcion;
     }
 
-    public String getPrecioCantidad() {
-        return precioCantidad;
+    public int getPrecioCantidad() {
+        return precio;
     }
 
-    public int getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
@@ -134,7 +123,6 @@ public class Producto implements Serializable{
                 "ID='" + id + '\'' +
                 "Nombre='" + nombre + '\'' +
                 ", Descripcion='" + descripcion + '\'' +
-                ", precioCantidad='" + precioCantidad + '\'' +
                 ", Tipo='" + tipo + '\'' +
                 '}';
     }

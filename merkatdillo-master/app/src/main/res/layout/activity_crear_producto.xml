@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Precio cantidad"
+            android:hint="Precio"
             android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 

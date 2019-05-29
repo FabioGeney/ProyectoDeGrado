@@ -71,7 +71,7 @@ public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapte
             Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
             nombre.setText( producto.getNombre());
             descripcion.setText( producto.getDescripcion() );
-            costoCantidad.setText(producto.getPrecioCantidad());
+            costoCantidad.setText(""+producto.getPrecioCantidad());
 
 
             borrar.setOnClickListener(new View.OnClickListener() {

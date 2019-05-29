@@ -39,6 +39,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -72,6 +73,7 @@ public class CrearProducto extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference enviarProducto = db.collection("Producto");
     private static final String TAG = "CrearProducto";
     private String idCampesino;
     private File f;
@@ -113,7 +115,7 @@ public class CrearProducto extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                guardarProducto();
+                uploadFile();
             }
         });
 
@@ -334,7 +336,10 @@ public class CrearProducto extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(CrearProducto.this, "Imagen cargada", Toast.LENGTH_SHORT).show();
+
+
                     picture = taskSnapshot.getStorage().getDownloadUrl().toString();
+                    guardarProducto();
                     /*String uploadId = hDatabaseRef.push().getKey();
                     hDatabaseRef.child(uploadId).setValue(picture);*/
                 }
@@ -358,19 +363,13 @@ public class CrearProducto extends AppCompatActivity {
 
     private void guardarProducto(){
 
-        uploadFile();
+
         String nombre = edtNombre.getText().toString();
         String descripcion = edtDescripcion.getText().toString();
         String cantidad = edtCantidad.getText().toString();
         String cantidadP = precioCantidad.getText().toString();
-        final Map<String, Object> producto = new HashMap<>();
-        producto.put("nombre",nombre);
-        producto.put("descripcion",descripcion);
-        producto.put("cantidad",cantidad);
-        producto.put("precioCantidad",cantidadP);
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        producto.put("id",idCampesino);
-        db.collection("Producto").document().set(producto);
+        Producto producto = new Producto(idCampesino, nombre, descripcion, Integer.parseInt(cantidadP) , cantidad, picture);
+        enviarProducto.add(producto);
         Toast.makeText(CrearProducto.this, "Producto Guardado", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(CrearProducto.this, VistaCampesino.class);
         startActivity(i);
