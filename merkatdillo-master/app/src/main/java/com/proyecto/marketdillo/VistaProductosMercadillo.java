@@ -89,6 +89,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
 
                                 //si encuentra almacena la indormacion de la base de datos en el objeto
                                 Producto producto = document.toObject(Producto.class);
+                                producto.setIdDocument(document.getId());
                                 //agrega porducto de la base de dato al arreglo
                                 request.add(producto);
 

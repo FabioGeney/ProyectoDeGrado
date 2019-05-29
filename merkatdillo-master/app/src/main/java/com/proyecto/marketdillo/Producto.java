@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Producto implements Serializable{
     //id del campesino
     private String id;
-
+    private String idDocument;
     private String nombre;
     private String descripcion;
     private int precio;
@@ -52,6 +52,13 @@ public class Producto implements Serializable{
         this.imagen = imagen;
     };
 
+    public String getIdDocument() {
+        return idDocument;
+    }
+
+    public void setIdDocument(String idDocument) {
+        this.idDocument = idDocument;
+    }
 
     public int getContador() {
         return contador;

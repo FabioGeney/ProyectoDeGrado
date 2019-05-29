@@ -48,7 +48,9 @@ public class VistaProducto extends AppCompatActivity {
             public void onClick(View view) {
                 producto.setContador(1);
                 singletonCanasta.setCanastas(producto);
-            }
+                Intent intent = new Intent(VistaProducto.this, VistaProductosMercadillo.class);
+                startActivity(intent);
+               }
         });
 
 

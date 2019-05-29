@@ -33,17 +33,31 @@ public class SingletonCanasta {
     }
 
     public void setCanastas(Producto producto) {
-        canastas.add(producto);
+        if(canastas.size() != 0){
+            for(Producto producto1 : canastas){
+                if(producto.getIdDocument().equals(producto1.getIdDocument())){
+                    producto.setContador(producto.getContador()+1);
+                    canastas.add(producto);
+                    canastas.remove(producto1);
+                }else {
+                    canastas.add(producto);
+                }
+            }
+        }else {
+            canastas.add(producto);
+        }
+
     }
 
     public void setContador(Producto producto){
-        for(Producto producto1:canastas){
-            if(producto1==producto){
-                producto.setContador(producto1.getContador()+1);
-                canastas.remove(producto1);
-                canastas.add(producto);
-            }
-        }
+       for(Producto producto1:canastas){
+          if(producto.getIdDocument().equals(producto1.getIdDocument())){
+            producto.setContador(producto1.getContador()+1);
+            canastas.remove(producto1);
+            canastas.add(producto);
+          }
+       }
+
     }
     public void setProductosCanasta(List<Producto> canastas){
         for(Producto producto: canastas){

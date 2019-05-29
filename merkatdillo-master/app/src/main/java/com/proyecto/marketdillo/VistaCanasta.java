@@ -35,7 +35,7 @@ public class VistaCanasta extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter canastaAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Canasta> canastas;
+    private List<Producto> canastas;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference enviarPedido = db.collection("Pedido");
@@ -94,7 +94,7 @@ public class VistaCanasta extends AppCompatActivity {
 
         canastaAdapter = new CanastaAdapter(canastas, R.layout.list_item_canasta, new CanastaAdapter.OnItemClickListener() {
             @Override
-            public void OnItemClick(Canasta producto, int posicion) {
+            public void OnItemClick(Producto producto, int posicion) {
 
             }
         });
@@ -124,16 +124,14 @@ public class VistaCanasta extends AppCompatActivity {
         });
     }
 
-    private List<Canasta> getCanastas(){
+    private List<Producto> getCanastas(){
         //llama al singleton de canasta para acceder a la informaccion
         SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
-        final  ArrayList<Canasta> canasta = new ArrayList<>();
+        ArrayList<Producto> canasta = new ArrayList<>();
         //obtiene los productos del singleton de canasta
-        ArrayList<Producto> productos = singletonCanasta.getCanastas();
+        canasta = singletonCanasta.getCanastas();
         //recorre el arreglo de los productos seleccionados por el consumidor para llenar la lista de productos de la canasta
-        for(Producto producto:productos){
-          canasta.add(new Canasta(producto.getNombre(), producto.getPrecioCantidad() , producto.getContador(), R.drawable.fruit));
-        }
+
 
         return canasta;
     }
@@ -143,7 +141,7 @@ public class VistaCanasta extends AppCompatActivity {
         String idConsumidor = usuario.getId();
         String nombreMercadillo = mercadillo.getNombre();
         String direccionEntrega = usuario.getDireccion();
-        String estado = "creado";
+        String estado = "Creado";
         String precio = total.getText().toString();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();

@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -21,14 +22,14 @@ import java.util.List;
 
 public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHolder> {
 
-    private List<Canasta> canastas;
+    private List<Producto> canastas;
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
     public TextView textTotal;
     private int total = 0;
 
-    public  CanastaAdapter(List<Canasta> canastas, int layout, OnItemClickListener itemClickListener ){
+    public  CanastaAdapter(List<Producto> canastas, int layout, OnItemClickListener itemClickListener ){
         this.canastas = canastas;
         this.layout = layout;
         this.itemClickListener = itemClickListener;
@@ -70,28 +71,30 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
             textTotal = ((VistaCanasta)context).findViewById(R.id.total);
 
         }
-        public void bind( final Canasta canasta, final OnItemClickListener listener){
-            Picasso.with(context).load(canasta.getImagen()).fit().into(imagen);
-            nombre.setText( canasta.getNombreProducto());
-            precioProducto.setText( "$ " + canasta.getPrecioProducto());
-            cantidad.setText(""+canasta.getCantidad());
+        public void bind( final Producto producto, final OnItemClickListener listener){
+            Picasso.with(context).load(R.drawable.fruit).fit().into(imagen);
+            nombre.setText( producto.getNombre());
+            precioProducto.setText( "$ " + producto.getPrecioCantidad());
+            cantidad.setText(""+producto.getContador());
             getTotal();
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    canasta.setCantidad( canasta.getCantidad() + 1);
-                    cantidad.setText(""+ canasta.getCantidad());
-                    setTotal(canasta, true);
+                    producto.setCantidad( producto.getCantidad() + 1);
+                    cantidad.setText(""+ producto.getContador());
+                    setTotal(producto, true);
                 }
             });
 
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(canasta.getCantidad()  != 1) {
-                        canasta.setCantidad(canasta.getCantidad() - 1);
-                        cantidad.setText("" + canasta.getCantidad());
-                        setTotal(canasta, false);
+                    if(producto.getContador()  != 1) {
+                        producto.setContador(producto.getContador() - 1);
+                        cantidad.setText(""+ producto.getContador());
+                        setTotal(producto, false);
+                    }else{
+
                     }
                 }
             });
@@ -99,7 +102,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.OnItemClick(canasta, getAdapterPosition());
+                    listener.OnItemClick(producto, getAdapterPosition());
                 }
             });
 
@@ -108,25 +111,25 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     }
 
     public interface OnItemClickListener{
-        void OnItemClick(Canasta mercadillo, int posicion);
+        void OnItemClick(Producto producto, int posicion);
 
     }
 
     private void getTotal(){
 
-       for(Canasta canasta : canastas){
-          total = total + canasta.getPrecioProducto()*canasta.getCantidad();
+       for(Producto producto : canastas){
+          total = total + producto.getPrecioCantidad()*producto.getContador();
        }
 
        textTotal.setText("$ "+total);
     }
 
-    private void setTotal(Canasta canasta, boolean index){
+    private void setTotal(Producto producto, boolean index){
 
         if(index){
-            total = total + canasta.getPrecioProducto();
+            total = total + producto.getPrecioCantidad();
         }else{
-            total = total - canasta.getPrecioProducto();
+            total = total - producto.getPrecioCantidad();
         }
         textTotal.setText("$ "+total);
     }
