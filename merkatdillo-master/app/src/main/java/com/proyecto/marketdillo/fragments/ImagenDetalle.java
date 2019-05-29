@@ -39,7 +39,7 @@ public class ImagenDetalle extends AppCompatActivity {
         precio.setText("Precio: " + imagen.getPrecioCantidad());
         descripcion.setText("Descripción: "+imagen.getDescripcion());
         producto.setText(imagen.getNombre());
-        int img = imagen.getImagen();
+        String img = imagen.getImagen();
         Picasso.with(this).load(img).fit().into(picture);
     }
 

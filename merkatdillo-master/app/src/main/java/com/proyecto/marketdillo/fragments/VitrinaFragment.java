@@ -67,7 +67,7 @@ public class VitrinaFragment extends Fragment {
 
     public ArrayList<ImagenCard> getImagenes(){
         final ArrayList<ImagenCard> imagenes = new ArrayList<>();
-        imagenes.add(new ImagenCard(R.drawable.limone, "Limon", "2000", "Finca Fabio"));
+        //imagenes.add(new ImagenCard(R.drawable.limone, "Limon", "2000", "Finca Fabio"));
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Producto").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -76,8 +76,8 @@ public class VitrinaFragment extends Fragment {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()){
 
-                        ImagenCard imagen = document.toObject(ImagenCard.class);
-                        imagen.setImagen(R.drawable.limone);
+                        ImagenCard imagen = new ImagenCard(document.getData().get("id").toString(), document.getData().get("nombre").toString(),
+                                document.getData().get("descripcion").toString(), ""+document.getData().get("precioCantidad"), document.getData().get("imagen").toString());
                         imagenes.add(imagen);
                     }
 
