@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ImagenCard implements Serializable {
 
-    private int imagen;
+    private String imagen;
     private String nombre;
     private String precioCantidad;
     private String mercadillo;
@@ -14,14 +14,14 @@ public class ImagenCard implements Serializable {
     public ImagenCard() {
     };
 
-    ImagenCard(int imagen, String nombre, String precioCantidad, String mercadillo) {
+    ImagenCard(String imagen, String nombre, String precioCantidad, String mercadillo) {
         this.imagen = imagen;
         this.nombre = nombre;
         this.precioCantidad = precioCantidad;
         this.mercadillo = mercadillo;
     };
 
-    ImagenCard(String id, String nombre, String descripcion, String precioCantidad, int imagen){
+    ImagenCard(String id, String nombre, String descripcion, String precioCantidad, String imagen){
 
         this.id = id;
         this.nombre = nombre;
@@ -30,11 +30,11 @@ public class ImagenCard implements Serializable {
         this.imagen = imagen;
     };
 
-    public int getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(int imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
