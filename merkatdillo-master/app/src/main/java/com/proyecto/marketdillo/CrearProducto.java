@@ -328,22 +328,28 @@ public class CrearProducto extends AppCompatActivity {
     }
 
     private void uploadFile(){
-        if(hImagenUri != null){
+        if(hImagenUri != null) {
 
-            StorageReference fileReference = hStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(hImagenUri));
+            final StorageReference fileReference = hStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(hImagenUri));
 
             fileReference.putFile(hImagenUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(CrearProducto.this, "Imagen cargada", Toast.LENGTH_SHORT).show();
 
+                    fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            picture = uri.toString();
+                            guardarProducto();
+                        }
+                    });
 
-                    picture = taskSnapshot.getStorage().getDownloadUrl().toString();
-                    guardarProducto();
+                    //picture = taskSnapshot.getStorage().getDownloadUrl().toString();
                     /*String uploadId = hDatabaseRef.push().getKey();
                     hDatabaseRef.child(uploadId).setValue(picture);*/
                 }
-            }).addOnFailureListener(new OnFailureListener() {
+            /*}).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(CrearProducto.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -356,7 +362,11 @@ public class CrearProducto extends AppCompatActivity {
                 }
             });
 
-        } else {
+
+        */
+            });
+        }
+        else {
 
         }
     }
