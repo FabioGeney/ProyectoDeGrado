@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class SingletonCanasta {
@@ -33,30 +34,32 @@ public class SingletonCanasta {
     }
 
     public void setCanastas(Producto producto) {
-        if(canastas.size() != 0){
-            for(Producto producto1 : canastas){
-                if(producto.getIdDocument().equals(producto1.getIdDocument())){
-                    producto.setContador(producto.getContador()+1);
-                    canastas.add(producto);
-                    canastas.remove(producto1);
-                }else {
-                    canastas.add(producto);
-                }
+        canastas.add(producto);
+    }
+
+    public void setCanidad(Producto producto){
+        Iterator<Producto> it = canastas.iterator();
+        while (it.hasNext()){
+            Producto producto1 = it.next();
+            if(producto.getIdDocument().equals(producto1.getIdDocument())){
+                canastas.remove(producto1);
+                canastas.add(producto);
             }
-        }else {
-            canastas.add(producto);
+
         }
 
     }
 
     public void setContador(Producto producto){
-       for(Producto producto1:canastas){
-          if(producto.getIdDocument().equals(producto1.getIdDocument())){
-            producto.setContador(producto1.getContador()+1);
-            canastas.remove(producto1);
-            canastas.add(producto);
-          }
-       }
+        Iterator<Producto> it = canastas.iterator();
+        while (it.hasNext()){
+            Producto producto1 = it.next();
+            if(producto.getIdDocument().equals(producto1.getIdDocument())){
+                canastas.remove(producto1);
+                canastas.add(producto);
+            }
+
+        }
 
     }
     public void setProductosCanasta(List<Producto> canastas){

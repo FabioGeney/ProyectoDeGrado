@@ -72,6 +72,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
 
         }
         public void bind( final Producto producto, final OnItemClickListener listener){
+            final SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
             Picasso.with(context).load(R.drawable.fruit).fit().into(imagen);
             nombre.setText( producto.getNombre());
             precioProducto.setText( "$ " + producto.getPrecioCantidad());
@@ -80,7 +81,8 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    producto.setCantidad( producto.getCantidad() + 1);
+                    producto.setContador( producto.getContador() + 1);
+                    singletonCanasta.setContador(producto);
                     cantidad.setText(""+ producto.getContador());
                     setTotal(producto, true);
                 }
@@ -91,6 +93,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
                 public void onClick(View v) {
                     if(producto.getContador()  != 1) {
                         producto.setContador(producto.getContador() - 1);
+                        singletonCanasta.setContador(producto);
                         cantidad.setText(""+ producto.getContador());
                         setTotal(producto, false);
                     }else{
