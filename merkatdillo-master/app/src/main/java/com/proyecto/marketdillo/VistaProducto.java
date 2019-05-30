@@ -29,6 +29,7 @@ public class VistaProducto extends AppCompatActivity {
         singletonCanasta = SingletonCanasta.getInstance();
         //declara el objeto enviado desde VistaMercadilloPrducto
         producto = (Producto) getIntent().getSerializableExtra("producto");
+        final int index = Integer.parseInt(getIntent().getExtras().get("index").toString());
 
         String titulo = producto.getNombre();
 
@@ -47,7 +48,7 @@ public class VistaProducto extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 producto.setContador(1);
-                singletonCanasta.setCanastas(producto);
+                singletonCanasta.setCanastas(""+index,producto);
                 Intent intent = new Intent(VistaProducto.this, VistaProductosMercadillo.class);
                 startActivity(intent);
                }

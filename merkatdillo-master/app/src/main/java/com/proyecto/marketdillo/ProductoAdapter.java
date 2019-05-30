@@ -69,18 +69,23 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         }
         public void bind( final Producto producto, final OnItemClickListener listener){
             Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
+
             nombre.setText( producto.getNombre());
             descripcion.setText( producto.getDescripcion() );
             costoCantidad.setText(Integer.toString(producto.getPrecioCantidad()));
             agregar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(producto.getContador() ==0){
+                    Producto productoTemp = singletonCanasta.getProducto(""+getAdapterPosition());
+                    if(productoTemp!=null){
+                        producto.setContador(productoTemp.getContador()+1);
+                        singletonCanasta.setMap(""+getAdapterPosition());
+                        singletonCanasta.setCanastas(""+getAdapterPosition(), producto);
+
+                    }else {
                         producto.setContador(1);
-                        singletonCanasta.setCanastas(producto);
-                    }else{
-                        producto.setContador(producto.getContador()+1);
-                        singletonCanasta.setCanidad(producto);
+                        singletonCanasta.setCanastas(""+getAdapterPosition(), producto);
+
                     }
 
                 }

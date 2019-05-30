@@ -103,6 +103,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
                                     Toast.makeText(VistaProductosMercadillo.this,producto.getImagen(), Toast.LENGTH_SHORT).show();
                                     //envia informacion del mercadillo al otro activity
                                     intent.putExtra("producto", producto);
+                                    intent.putExtra("index", posicion);
                                     startActivity(intent);
                                 }
                             });

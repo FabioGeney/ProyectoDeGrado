@@ -1,6 +1,8 @@
 package com.proyecto.marketdillo;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class SingletonCanasta {
     }
 
     private ArrayList<Producto> canastas = new ArrayList<>();
+    private HashMap<String, Producto> productos = new HashMap<>();
 
     private SingletonCanasta(){
 
@@ -30,38 +33,37 @@ public class SingletonCanasta {
     }
 
     public ArrayList<Producto> getCanastas() {
-        return canastas;
-    }
-
-    public void setCanastas(Producto producto) {
-        canastas.add(producto);
-    }
-
-    public void setCanidad(Producto producto){
-        Iterator<Producto> it = canastas.iterator();
-        while (it.hasNext()){
-            Producto producto1 = it.next();
-            if(producto.getIdDocument().equals(producto1.getIdDocument())){
-                canastas.remove(producto1);
-                canastas.add(producto);
-            }
-
+        if(canastas.size()==0){
+            Collection<Producto> temp = productos.values();
+            return new ArrayList<> (temp);
+        }else{
+            return canastas;
         }
 
     }
 
-    public void setContador(Producto producto){
-        Iterator<Producto> it = canastas.iterator();
-        while (it.hasNext()){
-            Producto producto1 = it.next();
-            if(producto.getIdDocument().equals(producto1.getIdDocument())){
-                canastas.remove(producto1);
-                canastas.add(producto);
-            }
+    public Producto getProducto(String key){
+        return productos.get(key);
+    }
 
-        }
+    public void setMap(String key){
+        productos.remove(key);
+    }
+
+    public void setCanastas(String index, Producto producto) {
+        productos.put( index, producto);
+    }
+
+    public void setCantidad(Producto producto){
+       for(Producto producto1: canastas){
+           if(producto.getIdDocument().equals(producto1.getIdDocument())){
+               canastas.remove(producto1);
+               canastas.add(producto);
+           }
+       }
 
     }
+
     public void setProductosCanasta(List<Producto> canastas){
         for(Producto producto: canastas){
             this.canastas.add(producto);

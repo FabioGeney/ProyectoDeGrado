@@ -17,12 +17,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHolder> {
 
     private List<Producto> canastas;
+    private ArrayList<Producto> productosCanasta = new ArrayList<>();
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
@@ -73,6 +75,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
         }
         public void bind( final Producto producto, final OnItemClickListener listener){
             final SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+            //productosCanasta.add(producto);
             Picasso.with(context).load(R.drawable.fruit).fit().into(imagen);
             nombre.setText( producto.getNombre());
             precioProducto.setText( "$ " + producto.getPrecioCantidad());
@@ -81,8 +84,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    producto.setContador( producto.getContador() + 1);
-                    singletonCanasta.setContador(producto);
+                    singletonCanasta.getCanastas().get(getAdapterPosition()).setContador(producto.getContador()+1);
                     cantidad.setText(""+ producto.getContador());
                     setTotal(producto, true);
                 }
@@ -92,8 +94,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
                 @Override
                 public void onClick(View v) {
                     if(producto.getContador()  != 1) {
-                        producto.setContador(producto.getContador() - 1);
-                        singletonCanasta.setContador(producto);
+                        singletonCanasta.getCanastas().get(getAdapterPosition()).setContador(producto.getContador()-1);
                         cantidad.setText(""+ producto.getContador());
                         setTotal(producto, false);
                     }else{
