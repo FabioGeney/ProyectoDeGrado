@@ -79,7 +79,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                         producto.setContador(1);
                         singletonCanasta.setCanastas(producto);
                     }else{
-                        singletonCanasta.setContador(producto);
+                        producto.setContador(producto.getContador()+1);
+                        singletonCanasta.setCanidad(producto);
                     }
 
                 }
