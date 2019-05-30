@@ -8,13 +8,13 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar3"
-        app:titleTextColor="@color/colorPrimary2"
-        app:theme="@style/ToolbarColoredBackArrow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:titleTextColor="@color/colorPrimary2">
 
     </android.support.v7.widget.Toolbar>
 
@@ -22,21 +22,22 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3"
+        app:layout_constraintTop_toTopOf="@id/guideline9"
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/imageview1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -49,7 +50,7 @@
         android:layout_marginTop="48dp"
         android:text="Producto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/guideline10" />
 
     <TextView
         android:id="@+id/vendedor"
@@ -64,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.987"
         app:layout_constraintStart_toEndOf="@+id/producto"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline10" />
 
     <TextView
         android:id="@+id/precio"
@@ -81,16 +82,12 @@
         android:id="@+id/descripcion"
         android:layout_width="282dp"
         android:layout_height="135dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
         android:text="Descripción"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline12"
+        app:layout_constraintEnd_toEndOf="@id/guideline14"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/precio" />
+        app:layout_constraintStart_toStartOf="@id/guideline13"
+        app:layout_constraintTop_toBottomOf="@+id/guideline11" />
 
     <View
         android:id="@+id/view"
@@ -104,6 +101,48 @@
         app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.077" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.419" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.659" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8439" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.155" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.840" />
 
 
 </android.support.constraint.ConstraintLayout>
