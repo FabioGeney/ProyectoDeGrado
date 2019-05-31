@@ -110,7 +110,7 @@
         android:src="@drawable/fruit"
         app:civ_border_color="@color/colorPrimary2"
         app:civ_border_width="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline16"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline16"
         app:layout_constraintEnd_toEndOf="@id/guideline18"
         app:layout_constraintStart_toStartOf="@id/guideline17"
         app:layout_constraintTop_toTopOf="@id/guideline15" />
