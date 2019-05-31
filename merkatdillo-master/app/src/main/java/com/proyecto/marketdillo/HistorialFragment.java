@@ -98,12 +98,15 @@ public class HistorialFragment extends Fragment {
                             historialAdapter = new HistorialAdapter(historialList, R.layout.list_item_historial, new HistorialAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Pedidos pedidos, int posicion) {
+                                    ArrayList<Producto> productos = new ArrayList<>(pedidos.getProductos());
                                     SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
-                                    singletonCanasta.setProductosCanasta(pedidos.getProductos());
+                                    singletonCanasta.setHistorial(pedidos.getProductos());
                                     Intent intent = new Intent(getContext(), VistaDetalles.class);
                                     intent.putExtra("nombre", pedidos.getNombreMercadillo());
                                     intent.putExtra("direccion", pedidos.getDireccionEntrega());
                                     intent.putExtra("total", pedidos.getTotal());
+                                    intent.putExtra("productos", productos);
+
                                     startActivity(intent);
                                 }
                             });
@@ -120,5 +123,6 @@ public class HistorialFragment extends Fragment {
 
         return pedidos;
     }
+
 
 }

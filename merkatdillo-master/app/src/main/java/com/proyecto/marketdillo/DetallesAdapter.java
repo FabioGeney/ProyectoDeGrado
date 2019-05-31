@@ -15,15 +15,15 @@ import java.util.List;
 
 public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.ViewHolder> {
 
-    private List<Canasta> canastas;
+    private List<Producto> canastas;
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
 
 
 
-    public  DetallesAdapter(List<Canasta> canastas, int layout, OnItemClickListener itemClickListener ){
-        this.canastas = canastas;
+    public  DetallesAdapter(List<Producto> Producto, int layout, OnItemClickListener itemClickListener ){
+        this.canastas = Producto;
         this.layout = layout;
         this.itemClickListener = itemClickListener;
     }
@@ -60,17 +60,17 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.ViewHo
 
 
         }
-        public void bind( final Canasta canasta, final OnItemClickListener listener){
-            Picasso.with(context).load(canasta.getImagen()).fit().into(imagen);
-            nombre.setText( canasta.getNombreProducto());
-            precioProducto.setText( "$ " + canasta.getPrecioProducto());
-            cantidad.setText("x "+canasta.getCantidad());
+        public void bind( final Producto producto, final OnItemClickListener listener){
+            Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
+            nombre.setText( producto.getNombre());
+            precioProducto.setText( "$ " + producto.getPrecioCantidad());
+            cantidad.setText("x "+producto.getContador());
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.OnItemClick(canasta, getAdapterPosition());
+                    listener.OnItemClick(producto, getAdapterPosition());
                 }
             });
 
@@ -79,7 +79,7 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.ViewHo
     }
 
     public interface OnItemClickListener{
-        void OnItemClick(Canasta canasta, int posicion);
+        void OnItemClick(Producto producto, int posicion);
 
     }
 

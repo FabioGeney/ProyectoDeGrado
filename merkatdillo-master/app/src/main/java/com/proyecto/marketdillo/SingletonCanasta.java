@@ -19,6 +19,7 @@ public class SingletonCanasta {
 
     private ArrayList<Producto> canastas = new ArrayList<>();
     private HashMap<String, Producto> productos = new HashMap<>();
+    private ArrayList<Producto> historial = new ArrayList<>();
 
     private SingletonCanasta(){
 
@@ -40,6 +41,17 @@ public class SingletonCanasta {
             return canastas;
         }
 
+    }
+
+    public void setHistorial(List<Producto> productos){
+
+        for(Producto temp: productos){
+            historial.add(temp);
+        }
+    }
+
+    public ArrayList<Producto> getHistorial(){
+        return historial;
     }
 
     public Producto getProducto(String key){
@@ -64,10 +76,18 @@ public class SingletonCanasta {
 
     }
 
+    public void borrarProducto(int index){
+        productos.remove(index);
+    }
+
+    public void borrarLista(){
+        canastas = new ArrayList<>();
+        productos = new HashMap<>();
+    }
+
     public void setProductosCanasta(List<Producto> canastas){
         for(Producto producto: canastas){
             this.canastas.add(producto);
         }
-
     }
 }
