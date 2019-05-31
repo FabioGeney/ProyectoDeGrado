@@ -5,23 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CrearProducto">
-    <include android:id="@+id/toolbar" layout="@layout/toolbar" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351">
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline19"
+        app:layout_constraintEnd_toEndOf="@id/guideline18"
+        app:layout_constraintStart_toStartOf="@id/guideline17"
+        app:layout_constraintTop_toTopOf="@id/guideline16"
+        app:layout_constraintVertical_bias="0.05">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edtnombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="15"
+            android:ems="11"
             android:hint="Nombre"
             android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
@@ -30,18 +36,21 @@
         android:id="@+id/textInputLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline19"
+        app:layout_constraintEnd_toEndOf="@id/guideline18"
+        app:layout_constraintStart_toStartOf="@id/guideline17"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout3"
+        app:layout_constraintVertical_bias="0.045"
         app:passwordToggleEnabled="true">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edtdescripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="15"
+            android:ems="11"
             android:hint="Descripción"
             android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
@@ -50,8 +59,11 @@
         android:id="@+id/textInputLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="1dp"
+        app:layout_constraintEnd_toEndOf="@id/guideline18"
+        app:layout_constraintStart_toStartOf="@id/guideline17"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:passwordToggleEnabled="true">
 
@@ -59,7 +71,7 @@
             android:id="@+id/edtcantidad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="11"
             android:hint="Cantidad"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
@@ -67,18 +79,23 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline19"
+        app:layout_constraintEnd_toEndOf="@id/guideline18"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintVertical_bias="0.136"
         app:passwordToggleEnabled="true">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edtprecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="11"
             android:hint="Precio"
-            android:inputType="text" />
+            android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -86,35 +103,75 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:enabled="false"
-        android:textAllCaps="false"
         android:text="Guardar"
+        android:textAllCaps="false"
         android:theme="@style/RaisedButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imagen"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@mipmap/ic_fruit" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/fruit"
+        app:civ_border_color="@color/colorPrimary2"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline16"
+        app:layout_constraintEnd_toEndOf="@id/guideline18"
+        app:layout_constraintStart_toStartOf="@id/guideline17"
+        app:layout_constraintTop_toTopOf="@id/guideline15" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="57dp"
         android:layout_height="51dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="96dp"
-        app:layout_constraintStart_toStartOf="@+id/imagen"
-        app:layout_constraintTop_toTopOf="@+id/imagen"
+        android:layout_marginStart="176dp"
+        android:layout_marginLeft="176dp"
+        android:layout_marginTop="160dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imagen"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toTopOf="@+id/guideline15"
         app:srcCompat="@drawable/ic_camera_alt_" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.077" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.407" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
 
 
 </android.support.constraint.ConstraintLayout>
