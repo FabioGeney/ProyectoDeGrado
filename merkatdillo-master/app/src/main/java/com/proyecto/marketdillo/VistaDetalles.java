@@ -18,7 +18,7 @@ public class VistaDetalles extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mercadilloAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Canasta> canastas;
+    private List<Producto> canastas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,8 @@ public class VistaDetalles extends AppCompatActivity {
         this.setTitle("Detalles del Pedido");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         //Declara e inicia variables
 
@@ -40,6 +42,8 @@ public class VistaDetalles extends AppCompatActivity {
         String nombreMercadillo = getIntent().getStringExtra("nombre");
         String direccionEntrega = getIntent().getStringExtra("direccion");
         String totalPedido = getIntent().getStringExtra("total");
+        ArrayList<Producto> getProductos = (ArrayList<Producto>) getIntent().getSerializableExtra("productos");
+
 
         //setea textviews
         nombre.setText(nombreMercadillo);
@@ -47,14 +51,14 @@ public class VistaDetalles extends AppCompatActivity {
         total.setText(totalPedido);
 
 
-        canastas = getCanastas();
+        canastas = getProductos;
 
         mRecyclerView = findViewById(R.id.listview);
         layoutManager = new LinearLayoutManager(this);
 
         mercadilloAdapter = new DetallesAdapter(canastas, R.layout.list_detalles, new DetallesAdapter.OnItemClickListener() {
             @Override
-            public void OnItemClick(Canasta canasta, int posicion) {
+            public void OnItemClick(Producto producto, int posicion) {
 
             }
         });
@@ -62,23 +66,15 @@ public class VistaDetalles extends AppCompatActivity {
         mRecyclerView.setAdapter(mercadilloAdapter);
 
 
-
-
-
-
     }
 
-    private ArrayList<Canasta> getCanastas(){
-        //llama al singleton de canasta para acceder a la informaccion
+    private ArrayList<Producto> getCanasta(){
+        ArrayList<Producto> producto = new ArrayList<>();
         SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
-        final  ArrayList<Canasta> canasta = new ArrayList<>();
-        //obtiene los productos del singleton de canasta
-        ArrayList<Producto> productos = singletonCanasta.getCanastas();
-        //recorre el arreglo de los productos seleccionados por el consumidor para llenar la lista de productos de la canasta
-        for(Producto producto:productos){
-            canasta.add(new Canasta(producto.getNombre(), producto.getPrecioCantidad() , producto.getContador(), R.drawable.fruit));
+        for (Producto temp : singletonCanasta.getHistorial()){
+            producto.add(temp);
         }
-
-        return canasta;
+        return producto;
     }
+
 }

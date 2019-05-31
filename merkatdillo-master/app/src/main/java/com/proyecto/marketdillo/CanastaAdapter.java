@@ -24,7 +24,6 @@ import java.util.List;
 public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHolder> {
 
     private List<Producto> canastas;
-    private ArrayList<Producto> productosCanasta = new ArrayList<>();
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
@@ -98,7 +97,9 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
                         cantidad.setText(""+ producto.getContador());
                         setTotal(producto, false);
                     }else{
-
+                        singletonCanasta.borrarProducto(getAdapterPosition());
+                        canastas.remove(producto);
+                        notifyDataSetChanged();
                     }
                 }
             });

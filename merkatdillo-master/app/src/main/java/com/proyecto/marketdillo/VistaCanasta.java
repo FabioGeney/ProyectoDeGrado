@@ -42,6 +42,7 @@ public class VistaCanasta extends AppCompatActivity {
     private Mercadillo mercadillo;
     private Usuario usuario;
     private TextView total;
+    private SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +69,8 @@ public class VistaCanasta extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 enviarPedido();
+                singletonCanasta.borrarLista();
+
             }
         });
 
@@ -147,7 +150,7 @@ public class VistaCanasta extends AppCompatActivity {
         Date date = new Date();
 
         String fecha = dateFormat.format(date);
-        SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+
         ArrayList<Producto> canasta = singletonCanasta.getCanastas();
 
         Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreMercadillo, direccionEntrega,estado ,canasta, precio, fecha);
