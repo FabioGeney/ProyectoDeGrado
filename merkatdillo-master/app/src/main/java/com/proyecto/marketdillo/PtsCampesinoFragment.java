@@ -98,6 +98,7 @@ public class PtsCampesinoFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Producto producto = document.toObject(Producto.class);
+                                producto.setIdDocument(document.getId());
                                 p.add(producto);
 
                             }
@@ -105,7 +106,7 @@ public class PtsCampesinoFragment extends Fragment {
                             ptsAdapter = new PtsCampesinoAdapter(productos, R.layout.list_item_campesino_prdto, new PtsCampesinoAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Producto producto, int posicion) {
-                                    Toast.makeText(getContext(), producto.getId(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), producto.getNombre(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                             //Relacionando la lista con el adaptador

@@ -1,7 +1,9 @@
 package com.proyecto.marketdillo;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,6 +30,7 @@ public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapte
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
+    private FirebaseStorage mStorage = FirebaseStorage.getInstance();
 
     public  PtsCampesinoAdapter(List<Producto> productos, int layout, OnItemClickListener itemClickListener ){
         this.productos = productos;
@@ -73,25 +78,61 @@ public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapte
             descripcion.setText( producto.getDescripcion() );
             costoCantidad.setText(""+producto.getPrecioCantidad());
 
-
             borrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    db.collection("Producto").document(producto.getNombre())
-                            .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(context, "Producto eliminado", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                    final CharSequence[] item = {"Si","No"};
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    alert.setTitle("¿Esta seguro de borrar el producto?");
+                    alert.setItems(item, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(item[which].equals("Si")){
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                db.collection("Producto").document(producto.getIdDocument())
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                StorageReference imageRef = mStorage.getReferenceFromUrl(producto.getImagen());
+                                                imageRef.delete();
+                                                Toast.makeText(context, "Producto eliminado", Toast.LENGTH_SHORT).show();
+                                                productos.remove(getAdapterPosition());
+                                                notifyDataSetChanged();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            } else if(item[which].equals("No")){
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                    alert.show();
+                }
+            });
+
+            editar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final CharSequence[] itemm = {"Si","No"};
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(context);
+                    alerta.setTitle("¿Quiere editar este producto?");
+                    alerta.setItems(itemm, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(itemm[which].equals("Si")){
+                            } else if(itemm[which].equals("No")){
+                                dialog.dismiss();
+                            }
+
+                        }
+                    });
+                    alerta.show();
 
                 }
             });
