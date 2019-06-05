@@ -73,7 +73,6 @@ public class CrearProducto extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference enviarProducto = db.collection("Producto");
     private static final String TAG = "CrearProducto";
     private String idCampesino;
     private File f;
@@ -371,7 +370,8 @@ public class CrearProducto extends AppCompatActivity {
     }
 
     private void guardarProducto(){
-
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        CollectionReference enviarProducto = db.collection("Mercadillo/" + firebaseUser.getUid() + "/Productos" );
 
         String nombre = edtNombre.getText().toString();
         String descripcion = edtDescripcion.getText().toString();

@@ -79,7 +79,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         String id = mercadillo.getId();
         //hace consulta en la base de datos para buscar los prodcutos del mercadillo
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Producto").whereEqualTo("id",id)
+        db.collection("Mercadillo").document(id).collection("Productos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -146,13 +146,14 @@ public class CrearCampesinoActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
                         user.put("id",firebaseUser.getUid());
                         mercadillo.put("id",firebaseUser.getUid());
                         mercadillo.put("nombre",mercadillos);
                         mercadillo.put("tiempoEntrega", tiempoaprox);
                         mercadillo.put("calificacion", "--");
-                        db.collection("Campesino").document(didentidad).set(user);
-                        db.collection("Mercadillo").document().set(mercadillo);
+                        db.collection("Campesino").document(firebaseUser.getUid()).set(user);
+                        db.collection("Mercadillo").document(firebaseUser.getUid()).set(mercadillo);
                         Toast.makeText(CrearCampesinoActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(CrearCampesinoActivity.this, MainActivity.class);
                         startActivity(i);

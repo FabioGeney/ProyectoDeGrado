@@ -89,7 +89,7 @@ public class PtsCampesinoFragment extends Fragment {
         final ArrayList<Producto> p = new ArrayList<>();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Producto").whereEqualTo("id",id)
+        db.collection("Mercadillo").document(id).collection("Productos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
