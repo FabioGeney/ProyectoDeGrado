@@ -16,15 +16,19 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button btninicio;
     private TextView txcrearcuenta;
     private TextView txproductor;
@@ -115,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(MainActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
                     getTipo(email);
+
                 } else{
                     Toast.makeText(MainActivity.this, "Error iniciando cuenta", Toast.LENGTH_SHORT).show();
                 }
@@ -166,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void getTipo( String correo){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Consumidor").whereEqualTo("email",correo)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -182,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                         if(usuario!=null && usuario.getTipoUsuario().equals("consumidor")){
+                            tokenID("Consumidor");
                             Intent intent = new Intent(MainActivity.this, VistaUsuarios.class);
                             SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
                             singletonUsuario.setUsuario(usuario);
@@ -206,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                         if(usuario!=null && usuario.getTipoUsuario().equals("campesino")){
+                            tokenID("Campesino");
                             Intent intent = new Intent(MainActivity.this, VistaCampesino.class);
                             SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
                             singletonUsuario.setUsuario(usuario);
@@ -213,6 +219,19 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void tokenID(final String coleccion){
+        firebaseAuth.getCurrentUser().getIdToken(true).addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
+            @Override
+            public void onSuccess(GetTokenResult getTokenResult) {
+                String token_id = getTokenResult.getToken();
+                Map<String, Object> token = new HashMap<>();
+                token.put("token_ide", token_id);
+                db.collection(coleccion).document(firebaseAuth.getUid()).update(token);
+
+            }
+        });
     }
 
     @Override

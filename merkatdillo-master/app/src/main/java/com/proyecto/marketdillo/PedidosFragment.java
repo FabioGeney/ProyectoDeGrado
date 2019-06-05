@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -73,9 +74,20 @@ public class PedidosFragment extends Fragment {
 
     private ArrayList<Pedidos> getPedidos(){
         final ArrayList<Pedidos> pedidosRequest = new ArrayList<>();
-
+        //llama al singletonUsuario para obtener los datos del usuario
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+        //almacena en el objeo usuario los datos del singleton
+        Usuario usuario = singletonUsuario.getUsuario();
+        //obtiene la id del usuario
+        String id = usuario.getId();
+        String collection;
+        if(usuario.getTipoUsuario().equals("consumidor")){
+            collection = "Consumidor";
+        }else{
+            collection = "Campesino";
+        }
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Pedido")
+        db.collection(collection).document(id).collection("Pedidos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -38,7 +38,6 @@ public class VistaCanasta extends AppCompatActivity {
     private List<Producto> canastas;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference enviarPedido = db.collection("Pedido");
     private Mercadillo mercadillo;
     private Usuario usuario;
     private TextView total;
@@ -148,6 +147,9 @@ public class VistaCanasta extends AppCompatActivity {
         String precio = total.getText().toString();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
+        CollectionReference enviarPedidoCampesino = db.collection("Campesino").document(idCampesino).collection("Pedidos");
+        CollectionReference enviarPedido = db.collection("Consumidor").document(SingletonUsuario.getInstance().getUsuario().getId()).collection("Pedidos");
+
 
         String fecha = dateFormat.format(date);
 
@@ -156,6 +158,7 @@ public class VistaCanasta extends AppCompatActivity {
         Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreMercadillo, direccionEntrega,estado ,canasta, precio, fecha);
         Toast.makeText(this, ""+ canasta.size(), Toast.LENGTH_SHORT).show();
         enviarPedido.add(pedido);
+        enviarPedidoCampesino.add(pedido);
         Intent intent = new Intent(VistaCanasta.this, VistaUsuarios.class );
         startActivity(intent);
     }
