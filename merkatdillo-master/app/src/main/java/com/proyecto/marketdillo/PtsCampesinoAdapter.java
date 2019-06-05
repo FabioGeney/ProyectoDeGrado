@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -89,7 +90,7 @@ public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapte
                         public void onClick(DialogInterface dialog, int which) {
                             if(item[which].equals("Si")){
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                db.collection("Producto").document(producto.getIdDocument())
+                                db.collection("Mercadillo").document(producto.getId()).collection("Productos").document(producto.getIdDocument())
                                         .delete()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override

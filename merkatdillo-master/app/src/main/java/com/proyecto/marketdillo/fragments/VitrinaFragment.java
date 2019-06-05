@@ -69,28 +69,42 @@ public class VitrinaFragment extends Fragment {
         final ArrayList<ImagenCard> imagenes = new ArrayList<>();
         //imagenes.add(new ImagenCard(R.drawable.limone, "Limon", "2000", "Finca Fabio"));
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Producto").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Mercadillo").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()){
+                        Toast.makeText(getContext(), "mercadillos", Toast.LENGTH_SHORT).show();
 
-                        ImagenCard imagen = new ImagenCard(document.getData().get("id").toString(), document.getData().get("nombre").toString(),
-                                document.getData().get("descripcion").toString(), ""+document.getData().get("precioCantidad"), document.getData().get("imagen").toString());
-                        imagenes.add(imagen);
+                        db.collection("Mercadillo").document(document.getId()).collection("Productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task1) {
+                                if(task1.isSuccessful()){
+                                    Toast.makeText(getContext(), "Productos", Toast.LENGTH_SHORT).show();
+                                    for(QueryDocumentSnapshot document1 : task1.getResult()){
+                                        ImagenCard imagen = new ImagenCard(document1.getData().get("id").toString(), document1.getData().get("nombre").toString(),
+                                        document1.getData().get("descripcion").toString(), ""+document1.getData().get("precioCantidad"), document1.getData().get("imagen").toString());
+                                        imagenes.add(imagen);
+                                    }
+                                    imagenAdapter = new ImagenAdapter(imagenes1, R.layout.cardview_ima, getActivity(), new ImagenAdapter.OnItemClickListener() {
+                                        @Override
+                                        public void OnItemClick(ImagenCard imagen, int posicion) {
+                                            Intent i = new Intent(getContext(), ImagenDetalle.class);
+                                            i.putExtra("imagen", imagen);
+                                            startActivity(i);
+                                        }
+                                    });
+                                    imagenesRecycler.setAdapter(imagenAdapter);
+                                    imagenesRecycler.setLayoutManager(gridLayoutManager);
+                                }else {
+                                    Log.d(TAG, "Error getting documents: ", task1.getException());
+                                }
+                            }
+                        });
                     }
 
-                    imagenAdapter = new ImagenAdapter(imagenes1, R.layout.cardview_ima, getActivity(), new ImagenAdapter.OnItemClickListener() {
-                        @Override
-                        public void OnItemClick(ImagenCard imagen, int posicion) {
-                            Intent i = new Intent(getContext(), ImagenDetalle.class);
-                            i.putExtra("imagen", imagen);
-                            startActivity(i);
-                        }
-                    });
-                    imagenesRecycler.setAdapter(imagenAdapter);
-                    imagenesRecycler.setLayoutManager(gridLayoutManager);
+
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }
