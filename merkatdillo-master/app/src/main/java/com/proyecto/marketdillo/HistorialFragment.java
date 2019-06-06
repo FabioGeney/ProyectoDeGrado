@@ -82,9 +82,22 @@ public class HistorialFragment extends Fragment {
     }
     private ArrayList<Pedidos> getHistorial() {
         final ArrayList<Pedidos> pedidos = new ArrayList<>();
+        //llama al singletonUsuario para obtener los datos del usuario
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+        //almacena en el objeo usuario los datos del singleton
+        Usuario usuario = singletonUsuario.getUsuario();
+        //obtiene la id del usuario
+        String id = usuario.getId();
+        String collection;
+
+        if(usuario.getTipoUsuario().equals("consumidor")){
+            collection = "Cosumidor";
+        }else {
+            collection = "Campesino";
+        }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Pedido")
+        db.collection(collection).document(id).collection("Pedidos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

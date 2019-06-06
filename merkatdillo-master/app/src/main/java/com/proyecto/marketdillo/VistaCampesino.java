@@ -106,6 +106,9 @@ public class VistaCampesino extends AppCompatActivity
 
             fragmentManager.beginTransaction().replace(R.id.campesinos_content,  new PtsCampesinoFragment()).commit();
         } else if (id == R.id.pedidos) {
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content, new PedidosFragment()).commit();
+            this.setTitle("Pedidos");
+
 
         } else if (id == R.id.historial) {
 

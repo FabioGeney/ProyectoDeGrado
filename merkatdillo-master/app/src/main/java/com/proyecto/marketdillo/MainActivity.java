@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(GetTokenResult getTokenResult) {
                 String token_id = getTokenResult.getToken();
                 Map<String, Object> token = new HashMap<>();
-                token.put("token_ide", token_id);
+                token.put("token_id", token_id);
                 db.collection(coleccion).document(firebaseAuth.getUid()).update(token);
 
             }
