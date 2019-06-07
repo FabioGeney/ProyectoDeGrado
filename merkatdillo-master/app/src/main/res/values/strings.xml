@@ -36,4 +36,7 @@
     <string name="title_home">Inicio</string>
     <string name="title_vitrina">Vitrina</string>
     <string name="title_start">Empezar</string>
+    <string name="default_notification_channel_id">CH_01</string>
+
+
 </resources>

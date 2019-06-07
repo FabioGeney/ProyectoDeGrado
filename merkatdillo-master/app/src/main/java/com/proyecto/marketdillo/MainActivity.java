@@ -25,6 +25,7 @@ import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -222,16 +223,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void tokenID(final String coleccion){
-        firebaseAuth.getCurrentUser().getIdToken(true).addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
-            @Override
-            public void onSuccess(GetTokenResult getTokenResult) {
-                String token_id = getTokenResult.getToken();
-                Map<String, Object> token = new HashMap<>();
-                token.put("token_id", token_id);
-                db.collection(coleccion).document(firebaseAuth.getUid()).update(token);
+        String token_id = FirebaseInstanceId.getInstance().getToken();
+        Map<String, Object> token = new HashMap<>();
+        token.put("token_id", token_id);
+        db.collection(coleccion).document(firebaseAuth.getUid()).update(token);
 
-            }
-        });
     }
 
     @Override
