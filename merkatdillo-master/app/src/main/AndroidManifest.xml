@@ -4,7 +4,11 @@
     package="com.proyecto.marketdillo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.camera2" android:required="false"/>
+
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -16,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".fragments.ImagenDetalle"
+        <activity android:name=".EstadoPedido"></activity>
+        <activity
+            android:name=".fragments.ImagenDetalle"
             android:parentActivityName=".BottomActivity"
             android:theme="@style/ThemeMainActivityH">
             <meta-data
@@ -97,17 +103,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <provider
-            android:authorities="${applicationId}.fileprovider"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths">
-            </meta-data>
-
+                android:resource="@xml/filepaths"></meta-data>
         </provider>
+
         <service
             android:name=".FirebaseMessagingService"
             android:exported="false">
@@ -115,6 +121,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
