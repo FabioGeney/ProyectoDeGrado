@@ -15,8 +15,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,7 @@ public class PedidosFragment extends Fragment {
     private RecyclerView.Adapter pedidosAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Pedidos> pedidos;
-
+    private Intent intent;
 
 
     public PedidosFragment() {
@@ -80,15 +82,16 @@ public class PedidosFragment extends Fragment {
         Usuario usuario = singletonUsuario.getUsuario();
         //obtiene la id del usuario
         String id = usuario.getId();
-        String collection;
-        if(usuario.getTipoUsuario().equals("consumidor")){
-            collection = "Consumidor";
-        }else{
-            collection = "Campesino";
-        }
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection(collection).document(id).collection("Pedidos")
-                .get()
+        Query dbUser = db.collection("Pedidos").whereEqualTo("idConsumidor", id);
+        intent = new Intent(getContext(), EstadoPedido.class);
+        if(usuario.getTipoUsuario().equals("campesino")){
+            dbUser = db.collection("Pedidos").whereEqualTo("idCampesino", id);
+            intent = new Intent(getContext(), EstadoPedidoCampesino.class);
+        }
+
+        dbUser.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -96,6 +99,7 @@ public class PedidosFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Pedidos pedido = document.toObject(Pedidos.class);
+                                pedido.setIdDocument(document.getId());
                                 pedidosRequest.add(pedido);
 
                             }
@@ -103,9 +107,9 @@ public class PedidosFragment extends Fragment {
                             pedidosAdapter = new PedidosAdapter(pedidos, R.layout.list_item_pedido, new PedidosAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Pedidos pedidos, int posicion) {
-                                    SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
-                                    //singletonCanasta.setProductosCanasta(pedidos.getProductos());
-                                    Intent intent = new Intent(getContext(), EstadoPedidoCampesino.class);
+                                    SingletonPedido singletonPedido = SingletonPedido.getInstance();
+                                    singletonPedido.setPedido(pedidos);
+
                                     startActivity(intent);
 
                                 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Pedidos {
 
+    private String idDocument;
     private String idCampesino;
     private String idConsumidor;
     private String NombreMercadillo;
@@ -28,6 +29,14 @@ public class Pedidos {
         this.productos = productos;
         this.total = total;
         this.fecha = fecha;
+    }
+
+    public String getIdDocument() {
+        return idDocument;
+    }
+
+    public void setIdDocument(String idDocument) {
+        this.idDocument = idDocument;
     }
 
     public String getFecha() {
