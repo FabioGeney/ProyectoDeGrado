@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EstadoPedido"></activity>
+        <activity android:name=".EstadoPedidoCampesino"></activity>
+        <activity android:name=".EstadoPedido" />
         <activity
             android:name=".fragments.ImagenDetalle"
             android:parentActivityName=".BottomActivity"
@@ -111,7 +112,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths"></meta-data>
+                android:resource="@xml/filepaths" />
         </provider>
 
         <service

@@ -104,9 +104,9 @@ public class PedidosFragment extends Fragment {
                                 @Override
                                 public void OnItemClick(Pedidos pedidos, int posicion) {
                                     SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
-                                    singletonCanasta.setProductosCanasta(pedidos.getProductos());
-                                    Intent intent = new Intent(getContext(), VistaDetalles.class);
-                                    //startActivity(intent);
+                                    //singletonCanasta.setProductosCanasta(pedidos.getProductos());
+                                    Intent intent = new Intent(getContext(), EstadoPedidoCampesino.class);
+                                    startActivity(intent);
 
                                 }
                             });
