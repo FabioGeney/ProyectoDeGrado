@@ -20,8 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EstadoPedidoCampesino"></activity>
-        <activity android:name=".EstadoPedido" />
+        <activity android:name=".EstadoPedidoCampesino">
+            <intent-filter>
+                <action android:name="com.proyecto.marketdillo.NOTIFICACIONCAMPESINO"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+            </intent-filter>
+        </activity>
+        <activity android:name=".EstadoPedido">
+            <intent-filter>
+            <action android:name="com.proyecto.marketdillo.NOTIFICACIONCONSUMIDOR"></action>
+            <category android:name="android.intent.category.DEFAULT"></category>
+        </intent-filter>
+        </activity>
         <activity
             android:name=".fragments.ImagenDetalle"
             android:parentActivityName=".BottomActivity"
