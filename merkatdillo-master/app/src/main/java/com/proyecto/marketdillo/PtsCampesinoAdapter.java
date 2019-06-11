@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,12 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.proyecto.marketdillo.fragments.ImagenDetalle;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -127,6 +133,23 @@ public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapte
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if(itemm[which].equals("Si")){
+                                /*Intent intent = new Intent(context, Actualizar.class);
+                                intent.putExtra("produ", producto);
+                                context.startActivity(intent);*/
+
+                                /*FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                db.collection("Mercadillo").document(producto.getId()).collection("Productos").document(producto.getIdDocument()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            for(QueryDocumentSnapshot document : task.getResult()){
+                                                Producto producto = new Producto(document.getId(),)
+
+                                            }
+                                        }
+                                    }
+                                });*/
+
                             } else if(itemm[which].equals("No")){
                                 dialog.dismiss();
                             }
