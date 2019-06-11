@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -98,13 +99,15 @@ public class PedidosFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                Pedidos pedido = document.toObject(Pedidos.class);
-                                pedido.setIdDocument(document.getId());
+                                String estado = document.getData().get("estado").toString();
 
-                                if(pedido.getEstado() != "Finalizado"){
+                                if(estado.equals("Finalizado")){
+
+                                }else {
+                                    Pedidos pedido = document.toObject(Pedidos.class);
+                                    pedido.setIdDocument(document.getId());
                                     pedidosRequest.add(pedido);
                                 }
-
 
                             }
                             // Inicializar el adaptador con la fuente de datos.

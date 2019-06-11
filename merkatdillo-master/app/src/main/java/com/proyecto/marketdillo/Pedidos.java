@@ -10,7 +10,8 @@ public class Pedidos {
     private String idDocument;
     private String idCampesino;
     private String idConsumidor;
-    private String NombreMercadillo;
+    private String nombreMercadillo;
+    private String nombreComprador;
     private String direccionEntrega;
     private String estado;
     private List<Producto> productos;
@@ -20,15 +21,24 @@ public class Pedidos {
     public Pedidos() {
     }
 
-    public Pedidos(String idCampesino, String idConsumidor, String nombreMercadillo, String direccionEntrega, String estado, List<Producto> productos, String total, String fecha) {
+    public Pedidos(String idCampesino, String idConsumidor,String nombreComprador, String nombreMercadillo, String direccionEntrega, String estado, List<Producto> productos, String total, String fecha) {
         this.idCampesino = idCampesino;
         this.idConsumidor = idConsumidor;
-        NombreMercadillo = nombreMercadillo;
+        this.nombreMercadillo = nombreMercadillo;
+        this.nombreComprador = nombreComprador;
         this.direccionEntrega = direccionEntrega;
         this.estado = estado;
         this.productos = productos;
         this.total = total;
         this.fecha = fecha;
+    }
+
+    public String getNombreComprador() {
+        return nombreComprador;
+    }
+
+    public void setNombreComprador(String nombreComprador) {
+        this.nombreComprador = nombreComprador;
     }
 
     public String getIdDocument() {
@@ -64,11 +74,11 @@ public class Pedidos {
     }
 
     public String getNombreMercadillo() {
-        return NombreMercadillo;
+        return nombreMercadillo;
     }
 
     public void setNombreMercadillo(String nombreMercadillo) {
-        NombreMercadillo = nombreMercadillo;
+        this.nombreMercadillo = nombreMercadillo;
     }
 
     public String getDireccionEntrega() {

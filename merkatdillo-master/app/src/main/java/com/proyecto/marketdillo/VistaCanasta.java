@@ -143,6 +143,7 @@ public class VistaCanasta extends AppCompatActivity {
         String idConsumidor = usuario.getId();
         String nombreMercadillo = mercadillo.getNombre();
         String direccionEntrega = usuario.getDireccion();
+        String nombreUsuario = usuario.getNombre();
         String estado = "Creado";
         String precio = total.getText().toString();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -150,7 +151,7 @@ public class VistaCanasta extends AppCompatActivity {
         CollectionReference enviarPedido = db.collection("Pedidos");
         String fecha = dateFormat.format(date);
         ArrayList<Producto> canasta = singletonCanasta.getCanastas();
-        Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreMercadillo, direccionEntrega,estado ,canasta, precio, fecha);
+        Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreUsuario, nombreMercadillo, direccionEntrega,estado ,canasta, precio, fecha);
         Toast.makeText(this, ""+ canasta.size(), Toast.LENGTH_SHORT).show();
         enviarPedido.add(pedido);
 

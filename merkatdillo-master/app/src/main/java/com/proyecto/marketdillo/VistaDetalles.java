@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,6 +31,8 @@ public class VistaDetalles extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+
 
 
         //Declara e inicia variables
@@ -36,20 +40,31 @@ public class VistaDetalles extends AppCompatActivity {
         TextView nombre = findViewById(R.id.nombreMercadillo);
         TextView direccion = findViewById(R.id.direccion);
         TextView total = findViewById(R.id.total);
+        Button pedirNuevo = findViewById(R.id.button);
 
         //obtiene datos del intent
 
         String nombreMercadillo = getIntent().getStringExtra("nombre");
+        String nombreUsuario = getIntent().getStringExtra("nombreUsuario");
         String direccionEntrega = getIntent().getStringExtra("direccion");
         String totalPedido = getIntent().getStringExtra("total");
+        String boton = getIntent().getStringExtra("visible");
         ArrayList<Producto> getProductos = (ArrayList<Producto>) getIntent().getSerializableExtra("productos");
+
+        if(boton.equals("no")){
+            pedirNuevo.setVisibility(View.GONE);
+        }
 
 
         //setea textviews
-        nombre.setText(nombreMercadillo);
+        if(singletonUsuario.getUsuario().getTipoUsuario().equals("campesino")){
+            nombre.setText(nombreUsuario);
+        }else{
+            nombre.setText(nombreMercadillo);
+        }
+
         direccion.setText(direccionEntrega);
         total.setText(totalPedido);
-
 
         canastas = getProductos;
 
