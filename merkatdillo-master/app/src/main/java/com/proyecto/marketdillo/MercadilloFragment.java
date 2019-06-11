@@ -90,7 +90,7 @@ public class MercadilloFragment extends Fragment {
 
                             }
                             // Inicializar el adaptador con la fuente de datos.
-                            mercadilloAdapter = new MensajeAdapter(mercadillos1, R.layout.list_item_mercadillo, new MensajeAdapter.OnItemClickListener() {
+                            mercadilloAdapter = new MercadilloAdapter(mercadillos1, R.layout.list_item_mercadillo, new MercadilloAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Mercadillo mercadillo, int posicion) {
                                     Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);

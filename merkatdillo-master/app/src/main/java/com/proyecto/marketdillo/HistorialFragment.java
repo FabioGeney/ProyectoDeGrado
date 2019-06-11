@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -88,17 +89,17 @@ public class HistorialFragment extends Fragment {
         Usuario usuario = singletonUsuario.getUsuario();
         //obtiene la id del usuario
         String id = usuario.getId();
-        String collection;
 
-        if(usuario.getTipoUsuario().equals("consumidor")){
-            collection = "Cosumidor";
-        }else {
-            collection = "Campesino";
-        }
+
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection(collection).document(id).collection("Pedidos")
-                .get()
+        Query dbUser = db.collection("Pedidos").whereEqualTo("idConsumidor", id);
+
+        if(usuario.getTipoUsuario().equals("campesino")){
+            dbUser = db.collection("Pedidos").whereEqualTo("idCampesino", id);
+        }
+
+        dbUser.whereEqualTo("estado", "Finalizado").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

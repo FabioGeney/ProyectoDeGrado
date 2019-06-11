@@ -94,6 +94,15 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
             }
         });
 
+        finalizarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalizado.setVisibility(View.GONE);
+                checkFinal.setImageResource(R.drawable.check_circle);
+                modificaPedido("Finalizado");
+            }
+        });
+
     }
 
     private void modificaPedido(String estado){

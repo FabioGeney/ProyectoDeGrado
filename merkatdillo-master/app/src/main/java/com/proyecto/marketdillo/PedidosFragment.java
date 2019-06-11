@@ -100,7 +100,11 @@ public class PedidosFragment extends Fragment {
 
                                 Pedidos pedido = document.toObject(Pedidos.class);
                                 pedido.setIdDocument(document.getId());
-                                pedidosRequest.add(pedido);
+
+                                if(pedido.getEstado() != "Finalizado"){
+                                    pedidosRequest.add(pedido);
+                                }
+
 
                             }
                             // Inicializar el adaptador con la fuente de datos.
