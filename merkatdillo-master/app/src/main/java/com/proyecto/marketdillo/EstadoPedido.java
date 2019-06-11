@@ -2,6 +2,7 @@ package com.proyecto.marketdillo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
 public class EstadoPedido extends AppCompatActivity {
@@ -10,6 +11,10 @@ public class EstadoPedido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estado_pedido);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ImageView checkConf = findViewById(R.id.checkConfirmado);
         ImageView checkSend = findViewById(R.id.checkEnviado);

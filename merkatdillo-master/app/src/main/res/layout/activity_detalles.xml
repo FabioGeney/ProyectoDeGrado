@@ -79,7 +79,7 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent2"
         android:text="Pedir de nuevo"
         android:textAllCaps="false"
         android:textColor="#ffff"

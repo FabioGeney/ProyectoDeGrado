@@ -28,7 +28,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     private OnItemClickListener itemClickListener;
     private Context context;
     public TextView textTotal;
-    private int total = 0;
+
 
     public  CanastaAdapter(List<Producto> canastas, int layout, OnItemClickListener itemClickListener ){
         this.canastas = canastas;
@@ -121,22 +121,24 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     }
 
     private void getTotal(){
+        int total = 0;
 
        for(Producto producto : canastas){
           total = total + producto.getPrecioCantidad()*producto.getContador();
        }
 
-       textTotal.setText("$ "+total);
+       textTotal.setText(""+total);
     }
 
     private void setTotal(Producto producto, boolean index){
+        int total = Integer.parseInt(textTotal.getText().toString());
 
         if(index){
             total = total + producto.getPrecioCantidad();
         }else{
             total = total - producto.getPrecioCantidad();
         }
-        textTotal.setText("$ "+total);
+        textTotal.setText(""+total);
     }
 }
 

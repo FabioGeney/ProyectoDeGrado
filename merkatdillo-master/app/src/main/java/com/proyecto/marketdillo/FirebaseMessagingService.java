@@ -46,7 +46,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     private void getPedido(String id){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-         db.collection("Pedidos").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("Pedidos").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
              @Override
              public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                  if(task.isSuccessful()){
@@ -57,6 +57,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                      singletonPedido.setPedido(pedido);
                  }
              }
-         });
+        });
     }
 }

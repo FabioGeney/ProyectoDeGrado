@@ -3,6 +3,7 @@ package com.proyecto.marketdillo;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,6 +32,10 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estado_pedido_campesino);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SingletonPedido singletonPedido = SingletonPedido.getInstance();
         Pedidos pedido = singletonPedido.getPedido();
@@ -58,6 +63,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
 
                 break;
             case "Enviado":
+                confirmar.setVisibility(View.GONE);
                 enviado.setVisibility(View.GONE);
                 checkConf.setImageResource(R.drawable.check_circle);
                 checkSend.setImageResource(R.drawable.check_circle);

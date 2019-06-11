@@ -20,17 +20,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EstadoPedidoCampesino">
+        <activity android:name=".Chat"></activity>
+        <activity
+            android:name=".EstadoPedidoCampesino"
+            android:parentActivityName=".VistaCampesino"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".VistaCampesino" />
+
             <intent-filter>
-                <action android:name="com.proyecto.marketdillo.NOTIFICACIONCAMPESINO"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
+                <action android:name="com.proyecto.marketdillo.NOTIFICACIONCAMPESINO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".EstadoPedido">
+        <activity
+            android:name=".EstadoPedido"
+            android:parentActivityName=".VistaUsuarios"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".VistaUsuarios" />
+
             <intent-filter>
-            <action android:name="com.proyecto.marketdillo.NOTIFICACIONCONSUMIDOR"></action>
-            <category android:name="android.intent.category.DEFAULT"></category>
-        </intent-filter>
+                <action android:name="com.proyecto.marketdillo.NOTIFICACIONCONSUMIDOR" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".fragments.ImagenDetalle"
@@ -40,7 +57,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BottomActivity" />
         </activity>
-        <activity android:name=".VistaProducto" />
+        <activity
+            android:name=".VistaProducto"
+            android:parentActivityName=".VistaProductosMercadillo"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".VistaProductosMercadillo" />
+        </activity>
         <activity
             android:name=".CrearProducto"
             android:parentActivityName=".VistaCampesino"
