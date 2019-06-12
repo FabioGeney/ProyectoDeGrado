@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,6 +102,23 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                 finalizado.setVisibility(View.GONE);
                 checkFinal.setImageResource(R.drawable.check_circle);
                 modificaPedido("Finalizado");
+            }
+        });
+
+        detalles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SingletonPedido singletonPedido = SingletonPedido.getInstance();
+                Pedidos pedidos = singletonPedido.getPedido();
+                ArrayList<Producto> productos = new ArrayList<>(pedidos.getProductos());
+                Intent intent = new Intent(EstadoPedidoCampesino.this, VistaDetalles.class);
+                intent.putExtra("nombre", pedidos.getNombreMercadillo());
+                intent.putExtra("nombreUsuario", pedidos.getNombreComprador());
+                intent.putExtra("direccion", pedidos.getDireccionEntrega());
+                intent.putExtra("total", pedidos.getTotal());
+                intent.putExtra("productos", productos);
+                intent.putExtra("visible", "no");
+                startActivity(intent);
             }
         });
 

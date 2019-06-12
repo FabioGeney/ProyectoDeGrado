@@ -120,7 +120,7 @@ public class HistorialFragment extends Fragment {
                                     intent.putExtra("direccion", pedidos.getDireccionEntrega());
                                     intent.putExtra("total", pedidos.getTotal());
                                     intent.putExtra("productos", productos);
-
+                                    intent.putExtra("visible", "si");
                                     startActivity(intent);
                                 }
                             });

@@ -63,7 +63,13 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.View
         public void bind( final Pedidos pedido, final OnItemClickListener listener){
 
             Picasso.with(context).load(R.mipmap.ic_merca_image).fit().into(imagen);
-            nombre.setText(pedido.getNombreMercadillo());
+            SingletonUsuario singletonUsuario  =SingletonUsuario.getInstance();
+
+            if(singletonUsuario.getUsuario().getTipoUsuario().equals("campesino")){
+                nombre.setText(pedido.getNombreComprador());
+            }else {
+                nombre.setText(pedido.getNombreMercadillo());
+            }
             fechaPedido.setText(pedido.getFecha());
 
             itemView.setOnClickListener(new View.OnClickListener() {

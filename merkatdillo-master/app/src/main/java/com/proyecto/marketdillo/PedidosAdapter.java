@@ -57,7 +57,14 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         }
         public void bind( final Pedidos pedidos, final OnItemClickListener listener){
 
-            nombre.setText(pedidos.getNombreMercadillo());
+            SingletonUsuario singletonUsuario  =SingletonUsuario.getInstance();
+
+            if(singletonUsuario.getUsuario().getTipoUsuario().equals("campesino")){
+                nombre.setText(pedidos.getNombreComprador());
+            }else {
+                nombre.setText(pedidos.getNombreMercadillo());
+            }
+
             estado.setText("Estado: "+ pedidos.getEstado());
             total.setText(pedidos.getTotal());
 
