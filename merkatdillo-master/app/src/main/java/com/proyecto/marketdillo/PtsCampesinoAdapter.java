@@ -133,9 +133,9 @@ public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapte
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if(itemm[which].equals("Si")){
-                                /*Intent intent = new Intent(context, Actualizar.class);
+                                Intent intent = new Intent(context, Actualizar.class);
                                 intent.putExtra("produ", producto);
-                                context.startActivity(intent);*/
+                                context.startActivity(intent);
 
                                 /*FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 db.collection("Mercadillo").document(producto.getId()).collection("Productos").document(producto.getIdDocument()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

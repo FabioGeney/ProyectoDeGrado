@@ -108,7 +108,10 @@
         android:theme="@style/RaisedButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imagen"

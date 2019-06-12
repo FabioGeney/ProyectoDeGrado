@@ -20,7 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Actualizar"></activity>
+        <activity android:name=".Actualizar"
+            android:parentActivityName=".VistaCampesino"
+            android:theme="@style/ThemeMainActivityH">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".VistaCampesino" />
+        </activity>
         <activity android:name=".Chat" />
         <activity
             android:name=".EstadoPedidoCampesino"
