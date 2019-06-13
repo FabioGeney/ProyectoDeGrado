@@ -63,6 +63,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import id.zelory.compressor.Compressor;
+
 public class CrearProducto extends AppCompatActivity {
     private EditText edtNombre;
     private EditText edtDescripcion;
@@ -79,12 +81,13 @@ public class CrearProducto extends AppCompatActivity {
     private String eleccionusuario;
     private int REQUEST_CAMERA = 0;
     private int SELECT_FILE = 1;
-    private  Uri hImagenUri;
+    private Uri hImagenUri;
     private StorageReference hStorageRef;
     private DatabaseReference hDatabaseRef;
     private String picture;
     private String photoPath;
     private Intent intentL;
+    private byte[] final_image;
 
     private final int PICTURE_FROM_CAMERA = 50;
 
@@ -249,6 +252,24 @@ public class CrearProducto extends AppCompatActivity {
                 Bitmap thumbnail = (Bitmap) extras.get("data");
                 imagen.setImageBitmap(thumbnail);
                 hImagenUri = data.getData();
+                //hImagenUri = data.getData();
+
+                /*File actualImage = new File(photoPath);
+
+                try {
+                    Bitmap compressedImage = new Compressor(this)
+                            .setMaxWidth(640)
+                            .setMaxHeight(480)
+                            .setQuality(75)
+                            .compressToBitmap(actualImage);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    compressedImage.compress(Bitmap.CompressFormat.JPEG, 75, baos);
+                    final_image = baos.toByteArray();
+                    imagen.setImageURI(hImagenUri);
+                } catch (IOException e){
+                    e.printStackTrace();
+                }*/
+
             }
         }
     }
@@ -329,7 +350,7 @@ public class CrearProducto extends AppCompatActivity {
         if(hImagenUri != null) {
 
             final StorageReference fileReference = hStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(hImagenUri));
-
+            //UploadTask uploadTask = fileReference.putBytes(final_image);
             fileReference.putFile(hImagenUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
