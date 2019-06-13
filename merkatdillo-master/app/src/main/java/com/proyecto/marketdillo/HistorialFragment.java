@@ -106,6 +106,7 @@ public class HistorialFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Pedidos pedido = document.toObject(Pedidos.class);
+                                pedido.setIdDocument(document.getId());
                                 pedidos.add(pedido);
                             }
                             // Inicializar el adaptador con la fuente de datos.
@@ -117,6 +118,7 @@ public class HistorialFragment extends Fragment {
                                     singletonCanasta.setHistorial(pedidos.getProductos());
                                     Intent intent = new Intent(getContext(), VistaDetalles.class);
                                     intent.putExtra("nombre", pedidos.getNombreMercadillo());
+                                    intent.putExtra("idDocumento", pedidos.getIdDocument());
                                     intent.putExtra("direccion", pedidos.getDireccionEntrega());
                                     intent.putExtra("total", pedidos.getTotal());
                                     intent.putExtra("productos", productos);

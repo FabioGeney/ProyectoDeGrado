@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,11 +41,13 @@ public class VistaDetalles extends AppCompatActivity {
         TextView nombre = findViewById(R.id.nombreMercadillo);
         TextView direccion = findViewById(R.id.direccion);
         TextView total = findViewById(R.id.total);
+        TextView calificacion = findViewById(R.id.calificacion);
         Button pedirNuevo = findViewById(R.id.button);
 
         //obtiene datos del intent
 
-        String nombreMercadillo = getIntent().getStringExtra("nombre");
+        final String nombreMercadillo = getIntent().getStringExtra("nombre");
+        final String idDocumentPedido = getIntent().getStringExtra("idDocumento");
         String nombreUsuario = getIntent().getStringExtra("nombreUsuario");
         String direccionEntrega = getIntent().getStringExtra("direccion");
         String totalPedido = getIntent().getStringExtra("total");
@@ -59,6 +62,8 @@ public class VistaDetalles extends AppCompatActivity {
         //setea textviews
         if(singletonUsuario.getUsuario().getTipoUsuario().equals("campesino")){
             nombre.setText(nombreUsuario);
+            calificacion.setVisibility(View.GONE);
+            pedirNuevo.setVisibility(View.GONE);
         }else{
             nombre.setText(nombreMercadillo);
         }
@@ -79,7 +84,15 @@ public class VistaDetalles extends AppCompatActivity {
         });
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mercadilloAdapter);
-
+        calificacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VistaDetalles.this, CalificarPedido.class);
+                intent.putExtra("mercadillo", nombreMercadillo);
+                intent.putExtra("idDocumentPedido", idDocumentPedido);
+                startActivity(intent);
+            }
+        });
 
     }
 

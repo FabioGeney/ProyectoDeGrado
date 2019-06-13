@@ -17,6 +17,7 @@ public class Pedidos {
     private List<Producto> productos;
     private String total;
     private String fecha;
+    private double calificacion;
 
     public Pedidos() {
     }
@@ -31,6 +32,27 @@ public class Pedidos {
         this.productos = productos;
         this.total = total;
         this.fecha = fecha;
+    }
+
+    public Pedidos(String idCampesino, String idConsumidor, String nombreMercadillo, String nombreComprador, String direccionEntrega, String estado, List<Producto> productos, String total, String fecha, double calificacion) {
+        this.idCampesino = idCampesino;
+        this.idConsumidor = idConsumidor;
+        this.nombreMercadillo = nombreMercadillo;
+        this.nombreComprador = nombreComprador;
+        this.direccionEntrega = direccionEntrega;
+        this.estado = estado;
+        this.productos = productos;
+        this.total = total;
+        this.fecha = fecha;
+        this.calificacion = calificacion;
+    }
+
+    public double getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(double calificacion) {
+        this.calificacion = calificacion;
     }
 
     public String getNombreComprador() {
