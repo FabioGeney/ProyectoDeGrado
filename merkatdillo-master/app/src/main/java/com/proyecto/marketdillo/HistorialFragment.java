@@ -117,11 +117,7 @@ public class HistorialFragment extends Fragment {
                                     SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
                                     singletonCanasta.setHistorial(pedidos.getProductos());
                                     Intent intent = new Intent(getContext(), VistaDetalles.class);
-                                    intent.putExtra("nombre", pedidos.getNombreMercadillo());
-                                    intent.putExtra("idDocumento", pedidos.getIdDocument());
-                                    intent.putExtra("direccion", pedidos.getDireccionEntrega());
-                                    intent.putExtra("total", pedidos.getTotal());
-                                    intent.putExtra("productos", productos);
+                                    intent.putExtra("pedido", pedidos);
                                     intent.putExtra("visible", "si");
                                     startActivity(intent);
                                 }

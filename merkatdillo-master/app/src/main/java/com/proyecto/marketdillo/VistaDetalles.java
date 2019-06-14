@@ -2,6 +2,7 @@ package com.proyecto.marketdillo;
 
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,20 +45,31 @@ public class VistaDetalles extends AppCompatActivity {
         TextView direccion = findViewById(R.id.direccion);
         TextView total = findViewById(R.id.total);
         TextView calificacion = findViewById(R.id.calificacion);
+        ConstraintLayout layout = findViewById(R.id.layout);
         Button pedirNuevo = findViewById(R.id.button);
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
 
         //obtiene datos del intent
-
-        final String nombreMercadillo = getIntent().getStringExtra("nombre");
-        final String idDocumentPedido = getIntent().getStringExtra("idDocumento");
-        String nombreUsuario = getIntent().getStringExtra("nombreUsuario");
-        String direccionEntrega = getIntent().getStringExtra("direccion");
-        String totalPedido = getIntent().getStringExtra("total");
+        Pedidos pedidos = (Pedidos) getIntent().getSerializableExtra("pedido");
+        final String nombreMercadillo = pedidos.getNombreMercadillo();
+        final String idDocumentPedido = pedidos.getIdDocument();
+        String nombreUsuario = pedidos.getNombreComprador();
+        double cal = pedidos.getCalificacion();
+        String direccionEntrega = pedidos.getDireccionEntrega();
+        String totalPedido = pedidos.getTotal();
         String boton = getIntent().getStringExtra("visible");
-        ArrayList<Producto> getProductos = (ArrayList<Producto>) getIntent().getSerializableExtra("productos");
+        ArrayList<Producto> getProductos = (ArrayList<Producto>)pedidos.getProductos();
 
         if(boton.equals("no")){
             pedirNuevo.setVisibility(View.GONE);
+            calificacion.setVisibility(View.GONE);
+        }
+
+        if(cal!=0){
+            float numStar = (float)cal;
+            layout.setVisibility(View.VISIBLE);
+            calificacion.setVisibility(View.GONE);
+            ratingBar.setRating(numStar);
         }
 
 

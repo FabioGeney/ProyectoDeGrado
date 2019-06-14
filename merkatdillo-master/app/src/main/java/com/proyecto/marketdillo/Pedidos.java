@@ -1,11 +1,12 @@
 package com.proyecto.marketdillo;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Pedidos {
+public class Pedidos implements Serializable {
 
     private String idDocument;
     private String idCampesino;

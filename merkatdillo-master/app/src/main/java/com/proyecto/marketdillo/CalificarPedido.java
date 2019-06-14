@@ -33,7 +33,7 @@ public class CalificarPedido extends AppCompatActivity {
 
         TextView nombreMercadillo = findViewById(R.id.nombreMercadillo);
         ratingProdutos = findViewById(R.id.ratingProdutos);
-        ratingServicio = findViewById(R.id.calfi);
+        ratingServicio = findViewById(R.id.ratingBar);
         ratingCosto = findViewById(R.id.ratingCosto);
         ratingTiempo = findViewById(R.id.ratingTiempo);
         Button enviar = findViewById(R.id.enviar);
