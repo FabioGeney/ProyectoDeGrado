@@ -50,33 +50,54 @@ exports.notificacionPedidoConsumidor = functions.firestore.document('Pedidos/{pe
     const compradorId = dataSnap.data().idConsumidor;
     const campesinoId = dataSnap.data().idCampesino;
     const estadoPedido = dataSnap.data().estado;
+    const cal = dataSnap.data().calificacion;
 
     const compradorDatos = admin.firestore().collection("Consumidor").doc(compradorId).get();
     const mercadilloDatos = admin.firestore().collection("Mercadillo").doc(campesinoId).get();
 
-    return Promise.all([compradorDatos, mercadilloDatos]).then(result=>{
-      const tokenComprador = result[0].data().token_id;
-      const nombreMercadillo = result[1].data().nombre;
-      
-      
-      const payload = {
-        notification: {
-          title : nombreMercadillo,
-          body : "Tu pedido ha sido " + estadoPedido + " por el campesino" ,
-          icon: "default",
-          click_action: "com.proyecto.marketdillo.NOTIFICACIONCONSUMIDOR"
-        },
-        data: {
-          pedidoID : idPedido
+    if(cal === 0){
+      return Promise.all([compradorDatos, mercadilloDatos]).then(result=>{
+        const tokenComprador = result[0].data().token_id;
+        const nombreMercadillo = result[1].data().nombre;
+  
+        var mensaje = "Tu pedido ha sido creado y enviado al campesino";
+        var check = "com.proyecto.marketdillo.NOTIFICACIONCONSUMIDOR";
+  
+        if(estadoPedido === "Confirmado"){
+          mensaje = "Tu pedido ha sido confirmado por el campesino";
         }
-      };
-
-      return admin.messaging().sendToDevice( tokenComprador, payload).then(result => {
-        console.log("Notificacion enviada");
-        return;
+        if(estadoPedido === "Enviado"){
+          mensaje = "Tu pedido ha sido enviado por el campesino";
+        }
+        if(estadoPedido === "Finalizado"){
+          mensaje = "Pedido finalizado, no olvides calificarlo";
+          check = "com.proyecto.marketdillo.NOTIFICACIONCONSUMIDORFIN"
+        }
+        
+        
+        const payload = {
+          notification: {
+            title : nombreMercadillo,
+            body : mensaje,
+            icon: "default",
+            click_action: check
+          },
+          data: {
+            pedidoID : idPedido
+          }
+        };
+  
+        return admin.messaging().sendToDevice( tokenComprador, payload).then(result => {
+          console.log("Notificacion enviada");
+          return;
+        });
       });
-    });
+    }else{
+      return;
+    }
+
+
   });
 
 
-})
+});
