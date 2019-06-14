@@ -112,11 +112,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                 Pedidos pedidos = singletonPedido.getPedido();
                 ArrayList<Producto> productos = new ArrayList<>(pedidos.getProductos());
                 Intent intent = new Intent(EstadoPedidoCampesino.this, VistaDetalles.class);
-                intent.putExtra("nombre", pedidos.getNombreMercadillo());
-                intent.putExtra("nombreUsuario", pedidos.getNombreComprador());
-                intent.putExtra("direccion", pedidos.getDireccionEntrega());
-                intent.putExtra("total", pedidos.getTotal());
-                intent.putExtra("productos", productos);
+                intent.putExtra("pedido", pedidos);
                 intent.putExtra("visible", "no");
                 startActivity(intent);
             }

@@ -15,6 +15,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
+    private Pedidos pedido;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -33,6 +34,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         Intent intent = new Intent(click_action);
+        intent.putExtra("pedido", pedido);
+        intent.putExtra("visible", "si");
         PendingIntent intentFilter = PendingIntent.getActivity(  this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(intentFilter);
 
@@ -51,7 +54,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
              public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                  if(task.isSuccessful()){
                      DocumentSnapshot document = task.getResult();
-                     Pedidos pedido = document.toObject(Pedidos.class);
+                     pedido = document.toObject(Pedidos.class);
                      pedido.setIdDocument(document.getId());
                      SingletonPedido singletonPedido = SingletonPedido.getInstance();
                      singletonPedido.setPedido(pedido);
