@@ -250,28 +250,26 @@ public class CrearProducto extends AppCompatActivity {
             }else if (requestCode == REQUEST_CAMERA) {
                 Bundle extras = data.getExtras();
                 Bitmap thumbnail = (Bitmap) extras.get("data");
-                imagen.setImageBitmap(thumbnail);
+                //imagen.setImageBitmap(thumbnail);
                 hImagenUri = data.getData();
+                //String pat = getIntent().getStringExtra("data");
+
                 //hImagenUri = data.getData();
-
-                /*File actualImage = new File(photoPath);
-
-                try {
-                    Bitmap compressedImage = new Compressor(this)
-                            .setMaxWidth(640)
-                            .setMaxHeight(480)
-                            .setQuality(75)
-                            .compressToBitmap(actualImage);
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    compressedImage.compress(Bitmap.CompressFormat.JPEG, 75, baos);
-                    final_image = baos.toByteArray();
-                    imagen.setImageURI(hImagenUri);
-                } catch (IOException e){
-                    e.printStackTrace();
-                }*/
-
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                thumbnail.compress(Bitmap.CompressFormat.JPEG, 75, baos);
+                Bitmap l = thumbnail.createScaledBitmap(thumbnail, 500, 500, false);
+                //l.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+                hImagenUri = getImageUri(l);
+                imagen.setImageBitmap(l);
             }
         }
+    }
+
+    public Uri getImageUri(Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 
     private void onCaptureImageResult(Intent data){
@@ -350,7 +348,7 @@ public class CrearProducto extends AppCompatActivity {
         if(hImagenUri != null) {
 
             final StorageReference fileReference = hStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(hImagenUri));
-            //UploadTask uploadTask = fileReference.putBytes(final_image);
+
             fileReference.putFile(hImagenUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
