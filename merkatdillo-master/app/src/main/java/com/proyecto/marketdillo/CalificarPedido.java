@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -63,6 +64,8 @@ public class CalificarPedido extends AppCompatActivity {
         Map<String, Object> update = new HashMap<>();
         update.put("calificacion", calificacion);
         db.collection("Pedidos").document(idDocumentPedido).update(update);
+        Intent intent = new Intent(CalificarPedido.this, VistaCampesino.class);
+        startActivity(intent);
 
     }
 }

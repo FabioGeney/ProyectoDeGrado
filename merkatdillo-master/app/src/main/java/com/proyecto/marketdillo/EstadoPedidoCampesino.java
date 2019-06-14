@@ -58,9 +58,14 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
 
 
         switch (pedido.getEstado()){
+            case "Creado":
+                finalizado.setVisibility(View.GONE);
+                enviado.setVisibility(View.GONE);
+                break;
             case "Confirmado":
                 confirmar.setVisibility(View.GONE);
                 checkConf.setImageResource(R.drawable.check_circle);
+                finalizado.setVisibility(View.GONE);
                 enviado.setVisibility(View.VISIBLE);
 
                 break;
@@ -91,7 +96,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
             public void onClick(View v) {
                 enviado.setVisibility(View.GONE);
                 checkSend.setImageResource(R.drawable.check_circle);
-                enviarPedido.setVisibility(View.VISIBLE);
+                finalizado.setVisibility(View.VISIBLE);
                 modificaPedido("Enviado");
             }
         });

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,8 +16,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.messaging.RemoteMessage;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
-    private Pedidos pedido;
+
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -33,6 +37,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentText(cuerpo)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
+        SingletonPedido singletonPedido = SingletonPedido.getInstance();
+        Pedidos pedido=singletonPedido.getPedido();
+
         Intent intent = new Intent(click_action);
         intent.putExtra("pedido", pedido);
         intent.putExtra("visible", "si");
@@ -44,7 +51,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         notificationManager.notify(mNotificationID, builder.build());
 
 
-       
+
     }
 
     private void getPedido(String id){
@@ -54,7 +61,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
              public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                  if(task.isSuccessful()){
                      DocumentSnapshot document = task.getResult();
-                     pedido = document.toObject(Pedidos.class);
+                     Pedidos pedido = document.toObject(Pedidos.class);
                      pedido.setIdDocument(document.getId());
                      SingletonPedido singletonPedido = SingletonPedido.getInstance();
                      singletonPedido.setPedido(pedido);
