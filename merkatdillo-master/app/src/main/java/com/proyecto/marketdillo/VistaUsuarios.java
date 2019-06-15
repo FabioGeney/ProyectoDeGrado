@@ -129,7 +129,8 @@ public class VistaUsuarios extends AppCompatActivity
 
 
         } else if (id == R.id.confi) {
-            this.setTitle("Configuración");
+            fragmentManager.beginTransaction().replace(R.id.mercadillos_container, new ConfiguracionFragment()).commit();
+            this.setTitle("Perfil");
             menu.findItem(R.id.search).setVisible(false);
 
         }

@@ -14,11 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class VistaCampesino extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();;
+    private TextView nombre;
+    private TextView correo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,11 @@ public class VistaCampesino extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
+        nombre = header.findViewById(R.id.usuarionombre);
+        nombre.setText(usuario.getNombre() + " " + usuario.getApellidos());
+        correo = header.findViewById(R.id.usuariocorreo);
+        correo.setText(usuario.getEmail());
         navigationView.setNavigationItemSelectedListener(this);
 
         //Enviar id del Campesino a PtsFragment para consultar los productos del campesino
@@ -116,6 +124,8 @@ public class VistaCampesino extends AppCompatActivity
             this.setTitle("Historial");
 
         } else if (id == R.id.confi) {
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content, new ConfiguracionFragment()).commit();
+            this.setTitle("Perfil");
 
         }
 

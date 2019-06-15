@@ -19,8 +19,8 @@
 
         <item
             android:id="@+id/confi"
-            android:icon="@drawable/ic_menu_conf"
-            android:title="Configuración" />
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="Perfil" />
     </group>
 
 
