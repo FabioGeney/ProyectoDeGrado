@@ -2,6 +2,7 @@ package com.proyecto.marketdillo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -17,11 +18,20 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 public class VistaCampesino extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();;
     private TextView nombre;
     private TextView correo;
+    private SessionManager sessionManager;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +39,31 @@ public class VistaCampesino extends AppCompatActivity
         setContentView(R.layout.activity_vista_campesino);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        sessionManager = new SessionManager(this);
         //almacena los datos del singleton en el objeto usuario
         final Usuario usuario = singletonUsuario.getUsuario();
+        if(usuario==null){
+            String userId = sessionManager.getIdsuario();
+            String tipoUsurio = sessionManager.getTipousuario();
+            /*
+            db.collection("Campesino").document(userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            usuario = document.toObject(Usuario.class);
+                            usuario.setTipoUsuario("consumidor");
+                        }
+
+                    }
+
+                }
+            });
+            */
+        }
 
         //Modifica titulo del Toolbar
-        this.setTitle("Mercadillo de frutas");
+        this.setTitle("Mis Productos");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +142,7 @@ public class VistaCampesino extends AppCompatActivity
         if (id == R.id.mimercadillo) {
 
             fragmentManager.beginTransaction().replace(R.id.campesinos_content,  new PtsCampesinoFragment()).commit();
-            this.setTitle("Mi mercadillo");
+            this.setTitle("Mis Productos");
         } else if (id == R.id.pedidos) {
             fragmentManager.beginTransaction().replace(R.id.campesinos_content, new PedidosFragment()).commit();
             this.setTitle("Pedidos");
@@ -125,7 +154,7 @@ public class VistaCampesino extends AppCompatActivity
 
         } else if (id == R.id.confi) {
             fragmentManager.beginTransaction().replace(R.id.campesinos_content, new ConfiguracionFragment()).commit();
-            this.setTitle("Perfil");
+            this.setTitle("Mi Perfil");
 
         }
 
