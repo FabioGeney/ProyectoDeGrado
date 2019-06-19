@@ -33,7 +33,7 @@ public class ConfiguracionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_configuracion, container, false);
-        txtperfil = (TextView) root.findViewById(R.id.txtperfil);
+        //txtperfil = (TextView) root.findViewById(R.id.txtperfil);
 
         return root;
     }

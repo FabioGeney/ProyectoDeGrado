@@ -7,7 +7,7 @@
         <item
             android:id="@+id/mimercadillo"
             android:icon="@drawable/ic_menu_mercadillos"
-            android:title="Mi Mercadillo" />
+            android:title="Mis Productos" />
         <item
             android:id="@+id/pedidos"
             android:icon="@drawable/ic_menu_pedidos"
@@ -20,7 +20,7 @@
         <item
             android:id="@+id/confi"
             android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="Perfil" />
+            android:title="Mi Perfil" />
     </group>
 
 
