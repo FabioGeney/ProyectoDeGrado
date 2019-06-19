@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+
 public class SessionManager {
     SharedPreferences sharedPreferences;
     public SharedPreferences.Editor editor;
@@ -13,7 +15,7 @@ public class SessionManager {
     private static final String PREF_NAME = "LOGIN";
     private static final String LOGIN = "IS_LOGIN";
     public static final String TIPOUSUARIO = "TIPOUSUARIO";
-    public static final String IDSUARIO = "IDSUARIO";
+    public static final String USUARIO = "SUARIO";
 
 
     public SessionManager(Context context) {
@@ -22,9 +24,10 @@ public class SessionManager {
         editor = sharedPreferences.edit();
 
     }
-    public void createSession (String idUsuario, String tipoUsuario){
+    public void createSession (Usuario usuario, String tipoUsuario){
+        Gson gson = new Gson();
         editor.putBoolean(LOGIN, true);
-        editor.putString(IDSUARIO, idUsuario);
+        editor.putString(USUARIO, gson.toJson(usuario));
         editor.putString(TIPOUSUARIO, tipoUsuario);
         editor.apply();
     }
@@ -36,16 +39,12 @@ public class SessionManager {
     public  String getTipousuario(){
         return sharedPreferences.getString(TIPOUSUARIO, null);
     }
-    public  String getIdsuario(){
-        return sharedPreferences.getString(IDSUARIO, null);
+    public  String getUsuario(){
+        return sharedPreferences.getString(USUARIO, null);
     }
 
     public void checkLogin(){
-        if(!this.isLoggin()){
-            Intent i = new Intent(context, BottomActivity.class);
-            context.startActivity(i);
-
-        }else {
+        if(this.isLoggin()){
             if(getTipousuario().equals("campesino")){
                 Intent i = new Intent(context, VistaCampesino.class);
                 context.startActivity(i);
@@ -56,7 +55,6 @@ public class SessionManager {
                 ((BottomActivity)context).finish();
 
             }
-
         }
     }
     /*
