@@ -31,8 +31,8 @@ public class BottomActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //sessionManager = new SessionManager(this);
-        //sessionManager.checkLogin();
+        sessionManager = new SessionManager(this);
+        sessionManager.checkLogin();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom);
         BottomNavigationView navigation = findViewById(R.id.navigation);
