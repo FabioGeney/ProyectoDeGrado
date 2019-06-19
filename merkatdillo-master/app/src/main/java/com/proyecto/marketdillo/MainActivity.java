@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, VistaUsuarios.class);
                             SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
                             singletonUsuario.setUsuario(usuario);
-                            sessionManager.createSession(usuario.getId(), usuario.getTipoUsuario());
+                            sessionManager.createSession(usuario, usuario.getTipoUsuario());
                             startActivity(intent);
 
                         }
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                             tokenID("Campesino");
                             Intent intent = new Intent(MainActivity.this, VistaCampesino.class);
                             SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
-                            sessionManager.createSession(usuario.getId(), usuario.getTipoUsuario());
+                            sessionManager.createSession(usuario, usuario.getTipoUsuario());
                             singletonUsuario.setUsuario(usuario);
                             startActivity(intent);
                         }

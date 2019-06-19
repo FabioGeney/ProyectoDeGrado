@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 public class VistaCampesino extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,27 +41,15 @@ public class VistaCampesino extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         sessionManager = new SessionManager(this);
-        //almacena los datos del singleton en el objeto usuario
-        final Usuario usuario = singletonUsuario.getUsuario();
-        if(usuario==null){
-            String userId = sessionManager.getIdsuario();
-            String tipoUsurio = sessionManager.getTipousuario();
-            /*
-            db.collection("Campesino").document(userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            usuario = document.toObject(Usuario.class);
-                            usuario.setTipoUsuario("consumidor");
-                        }
+        //almacena los datos del sessionManger en el objeto usuario
+        Gson gson = new Gson();
+        String userGson = sessionManager.getUsuario();
+        final Usuario usuario = gson.fromJson(userGson,Usuario.class);
 
-                    }
+        //almacena los datos en singleton
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+        singletonUsuario.setUsuario(usuario);
 
-                }
-            });
-            */
-        }
 
         //Modifica titulo del Toolbar
         this.setTitle("Mis Productos");

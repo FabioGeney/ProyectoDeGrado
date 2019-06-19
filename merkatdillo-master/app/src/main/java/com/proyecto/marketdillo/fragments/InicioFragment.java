@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.proyecto.marketdillo.R;
+import com.proyecto.marketdillo.SessionManager;
 import com.proyecto.marketdillo.SliderAdapter;
 
 /**
@@ -26,7 +27,7 @@ public class InicioFragment extends Fragment{
     private TextView[] dots;
 
     private SliderAdapter sliderAdapter;
-
+    private SessionManager sessionManager;
     public InicioFragment() {
         // Required empty public constructor
     }
@@ -37,6 +38,8 @@ public class InicioFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        sessionManager = new SessionManager(getContext());
+        sessionManager.checkLogin();
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_inicio, container, false);
         slideViewPager = (ViewPager) root.findViewById(R.id.slideViewPager);
