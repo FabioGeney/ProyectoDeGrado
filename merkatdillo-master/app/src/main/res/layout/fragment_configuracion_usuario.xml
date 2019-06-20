@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfiguracionFragment">
+    tools:context=".ConfiguracionUsuarioFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.07" />
+                app:layout_constraintVertical_bias="0.070" />
 
             <TextView
                 android:id="@+id/nnm"
