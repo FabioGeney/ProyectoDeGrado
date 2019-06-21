@@ -32,6 +32,7 @@ public class VistaCampesino extends AppCompatActivity
     private TextView correo;
     private SessionManager sessionManager;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FloatingActionButton fab;
 
 
     @Override
@@ -53,7 +54,7 @@ public class VistaCampesino extends AppCompatActivity
 
         //Modifica titulo del Toolbar
         this.setTitle("Mis Productos");
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,4 +152,13 @@ public class VistaCampesino extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void hideFloatingActionButton(){
+        fab.hide();
+    }
+
+    public void showFloatingActionButton(){
+        fab.show();
+    }
+
 }
