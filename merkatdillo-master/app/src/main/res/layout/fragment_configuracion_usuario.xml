@@ -187,6 +187,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cel">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/celuco"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="12" />
@@ -223,6 +224,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ddi">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/identitydocument"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="12" />
@@ -260,7 +262,8 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:id="@+id/birth"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -293,7 +296,8 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:id="@+id/address"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -311,13 +315,13 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/button_cerrarsesion"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary2"
                 android:theme="@style/RaisedButton"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9"
-                android:textAllCaps="false"/>
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
 
 
         </android.support.constraint.ConstraintLayout>

@@ -1,12 +1,30 @@
 package com.proyecto.marketdillo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -21,6 +39,11 @@ public class ConfiguracionFragment extends Fragment {
     private EditText documentoidentidad;
     private EditText fechanacimiento;
     private EditText direccion;
+    private EditText nommercadillo;
+    private EditText tiempoaprox;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     public ConfiguracionFragment() {
         // Required empty public constructor
@@ -41,18 +64,59 @@ public class ConfiguracionFragment extends Fragment {
         nombre = (EditText) root.findViewById(R.id.nnnnombre);
         apellido = (EditText) root.findViewById(R.id.aaaapellido);
         correo = (TextView) root.findViewById(R.id.ccorreoespacio);
+        celular = (EditText) root.findViewById(R.id.celuco);
+        documentoidentidad = (EditText) root.findViewById(R.id.identitydocument);
+        fechanacimiento = (EditText) root.findViewById(R.id.birth);
+        direccion = (EditText) root.findViewById(R.id.address);
+        nommercadillo = (EditText) root.findViewById(R.id.nommercadillo);
+        tiempoaprox = (EditText) root.findViewById(R.id.tiempoaprox);
+        initialize();
         cargar();
         ((VistaCampesino) getActivity()).hideFloatingActionButton();
         return root;
     }
 
-    public void cargar(){
+    public void cargar() {
         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
         Usuario usuario = singletonUsuario.getUsuario();
         nombre.setText(usuario.getNombre());
         apellido.setText(usuario.getApellidos());
         correo.setText(usuario.getEmail());
+        celular.setText(usuario.getCelular());
+        documentoidentidad.setText(usuario.getDoc_identidad());
+        fechanacimiento.setText(usuario.getFecha());
+        direccion.setText(usuario.getDireccion());
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Mercadillo").document(firebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    Mercadillo mercadillo = document.toObject(Mercadillo.class);
+                    SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
+                    singletonMercadillo.setMercadillo(mercadillo);
+                    nommercadillo.setText(mercadillo.getNombre());
+                    tiempoaprox.setText(mercadillo.getTiempoEntrega());
+                }
+            }
+        });
 
     }
 
+    private void initialize(){
+        firebaseAuth = FirebaseAuth.getInstance();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                if (firebaseUser != null){
+                    Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getUid());
+                    Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getEmail());
+                } else {
+                    Log.w(TAG, "onAuthStateChanged - cerró sesión");
+                }
+            }
+        };
+    }
 }

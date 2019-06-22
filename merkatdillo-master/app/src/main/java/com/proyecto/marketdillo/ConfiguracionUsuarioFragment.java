@@ -39,6 +39,10 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         nombre = (EditText) root.findViewById(R.id.nnnnombre);
         apellido = (EditText) root.findViewById(R.id.aaaapellido);
         correo = (TextView) root.findViewById(R.id.correoespacio);
+        celular = (EditText) root.findViewById(R.id.celuco);
+        documentoidentidad = (EditText) root.findViewById(R.id.identitydocument);
+        fechanacimiento = (EditText) root.findViewById(R.id.birth);
+        direccion = (EditText) root.findViewById(R.id.address);
         cargar();
         return root ;
     }
@@ -49,6 +53,10 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         nombre.setText(usuario.getNombre());
         apellido.setText(usuario.getApellidos());
         correo.setText(usuario.getEmail());
+        celular.setText(usuario.getCelular());
+        documentoidentidad.setText(usuario.getDoc_identidad());
+        fechanacimiento.setText(usuario.getFecha());
+        direccion.setText(usuario.getDireccion());
     }
 
 }
