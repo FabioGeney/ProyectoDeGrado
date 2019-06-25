@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +47,7 @@ public class ConfiguracionFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth.AuthStateListener authStateListener;
+    private Button guardar;
 
     public ConfiguracionFragment() {
         // Required empty public constructor
@@ -73,6 +77,20 @@ public class ConfiguracionFragment extends Fragment {
         initialize();
         cargar();
         ((VistaCampesino) getActivity()).hideFloatingActionButton();
+        /*nombre.addTextChangedListener(loginTextWatcher);
+        apellido.addTextChangedListener(loginTextWatcher);
+        celular.addTextChangedListener(loginTextWatcher);
+        documentoidentidad.addTextChangedListener(loginTextWatcher);
+        fechanacimiento.addTextChangedListener(loginTextWatcher);
+        direccion.addTextChangedListener(loginTextWatcher);
+        nommercadillo.addTextChangedListener(loginTextWatcher);
+        tiempoaprox.addTextChangedListener(loginTextWatcher);*/
+
+        /*guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });*/
         return root;
     }
 
@@ -119,4 +137,39 @@ public class ConfiguracionFragment extends Fragment {
             }
         };
     }
+
+    /*private TextWatcher loginTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String nombre1 = nombre.getText().toString();
+            String apellido1 = apellido.getText().toString();
+            String celular1 = celular.getText().toString();
+            String documentoidentidad1 = documentoidentidad.getText().toString();
+            String fechanacimiento1 = fechanacimiento.getText().toString();
+            String direccion1 = direccion.getText().toString();
+            String nommercadillo1 = nommercadillo.getText().toString();
+            String tiempoaprox1 = tiempoaprox.getText().toString();
+            guardar.setEnabled(!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty());
+            if(!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty()){
+                guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
+            }else {
+                guardar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
+            }
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(!guardar.isEnabled()){
+                guardar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
+            }else {
+                guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
+            }
+        }
+    };*/
 }
