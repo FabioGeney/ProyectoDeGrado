@@ -28,11 +28,11 @@ public class BottomActivity extends AppCompatActivity
     private boolean twice = false;
     private final String TAG = this.getClass().getName();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom);
-
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 

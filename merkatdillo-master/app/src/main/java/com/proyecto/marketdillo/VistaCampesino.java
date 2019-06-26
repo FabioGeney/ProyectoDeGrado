@@ -2,6 +2,7 @@ package com.proyecto.marketdillo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -14,11 +15,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 public class VistaCampesino extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();;
+    private TextView nombre;
+    private TextView correo;
+    private SessionManager sessionManager;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +41,20 @@ public class VistaCampesino extends AppCompatActivity
         setContentView(R.layout.activity_vista_campesino);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        sessionManager = new SessionManager(this);
+        //almacena los datos del sessionManger en el objeto usuario
+        Gson gson = new Gson();
+        String userGson = sessionManager.getUsuario();
+        final Usuario usuario = gson.fromJson(userGson,Usuario.class);
 
-        //almacena los datos del singleton en el objeto usuario
-        final Usuario usuario = singletonUsuario.getUsuario();
+        //almacena los datos en singleton
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+        singletonUsuario.setUsuario(usuario);
+
 
         //Modifica titulo del Toolbar
-        this.setTitle("Mercadillo de frutas");
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        this.setTitle("Mis Productos");
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +73,11 @@ public class VistaCampesino extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
+        nombre = header.findViewById(R.id.usuarionombre);
+        nombre.setText(usuario.getNombre() + " " + usuario.getApellidos());
+        correo = header.findViewById(R.id.usuariocorreo);
+        correo.setText(usuario.getEmail());
         navigationView.setNavigationItemSelectedListener(this);
 
         //Enviar id del Campesino a PtsFragment para consultar los productos del campesino
@@ -105,7 +132,7 @@ public class VistaCampesino extends AppCompatActivity
         if (id == R.id.mimercadillo) {
 
             fragmentManager.beginTransaction().replace(R.id.campesinos_content,  new PtsCampesinoFragment()).commit();
-            this.setTitle("Mi mercadillo");
+            this.setTitle("Mis Productos");
         } else if (id == R.id.pedidos) {
             fragmentManager.beginTransaction().replace(R.id.campesinos_content, new PedidosFragment()).commit();
             this.setTitle("Pedidos");
@@ -116,6 +143,8 @@ public class VistaCampesino extends AppCompatActivity
             this.setTitle("Historial");
 
         } else if (id == R.id.confi) {
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content, new ConfiguracionFragment()).commit();
+            this.setTitle("Mi Perfil");
 
         }
 
@@ -123,4 +152,13 @@ public class VistaCampesino extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void hideFloatingActionButton(){
+        fab.hide();
+    }
+
+    public void showFloatingActionButton(){
+        fab.show();
+    }
+
 }

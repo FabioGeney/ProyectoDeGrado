@@ -20,11 +20,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 public class VistaUsuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
     private String direccion;
     private TextView nombreUsuario;
+    private SessionManager sessionManager;
     Menu menu;
 
 
@@ -34,10 +37,16 @@ public class VistaUsuarios extends AppCompatActivity
         setContentView(R.layout.activity_mercadillos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //llama singleton para obtener datos del usuario
+
+        sessionManager = new SessionManager(this);
+        //almacena los datos del sessionManger en el objeto usuario
+        Gson gson = new Gson();
+        String userGson = sessionManager.getUsuario();
+        final Usuario usuario = gson.fromJson(userGson,Usuario.class);
+        //llama singleton para alamcenar datos del usuario
         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
         //almacena los datos del singleton en la variable usuario
-        Usuario usuario = singletonUsuario.getUsuario();
+        singletonUsuario.setUsuario(usuario);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -129,7 +138,8 @@ public class VistaUsuarios extends AppCompatActivity
 
 
         } else if (id == R.id.confi) {
-            this.setTitle("Configuración");
+            fragmentManager.beginTransaction().replace(R.id.mercadillos_container, new ConfiguracionUsuarioFragment()).commit();
+            this.setTitle("Perfil");
             menu.findItem(R.id.search).setVisible(false);
 
         }

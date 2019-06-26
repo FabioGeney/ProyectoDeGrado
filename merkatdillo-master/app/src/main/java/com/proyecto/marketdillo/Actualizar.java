@@ -44,6 +44,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -254,10 +255,23 @@ public class Actualizar extends AppCompatActivity {
             }else if (requestCode == REQUEST_CAMERA) {
                 Bundle extras = data.getExtras();
                 Bitmap thumbnail = (Bitmap) extras.get("data");
-                imagen1.setImageBitmap(thumbnail);
                 hImagenUri = data.getData();
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                thumbnail.compress(Bitmap.CompressFormat.JPEG, 75, baos);
+                Bitmap l = thumbnail.createScaledBitmap(thumbnail, 1024, 1024, false);
+
+                hImagenUri = getImageUri(l);
+                imagen1.setImageBitmap(l);
             }
         }
+    }
+
+    public Uri getImageUri(Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 
     private File createImageFile() throws IOException {

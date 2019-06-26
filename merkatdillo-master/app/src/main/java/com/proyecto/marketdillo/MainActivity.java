@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtemail;
     private EditText edtpassword;
     private Usuario usuario;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +174,8 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void getTipo( String correo){
-        db.collection("Consumidor").whereEqualTo("email",correo)
+        sessionManager = new SessionManager(this);
+                db.collection("Consumidor").whereEqualTo("email",correo)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -191,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, VistaUsuarios.class);
                             SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
                             singletonUsuario.setUsuario(usuario);
+                            sessionManager.createSession(usuario, usuario.getTipoUsuario());
                             startActivity(intent);
 
                         }
@@ -215,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
                             tokenID("Campesino");
                             Intent intent = new Intent(MainActivity.this, VistaCampesino.class);
                             SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                            sessionManager.createSession(usuario, usuario.getTipoUsuario());
                             singletonUsuario.setUsuario(usuario);
                             startActivity(intent);
                         }
@@ -235,4 +240,5 @@ public class MainActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
 }

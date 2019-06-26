@@ -257,7 +257,7 @@ public class CrearProducto extends AppCompatActivity {
                 //hImagenUri = data.getData();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 thumbnail.compress(Bitmap.CompressFormat.JPEG, 75, baos);
-                Bitmap l = thumbnail.createScaledBitmap(thumbnail, 500, 500, false);
+                Bitmap l = thumbnail.createScaledBitmap(thumbnail, 1024, 1024, false);
                 //l.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                 hImagenUri = getImageUri(l);
                 imagen.setImageBitmap(l);

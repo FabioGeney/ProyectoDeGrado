@@ -64,7 +64,7 @@ public class CalificarPedido extends AppCompatActivity {
         Map<String, Object> update = new HashMap<>();
         update.put("calificacion", calificacion);
         db.collection("Pedidos").document(idDocumentPedido).update(update);
-        Intent intent = new Intent(CalificarPedido.this, VistaCampesino.class);
+        Intent intent = new Intent(CalificarPedido.this, VistaUsuarios.class);
         startActivity(intent);
 
     }

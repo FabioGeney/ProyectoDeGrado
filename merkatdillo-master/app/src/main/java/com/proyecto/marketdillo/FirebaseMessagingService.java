@@ -35,6 +35,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(titulo)
                 .setContentText(cuerpo)
+                .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         SingletonPedido singletonPedido = SingletonPedido.getInstance();
@@ -49,8 +50,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         int mNotificationID = (int)System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(mNotificationID, builder.build());
-
-
 
     }
 
