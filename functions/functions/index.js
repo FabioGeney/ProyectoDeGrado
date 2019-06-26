@@ -70,7 +70,7 @@ exports.notificacionPedidoConsumidor = functions.firestore.document('Pedidos/{pe
         }
         if(estadoPedido === "Finalizado"){
           mensaje = "Pedido finalizado, no olvides calificarlo";
-          check = "com.proyecto.marketdillo.NOTIFICACIONCONSUMIDORFIN"
+          //check = "com.proyecto.marketdillo.NOTIFICACIONCONSUMIDORFIN"
         }
         
         
