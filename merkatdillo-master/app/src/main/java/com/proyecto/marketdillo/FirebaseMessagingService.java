@@ -25,13 +25,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        String titulo = remoteMessage.getNotification().getTitle();
-        String cuerpo = remoteMessage.getNotification().getBody();
-        String click_action = remoteMessage.getNotification().getClickAction();
+        String titulo = remoteMessage.getData().get("title");
+        String cuerpo = remoteMessage.getData().get("body");
+        String click_action = remoteMessage.getData().get("click_action");
         String idPedido = remoteMessage.getData().get("pedidoID");
         getPedido(idPedido);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.default_notification_channel_id))
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(FirebaseMessagingService.this, getString(R.string.default_notification_channel_id))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(titulo)
                 .setContentText(cuerpo)
@@ -43,7 +43,12 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         Intent intent = new Intent(click_action);
         intent.putExtra("pedido", pedido);
-        intent.putExtra("visible", "si");
+        if(click_action.equals("com.proyecto.marketdillo.NOTIFICACIONCONSUMIDORFIN")){
+            intent.putExtra("visible", "si");
+        }else {
+            intent.putExtra("visible", "no");
+        }
+
         PendingIntent intentFilter = PendingIntent.getActivity(  this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(intentFilter);
 

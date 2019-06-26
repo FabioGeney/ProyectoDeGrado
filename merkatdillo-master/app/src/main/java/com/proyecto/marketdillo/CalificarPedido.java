@@ -52,10 +52,6 @@ public class CalificarPedido extends AppCompatActivity {
         });
 
 
-
-
-
-
     }
 
     private void enviaCalificaion(){

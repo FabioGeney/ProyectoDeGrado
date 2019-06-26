@@ -16,6 +16,8 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,11 @@ public class VistaDetalles extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+        // consulta los datos del usuario almacenados en el SessionManager
+        SessionManager sessionManager = new SessionManager(this);
+        Gson gson = new Gson();
+        String userGson = sessionManager.getUsuario();
+        Usuario usuario = gson.fromJson(userGson,Usuario.class);
 
 
 
@@ -65,6 +71,7 @@ public class VistaDetalles extends AppCompatActivity {
             calificacion.setVisibility(View.GONE);
         }
 
+
         if(cal!=0){
             float numStar = (float)cal;
             layout.setVisibility(View.VISIBLE);
@@ -74,7 +81,7 @@ public class VistaDetalles extends AppCompatActivity {
 
 
         //setea textviews
-        if(singletonUsuario.getUsuario().getTipoUsuario().equals("campesino")){
+        if(usuario.getTipoUsuario().equals("campesino")){
             nombre.setText(nombreUsuario);
             calificacion.setVisibility(View.GONE);
             pedirNuevo.setVisibility(View.GONE);
