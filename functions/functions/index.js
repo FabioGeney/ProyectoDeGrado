@@ -22,15 +22,14 @@ exports.notificaCreacionPedido = functions.firestore.document('Pedidos/{pedidosI
       const tokenCampesino = result[1].data().token_id;
       
       const payload = {
-        notification: {
+        data: {
           title : "Tienes un nuevo pedido ",
           body : "el usuario " + nombreComprador + " te ha hecho un pedido" ,
           icon: "default",
-          click_action: "com.proyecto.marketdillo.NOTIFICACIONCAMPESINO"
-        },
-        data: {
+          click_action: "com.proyecto.marketdillo.NOTIFICACIONCAMPESINO",
           pedidoID : idPedidos
-        }
+        },
+       
       };
 
       return admin.messaging().sendToDevice( tokenCampesino, payload).then(result => {
@@ -76,15 +75,15 @@ exports.notificacionPedidoConsumidor = functions.firestore.document('Pedidos/{pe
         
         
         const payload = {
-          notification: {
+          data: {
             title : nombreMercadillo,
             body : mensaje,
             icon: "default",
-            click_action: check
-          },
-          data: {
+            click_action: check,
             pedidoID : idPedido
-          }
+          },
+                  
+
         };
   
         return admin.messaging().sendToDevice( tokenComprador, payload).then(result => {
