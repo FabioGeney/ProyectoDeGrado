@@ -27,7 +27,7 @@ public class EstadoPedido extends AppCompatActivity {
         TextView verDetalles = findViewById(R.id.detalles);
 
         SingletonPedido singletonPedido = SingletonPedido.getInstance();
-        Pedidos pedido = singletonPedido.getPedido();
+        final Pedidos pedido = singletonPedido.getPedido();
 
         switch (pedido.getEstado()){
             case "Confirmado":
@@ -37,20 +37,26 @@ public class EstadoPedido extends AppCompatActivity {
                 checkConf.setImageResource(R.drawable.check_circle);
                 checkSend.setImageResource(R.drawable.check_circle);
                 break;
+            case "Finalizado":
+                checkConf.setImageResource(R.drawable.check_circle);
+                checkSend.setImageResource(R.drawable.check_circle);
+                checkFinal.setImageResource(R.drawable.check_circle);
+                nextActivity(pedido,"si");
+                break;
         }
 
         verDetalles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SingletonPedido singletonPedido = SingletonPedido.getInstance();
-                Pedidos pedidos = singletonPedido.getPedido();
-                ArrayList<Producto> productos = new ArrayList<>(pedidos.getProductos());
-                Intent intent = new Intent(EstadoPedido.this, VistaDetalles.class);
-                intent.putExtra("pedido", pedidos);
-                intent.putExtra("productos", productos);
-                intent.putExtra("visible", "no");
-                startActivity(intent);
+                nextActivity(pedido,"no");
             }
         });
+    }
+    private void nextActivity(Pedidos pedido, String visible){
+        ArrayList<Producto> productos = new ArrayList<>(pedido.getProductos());
+        Intent intent = new Intent(EstadoPedido.this, VistaDetalles.class);
+        intent.putExtra("pedido", pedido);
+        intent.putExtra("visible", visible);
+        startActivity(intent);
     }
 }
