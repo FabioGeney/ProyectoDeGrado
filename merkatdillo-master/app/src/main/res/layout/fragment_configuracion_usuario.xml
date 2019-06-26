@@ -260,10 +260,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView20">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/birth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12"
-                    android:id="@+id/birth"/>
+                    android:ems="12" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -294,12 +294,33 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView24">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12"
-                    android:id="@+id/address"/>
+                    android:ems="12" />
 
             </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/guardaarr"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/save_button"
+                android:clickable="true"
+                android:enabled="false"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="@string/button_guardar"
+                android:textAllCaps="false"
+                android:textColor="@color/colorIcons"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
 
             <Button
                 android:layout_width="160dp"
@@ -321,7 +342,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
+                app:layout_constraintTop_toBottomOf="@+id/guardaarr" />
 
 
         </android.support.constraint.ConstraintLayout>

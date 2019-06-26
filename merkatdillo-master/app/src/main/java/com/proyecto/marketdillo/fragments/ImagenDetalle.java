@@ -1,12 +1,21 @@
 package com.proyecto.marketdillo.fragments;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.proyecto.marketdillo.Mercadillo;
 import com.proyecto.marketdillo.R;
+import com.proyecto.marketdillo.SingletonMercadillo;
 import com.squareup.picasso.Picasso;
 
 public class ImagenDetalle extends AppCompatActivity {
@@ -17,6 +26,8 @@ public class ImagenDetalle extends AppCompatActivity {
     private TextView precio;
     private ImageView picture;
     private TextView vendedor;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,19 @@ public class ImagenDetalle extends AppCompatActivity {
         producto.setText(imagen.getNombre());
         String img = imagen.getImagen();
         Picasso.with(this).load(img).fit().into(picture);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Mercadillo").document(imagen.getId()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    Mercadillo mercadillo = document.toObject(Mercadillo.class);
+                    SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
+                    singletonMercadillo.setMercadillo(mercadillo);
+                    vendedor.setText(mercadillo.getNombre());
+                }
+            }
+        });
     }
 
 

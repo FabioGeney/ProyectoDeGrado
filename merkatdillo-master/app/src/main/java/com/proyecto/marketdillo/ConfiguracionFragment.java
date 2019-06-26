@@ -74,23 +74,24 @@ public class ConfiguracionFragment extends Fragment {
         direccion = (EditText) root.findViewById(R.id.address);
         nommercadillo = (EditText) root.findViewById(R.id.nommercadillo);
         tiempoaprox = (EditText) root.findViewById(R.id.tiempoaprox);
+        guardar = (Button) root.findViewById(R.id.guardaarr);
         initialize();
         cargar();
         ((VistaCampesino) getActivity()).hideFloatingActionButton();
-        /*nombre.addTextChangedListener(loginTextWatcher);
+        nombre.addTextChangedListener(loginTextWatcher);
         apellido.addTextChangedListener(loginTextWatcher);
         celular.addTextChangedListener(loginTextWatcher);
         documentoidentidad.addTextChangedListener(loginTextWatcher);
         fechanacimiento.addTextChangedListener(loginTextWatcher);
         direccion.addTextChangedListener(loginTextWatcher);
         nommercadillo.addTextChangedListener(loginTextWatcher);
-        tiempoaprox.addTextChangedListener(loginTextWatcher);*/
+        tiempoaprox.addTextChangedListener(loginTextWatcher);
 
-        /*guardar.setOnClickListener(new View.OnClickListener() {
+        guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
-        });*/
+        });
         return root;
     }
 
@@ -138,7 +139,7 @@ public class ConfiguracionFragment extends Fragment {
         };
     }
 
-    /*private TextWatcher loginTextWatcher = new TextWatcher() {
+    private TextWatcher loginTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -157,6 +158,7 @@ public class ConfiguracionFragment extends Fragment {
             guardar.setEnabled(!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty());
             if(!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty()){
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
+                //guardar.setBackground(getResources().getDrawable(R.drawable.save_button));
             }else {
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
             }
@@ -171,5 +173,5 @@ public class ConfiguracionFragment extends Fragment {
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             }
         }
-    };*/
+    };
 }

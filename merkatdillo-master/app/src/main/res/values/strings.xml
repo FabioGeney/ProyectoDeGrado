@@ -28,6 +28,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="button_cerrarsesion">Cerrar Sesión</string>
+    <string name="button_guardar">Guardar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

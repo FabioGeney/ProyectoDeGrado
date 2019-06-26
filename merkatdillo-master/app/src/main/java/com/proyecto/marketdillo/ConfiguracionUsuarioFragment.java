@@ -47,19 +47,20 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         documentoidentidad = (EditText) root.findViewById(R.id.identitydocument);
         fechanacimiento = (EditText) root.findViewById(R.id.birth);
         direccion = (EditText) root.findViewById(R.id.address);
+        guardar = (Button) root.findViewById(R.id.guardaarr);
         cargar();
-        /*nombre.addTextChangedListener(loginTextWatcher);
+        nombre.addTextChangedListener(loginTextWatcher);
         apellido.addTextChangedListener(loginTextWatcher);
         celular.addTextChangedListener(loginTextWatcher);
         documentoidentidad.addTextChangedListener(loginTextWatcher);
         fechanacimiento.addTextChangedListener(loginTextWatcher);
-        direccion.addTextChangedListener(loginTextWatcher);*/
+        direccion.addTextChangedListener(loginTextWatcher);
 
-        /*guardar.setOnClickListener(new View.OnClickListener() {
+        guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
-        });*/
+        });
 
         return root ;
     }
@@ -76,7 +77,7 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         direccion.setText(usuario.getDireccion());
     }
 
-    /*private TextWatcher loginTextWatcher = new TextWatcher() {
+    private TextWatcher loginTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -95,6 +96,7 @@ public class ConfiguracionUsuarioFragment extends Fragment {
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             }else {
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
+                //guardar.setBackground(getResources().getDrawable(R.drawable.save_button));
             }
 
         }
@@ -107,6 +109,6 @@ public class ConfiguracionUsuarioFragment extends Fragment {
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             }
         }
-    };*/
+    };
 
 }
