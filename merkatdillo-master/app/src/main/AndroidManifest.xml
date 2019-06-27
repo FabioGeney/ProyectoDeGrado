@@ -20,13 +20,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CalificarPedido"
+        <activity
+            android:name=".PhoneActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/ThemeMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity
+            android:name=".CalificarPedido"
             android:parentActivityName=".VistaCampesino"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaCampesino" />
-
         </activity>
         <activity
             android:name=".Actualizar"
@@ -100,6 +108,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaUsuarios" />
+
             <intent-filter>
                 <action android:name="com.proyecto.marketdillo.NOTIFICACIONCONSUMIDORFIN" />
 

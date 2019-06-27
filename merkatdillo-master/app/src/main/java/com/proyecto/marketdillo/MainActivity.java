@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btninicio;
     private TextView txcrearcuenta;
     private TextView txproductor;
+    private TextView txtelefono;
     private EditText edtemail;
     private EditText edtpassword;
     private Usuario usuario;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         txproductor = findViewById(R.id.txproductor);
         edtemail = findViewById(R.id.edtemail);
         edtpassword = findViewById(R.id.edtpassword);
+        txtelefono = findViewById(R.id.numtelingresa);
 
         initialize();
         /*el boton y el clicklistener, q al clickear llama al metodo iniciar sesion, con el email y la contraseña*/
@@ -87,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent( MainActivity.this, CrearCampesinoActivity.class);
+                startActivity(i);
+            }
+        });
+
+        txtelefono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, PhoneActivity.class);
                 startActivity(i);
             }
         });
