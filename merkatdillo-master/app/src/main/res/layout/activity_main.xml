@@ -127,10 +127,9 @@
         android:id="@+id/txproductor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -138,42 +137,32 @@
         android:textColor="@color/colorPrimary2"
         android:textSize="@dimen/tamañotextocuenta"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/o"
-        app:layout_constraintTop_toBottomOf="@+id/tx"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintStart_toEndOf="@+id/guide"
+        app:layout_constraintTop_toBottomOf="@+id/tx" />
 
     <TextView
         android:id="@+id/o"
-        android:layout_width="wrap_content"
+        android:layout_width="9dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:text="ó"
         android:textColor="@color/colorPrimary2"
         android:textSize="@dimen/tamañotextocuenta"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/txproductor"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@id/txproductor"
-        app:layout_constraintRight_toRightOf="@id/txcrearcuenta"
-        app:layout_constraintStart_toEndOf="@+id/txcrearcuenta"
-        app:layout_constraintTop_toBottomOf="@+id/tx"
-        app:layout_constraintVertical_bias="0.004" />
+        app:layout_constraintEnd_toEndOf="@+id/guide"
+        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintStart_toStartOf="@+id/guide"
+        app:layout_constraintTop_toBottomOf="@+id/tx" />
 
     <TextView
         android:id="@+id/txcrearcuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -181,12 +170,15 @@
         android:textColor="@color/colorPrimary2"
         android:textSize="@dimen/tamañotextocuenta"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.229"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tx"
-        app:layout_constraintVertical_bias="0.004" />
+        app:layout_constraintEnd_toEndOf="@id/guide"
+        app:layout_constraintTop_toBottomOf="@+id/tx" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
 
 
 </android.support.constraint.ConstraintLayout>

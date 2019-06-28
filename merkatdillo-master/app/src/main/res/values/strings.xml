@@ -16,6 +16,8 @@
     <string name="hint_direccion2">Dirección de tu finca</string>
     <string name="hint_mercadillo">Dale un nombre a tu Mercadillo</string>
     <string name="hint_tiempoaprox">Tiempo aproximado de entrega</string>
+    <string name="hint_numtelefonico">Ingresa tu numero de celular</string>
+    <string name="hint_ingrescode">Ingresa el código recibido</string>
     <string name="tx_productor">¿<u>Eres</u> <u>productor</u>?</string>
     <string name="tx_comprador">¿<u>Eres</u> <u>comprador</u>?</string>
     <string name="txt_unete">Únete ya a <u>MerkatDillo!</u></string>
@@ -29,7 +31,7 @@
     <string name="action_settings">Settings</string>
     <string name="button_cerrarsesion">Cerrar Sesión</string>
     <string name="button_guardar">Guardar</string>
-    <string name="ingresartelefono">Ingresa con tu teléfono</string>
+    <string name="ingresartelefono"><u>Ingresa</u> <u>con</u> <u>tu</u> <u>teléfono</u></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -159,6 +159,7 @@ public class ConfiguracionFragment extends Fragment {
             if(!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty()){
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
                 //guardar.setBackground(getResources().getDrawable(R.drawable.save_button));
+                //guardar.setBackgroundDrawable(getResources().getDrawable(R.drawable.save_button));
             }else {
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
             }
