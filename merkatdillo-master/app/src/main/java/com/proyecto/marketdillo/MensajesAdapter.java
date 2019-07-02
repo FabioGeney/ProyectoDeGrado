@@ -13,6 +13,9 @@ import java.util.List;
 
 public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.ViewHolder> {
 
+
+    public static final int MSG_TYPE_LEFT = 0;
+    public static final int MSG_TYPE_RIGHT = 1;
     private List<Mensaje> mensajes = new ArrayList<>();
     private int layout;
     private OnItemClickListener itemClickListener;
@@ -32,9 +35,8 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
-        Usuario usuario = singletonUsuario.getUsuario();
-        if(mensajes.get(i).getDe().equals(usuario.getId())){
+
+        if(i == MSG_TYPE_RIGHT){
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_mensaje_right, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             return viewHolder;
@@ -54,6 +56,17 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.ViewHo
     @Override
     public int getItemCount() {
         return mensajes.size();
+    }
+
+    @Override
+    public int getItemViewType(int position){
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+        Usuario usuario = singletonUsuario.getUsuario();
+        if(mensajes.get(position).getDe().equals(usuario.getId())){
+            return MSG_TYPE_RIGHT;
+        }else {
+            return MSG_TYPE_LEFT;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

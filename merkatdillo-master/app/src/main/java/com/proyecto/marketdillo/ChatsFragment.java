@@ -117,7 +117,6 @@ public class ChatsFragment extends Fragment {
                 String telefono = dataSnapshot.child("telefono").getValue(String.class);
                 String ultimoMensaje = dataSnapshot.child("ultimoMensaje").getValue(String.class);
                 Contacto contacto = new Contacto(id, imagen, nombre, telefono, ultimoMensaje);
-                Toast.makeText(getContext(), nombre, Toast.LENGTH_SHORT).show();
 
                 chatsAdapter.agregarMensaje(contacto);
             }
