@@ -146,6 +146,10 @@ public class VistaCampesino extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.campesinos_content, new ConfiguracionFragment()).commit();
             this.setTitle("Mi Perfil");
 
+        } else if (id == R.id.mensajes) {
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content, new ChatsFragment()).commit();
+            this.setTitle("Mensajes");
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

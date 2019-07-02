@@ -16,6 +16,10 @@
             android:id="@+id/historial"
             android:icon="@drawable/ic_menu_historial"
             android:title="Historial" />
+        <item
+            android:id="@+id/mensajes"
+            android:icon="@drawable/ic_message_black"
+            android:title="Mensajes" />
 
         <item
             android:id="@+id/confi"

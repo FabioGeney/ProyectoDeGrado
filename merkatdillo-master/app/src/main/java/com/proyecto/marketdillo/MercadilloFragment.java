@@ -85,6 +85,7 @@ public class MercadilloFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Mercadillo mercadillo = document.toObject(Mercadillo.class);
+                                mercadillo.setId(document.getId());
                                 mercadillo.setImagen(R.mipmap.ic_merca_image);
                                 mercadillos.add(mercadillo);
 

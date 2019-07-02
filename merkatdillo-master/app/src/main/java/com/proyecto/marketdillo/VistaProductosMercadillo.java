@@ -62,6 +62,18 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
             }
         });
 
+        FloatingActionButton mensaje = findViewById(R.id.enviarMensaje);
+        mensaje.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VistaProductosMercadillo.this, Chat.class);
+                intent.putExtra("idDestinatario", mercadillo.getId());
+                intent.putExtra("nombreDestinatario", mercadillo.getNombre());
+                startActivity(intent);
+            }
+        });
+
+
         productos = getProductos();
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView = findViewById(R.id.listaProductos);
