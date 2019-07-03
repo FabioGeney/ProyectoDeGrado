@@ -20,7 +20,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,9 +86,13 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(texto!=null){
+                    Calendar calendario = Calendar.getInstance();
+                    int hora, minutos, segundos;
+                    hora = calendario.get(Calendar.HOUR_OF_DAY);
+                    minutos = calendario.get(Calendar.MINUTE);
                     sendInfoChat(idDestinatario, texto.getText().toString());
-                    databaseReferenceDestinatario.push().setValue(new Mensaje(useriD, texto.getText().toString(), "now"));
-                    databaseReferenceRemitente.push().setValue(new Mensaje(useriD, texto.getText().toString(), "now"));
+                    databaseReferenceDestinatario.push().setValue(new Mensaje(useriD, texto.getText().toString(), hora +":" + minutos));
+                    databaseReferenceRemitente.push().setValue(new Mensaje(useriD, texto.getText().toString(), hora +":" + minutos));
                     texto.setText(null);
                 }
             }
@@ -102,7 +111,6 @@ public class Chat extends AppCompatActivity {
         databaseReferenceRemitente.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                 Mensaje mensaje = dataSnapshot.getValue(Mensaje.class);
                 mensajelAdapter.agregarMensaje(mensaje);
             }
@@ -142,15 +150,18 @@ public class Chat extends AppCompatActivity {
         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
         Usuario usuario = singletonUsuario.getUsuario();
         Contacto contacto = new Contacto(usuario.getNombre(), usuario.getId(), "", usuario.getCelular(), texto);
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("nombre", usuario.getNombre());
-        result.put("id", usuario.getId());
-        result.put("imagen", "1231|");
-        result.put("telefono", usuario.getCelular());
-        result.put("ultimoMensaje", texto);
+        HashMap<String, Object> resultDestino = new HashMap<>();
+        HashMap<String, Object> resultRemitente = new HashMap<>();
+        resultDestino.put("nombre", usuario.getNombre());
+        resultDestino.put("id", usuario.getId());
+        resultDestino.put("imagen", "1231|");
+        resultDestino.put("telefono", usuario.getCelular());
+        resultDestino.put("ultimoMensaje", texto);
+        resultRemitente.put("ultimoMensaje", texto);
 
 
-        firebaseDatabase.getReference(idDestinatario).child(usuario.getId()).child("Datos").updateChildren(result);
+        firebaseDatabase.getReference(idDestinatario).child(usuario.getId()).child("Datos").updateChildren(resultDestino);
+        firebaseDatabase.getReference(usuario.getId()).child(idDestinatario).child("Datos").updateChildren(resultRemitente);
     }
 
 

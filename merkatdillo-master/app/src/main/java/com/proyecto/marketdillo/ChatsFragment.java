@@ -111,6 +111,7 @@ public class ChatsFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 String id = dataSnapshot.child("id").getValue(String.class);
                 String imagen = dataSnapshot.child("imagen").getValue(String.class);
                 String nombre = dataSnapshot.child("nombre").getValue(String.class);
@@ -118,7 +119,7 @@ public class ChatsFragment extends Fragment {
                 String ultimoMensaje = dataSnapshot.child("ultimoMensaje").getValue(String.class);
                 Contacto contacto = new Contacto(id, imagen, nombre, telefono, ultimoMensaje);
 
-                chatsAdapter.agregarMensaje(contacto);
+                chatsAdapter.agregarMensaje(id, contacto);
             }
 
             @Override

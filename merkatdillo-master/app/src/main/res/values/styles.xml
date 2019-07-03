@@ -40,6 +40,14 @@
         <item name="android:textColor">#FFFFFF</item>
 
     </style>
+    <style name="ThemeChatActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <item name="colorAccent">#8BC34A</item>
+        <item name="android:textColorSecondary">#757575</item>
+        <item name="android:textColorPrimary">#212121</item>
+
+    </style>
 
     <style name="ThemeMainActivityH" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#4CAF50</item>

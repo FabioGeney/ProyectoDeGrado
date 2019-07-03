@@ -74,11 +74,12 @@ public class VitrinaFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()){
+                    for(final QueryDocumentSnapshot document : task.getResult()){
                         db.collection("Mercadillo").document(document.getId()).collection("Productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task1) {
                                 if(task1.isSuccessful()){
+
                                     Toast.makeText(getContext(), "Productos", Toast.LENGTH_SHORT).show();
                                     for(QueryDocumentSnapshot document1 : task1.getResult()){
                                         ImagenCard imagen = new ImagenCard(document1.getData().get("id").toString(), document1.getData().get("nombre").toString(),
