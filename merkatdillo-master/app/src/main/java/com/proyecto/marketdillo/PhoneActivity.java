@@ -12,7 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -59,7 +62,7 @@ public class PhoneActivity extends AppCompatActivity {
         ingresarsms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ingresar();
+                //ingresar();
             }
         });
     }
@@ -81,7 +84,7 @@ public class PhoneActivity extends AppCompatActivity {
 
     private void enviar() {
         String phoneNumber = numerocelular.getText().toString();
-        if(TextUtils.isEmpty(phoneNumber))
+        if (TextUtils.isEmpty(phoneNumber))
             return;
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber, 60, TimeUnit.SECONDS, PhoneActivity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -93,18 +96,35 @@ public class PhoneActivity extends AppCompatActivity {
 
                     @Override
                     public void onVerificationFailed(FirebaseException e) {
-                        Toast.makeText(PhoneActivity.this, "onVerificationFailed" + e.getMessage(), Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(PhoneActivity.this, "Error en la verificación " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken){
+                    public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         super.onCodeSent(verificationId, forceResendingToken);
                         mVerificationId = verificationId;
+                    }
 
+                    @Override
+                    public void onCodeAutoRetrievalTimeOut(String verificationId) {
+                        super.onCodeAutoRetrievalTimeOut(verificationId);
+                        Toast.makeText(PhoneActivity.this, "Se acabó el tiempo de espera: " + verificationId, Toast.LENGTH_SHORT).show();
                     }
                 }
         );
+    }
+
+    private void singInWithCredential(PhoneAuthCredential phoneAuthCredential) {
+        firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(PhoneActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PhoneActivity.this, "Error con la credencial" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void ingresar() {
