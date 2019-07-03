@@ -84,7 +84,10 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/send_button"
+            android:clickable="true"
             android:enabled="false"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:text="Enviar SMS"
             android:textAllCaps="false"
             android:textColor="@color/colorIcons"
@@ -109,8 +112,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelinevertical"
         app:layout_constraintHorizontal_bias="0.503"
@@ -169,7 +172,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:background="@drawable/send_button"
+            android:clickable="true"
             android:enabled="false"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:text="Ingresar"
             android:textAllCaps="false"
             android:textColor="@color/colorIcons"
@@ -193,8 +199,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.60" />
-
-
 
 
 </android.support.constraint.ConstraintLayout>

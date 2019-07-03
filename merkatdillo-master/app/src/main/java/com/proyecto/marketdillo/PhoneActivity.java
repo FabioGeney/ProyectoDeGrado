@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -55,16 +57,20 @@ public class PhoneActivity extends AppCompatActivity {
         enviarsms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //enviar();
+                enviar();
             }
         });
 
         ingresarsms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ingresar();
+                ingresar();
             }
         });
+
+        numerocelular.addTextChangedListener(loginTextWatcher);
+        codigoingresar.addTextChangedListener(loginTextWatcher);
+
     }
 
     private void initialize() {
@@ -128,8 +134,55 @@ public class PhoneActivity extends AppCompatActivity {
     }
 
     private void ingresar() {
+        String code = codigoingresar.getText().toString();
+        if(TextUtils.isEmpty(code))
+            return;
+
+        singInWithCredential(PhoneAuthProvider.getCredential(mVerificationId, code));
 
     }
 
+    private TextWatcher loginTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String sms = numerocelular.getText().toString();
+            String codigo = codigoingresar.getText().toString();
+            enviarsms.setEnabled(!sms.isEmpty());
+            if(!sms.isEmpty()){
+                enviarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
+            }else {
+                enviarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
+            }
+
+            ingresarsms.setEnabled(!codigo.isEmpty());
+            if(!codigo.isEmpty()){
+                ingresarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
+            }else {
+                ingresarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
+            }
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(!enviarsms.isEnabled()){
+                enviarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
+            }else {
+                enviarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
+            }
+
+            if(!ingresarsms.isEnabled()){
+                ingresarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
+            }else {
+                ingresarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
+            }
+
+        }
+    };
 
 }
