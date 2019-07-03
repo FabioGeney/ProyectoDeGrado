@@ -44,7 +44,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaCampesino" />
         </activity>
-        <activity android:name=".Chat" />
+        <activity android:name=".Chat"
+            android:parentActivityName=".VistaCampesino"
+            android:theme="@style/ThemeChatActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".VistaCampesino" />
+        </activity>
         <activity
             android:name=".EstadoPedidoCampesino"
             android:parentActivityName=".VistaCampesino"

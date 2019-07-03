@@ -7,13 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> {
 
     private List<Contacto> mensajes = new ArrayList<>();
+    private Map<String, Contacto> temp = new HashMap<>();
 
     private OnItemClickListener itemClickListener;
     private Context context;
@@ -23,9 +28,11 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
         this.itemClickListener =  itemClickListener;
     }
 
-    public void agregarMensaje(Contacto contacto){
-        mensajes.add(contacto);
-        notifyItemInserted(mensajes.size());
+    public void agregarMensaje(String key, Contacto contacto){
+        temp.put(key, contacto);
+        Collection<Contacto> getValues = temp.values();
+        mensajes = new ArrayList<> (getValues);
+        notifyDataSetChanged();
     }
     @NonNull
     @Override
