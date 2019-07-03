@@ -62,14 +62,13 @@ public class SessionManager {
         HashMap<String, String> user = new HashMap<>();
         user.put(USERNAME, sharedPreferences.getString(USERNAME, null));
         return user;
-    }
+    }*/
 
     public void logout(){
         editor.clear();
         editor.commit();
-        Intent i = new Intent(context, LoginActivity.class);
+        Intent i = new Intent(context, BottomActivity.class);
         context.startActivity(i);
-        ((ContainerActivity)context).finish();
     }
-    */
+
 }

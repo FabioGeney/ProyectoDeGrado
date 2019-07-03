@@ -79,7 +79,7 @@ public class PhoneActivity extends AppCompatActivity {
         };
     }
 
-    /*private void enviar() {
+    private void enviar() {
         String phoneNumber = numerocelular.getText().toString();
         if(TextUtils.isEmpty(phoneNumber))
             return;
@@ -87,7 +87,8 @@ public class PhoneActivity extends AppCompatActivity {
                 phoneNumber, 60, TimeUnit.SECONDS, PhoneActivity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                        singInWithCredential(phoneAuthCredential);
+                        Log.d(TAG, "onVerificationCompleted:" + phoneAuthCredential);
+                        //singInWithCredential(phoneAuthCredential);
                     }
 
                     @Override
@@ -104,7 +105,7 @@ public class PhoneActivity extends AppCompatActivity {
                     }
                 }
         );
-    }*/
+    }
 
     private void ingresar() {
 

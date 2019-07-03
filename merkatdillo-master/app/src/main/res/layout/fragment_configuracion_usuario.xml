@@ -323,6 +323,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
 
             <Button
+                android:id="@+id/cerrar"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

@@ -1,5 +1,7 @@
 package com.proyecto.marketdillo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,6 +52,8 @@ public class ConfiguracionFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth.AuthStateListener authStateListener;
     private Button guardar;
+    private Button cerrar;
+    private SessionManager sessionManager;
 
     public ConfiguracionFragment() {
         // Required empty public constructor
@@ -75,6 +81,7 @@ public class ConfiguracionFragment extends Fragment {
         nommercadillo = (EditText) root.findViewById(R.id.nommercadillo);
         tiempoaprox = (EditText) root.findViewById(R.id.tiempoaprox);
         guardar = (Button) root.findViewById(R.id.guardaarr);
+        cerrar = (Button) root.findViewById(R.id.cerrar);
         initialize();
         cargar();
         ((VistaCampesino) getActivity()).hideFloatingActionButton();
@@ -92,6 +99,29 @@ public class ConfiguracionFragment extends Fragment {
             public void onClick(View v) {
             }
         });
+
+        cerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CharSequence[] item = {"Si","No"};
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                alert.setTitle("¿Esta seguro de querer salir?");
+                alert.setItems(item, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(item[which].equals("Si")){
+                            FirebaseAuth.getInstance().signOut();
+                            sessionManager = new SessionManager(getActivity());
+                            sessionManager.logout();
+                        } else if(item[which].equals("No")){
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                alert.show();
+            }
+        });
+
         return root;
     }
 

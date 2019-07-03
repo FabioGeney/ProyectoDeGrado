@@ -250,5 +250,4 @@ public class MainActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
 }

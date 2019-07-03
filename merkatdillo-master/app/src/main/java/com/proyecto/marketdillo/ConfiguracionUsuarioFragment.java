@@ -1,16 +1,26 @@
 package com.proyecto.marketdillo;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class ConfiguracionUsuarioFragment extends Fragment {
 
@@ -21,7 +31,12 @@ public class ConfiguracionUsuarioFragment extends Fragment {
     private EditText documentoidentidad;
     private EditText fechanacimiento;
     private EditText direccion;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth.AuthStateListener authStateListener;
     private Button guardar;
+    private Button cerrar;
+    private SessionManager sessionManager;
 
 
     public ConfiguracionUsuarioFragment() {
@@ -48,6 +63,8 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         fechanacimiento = (EditText) root.findViewById(R.id.birth);
         direccion = (EditText) root.findViewById(R.id.address);
         guardar = (Button) root.findViewById(R.id.guardaarr);
+        cerrar = (Button) root.findViewById(R.id.cerrar);
+        initialize();
         cargar();
         nombre.addTextChangedListener(loginTextWatcher);
         apellido.addTextChangedListener(loginTextWatcher);
@@ -59,6 +76,28 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            }
+        });
+
+        cerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CharSequence[] item = {"Si","No"};
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                alert.setTitle("¿Esta seguro de querer salir?");
+                alert.setItems(item, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(item[which].equals("Si")){
+                            FirebaseAuth.getInstance().signOut();
+                            sessionManager = new SessionManager(getActivity());
+                            sessionManager.logout();
+                        } else if(item[which].equals("No")){
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                alert.show();
             }
         });
 
@@ -75,6 +114,22 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         documentoidentidad.setText(usuario.getDoc_identidad());
         fechanacimiento.setText(usuario.getFecha());
         direccion.setText(usuario.getDireccion());
+    }
+
+    private void initialize(){
+        firebaseAuth = FirebaseAuth.getInstance();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                if (firebaseUser != null){
+                    Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getUid());
+                    Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getEmail());
+                } else {
+                    Log.w(TAG, "onAuthStateChanged - cerró sesión");
+                }
+            }
+        };
     }
 
     private TextWatcher loginTextWatcher = new TextWatcher() {
