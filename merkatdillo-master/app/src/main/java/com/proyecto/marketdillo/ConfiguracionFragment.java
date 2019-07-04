@@ -103,17 +103,17 @@ public class ConfiguracionFragment extends Fragment {
         cerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CharSequence[] item = {"Si","No"};
+                final CharSequence[] item = {"Si", "No"};
                 AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
                 alert.setTitle("¿Esta seguro de querer salir?");
                 alert.setItems(item, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(item[which].equals("Si")){
+                        if (item[which].equals("Si")) {
                             FirebaseAuth.getInstance().signOut();
                             sessionManager = new SessionManager(getActivity());
                             sessionManager.logout();
-                        } else if(item[which].equals("No")){
+                        } else if (item[which].equals("No")) {
                             dialog.dismiss();
                         }
                     }
@@ -150,16 +150,15 @@ public class ConfiguracionFragment extends Fragment {
                 }
             }
         });
-
     }
 
-    private void initialize(){
+    private void initialize() {
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null){
+                if (firebaseUser != null) {
                     Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getUid());
                     Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getEmail());
                 } else {
@@ -186,22 +185,20 @@ public class ConfiguracionFragment extends Fragment {
             String nommercadillo1 = nommercadillo.getText().toString();
             String tiempoaprox1 = tiempoaprox.getText().toString();
             guardar.setEnabled(!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty());
-            if(!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty()){
-                guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
-                //guardar.setBackground(getResources().getDrawable(R.drawable.save_button));
-                //guardar.setBackgroundDrawable(getResources().getDrawable(R.drawable.save_button));
-            }else {
-                guardar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
+            if (!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty()) {
+                guardar.setBackgroundDrawable(getResources().getDrawable(R.drawable.save_button2));
+            } else {
+                guardar.setBackgroundDrawable(getResources().getDrawable(R.drawable.save_button));
             }
 
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            if(!guardar.isEnabled()){
-                guardar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
-            }else {
-                guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
+            if (!guardar.isEnabled()) {
+                guardar.setBackgroundDrawable(getResources().getDrawable(R.drawable.save_button));
+            } else {
+                guardar.setBackgroundDrawable(getResources().getDrawable(R.drawable.save_button2));
             }
         }
     };

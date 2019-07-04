@@ -384,9 +384,9 @@ public class Actualizar extends AppCompatActivity {
             String cantidadP = precioCantidad1.getText().toString();
             editar.setEnabled(!nombre.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !cantidadP.isEmpty());
             if(!nombre.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !cantidadP.isEmpty()){
-                editar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
+                editar.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
             }else {
-                editar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
+                editar.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
             }
 
         }
@@ -394,9 +394,9 @@ public class Actualizar extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable s) {
             if(!editar.isEnabled()){
-                editar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
+                editar.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
             }else {
-                editar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
+                editar.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
             }
         }
     };
