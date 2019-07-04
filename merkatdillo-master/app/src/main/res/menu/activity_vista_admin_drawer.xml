@@ -14,9 +14,9 @@
             android:icon="@drawable/ic_message_black"
             android:title="Mensajes" />
         <item
-            android:id="@+id/confi"
+            android:id="@+id/usuarios"
             android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="Pedidos" />
+            android:title="Usarios" />
 
 
     </group>

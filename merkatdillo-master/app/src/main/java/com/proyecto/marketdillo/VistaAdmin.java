@@ -49,7 +49,7 @@ public class VistaAdmin extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -71,6 +71,7 @@ public class VistaAdmin extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+    */
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -81,6 +82,8 @@ public class VistaAdmin extends AppCompatActivity
         if (id == R.id.mercadillo) {
             // Handle the camera action
         } else if (id == R.id.mensajes) {
+
+        } else if (id == R.id.usuarios){
 
         }
 

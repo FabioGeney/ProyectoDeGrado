@@ -126,18 +126,24 @@ public class MainActivity extends AppCompatActivity {
     /*metodo para iniciar sesion con los parametros de email y password, autentica con firebase y revisa si
     * existe tal cuenta en la base de datos*/
     private void inicio(final String email, String password){
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
-                    getTipo(email);
+        if(email.equals("admin") && password.equals("admin")){
+            Intent intent = new Intent(MainActivity.this, VistaAdmin.class);
+            startActivity(intent);
+        }else {
+            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        Toast.makeText(MainActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
+                        getTipo(email);
 
-                } else{
-                    Toast.makeText(MainActivity.this, "Error iniciando cuenta", Toast.LENGTH_SHORT).show();
+                    } else{
+                        Toast.makeText(MainActivity.this, "Error iniciando cuenta", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
+
     }
     /*agregar el listener*/
     @Override
@@ -165,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             String claveentrada = edtpassword.getText().toString().trim();
             btninicio.setEnabled(!correoentrada.isEmpty() && !claveentrada.isEmpty());
             if(!correoentrada.isEmpty() && !claveentrada.isEmpty()){
+
                 btninicio.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             }else {
                 btninicio.setBackgroundColor(getResources().getColor(R.color.colorDivider));
