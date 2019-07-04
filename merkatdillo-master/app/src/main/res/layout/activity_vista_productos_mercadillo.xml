@@ -28,11 +28,11 @@
             android:id="@+id/enviarMensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/fab"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="75dp"
+            android:layout_marginBottom="10dp"
             app:backgroundTint="@color/colorPrimary"
             app:srcCompat="@drawable/ic_botonmensajes" />
 

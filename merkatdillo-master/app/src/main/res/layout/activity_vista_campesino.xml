@@ -19,6 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:itemIconTint="@color/colorPrimaryDark2"
         app:headerLayout="@layout/nav_header_vista_campesino"
         app:menu="@menu/activity_vista_campesino_drawer" />
 

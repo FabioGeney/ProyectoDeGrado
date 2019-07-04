@@ -7,7 +7,8 @@
         <item
             android:id="@+id/mimercadillo"
             android:icon="@drawable/ic_menu_mercadillos"
-            android:title="Mis Productos" />
+            android:title="Mis Productos"
+            />
         <item
             android:id="@+id/pedidos"
             android:icon="@drawable/ic_menu_pedidos"
