@@ -43,6 +43,14 @@
     <string name="title_start">Empezar</string>
     <string name="default_notification_channel_id">CH_01</string>
     <string name="title_activity_phone">PhoneActivity</string>
+    <string name="title_activity_vista_admin">VistaAdmin</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
 
 
 </resources>

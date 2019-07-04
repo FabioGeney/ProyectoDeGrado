@@ -21,12 +21,16 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".VistaAdmin"
+            android:label="@string/title_activity_vista_admin"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".PhoneActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/ThemeMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".CalificarPedido"
