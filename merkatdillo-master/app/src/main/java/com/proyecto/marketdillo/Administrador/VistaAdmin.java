@@ -1,8 +1,9 @@
-package com.proyecto.marketdillo;
+package com.proyecto.marketdillo.Administrador;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,7 +13,10 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+
+import com.proyecto.marketdillo.ChatsFragment;
+import com.proyecto.marketdillo.PtsCampesinoFragment;
+import com.proyecto.marketdillo.R;
 
 public class VistaAdmin extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +28,7 @@ public class VistaAdmin extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+        this.setTitle("Mercadillos");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,6 +43,12 @@ public class VistaAdmin extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        MercadillosAdminFragment mercadillosAdminFragment = new MercadillosAdminFragment();
+
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_vista_admin, mercadillosAdminFragment).commit();
     }
 
     @Override
@@ -78,11 +89,14 @@ public class VistaAdmin extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.mercadillo) {
-            // Handle the camera action
+            fragmentManager.beginTransaction().replace(R.id.content_vista_admin,  new MercadillosAdminFragment()).commit();
+            this.setTitle("Mercadillos");
         } else if (id == R.id.mensajes) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_vista_admin, new ChatsFragment()).commit();
+            this.setTitle("Mensajes");
         } else if (id == R.id.usuarios){
 
         }

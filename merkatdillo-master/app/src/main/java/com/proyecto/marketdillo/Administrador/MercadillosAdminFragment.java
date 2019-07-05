@@ -1,54 +1,56 @@
 package com.proyecto.marketdillo.Administrador;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.proyecto.marketdillo.Mercadillo;
+import com.proyecto.marketdillo.MercadilloAdapter;
 import com.proyecto.marketdillo.R;
+import com.proyecto.marketdillo.SingletonMercadillo;
+import com.proyecto.marketdillo.VistaProductosMercadillo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.support.constraint.Constraints.TAG;
+
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MercadillosAdminFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MercadillosAdminFragment#newInstance} factory method to
+ * Use the {@link com.proyecto.marketdillo.MercadilloFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class MercadillosAdminFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mercadilloAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Mercadillo> mercadillos1;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     public MercadillosAdminFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MercadillosAdminFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MercadillosAdminFragment newInstance(String param1, String param2) {
-        MercadillosAdminFragment fragment = new MercadillosAdminFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
+    public static com.proyecto.marketdillo.MercadilloFragment newInstance(/*parámetros*/) {
+        com.proyecto.marketdillo.MercadilloFragment fragment = new com.proyecto.marketdillo.MercadilloFragment();
+        // Setup parámetros
         return fragment;
     }
 
@@ -56,54 +58,67 @@ public class MercadillosAdminFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // Gets parámetros
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mercadillos_admin, container, false);
+
+        View root = inflater.inflate(R.layout.fragment_mercadillo, container, false);
+        mercadillos1 = getMercadillos();
+
+        layoutManager = new LinearLayoutManager(getContext());
+        // Instancia del ListView.
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.mercadillo_Recycler);
+
+        return root;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    public List<Mercadillo> getMercadillos() {
+        final ArrayList<Mercadillo> mercadillos = new ArrayList<>();
+        mercadillos.add(new Mercadillo("Mercadillo de frutas", "40 min", "4.5", "4500", R.mipmap.ic_merca_image));
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Mercadillo")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Mercadillo mercadillo = document.toObject(Mercadillo.class);
+                                mercadillo.setId(document.getId());
+                                mercadillo.setImagen(R.mipmap.ic_merca_image);
+                                mercadillos.add(mercadillo);
+
+                            }
+                            // Inicializar el adaptador con la fuente de datos.
+                            mercadilloAdapter = new MercadillosAdminAdapter(mercadillos1, R.layout.list_admin_mercados, new MercadillosAdminAdapter.OnItemClickListener() {
+                                @Override
+                                public void OnItemClick(Mercadillo mercadillo, int posicion) {
+                                    Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);
+                                    //crea el singleotnMercadillo para almacenar en memoria los detos del mercadillo seleccionado por el usuario
+                                    SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
+                                    //en caso de que ya haya un mercadillo almacenado será reemplazado por otro seleccionado por el usuario
+                                    singletonMercadillo.setMercadillo(mercadillo);
+                                    Toast.makeText(getContext(), mercadillo.getId(), Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+                                }
+                            });
+                            //Relacionando la lista con el adaptador
+                            mRecyclerView.setLayoutManager(layoutManager);
+                            mRecyclerView.setAdapter(mercadilloAdapter);
+
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        return mercadillos;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

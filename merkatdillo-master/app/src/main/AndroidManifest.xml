@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".VistaAdmin"
+            android:name=".Administrador.VistaAdmin"
             android:label="@string/title_activity_vista_admin"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
