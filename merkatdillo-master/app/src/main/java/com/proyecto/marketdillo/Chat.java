@@ -48,7 +48,7 @@ public class Chat extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //obtiene datos del intent
-        String nombreDestinatario = getIntent().getStringExtra("nombreDestinatario");
+        final String nombreDestinatario = getIntent().getStringExtra("nombreDestinatario");
         final String idDestinatario = getIntent().getStringExtra("idDestinatario");
 
         //cambia titulo al toolbar
@@ -60,9 +60,11 @@ public class Chat extends AppCompatActivity {
         texto = findViewById(R.id.texto);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         final String useriD = firebaseUser.getUid();
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReferenceDestinatario = firebaseDatabase.getReference(idDestinatario).child(useriD).child("Mensajes");
         databaseReferenceRemitente = firebaseDatabase.getReference(useriD).child(idDestinatario).child("Mensajes");
+
 
 
 
@@ -90,7 +92,7 @@ public class Chat extends AppCompatActivity {
                     int hora, minutos, segundos;
                     hora = calendario.get(Calendar.HOUR_OF_DAY);
                     minutos = calendario.get(Calendar.MINUTE);
-                    sendInfoChat(idDestinatario, texto.getText().toString());
+                    sendInfoChat(idDestinatario, texto.getText().toString(), nombreDestinatario);
                     databaseReferenceDestinatario.push().setValue(new Mensaje(useriD, texto.getText().toString(), hora +":" + minutos));
                     databaseReferenceRemitente.push().setValue(new Mensaje(useriD, texto.getText().toString(), hora +":" + minutos));
                     texto.setText(null);
@@ -146,17 +148,20 @@ public class Chat extends AppCompatActivity {
     }
 
     //Este metodo almacena la informacion del usuario en el objeto contacto y la envia a la sala de chat del Destinatario
-    private void sendInfoChat(String idDestinatario, String texto) {
+    private void sendInfoChat(String idDestinatario, String texto, String nombreDestinatario) {
         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
         Usuario usuario = singletonUsuario.getUsuario();
-        Contacto contacto = new Contacto(usuario.getNombre(), usuario.getId(), "", usuario.getCelular(), texto);
         HashMap<String, Object> resultDestino = new HashMap<>();
         HashMap<String, Object> resultRemitente = new HashMap<>();
         resultDestino.put("nombre", usuario.getNombre());
         resultDestino.put("id", usuario.getId());
-        resultDestino.put("imagen", "1231|");
-        resultDestino.put("telefono", usuario.getCelular());
+        resultDestino.put("imagen", "1231");
         resultDestino.put("ultimoMensaje", texto);
+
+        resultRemitente.put("nombre", nombreDestinatario);
+        resultRemitente.put("id", idDestinatario);
+        resultRemitente.put("imagen", "1231");
+
         resultRemitente.put("ultimoMensaje", texto);
 
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -115,11 +116,10 @@ public class ChatsFragment extends Fragment {
                 String id = dataSnapshot.child("id").getValue(String.class);
                 String imagen = dataSnapshot.child("imagen").getValue(String.class);
                 String nombre = dataSnapshot.child("nombre").getValue(String.class);
-                String telefono = dataSnapshot.child("telefono").getValue(String.class);
                 String ultimoMensaje = dataSnapshot.child("ultimoMensaje").getValue(String.class);
-                Contacto contacto = new Contacto(id, imagen, nombre, telefono, ultimoMensaje);
-
+                Contacto contacto = new Contacto(id, imagen, nombre, ultimoMensaje);
                 chatsAdapter.agregarMensaje(id, contacto);
+
             }
 
             @Override

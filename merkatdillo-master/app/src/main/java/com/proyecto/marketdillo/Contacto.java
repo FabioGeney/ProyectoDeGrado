@@ -4,17 +4,22 @@ public class Contacto {
     private String nombre;
     private String id;
     private String imagen;
-    private String telefono;
+
     private String ultimoMensaje;
 
     public Contacto() {
     }
 
-    public Contacto(String id, String imagen, String nombre, String telefono, String ultimoMensaje) {
+    public Contacto(String id, String nombre, String ultimoMensaje) {
+        this.nombre = nombre;
+        this.ultimoMensaje = ultimoMensaje;
+    }
+
+    public Contacto(String id, String imagen, String nombre, String ultimoMensaje) {
         this.id = id;
         this.imagen = imagen;
         this.nombre = nombre;
-        this.telefono = telefono;
+
         this.ultimoMensaje = ultimoMensaje;
     }
 
@@ -28,9 +33,6 @@ public class Contacto {
 
     public String getImagen() {
         return imagen;
-    }
-    public String getTelefono(){
-        return telefono;
     }
     public String getUltimoMensaje() {
         return ultimoMensaje;

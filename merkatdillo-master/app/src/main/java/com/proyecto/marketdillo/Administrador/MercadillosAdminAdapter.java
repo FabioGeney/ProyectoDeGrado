@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.proyecto.marketdillo.Mercadillo;
 import com.proyecto.marketdillo.R;
 import com.squareup.picasso.Picasso;
@@ -29,7 +28,6 @@ public class MercadillosAdminAdapter extends RecyclerView.Adapter<MercadillosAdm
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
-    private FirebaseStorage mStorage = FirebaseStorage.getInstance();
 
     public  MercadillosAdminAdapter(List<Mercadillo> mercadillos, int layout, OnItemClickListener itemClickListener ){
         this.mercadillos = mercadillos;
@@ -83,32 +81,16 @@ public class MercadillosAdminAdapter extends RecyclerView.Adapter<MercadillosAdm
             borrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final CharSequence[] item = {"Si","No"};
+                    final CharSequence[] item = {"Contactar","Eliminar"};
                     AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                    alert.setTitle("¿Esta seguro de borrar este mercadillo?");
                     alert.setItems(item, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if(item[which].equals("Si")){
-                                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                db.collection("Mercadillo").document(mercadillo.getId())
-                                        .delete()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
+                            if(item[which].equals("Contactar")){
 
-                                                Toast.makeText(context, "Mercadillo eliminado", Toast.LENGTH_SHORT).show();
-                                                mercadillos.remove(getAdapterPosition());
-                                                notifyDataSetChanged();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            } else if(item[which].equals("No")){
+                            } else if(item[which].equals("Eliminar")){
+                                deleteMercadillo(mercadillo.getId(), getAdapterPosition());
+                            }else {
                                 dialog.dismiss();
                             }
                         }
@@ -126,6 +108,40 @@ public class MercadillosAdminAdapter extends RecyclerView.Adapter<MercadillosAdm
 
 
         }
+    }
+
+    private void deleteMercadillo(final String id, final int index){
+        final CharSequence[] item = {"Si","No"};
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle("¿Esta seguro de borrar este mercadillo?");
+        alert.setItems(item, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(item[which].equals("Si")){
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("Mercadillo").document(id)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+
+                                    Toast.makeText(context, "Mercadillo eliminado", Toast.LENGTH_SHORT).show();
+                                    mercadillos.remove(index);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                } else if(item[which].equals("No")){
+                    dialog.dismiss();
+                }
+            }
+        });
+        alert.show();
     }
 
     public interface OnItemClickListener{

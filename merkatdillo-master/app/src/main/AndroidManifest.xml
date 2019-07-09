@@ -21,9 +21,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".Example.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".Administrador.VistaAdmin"
             android:label="@string/title_activity_vista_admin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PhoneActivity"
             android:parentActivityName=".MainActivity"
@@ -48,7 +52,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaCampesino" />
         </activity>
-        <activity android:name=".Chat"
+        <activity
+            android:name=".Chat"
             android:parentActivityName=".VistaCampesino"
             android:theme="@style/ThemeChatActivity">
             <meta-data

@@ -238,6 +238,31 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+        db.collection("Admins").whereEqualTo("email",correo)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                usuario = document.toObject(Usuario.class);
+                                usuario.setTipoUsuario("Admin");
+                            }
+
+                        }else{
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                        if(usuario!=null && usuario.getTipoUsuario().equals("Admin")){
+                            tokenID("Admins");
+                            Intent intent = new Intent(MainActivity.this, VistaAdmin.class);
+                            SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                            singletonUsuario.setUsuario(usuario);
+                            startActivity(intent);
+                        }
+                    }
+                });
+
+
     }
 
     private void tokenID(final String coleccion){

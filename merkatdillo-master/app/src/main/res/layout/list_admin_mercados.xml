@@ -93,7 +93,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline36"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_close_button"
+        app:srcCompat="@drawable/ic_more_vert"
         tools:ignore="VectorDrawableCompat" />
 
     <TextView

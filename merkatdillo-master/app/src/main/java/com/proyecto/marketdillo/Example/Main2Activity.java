@@ -1,9 +1,8 @@
-package com.proyecto.marketdillo.Administrador;
+package com.proyecto.marketdillo.Example;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,22 +12,20 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 
-import com.proyecto.marketdillo.ChatsFragment;
-import com.proyecto.marketdillo.PtsCampesinoFragment;
 import com.proyecto.marketdillo.R;
 
-public class VistaAdmin extends AppCompatActivity
+public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vista_admin);
+        setContentView(R.layout.activity_main2);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        this.setTitle("Mercadillos");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,12 +40,6 @@ public class VistaAdmin extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-        MercadillosAdminFragment mercadillosAdminFragment = new MercadillosAdminFragment();
-
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_vista_admin, mercadillosAdminFragment).commit();
     }
 
     @Override
@@ -60,11 +51,11 @@ public class VistaAdmin extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.vista_admin, menu);
+        getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
 
@@ -82,24 +73,24 @@ public class VistaAdmin extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-    */
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (id == R.id.mercadillo) {
-            fragmentManager.beginTransaction().replace(R.id.content_vista_admin,  new MercadillosAdminFragment()).commit();
-            this.setTitle("Mercadillos");
-        } else if (id == R.id.mensajes) {
-            fragmentManager.beginTransaction().replace(R.id.content_vista_admin, new ChatsFragment()).commit();
-            this.setTitle("Mensajes");
-        } else if (id == R.id.usuarios){
-            fragmentManager.beginTransaction().replace(R.id.content_vista_admin, new UsuariosFragment()).commit();
-            this.setTitle("Usuarios");
+        if (id == R.id.nav_home) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_tools) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
 
         }
 
