@@ -57,7 +57,7 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_configuracion_usuario, container, false);
         nombre = (EditText) root.findViewById(R.id.nnnnombre);
         apellido = (EditText) root.findViewById(R.id.aaaapellido);
-        correo = (TextView) root.findViewById(R.id.correoespacio);
+        correo = (TextView) root.findViewById(R.id.correo);
         celular = (EditText) root.findViewById(R.id.celuco);
         documentoidentidad = (EditText) root.findViewById(R.id.identitydocument);
         fechanacimiento = (EditText) root.findViewById(R.id.birth);

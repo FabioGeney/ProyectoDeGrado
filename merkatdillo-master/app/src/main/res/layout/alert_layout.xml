@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfiguracionFragment">
+    tools:context=".ConfiguracionUsuarioFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.07" />
+                app:layout_constraintVertical_bias="0.070" />
 
             <TextView
                 android:id="@+id/nnm"
@@ -60,15 +60,16 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Nombres"
-                app:layout_constraintBottom_toTopOf="@+id/nnnombre"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/nombre"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/i1"
                 app:layout_constraintVertical_bias="0.411" />
 
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/nnnombre"
+            <TextView
+                android:id="@+id/nombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -76,18 +77,14 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:text="nombre"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nnm">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/nnnnombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="12" />
 
-            </android.support.design.widget.TextInputLayout>
+            </TextView>
 
             <TextView
                 android:id="@+id/apell1"
@@ -99,12 +96,13 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Apellidos"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nnnombre" />
+                app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/aaapellido"
+            <TextView
+                android:id="@+id/apellido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -112,18 +110,14 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:text="apellido"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/apell1">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/aaaapellido"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="12" />
 
-            </android.support.design.widget.TextInputLayout>
+            </TextView>
 
             <TextView
                 android:id="@+id/corr"
@@ -135,18 +129,19 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Correo"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/aaapellido" />
+                app:layout_constraintTop_toBottomOf="@+id/apellido" />
 
             <TextView
-                android:id="@+id/ccorreoespacio"
+                android:id="@+id/correo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Espacio Correo"
@@ -160,19 +155,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Celular"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/celular"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ccorreoespacio"
+                app:layout_constraintTop_toBottomOf="@+id/correo"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
                 android:id="@+id/celular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -181,18 +177,14 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:text="celular"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cel">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/celuco"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="12" />
 
-            </android.support.design.widget.TextInputLayout>
+            </TextView>
 
             <TextView
                 android:id="@+id/ddi"
@@ -204,12 +196,13 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Documento de Identidad"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/celular" />
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
                 android:id="@+id/docIdentidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -218,18 +211,14 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:text="C.C"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ddi">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/identitydocument"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="12" />
 
-            </android.support.design.widget.TextInputLayout>
+            </TextView>
 
             <TextView
                 android:id="@+id/textView20"
@@ -241,11 +230,12 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Fecha de Nacimiento"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/docIdentidad" />
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
                 android:id="@+id/fecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -254,18 +244,14 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:text="fecha"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView20">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/birth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="12" />
 
-            </android.support.design.widget.TextInputLayout>
+            </TextView>
 
             <TextView
                 android:id="@+id/textView24"
@@ -276,12 +262,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Direccion de tu Finca"
+                android:text="Direccion"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fecha" />
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
                 android:id="@+id/direccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -290,132 +277,68 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:text="direccio"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView24">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="12" />
 
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="Nombre de tu Mercadillo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/direccion" />
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView25">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/nommercadillo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="12" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="Tiempo Aproximado de Entrega"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout10" />
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView26">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/tiempoaprox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="12" />
-
-            </android.support.design.widget.TextInputLayout>
-
+            </TextView>
 
             <Button
-                android:id="@+id/guardaarr"
-                android:layout_width="140dp"
+                android:id="@+id/cerrar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="@drawable/save_button2"
-                android:clickable="true"
-                android:enabled="false"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text="@string/button_guardar"
-                android:textAllCaps="false"
-                android:textColor="@color/colorIcons"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout11" />
-
-            <Button
-                android:id="@+id/cerrar"
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/custom_button"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:text="@string/button_cerrarsesion"
+                android:text="Cerrar"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary2"
+                android:theme="@style/RaisedButton"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guardaarr" />
+                app:layout_constraintTop_toBottomOf="@+id/mercadillo" />
+
+            <TextView
+                android:id="@+id/mercado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Nombre mercadillo"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/direccion" />
+
+            <TextView
+                android:id="@+id/mercadillo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="mercadillo"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mercado" />
 
 
         </android.support.constraint.ConstraintLayout>

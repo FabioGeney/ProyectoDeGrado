@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.proyecto.marketdillo.ChatsFragment;
-import com.proyecto.marketdillo.PtsCampesinoFragment;
 import com.proyecto.marketdillo.R;
 
 public class VistaAdmin extends AppCompatActivity
@@ -91,7 +90,7 @@ public class VistaAdmin extends AppCompatActivity
         int id = item.getItemId();
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (id == R.id.mercadillo) {
+        if (id == R.id.mercado) {
             fragmentManager.beginTransaction().replace(R.id.content_vista_admin,  new MercadillosAdminFragment()).commit();
             this.setTitle("Mercadillos");
         } else if (id == R.id.mensajes) {
