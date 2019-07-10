@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.proyecto.marketdillo.Chat;
 import com.proyecto.marketdillo.R;
@@ -78,7 +77,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
             opciones.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final CharSequence[] item = {"Contactar","Mas información","Eliminar Usuario"};
+                    final CharSequence[] item = {"Contactar","Eliminar Usuario"};
                     AlertDialog.Builder alert = new AlertDialog.Builder(context);
 
                     alert.setItems(item, new DialogInterface.OnClickListener() {
@@ -91,10 +90,10 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
                                     intent.putExtra("idDestinatario", usuario.getId());
                                     context.startActivity(intent);
                                     break;
-                                case "Mas información":
-                                    break;
+
                                 case "Eliminar Usuario":
                                     //FirebaseAuth.getInstance()
+                                    deleteUsusario(usuario.getId(), getAdapterPosition(), usuario.getNombre() + " "+ usuario.getApellidos(), usuario.getTipoUsuario());
                                     break;
                                 default:
                                     dialog.dismiss();
@@ -119,6 +118,39 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
 
 
         }
+    }
+    private void deleteUsusario (final String id, final int index, String nombre, final String colleccion){
+        final CharSequence[] item = {"Si","No"};
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle("¿Esta seguro de borrar al usuario " + nombre + " ?");
+        alert.setItems(item, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(item[which].equals("Si")){
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection(colleccion).document(id)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+
+                                    Toast.makeText(context, "Mercadillo eliminado", Toast.LENGTH_SHORT).show();
+                                    usuarios.remove(index);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                } else if(item[which].equals("No")){
+                    dialog.dismiss();
+                }
+            }
+        });
+        alert.show();
     }
 
     public interface OnItemClickListener{

@@ -92,7 +92,7 @@ public class UsuariosFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Usuario usuario = document.toObject(Usuario.class);
-                                usuario.setTipoUsuario("Comprador");
+                                usuario.setTipoUsuario("Consumidor");
                                 usersResult.add(usuario);
 
                             }

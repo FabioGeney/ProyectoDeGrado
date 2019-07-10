@@ -98,7 +98,7 @@ public class MercadillosAdminFragment extends Fragment {
                             mercadilloAdapter = new MercadillosAdminAdapter(mercadillos1, R.layout.list_admin_mercados, new MercadillosAdminAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Mercadillo mercadillo, int posicion) {
-                                    Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);
+                                    Intent intent = new Intent(getContext(), VistaMercadilloAdmin.class);
                                     //crea el singleotnMercadillo para almacenar en memoria los detos del mercadillo seleccionado por el usuario
                                     SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
                                     //en caso de que ya haya un mercadillo almacenado será reemplazado por otro seleccionado por el usuario
