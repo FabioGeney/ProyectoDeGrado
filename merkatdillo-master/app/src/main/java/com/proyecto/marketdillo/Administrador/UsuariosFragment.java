@@ -166,6 +166,7 @@ public class UsuariosFragment extends Fragment {
         // Inflar y establecer el layout para el dialogo
         // Pasar nulo como vista principal porque va en el diseño del diálogo
         View v = inflater.inflate(R.layout.alert_layout, null);
+
         //builder.setView(inflater.inflate(R.layout.dialog_signin, null))
         //inicializa elementos de la vista
         TextView nombre = v.findViewById(R.id.nombre);
@@ -178,6 +179,7 @@ public class UsuariosFragment extends Fragment {
         TextView mercadillo = v.findViewById(R.id.mercadillo);
         TextView mercado = v.findViewById(R.id.mercado);
         Button cerrar = v.findViewById(R.id.cerrar);
+
         //setea elemntos de la vista con los datos del usuario
         nombre.setText(usuario.getNombre());
         apellido.setText(usuario.getApellidos());

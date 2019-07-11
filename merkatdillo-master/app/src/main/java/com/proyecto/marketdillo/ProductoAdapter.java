@@ -72,7 +72,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
             nombre.setText( producto.getNombre());
             descripcion.setText( producto.getDescripcion() );
-            costoCantidad.setText(Integer.toString(producto.getPrecioCantidad()));
+            costoCantidad.setText("Lleve 1 gr por $ " + Integer.toString(producto.getPrecioCantidad()));
             agregar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -90,7 +90,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
                 }
             });
-
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

@@ -68,96 +68,42 @@ public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapte
         public TextView nombre;
         public TextView descripcion;
         public TextView costoCantidad ;
-        public ImageButton editar;
-        public ImageButton borrar ;
+        public ImageView options;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imagen = (ImageView) itemView.findViewById(R.id.imagen);
             nombre = (TextView) itemView.findViewById(R.id.nombre);
             descripcion = (TextView)itemView.findViewById(R.id.descripcion);
             costoCantidad = (TextView)itemView.findViewById(R.id.precio);
-            editar = itemView.findViewById(R.id.editar);
-            borrar = itemView.findViewById(R.id.borrar);
+            options = itemView.findViewById(R.id.options);
+
         }
         public void bind( final Producto producto, final OnItemClickListener listener){
             Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
             nombre.setText( producto.getNombre());
             descripcion.setText( producto.getDescripcion() );
-            costoCantidad.setText(""+producto.getPrecioCantidad());
+            costoCantidad.setText("$ "+producto.getPrecioCantidad());
 
-            borrar.setOnClickListener(new View.OnClickListener() {
+            options.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final CharSequence[] item = {"Si","No"};
-                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                    alert.setTitle("¿Esta seguro de borrar el producto?");
-                    alert.setItems(item, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if(item[which].equals("Si")){
-                                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                db.collection("Mercadillo").document(producto.getId()).collection("Productos").document(producto.getIdDocument())
-                                        .delete()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                StorageReference imageRef = mStorage.getReferenceFromUrl(producto.getImagen());
-                                                imageRef.delete();
-                                                Toast.makeText(context, "Producto eliminado", Toast.LENGTH_SHORT).show();
-                                                productos.remove(getAdapterPosition());
-                                                notifyDataSetChanged();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            } else if(item[which].equals("No")){
-                                dialog.dismiss();
-                            }
-                        }
-                    });
-                    alert.show();
-                }
-            });
-
-            editar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final CharSequence[] itemm = {"Si","No"};
+                    final CharSequence[] itemm = {"Editar","Borrar"};
                     AlertDialog.Builder alerta = new AlertDialog.Builder(context);
-                    alerta.setTitle("¿Quiere editar este producto?");
                     alerta.setItems(itemm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if(itemm[which].equals("Si")){
-                                Intent intent = new Intent(context, Actualizar.class);
-                                intent.putExtra("produ", producto);
-                                context.startActivity(intent);
-
-                                /*FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                db.collection("Mercadillo").document(producto.getId()).collection("Productos").document(producto.getIdDocument()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if(task.isSuccessful()){
-                                            for(QueryDocumentSnapshot document : task.getResult()){
-                                                Producto producto = new Producto(document.getId(),)
-
-                                            }
-                                        }
-                                    }
-                                });*/
-
-                            } else if(itemm[which].equals("No")){
+                            if(itemm[which].equals("Editar")){
+                                editarProducto(producto);
+                            } else if(itemm[which].equals("Borrar")){
+                                borrarProducto(producto, getAdapterPosition());
+                            }else {
                                 dialog.dismiss();
                             }
 
                         }
                     });
                     alerta.show();
-
                 }
             });
 
@@ -172,6 +118,74 @@ public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapte
         }
 
 
+    }
+
+    private void borrarProducto(final Producto producto, final int position){
+        final CharSequence[] item = {"Si","No"};
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle("¿Esta seguro de borrar el producto?");
+        alert.setItems(item, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(item[which].equals("Si")){
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("Mercadillo").document(producto.getId()).collection("Productos").document(producto.getIdDocument())
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    StorageReference imageRef = mStorage.getReferenceFromUrl(producto.getImagen());
+                                    imageRef.delete();
+                                    Toast.makeText(context, "Producto eliminado", Toast.LENGTH_SHORT).show();
+                                    productos.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                } else if(item[which].equals("No")){
+                    dialog.dismiss();
+                }
+            }
+        });
+        alert.show();
+    }
+
+    private void editarProducto(final Producto producto){
+        final CharSequence[] itemm = {"Si","No"};
+        AlertDialog.Builder alerta = new AlertDialog.Builder(context);
+        alerta.setTitle("¿Quiere editar este producto?");
+        alerta.setItems(itemm, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(itemm[which].equals("Si")){
+                    Intent intent = new Intent(context, Actualizar.class);
+                    intent.putExtra("produ", producto);
+                    context.startActivity(intent);
+                                /*FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                db.collection("Mercadillo").document(producto.getId()).collection("Productos").document(producto.getIdDocument()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            for(QueryDocumentSnapshot document : task.getResult()){
+                                                Producto producto = new Producto(document.getId(),)
+
+                                           }
+                                        }
+                                    }
+                                });*/
+
+                } else if(itemm[which].equals("No")){
+                    dialog.dismiss();
+                }
+
+            }
+        });
+        alerta.show();
     }
 
     public interface OnItemClickListener{

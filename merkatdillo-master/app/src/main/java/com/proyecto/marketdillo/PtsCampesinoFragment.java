@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -106,7 +107,9 @@ public class PtsCampesinoFragment extends Fragment {
                             ptsAdapter = new PtsCampesinoAdapter(productos, R.layout.list_item_campesino_prdto, new PtsCampesinoAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Producto producto, int posicion) {
-                                    Toast.makeText(getContext(), producto.getNombre(), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getContext(), Actualizar.class);
+                                    intent.putExtra("produ", producto);
+                                    startActivity(intent);
                                 }
                             });
                             //Relacionando la lista con el adaptador
