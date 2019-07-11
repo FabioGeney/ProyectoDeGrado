@@ -100,3 +100,10 @@ exports.notificacionPedidoConsumidor = functions.firestore.document('Pedidos/{pe
 
 
 });
+
+exports.notificacionMensaje = firebase.database.ref('/{idDestino}/{idRemintente}/Mensajes').
+onCreate((snap, context) => {
+  const idDestinatario = context.params.idDestinatario;
+  console.log( "id: "+idDestinatario);
+
+});
