@@ -101,9 +101,44 @@ exports.notificacionPedidoConsumidor = functions.firestore.document('Pedidos/{pe
 
 });
 
-exports.notificacionMensaje = firebase.database.ref('/{idDestino}/{idRemintente}/Mensajes').
-onCreate((snap, context) => {
-  const idDestinatario = context.params.idDestinatario;
-  console.log( "id: "+idDestinatario);
+exports.notificacionMensaje = functions.database.ref('/{idDestino}/{idRemintente}/Mensajes/{idMensaje}').
+onWrite((snap, context) => {
+  const idDestinatario = context.params.idDestino;
+  const idRemintente = context.params.idRemintente;
+  const idMensaje = context.params.idMensaje;
+
+  const queryRemintente = admin.database()
+  .ref(`/${idDestinatario}/${idRemintente}/Mensajes/${idMensaje}`).once('value');
+  const queryTokenId = admin.database()
+  .ref(`/${idDestinatario}/TokenId`).once('value');
+  const queryDatos = admin.database()
+  .ref(`/${idDestinatario}/${idRemintente}/Datos/`).once('value');
+
+  return Promise.all([queryRemintente, queryTokenId, queryDatos]).then(result => {
+    const de = result[0].val().de;
+    const token = result[1].val().token_id;
+    const nombreRemintente = result[2].val().nombre;
+    const mensaje = result[2].val().ultimoMensaje;
+      if(de !== idDestinatario){
+        const payload = {
+          data: {
+            title : nombreRemintente,
+            body : mensaje,
+            icon: "default",
+            click_action: "check",
+            pedidoID : "idPedido"
+          },
+        };
+        return admin.messaging().sendToDevice( token, payload).then(result => {
+          console.log("Notificacion enviada");
+          return;
+        });
+  
+      }else{
+        return;
+      }
+    
+  });
+  
 
 });

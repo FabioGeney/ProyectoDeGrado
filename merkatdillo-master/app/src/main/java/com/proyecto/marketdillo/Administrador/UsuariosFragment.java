@@ -141,7 +141,6 @@ public class UsuariosFragment extends Fragment {
                             usuariosAdapter = new UsuarioAdapter(usuarios, R.layout.list_user_admin, new UsuarioAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Usuario usuario, int posicion) {
-                                    getMercadillo(usuario.getId());
                                     alertDialog( usuario);
                                 }
                             });
@@ -176,7 +175,7 @@ public class UsuariosFragment extends Fragment {
         TextView docIdentidad = v.findViewById(R.id.docIdentidad);
         TextView fecha = v.findViewById(R.id.fecha);
         TextView direccion = v.findViewById(R.id.direccion);
-        TextView mercadillo = v.findViewById(R.id.mercadillo);
+        final TextView mercadilloTv = v.findViewById(R.id.mercadillo);
         TextView mercado = v.findViewById(R.id.mercado);
         Button cerrar = v.findViewById(R.id.cerrar);
 
@@ -192,10 +191,21 @@ public class UsuariosFragment extends Fragment {
         if(usuario.getTipoUsuario().equals("Campesino")){
 
             mercado.setVisibility(View.VISIBLE);
-            mercadillo.setVisibility(View.VISIBLE);
+            mercadilloTv.setVisibility(View.VISIBLE);
             SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
-            Mercadillo mercadilloResult = singletonMercadillo.getMercadillo();
-           // mercadillo.setText(mercadilloResult.getNombre());
+            final Mercadillo mercadilloResult = singletonMercadillo.getMercadillo();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("Mercadillo").document(usuario.getId()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()){
+                        DocumentSnapshot document = task.getResult();
+                        Mercadillo mercadillo = document.toObject(Mercadillo.class);
+                        mercadilloTv.setText(mercadillo.getNombre());
+                    }
+                }
+            });
+
         }
 
         cerrar.setOnClickListener(new View.OnClickListener() {
@@ -209,22 +219,4 @@ public class UsuariosFragment extends Fragment {
         alertDialog.show();
 
     }
-
-    private void getMercadillo(String id){
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Mercadillo").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document = task.getResult();
-                    Mercadillo mercadillo = document.toObject(Mercadillo.class);
-                    SingletonMercadillo singleton = SingletonMercadillo.getInstance();
-                    singleton.setMercadillo(mercadillo);
-                    Toast.makeText(getContext(), mercadillo.getNombre(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
 }
