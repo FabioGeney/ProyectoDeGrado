@@ -45,8 +45,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             getPedido(idPedido);
             SingletonPedido singletonPedido = SingletonPedido.getInstance();
             Pedidos pedido=singletonPedido.getPedido();
-
-
             intent.putExtra("pedido", pedido);
             if(click_action.equals("com.proyecto.marketdillo.NOTIFICACIONCONSUMIDORFIN")){
                 intent.putExtra("visible", "si");
@@ -55,7 +53,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             }
 
         }else{
-
+            String id = remoteMessage.getData().get("remitenteID");
+            intent.putExtra("nombreDestinatario", titulo);
+            intent.putExtra("idDestinatario", id);
 
         }
 

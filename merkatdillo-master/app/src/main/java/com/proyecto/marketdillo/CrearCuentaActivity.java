@@ -134,7 +134,7 @@ public class CrearCuentaActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         user.put("id",firebaseUser.getUid());
-                        db.collection("Consumidor").document().set(user);
+                        db.collection("Consumidor").document(firebaseUser.getUid()).set(user);
                         Toast.makeText(CrearCuentaActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(CrearCuentaActivity.this, MainActivity.class);
                         startActivity(i);
