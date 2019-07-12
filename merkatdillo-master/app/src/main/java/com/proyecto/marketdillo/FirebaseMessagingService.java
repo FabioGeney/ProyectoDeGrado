@@ -28,8 +28,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         String titulo = remoteMessage.getData().get("title");
         String cuerpo = remoteMessage.getData().get("body");
         String click_action = remoteMessage.getData().get("click_action");
-        String idPedido = remoteMessage.getData().get("pedidoID");
-        getPedido(idPedido);
+        String tipo = remoteMessage.getData().get("tipo");
+
+
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(FirebaseMessagingService.this, getString(R.string.default_notification_channel_id))
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -37,20 +38,31 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentText(cuerpo)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        SingletonPedido singletonPedido = SingletonPedido.getInstance();
-        Pedidos pedido=singletonPedido.getPedido();
-
         Intent intent = new Intent(click_action);
-        intent.putExtra("pedido", pedido);
-        if(click_action.equals("com.proyecto.marketdillo.NOTIFICACIONCONSUMIDORFIN")){
-            intent.putExtra("visible", "si");
-        }else {
-            intent.putExtra("visible", "no");
+
+        if(tipo.equals("Pedido")){
+            String idPedido = remoteMessage.getData().get("pedidoID");
+            getPedido(idPedido);
+            SingletonPedido singletonPedido = SingletonPedido.getInstance();
+            Pedidos pedido=singletonPedido.getPedido();
+
+
+            intent.putExtra("pedido", pedido);
+            if(click_action.equals("com.proyecto.marketdillo.NOTIFICACIONCONSUMIDORFIN")){
+                intent.putExtra("visible", "si");
+            }else {
+                intent.putExtra("visible", "no");
+            }
+
+        }else{
+
+
         }
 
         PendingIntent intentFilter = PendingIntent.getActivity(  this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(intentFilter);
+
+
 
         int mNotificationID = (int)System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);

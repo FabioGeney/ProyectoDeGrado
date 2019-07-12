@@ -27,7 +27,8 @@ exports.notificaCreacionPedido = functions.firestore.document('Pedidos/{pedidosI
           body : "el usuario " + nombreComprador + " te ha hecho un pedido" ,
           icon: "default",
           click_action: "com.proyecto.marketdillo.NOTIFICACIONCAMPESINO",
-          pedidoID : idPedidos
+          pedidoID : idPedidos,
+          tipo : "Pedido"
         },
        
       };
@@ -80,7 +81,8 @@ exports.notificacionPedidoConsumidor = functions.firestore.document('Pedidos/{pe
             body : mensaje,
             icon: "default",
             click_action: check,
-            pedidoID : idPedido
+            pedidoID : idPedido,
+            tipo : "Pedido"
           },
                   
 
@@ -119,14 +121,16 @@ onWrite((snap, context) => {
     const token = result[1].val().token_id;
     const nombreRemintente = result[2].val().nombre;
     const mensaje = result[2].val().ultimoMensaje;
+    const check = "com.proyecto.marketdillo.NOTIFICACIONMENSAJE"
       if(de !== idDestinatario){
         const payload = {
           data: {
             title : nombreRemintente,
             body : mensaje,
             icon: "default",
-            click_action: "check",
-            pedidoID : "idPedido"
+            click_action: check,
+            remitenteID : de,
+            tipo : "Mensaje"
           },
         };
         return admin.messaging().sendToDevice( token, payload).then(result => {
