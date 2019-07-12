@@ -10,6 +10,18 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout31"
         android:layout_width="wrap_content"
@@ -159,13 +171,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView22"
-            android:layout_width="57dp"
-            android:layout_height="51dp"
-            app:layout_constraintStart_toStartOf="@id/adentro2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:srcCompat="@drawable/ic_camera_alt_" />
+
 
         <android.support.constraint.Guideline
             android:id="@+id/adentro"
@@ -183,6 +189,30 @@
 
 
     </android.support.constraint.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imageView22"
+                android:layout_width="57dp"
+                android:layout_height="51dp"
+                app:layout_constraintStart_toStartOf="@id/guv"
+                app:layout_constraintBottom_toBottomOf="@id/guh"
+                app:layout_constraintEnd_toEndOf="@id/guv"
+                app:layout_constraintTop_toTopOf="@id/guh"
+                app:srcCompat="@drawable/ic_camera_alt_" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.575" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.35" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline15"
@@ -253,5 +283,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
