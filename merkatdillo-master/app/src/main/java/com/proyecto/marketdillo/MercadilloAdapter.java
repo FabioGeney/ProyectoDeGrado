@@ -79,10 +79,13 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
 
             final boolean[] click = {true};
 
+            if(getMercadillo(mercadillo)){
+                favorito.setImageResource(R.drawable.ic_fav);
+            }
             favorito.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(click[0]){
+                    if(!getMercadillo(mercadillo) && click[0]){
                         favorito.setImageResource(R.drawable.ic_fav);
                         click[0] = false;
                         agregarFavoritos(mercadillo);
@@ -90,6 +93,7 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
                         favorito.setImageResource(R.drawable.ic_favorito);
                         eliminarFavorito(mercadillo);
                         click[0] = true;
+                        notifyDataSetChanged();
                     }
                 }
             });
@@ -109,6 +113,17 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
         realm.beginTransaction();
         realm.copyToRealm(mercadillo);
         realm.commitTransaction();
+    }
+
+    private boolean getMercadillo(Mercadillo mercadillo){
+        final RealmResults<Mercadillo> res = realm.where(Mercadillo.class).equalTo("id", String.valueOf(mercadillo.getId()))
+                .findAll();
+        if(res.isValid() && !res.isEmpty()) {
+
+            return true;
+        }else {
+            return false;
+        }
     }
 
     private void eliminarFavorito(Mercadillo mercadillo){
