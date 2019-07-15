@@ -1,8 +1,10 @@
 package com.proyecto.marketdillo;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Mercadillo extends RealmObject {
+    @PrimaryKey
     private String id;
     private String nombre;
     private String calificacion;

@@ -133,7 +133,8 @@ public class VistaUsuarios extends AppCompatActivity
 
 
         } else if (id == R.id.nav_favoritos) {
-            this.setTitle("VistaUsuarios favoritos");
+            fragmentManager.beginTransaction().replace(R.id.mercadillos_container, new FavoritosFragment()).commit();
+            this.setTitle("Favoritos");
             menu.findItem(R.id.search).setVisible(false);
 
 

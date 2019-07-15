@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 
 public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.ViewHolder> {
@@ -110,10 +112,16 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
     }
 
     private void eliminarFavorito(Mercadillo mercadillo){
-        realm.beginTransaction();
-        assert mercadillo != null;
-        mercadillo.deleteFromRealm();
-        realm.commitTransaction();
+        final RealmResults<Mercadillo> res = realm.where(Mercadillo.class).equalTo("id", String.valueOf(mercadillo.getId()))
+                .findAll();
+        if(res.isValid() && !res.isEmpty()) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    res.deleteAllFromRealm();
+                }
+            });
+        }
     }
 
     public interface OnItemClickListener{

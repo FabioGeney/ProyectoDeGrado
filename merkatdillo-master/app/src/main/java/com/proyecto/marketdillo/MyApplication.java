@@ -11,8 +11,8 @@ public class MyApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        setUpRealConfig();
         Realm.init(getApplicationContext());
+        setUpRealConfig();
         Realm realm = Realm.getDefaultInstance();
         realm.close();
     }
