@@ -24,6 +24,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+
 import static android.support.constraint.Constraints.TAG;
 
 
@@ -64,6 +66,7 @@ public class MercadilloFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_mercadillo, container, false);
         mercadillos1 = getMercadillos();
 
+
         layoutManager = new LinearLayoutManager(getContext());
         // Instancia del ListView.
         mRecyclerView = (RecyclerView) root.findViewById(R.id.mercadillo_Recycler);
@@ -88,6 +91,7 @@ public class MercadilloFragment extends Fragment {
                                 mercadillo.setId(document.getId());
                                 mercadillo.setImagen(R.mipmap.ic_merca_image);
                                 mercadillos.add(mercadillo);
+
 
                             }
                             // Inicializar el adaptador con la fuente de datos.

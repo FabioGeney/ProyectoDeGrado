@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.karumi:dexter:4.2.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'id.zelory:compressor:2.1.0'
+    apply plugin: 'realm-android'
 }
 
 apply plugin: 'com.google.gms.google-services'

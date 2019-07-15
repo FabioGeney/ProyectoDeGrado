@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import io.realm.Realm;
+
 
 public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.ViewHolder> {
 
@@ -22,6 +24,7 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
+    private Realm realm;
 
     public  MercadilloAdapter(List<Mercadillo> mercadillos, int layout, OnItemClickListener itemClickListener ){
         this.mercadillos = mercadillos;
@@ -70,6 +73,8 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
             tiempoEnvio.setText( mercadillo.getTiempoEntrega());
             calificacion.setText(  mercadillo.getCalificacion());
 
+            realm = Realm.getDefaultInstance();
+
             final boolean[] click = {true};
 
             favorito.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +83,10 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
                     if(click[0]){
                         favorito.setImageResource(R.drawable.ic_fav);
                         click[0] = false;
+                        agregarFavoritos(mercadillo);
                     }else {
                         favorito.setImageResource(R.drawable.ic_favorito);
+                        eliminarFavorito(mercadillo);
                         click[0] = true;
                     }
                 }
@@ -94,6 +101,19 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
 
 
         }
+    }
+
+    private void agregarFavoritos(Mercadillo mercadillo){
+        realm.beginTransaction();
+        realm.copyToRealm(mercadillo);
+        realm.commitTransaction();
+    }
+
+    private void eliminarFavorito(Mercadillo mercadillo){
+        realm.beginTransaction();
+        assert mercadillo != null;
+        mercadillo.deleteFromRealm();
+        realm.commitTransaction();
     }
 
     public interface OnItemClickListener{

@@ -1,6 +1,8 @@
 package com.proyecto.marketdillo;
 
-public class Mercadillo {
+import io.realm.RealmObject;
+
+public class Mercadillo extends RealmObject {
     private String id;
     private String nombre;
     private String calificacion;
@@ -8,7 +10,7 @@ public class Mercadillo {
     private String costoEnvio;
     private int imagen;
 
-    Mercadillo(){
+    public Mercadillo(){
 
 
     };
