@@ -79,7 +79,13 @@ public class FavoritosFragment extends Fragment {
         mercadilloAdapter = new MercadilloAdapter(mercadillos, R.layout.list_item_mercadillo, new MercadilloAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(Mercadillo mercadillo, int posicion) {
-
+                Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);
+                //crea el singleotnMercadillo para almacenar en memoria los detos del mercadillo seleccionado por el usuario
+                SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
+                //en caso de que ya haya un mercadillo almacenado será reemplazado por otro seleccionado por el usuario
+                singletonMercadillo.setMercadillo(mercadillo);
+                Toast.makeText(getContext(), mercadillo.getId(), Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
         mRecyclerView.setLayoutManager(layoutManager);

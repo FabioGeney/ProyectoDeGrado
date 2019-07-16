@@ -17,6 +17,7 @@ import java.util.Map;
 public class CalificarPedido extends AppCompatActivity {
 
     private String idDocumentPedido;
+    private String idMercadillo;
     private RatingBar ratingProdutos;
     private RatingBar ratingServicio;
     private RatingBar ratingCosto;
@@ -41,6 +42,7 @@ public class CalificarPedido extends AppCompatActivity {
 
         idDocumentPedido = getIntent().getStringExtra("idDocumentPedido");
         String nombre = getIntent().getStringExtra("mercadillo");
+        idMercadillo = getIntent().getStringExtra("idMercadillo");
 
         nombreMercadillo.setText(nombre);
 
@@ -58,7 +60,10 @@ public class CalificarPedido extends AppCompatActivity {
 
         double calificacion = (ratingProdutos.getRating() + ratingServicio.getRating() + ratingCosto.getRating() + ratingTiempo.getRating())/4;
         Map<String, Object> update = new HashMap<>();
+        Map<String, Object> promedio = new HashMap<>();
         update.put("calificacion", calificacion);
+        promedio.put("promedio", calificacion);
+        db.collection("Mercadillo").document(idMercadillo).collection("Calificacion").document().set(promedio);
         db.collection("Pedidos").document(idDocumentPedido).update(update);
         Intent intent = new Intent(CalificarPedido.this, VistaUsuarios.class);
         startActivity(intent);

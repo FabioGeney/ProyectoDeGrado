@@ -59,6 +59,7 @@ public class VistaDetalles extends AppCompatActivity {
         Pedidos pedidos = (Pedidos) getIntent().getSerializableExtra("pedido");
         final String nombreMercadillo = pedidos.getNombreMercadillo();
         final String idDocumentPedido = pedidos.getIdDocument();
+        final String idMercadillo = pedidos.getIdCampesino();
         String nombreUsuario = pedidos.getNombreComprador();
         double cal = pedidos.getCalificacion();
         String direccionEntrega = pedidos.getDireccionEntrega();
@@ -111,6 +112,7 @@ public class VistaDetalles extends AppCompatActivity {
                 Intent intent = new Intent(VistaDetalles.this, CalificarPedido.class);
                 intent.putExtra("mercadillo", nombreMercadillo);
                 intent.putExtra("idDocumentPedido", idDocumentPedido);
+                intent.putExtra("idMercadillo", idMercadillo);
                 startActivity(intent);
             }
         });
