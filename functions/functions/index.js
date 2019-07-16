@@ -146,3 +146,29 @@ onWrite((snap, context) => {
   
 
 });
+
+exports.calcularPormedio = functions.firestore.document('Mercadillo/{mercadilloId}/Calificacion/{calificacionId}').onWrite((snap, context) =>{
+
+  const mercadilloId = context.params.mercadilloId;
+
+  const calificaciones = admin.firestore().collection("Mercadillo").doc(mercadilloId).collection("Calificacion").get().then( (dataSnap) => {
+    let contador = 0;
+    let suma = 0;
+   
+    //const calificacionesResult = dataSnap.data().promedio;
+    dataSnap.forEach(data =>{
+        suma = suma + parseFloat(data.data().promedio);
+        contador = contador + 1;
+          
+    });
+
+    const promedio = (suma/contador).toFixed(1);
+    console.log("suma: " + suma + " contador: " + contador + " promedio: " + (suma/contador).toFixed(1) );
+
+
+    return admin.firestore().collection("Mercadillo").doc(mercadilloId).update("calificacion", promedio); 
+    
+  });
+
+ 
+});

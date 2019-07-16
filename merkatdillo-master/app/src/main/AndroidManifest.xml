@@ -21,7 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Administrador.VistaMercadilloAdmin"></activity>
+        <activity android:name=".CrearPhoneCampesinoActivity"></activity>
+        <activity android:name=".CrearPhoneActivity" />
+        <activity android:name=".Administrador.VistaMercadilloAdmin" />
         <activity
             android:name=".Example.Main2Activity"
             android:label="@string/title_activity_main2"
@@ -33,7 +35,7 @@
         <activity
             android:name=".PhoneActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/ThemeMainActivity">
+            android:theme="@style/ThemeMainActivityH">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -61,6 +63,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaCampesino" />
+
             <intent-filter>
                 <action android:name="com.proyecto.marketdillo.NOTIFICACIONMENSAJE" />
 

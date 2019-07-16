@@ -69,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:ems="11"
                 android:hint="@string/hint_numtelefonico"
+                android:text="+57"
                 android:inputType="phone" />
 
         </android.support.design.widget.TextInputLayout>
