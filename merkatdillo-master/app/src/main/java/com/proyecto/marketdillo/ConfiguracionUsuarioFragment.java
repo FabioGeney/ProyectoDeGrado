@@ -15,10 +15,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -27,7 +32,7 @@ public class ConfiguracionUsuarioFragment extends Fragment {
     private EditText nombre;
     private EditText apellido;
     private TextView correo;
-    private EditText celular;
+    private TextView celular;
     private EditText documentoidentidad;
     private EditText fechanacimiento;
     private EditText direccion;
@@ -58,7 +63,7 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         nombre = (EditText) root.findViewById(R.id.nnnnombre);
         apellido = (EditText) root.findViewById(R.id.aaaapellido);
         correo = (TextView) root.findViewById(R.id.correo);
-        celular = (EditText) root.findViewById(R.id.celuco);
+        celular = (TextView) root.findViewById(R.id.celuco);
         documentoidentidad = (EditText) root.findViewById(R.id.identitydocument);
         fechanacimiento = (EditText) root.findViewById(R.id.birth);
         direccion = (EditText) root.findViewById(R.id.address);
@@ -76,6 +81,7 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //editarPerfil();
             }
         });
 
@@ -114,6 +120,30 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         documentoidentidad.setText(usuario.getDoc_identidad());
         fechanacimiento.setText(usuario.getFecha());
         direccion.setText(usuario.getDireccion());
+    }
+
+    public void editarPerfil(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        DocumentReference editarperf = db.collection("Consumidor").document(firebaseUser.getUid());
+
+        String nombre1 = nombre.getText().toString();
+        String apellido1 = apellido.getText().toString();
+        String documentoidentidad1 = documentoidentidad.getText().toString();
+        String fechanacimiento1 = fechanacimiento.getText().toString();
+        String direccion1 = direccion.getText().toString();
+
+        final Map<String, Object> updat = new HashMap<>();
+
+        updat.put("nombre", nombre1);
+        updat.put("apellidos", apellido1);
+        updat.put("doc_identidad", documentoidentidad1);
+        updat.put("fecha", fechanacimiento1);
+        updat.put("direccion", direccion1);
+
+        editarperf.update(updat);
+
+        Toast.makeText(getContext(), "Perfil Actualizado", Toast.LENGTH_SHORT).show();
+
     }
 
     private void initialize() {

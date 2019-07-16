@@ -31,6 +31,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static android.support.constraint.Constraints.TAG;
 
 
@@ -42,7 +45,7 @@ public class ConfiguracionFragment extends Fragment {
     private EditText nombre;
     private EditText apellido;
     private TextView correo;
-    private EditText celular;
+    private TextView celular;
     private EditText documentoidentidad;
     private EditText fechanacimiento;
     private EditText direccion;
@@ -74,7 +77,7 @@ public class ConfiguracionFragment extends Fragment {
         nombre = (EditText) root.findViewById(R.id.nnnnombre);
         apellido = (EditText) root.findViewById(R.id.aaaapellido);
         correo = (TextView) root.findViewById(R.id.ccorreoespacio);
-        celular = (EditText) root.findViewById(R.id.celuco);
+        celular = (TextView) root.findViewById(R.id.celuco);
         documentoidentidad = (EditText) root.findViewById(R.id.identitydocument);
         fechanacimiento = (EditText) root.findViewById(R.id.birth);
         direccion = (EditText) root.findViewById(R.id.address);
@@ -97,6 +100,7 @@ public class ConfiguracionFragment extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //editarPerfil();
             }
         });
 
@@ -150,6 +154,37 @@ public class ConfiguracionFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void editarPerfil(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        DocumentReference editarperf = db.collection("Campesino").document(firebaseUser.getUid());
+        DocumentReference editarperfi2 = db.collection("Mercadillo").document(firebaseUser.getUid());
+
+        String nombre1 = nombre.getText().toString();
+        String apellido1 = apellido.getText().toString();
+        String documentoidentidad1 = documentoidentidad.getText().toString();
+        String fechanacimiento1 = fechanacimiento.getText().toString();
+        String direccion1 = direccion.getText().toString();
+        String nommercadillo1 = nommercadillo.getText().toString();
+        String tiempoaprox1 = tiempoaprox.getText().toString();
+        final Map<String, Object> updat = new HashMap<>();
+        final Map<String, Object> updat2 = new HashMap<>();
+        updat.put("nombre", nombre1);
+        updat.put("apellidos", apellido1);
+        updat.put("doc_identidad", documentoidentidad1);
+        updat.put("fecha", fechanacimiento1);
+        updat.put("direccion", direccion1);
+
+        updat2.put("nombre", nommercadillo1);
+        updat2.put("tiempoEntrega", tiempoaprox1);
+
+        editarperf.update(updat);
+
+        editarperfi2.update(updat2);
+
+        Toast.makeText(getContext(), "Perfil Actualizado", Toast.LENGTH_SHORT).show();
+
     }
 
     private void initialize() {
