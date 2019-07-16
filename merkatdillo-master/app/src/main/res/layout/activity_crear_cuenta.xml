@@ -26,10 +26,11 @@
                 android:id="@+id/textInputLayoutNombres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +41,10 @@
                     android:id="@+id/edtnombres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="18"
+                    android:ems="16"
                     android:hint="@string/hint_nombres"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textSize="17sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -51,10 +53,11 @@
                 android:id="@+id/textInputLayoutApellidos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,9 +68,10 @@
                     android:id="@+id/edtapellidos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="18"
+                    android:ems="16"
                     android:hint="@string/hint_apellidos"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textSize="17sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -75,10 +79,11 @@
                 android:id="@+id/textInputLayoutCorreo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,9 +94,10 @@
                     android:id="@+id/edtemail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="18"
+                    android:ems="16"
                     android:hint="@string/hint_correo2"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:textSize="17sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -99,10 +105,11 @@
                 android:id="@+id/textInputLayoutCelular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -113,9 +120,10 @@
                     android:id="@+id/edtcelular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="18"
+                    android:ems="16"
                     android:hint="@string/hint_celular"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textSize="17sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -123,10 +131,11 @@
                 android:id="@+id/textInputLayoutIdentidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,9 +146,10 @@
                     android:id="@+id/edtdidentidad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="18"
+                    android:ems="16"
                     android:hint="@string/hint_didentidad"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textSize="17sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -147,10 +157,11 @@
                 android:id="@+id/textInputLayoutFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -161,9 +172,10 @@
                     android:id="@+id/edtfechanacimiento"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="18"
+                    android:ems="16"
                     android:hint="@string/hint_fechanacimiento"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    android:textSize="17sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -171,10 +183,11 @@
                 android:id="@+id/textInputLayoutDireccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -185,9 +198,10 @@
                     android:id="@+id/edtdireccion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="18"
+                    android:ems="16"
                     android:hint="@string/hint_direccion"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textSize="17sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -196,10 +210,11 @@
                 android:id="@+id/textInputLayoutContraseña"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -211,19 +226,21 @@
                     android:id="@+id/edtpassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="18"
+                    android:ems="16"
                     android:hint="@string/hint_password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:textSize="17sp" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayoutConfirmar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -235,16 +252,17 @@
                     android:id="@+id/edtpassword2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="18"
+                    android:ems="16"
                     android:hint="@string/hint_password2"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:textSize="17sp" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/btncrearcuenta"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="107dp"
+                android:layout_marginTop="30dp"
                 android:enabled="false"
                 android:text="@string/crear_cuenta2"
                 android:theme="@style/RaisedButton"
