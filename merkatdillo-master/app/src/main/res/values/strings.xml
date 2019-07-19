@@ -32,6 +32,7 @@
     <string name="button_cerrarsesion">Cerrar Sesión</string>
     <string name="button_guardar">Guardar</string>
     <string name="ingresartelefono"><u>Ingresa</u> <u>con</u> <u>tu</u> <u>teléfono</u></string>
+    <string name="button_siguiente">Siguiente</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
