@@ -35,7 +35,7 @@ public class CrearPhoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_phone);
 
-        etnombres =findViewById(R.id.etnombres);
+        etnombres = findViewById(R.id.etnombres);
         etapellidos = findViewById(R.id.etapellidos);
         etcelular = findViewById(R.id.etcelular);
         etfechanacimiento = findViewById(R.id.etfechanacimiento);
@@ -60,13 +60,13 @@ public class CrearPhoneActivity extends AppCompatActivity {
         etdireccion.addTextChangedListener(loginTextWatcher);
     }
 
-    private void initialize(){
+    private void initialize() {
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null){
+                if (firebaseUser != null) {
                     Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getUid());
                     Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getPhoneNumber());
                 } else {
@@ -91,9 +91,9 @@ public class CrearPhoneActivity extends AppCompatActivity {
             String didentidadentrada = etdidentidad.getText().toString().trim();
             String direccionentrada = etdireccion.getText().toString().trim();
             bnsiguiente.setEnabled(!nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty());
-            if(!nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty()){
+            if (!nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty()) {
                 bnsiguiente.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
-            }else {
+            } else {
 
 
             }
@@ -101,9 +101,9 @@ public class CrearPhoneActivity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if(!bnsiguiente.isEnabled()){
+            if (!bnsiguiente.isEnabled()) {
                 bnsiguiente.setBackgroundColor(getResources().getColor(R.color.colorDivider));
-            }else {
+            } else {
 
 
             }

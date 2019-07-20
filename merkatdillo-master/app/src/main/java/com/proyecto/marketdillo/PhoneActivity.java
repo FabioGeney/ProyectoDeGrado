@@ -188,7 +188,7 @@ public class PhoneActivity extends AppCompatActivity {
                     Toast.makeText(PhoneActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
                     final CharSequence[] itemss = {"Productor","Comprador"};
                     AlertDialog.Builder alert = new AlertDialog.Builder(PhoneActivity.this);
-                    alert.setTitle("¿Eres Productor o Comprador?");
+                    alert.setTitle("Bienvenido, ¿Eres Productor o Comprador?");
                     alert.setItems(itemss, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

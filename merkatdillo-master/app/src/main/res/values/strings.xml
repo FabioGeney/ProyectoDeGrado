@@ -22,6 +22,7 @@
     <string name="tx_comprador">¿<u>Eres</u> <u>comprador</u>?</string>
     <string name="txt_unete">Únete ya a <u>MerkatDillo!</u></string>
     <string name="txt_observar">Mira los productos de nuestros campesinos</string>
+    <string name="txt_registrar">Comienza registrando tu datos</string>
     <string name="title_activity_mercadillos">Mercadillos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

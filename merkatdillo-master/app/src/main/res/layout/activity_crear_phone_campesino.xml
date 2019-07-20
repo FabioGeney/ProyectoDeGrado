@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.1" />
+                app:layout_constraintGuide_percent="0.05" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/glv"
@@ -30,10 +30,30 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
 
+            <TextView
+                android:id="@+id/textoreg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="2dp"
+                android:text="@string/txt_registrar"
+                android:textColor="@color/colorPrimary2"
+                android:textSize="@dimen/tamañotexto2"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toTopOf="@+id/glh"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/laynom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/glh">
@@ -42,8 +62,10 @@
                     android:id="@+id/etnombres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="14"
+                    android:hint="@string/hint_nombres"
                     android:inputType="textPersonName"
-                    android:ems="14" />
+                    android:textSize="17sp" />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -52,6 +74,7 @@
                 android:id="@+id/layape"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/laynom">
@@ -60,8 +83,10 @@
                     android:id="@+id/etapellidos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="14"
+                    android:hint="@string/hint_apellidos"
                     android:inputType="textPersonName"
-                    android:ems="14" />
+                    android:textSize="17sp" />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -70,6 +95,7 @@
                 android:id="@+id/laycel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layape">
@@ -78,8 +104,10 @@
                     android:id="@+id/etcelular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="14"
+                    android:hint="@string/hint_celular"
                     android:inputType="phone"
-                    android:ems="14" />
+                    android:textSize="17sp" />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -88,6 +116,7 @@
                 android:id="@+id/layfec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/laycel">
@@ -96,8 +125,10 @@
                     android:id="@+id/etfechanacimiento"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="14"
+                    android:hint="@string/hint_fechanacimiento"
                     android:inputType="date"
-                    android:ems="14" />
+                    android:textSize="17sp" />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -106,6 +137,7 @@
                 android:id="@+id/layide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layfec">
@@ -114,8 +146,10 @@
                     android:id="@+id/etdidentidad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="14"
+                    android:hint="@string/hint_didentidad"
                     android:inputType="number"
-                    android:ems="14" />
+                    android:textSize="17sp" />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -124,6 +158,7 @@
                 android:id="@+id/laydir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layide">
@@ -132,8 +167,10 @@
                     android:id="@+id/etdireccion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="14"
+                    android:hint="@string/hint_direccion2"
                     android:inputType="text"
-                    android:ems="14" />
+                    android:textSize="17sp" />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -142,6 +179,7 @@
                 android:id="@+id/laymer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/laydir">
@@ -150,8 +188,10 @@
                     android:id="@+id/etmercadillo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="14"
+                    android:hint="@string/hint_mercadillo"
                     android:inputType="text"
-                    android:ems="14" />
+                    android:textSize="17sp" />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -160,6 +200,7 @@
                 android:id="@+id/laytie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/laymer">
@@ -168,8 +209,10 @@
                     android:id="@+id/ettiempoaprox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ems="14"
+                    android:hint="@string/hint_tiempoaprox"
                     android:inputType="text"
-                    android:ems="14" />
+                    android:textSize="17sp" />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -185,8 +228,8 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/button_siguiente"
                 android:theme="@style/RaisedButton"
-                app:layout_constraintTop_toBottomOf="@+id/laytie"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/laytie" />
 
 
         </android.support.constraint.ConstraintLayout>
