@@ -42,6 +42,7 @@
                     android:id="@+id/etnombres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
                     android:ems="14" />
 
 
@@ -59,6 +60,7 @@
                     android:id="@+id/etapellidos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
                     android:ems="14" />
 
 
@@ -76,6 +78,7 @@
                     android:id="@+id/etcelular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="phone"
                     android:ems="14" />
 
 
@@ -93,6 +96,7 @@
                     android:id="@+id/etfechanacimiento"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="date"
                     android:ems="14" />
 
 
@@ -110,6 +114,7 @@
                     android:id="@+id/etdidentidad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
                     android:ems="14" />
 
 
@@ -127,6 +132,7 @@
                     android:id="@+id/etdireccion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
                     android:ems="14" />
 
 
