@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,10 +10,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CrearPhoneCampesinoActivity extends AppCompatActivity {
 
@@ -30,7 +42,10 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
     private EditText etdireccion;
     private EditText etmercadillo;
     private EditText ettiempoaprox;
+    private String etpassword;
     private Button bnsiguiente;
+    private Usuario usuario;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +67,8 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         bnsiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //llenandodatos();
+                //busqueda();
             }
         });
 
@@ -83,6 +99,76 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
             }
         };
     }
+
+    private void llenandodatos() {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        sessionManager = new SessionManager(this);
+        String nombres = etnombres.getText().toString();
+        String apellidos = etapellidos.getText().toString();
+        String email = etemail;
+        String celular = etcelular.getText().toString();
+        String fecha = etfechanacimiento.getText().toString();
+        String didentidad = etdidentidad.getText().toString();
+        String direccion = etdireccion.getText().toString();
+        String mercadillos = etmercadillo.getText().toString();
+        String tiempoaprox = ettiempoaprox.getText().toString();
+        String password = etcelular.getText().toString();
+        final Map<String, Object> user = new HashMap<>();
+        final Map<String, Object> mercadillo = new HashMap<>();
+        user.put("nombre", nombres);
+        user.put("apellidos", apellidos);
+        user.put("email", email);
+        user.put("celular", celular);
+        user.put("fecha", fecha);
+        user.put("doc_identidad", didentidad);
+        user.put("direccion", direccion);
+        user.put("password", password);
+        user.put("id", firebaseUser.getUid());
+        mercadillo.put("id", firebaseUser.getUid());
+        mercadillo.put("nombre", mercadillos);
+        mercadillo.put("tiempoEntrega", tiempoaprox);
+        mercadillo.put("calificacion", "--");
+        db.collection("Campesino").document(firebaseUser.getUid()).set(user);
+        db.collection("Mercadillo").document(firebaseUser.getUid()).set(mercadillo);
+        Toast.makeText(CrearPhoneCampesinoActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
+    }
+
+    private void busqueda() {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        db.collection("Campesino").document(firebaseUser.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            usuario = document.toObject(Usuario.class);
+                            usuario.setTipoUsuario("campesino");
+                        } else {
+                            Toast.makeText(CrearPhoneCampesinoActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                        if (usuario != null && usuario.getTipoUsuario().equals("campesino")) {
+                            tokenID("Campesino");
+                            Intent i = new Intent(CrearPhoneCampesinoActivity.this, VistaCampesino.class);
+                            SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                            sessionManager.createSession(usuario, usuario.getTipoUsuario());
+                            singletonUsuario.setUsuario(usuario);
+                            startActivity(i);
+                        }
+                    }
+                });
+    }
+
+    private void tokenID(final String coleccion) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        String token_id = FirebaseInstanceId.getInstance().getToken();
+        Map<String, Object> token = new HashMap<>();
+        token.put("token_id", token_id);
+        db.collection(coleccion).document(firebaseAuth.getUid()).update(token);
+        firebaseDatabase.getReference(firebaseAuth.getUid()).child("TokenId").updateChildren(token);
+
+    }
+
 
     private TextWatcher loginTextWatcher = new TextWatcher() {
         @Override
@@ -121,4 +207,8 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Por favor termina de registrarte, y oprime en siguiente ", Toast.LENGTH_LONG).show();
+    }
 }
