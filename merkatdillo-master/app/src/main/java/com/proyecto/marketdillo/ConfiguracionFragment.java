@@ -100,7 +100,7 @@ public class ConfiguracionFragment extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //editarPerfil();
+                editarPerfil();
             }
         });
 

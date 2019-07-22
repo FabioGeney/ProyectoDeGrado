@@ -106,6 +106,7 @@
                     android:layout_height="wrap_content"
                     android:ems="14"
                     android:hint="@string/hint_celular"
+                    android:text="+57"
                     android:inputType="phone"
                     android:textSize="17sp" />
 
