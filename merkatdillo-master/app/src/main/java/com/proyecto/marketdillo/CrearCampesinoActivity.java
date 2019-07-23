@@ -1,6 +1,8 @@
 package com.proyecto.marketdillo;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -48,9 +50,11 @@ public class CrearCampesinoActivity extends AppCompatActivity {
     private EditText edtdireccion;
     private EditText edtmercadillo;
     private EditText edttiempoaprox;
-    private Button btncrearcuenta;
     private EditText edtpassword;
     private EditText edtpassword2;
+    private Button btncrearcuenta;
+    private EditText edtCostoDomii;
+    private EditText edtTipo;
 
     private static final String CERO = "0";
     private static final String BARRA = "/";
@@ -90,11 +94,22 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         edtpassword2 = findViewById(R.id.edtpassword2);
         textInputFecha=findViewById(R.id.textInputLayoutFecha);
         textInputLayoutNombres = findViewById(R.id.textInputLayoutNombres);
+        edtCostoDomii = findViewById(R.id.edtCostoDomii);
+        edtTipo = findViewById(R.id.edtTipo);
 
 
 
         initialize();
+        edtTipo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_HOVER_EXIT){
+                    getAlert();
+                }
 
+                return false;
+            }
+        });
 
         edtfechanacimiento.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -263,6 +278,31 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         //Muestro el widget
         recogerFecha.show();
 
+    }
+
+    private void getAlert(){
+        final String[] listItems = {"Frutas","Vegetales","Legumbres","Cereales", "Tubérculos","Otros"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Tipos de productos");
+
+        boolean[] checkedItems = new boolean[]{true, false, true, false, true, false};
+        builder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                Toast.makeText(CrearCampesinoActivity.this, "Position: " + which + " Value: " + listItems[which] + " State: " + (isChecked ? "checked" : "unchecked"), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

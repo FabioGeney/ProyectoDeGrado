@@ -23,6 +23,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
@@ -72,10 +73,11 @@ public class CrearProducto extends AppCompatActivity {
     private EditText edtDescripcion;
     private EditText edtCantidad;
     private EditText precioCantidad;
+    private EditText cantidadMasa;
+    private EditText precioPorCantidad;
+    private EditText tipo;
     private ImageView imagen;
-    private Spinner spinnerCantidad;
-    private Spinner spinnerPrecio;
-    private Spinner spinnerTipo;
+
     private Button guardar;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -111,18 +113,49 @@ public class CrearProducto extends AppCompatActivity {
         precioCantidad = findViewById(R.id.edtprecio);
         guardar = findViewById(R.id.btnguardar);
         imagen = findViewById(R.id.imagen);
-        spinnerCantidad = findViewById(R.id.spinnerCantidad);
-        spinnerPrecio = findViewById(R.id.spinnerPrecio);
-        spinnerTipo = findViewById(R.id.spinnerTipo);
+        cantidadMasa = findViewById(R.id.edtCategoria1);
+        precioPorCantidad = findViewById(R.id.edtCategoria2);
+        tipo = findViewById(R.id.edtTipo);
 
-        String[] tipo = {"Fruta","Vegetal","Grano","Cereal"};
-        spinnerTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipo));
+        tipo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
-        String[] cantidad = {"Unidades","Gramos","Libras","Kilogramos","Canastas"};
-        spinnerCantidad.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cantidad));
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    seleccionaTipo();
+                }
+
+                return false;
+            }
+        });
+
+        cantidadMasa.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    seleccionaMasa();
+                }
+
+                return false;
+            }
+        });
+
+        precioPorCantidad.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    seleccionaCantidadPorPrecio();
+                }
+
+                return false;
+            }
+        });
+
+
+
 
         String[] precio = {"Unidad","Gramo","Libra","Kilogramo", "Canastas"};
-        spinnerPrecio.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, precio));
+
 
         hStorageRef = FirebaseStorage.getInstance().getReference("Subidas");
         hDatabaseRef = FirebaseDatabase.getInstance().getReference("Subidas");
@@ -148,6 +181,9 @@ public class CrearProducto extends AppCompatActivity {
         edtDescripcion.addTextChangedListener(loginTextWatcher);
         edtCantidad.addTextChangedListener(loginTextWatcher);
         precioCantidad.addTextChangedListener(loginTextWatcher);
+        tipo.addTextChangedListener(loginTextWatcher);
+        cantidadMasa.addTextChangedListener(loginTextWatcher);
+        precioPorCantidad.addTextChangedListener(loginTextWatcher);
 
     }
 
@@ -413,9 +449,9 @@ public class CrearProducto extends AppCompatActivity {
         String descripcion = edtDescripcion.getText().toString();
         String cantidad = edtCantidad.getText().toString();
         String cantidadP = precioCantidad.getText().toString();
-        String precioPorCanditdad = spinnerPrecio.getSelectedItem().toString();
-        String tipo = spinnerTipo.getSelectedItem().toString();
-        Producto producto = new Producto(idCampesino, nombre, descripcion, Integer.parseInt(cantidadP) , cantidad, picture, precioPorCanditdad, tipo);
+        String precioCantidad = precioPorCantidad.getText().toString();
+        String tipoProducto = tipo.getText().toString();
+        Producto producto = new Producto(idCampesino, nombre, descripcion, Integer.parseInt(cantidadP) , cantidad, picture, precioCantidad, tipoProducto);
         enviarProducto.add(producto);
         Toast.makeText(CrearProducto.this, "Producto Guardado", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(CrearProducto.this, VistaCampesino.class);
@@ -450,8 +486,11 @@ public class CrearProducto extends AppCompatActivity {
             String descripcion = edtDescripcion.getText().toString();
             String cantidad = edtCantidad.getText().toString();
             String cantidadP = precioCantidad.getText().toString();
-            guardar.setEnabled(!nombre.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !cantidadP.isEmpty());
-            if(!nombre.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !cantidadP.isEmpty()){
+            String tipoCantidad = tipo.getText().toString();
+            String cantidadM = cantidadMasa.getText().toString();
+            String cantidPorVenta = precioPorCantidad.getText().toString();
+            guardar.setEnabled(!nombre.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !cantidadP.isEmpty() && !tipoCantidad.isEmpty() && !cantidadM.isEmpty() && !cantidPorVenta.isEmpty());
+            if(!nombre.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !cantidadP.isEmpty() && !tipoCantidad.isEmpty() && !cantidadM.isEmpty() && !cantidPorVenta.isEmpty()){
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             }else {
                 guardar.setBackgroundColor(getResources().getColor(R.color.colorDivider));
@@ -468,4 +507,101 @@ public class CrearProducto extends AppCompatActivity {
             }
         }
     };
+    private void seleccionaTipo(){
+        final CharSequence[] item = {"Fruta","Vegetal","Legumbre","Cereal", "Tubérculo","Otro"};
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Seleccione un tipo");
+        alert.setItems(item, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (item[which].toString()){
+                    case "Fruta":
+                        tipo.setText(item[which].toString());
+                        break;
+                    case "Vegetal":
+                        tipo.setText(item[which].toString());
+                        break;
+                    case "Legumbre":
+                        tipo.setText(item[which].toString());
+                        break;
+                    case "Cereal":
+                        tipo.setText(item[which].toString());
+                        break;
+                    case "Otro":
+                        tipo.setText(item[which].toString());
+                        break;
+                    default:
+                        dialog.dismiss();
+
+                }
+            }
+        });
+        alert.show();
+    }
+
+    private void seleccionaMasa(){
+        final CharSequence[] item = {"Unidades","Gramos","Libras","Kilogramos","Canastas"};
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Seleccione un tipo");
+        alert.setItems(item, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (item[which].toString()){
+                    case "Unidades":
+                        cantidadMasa.setText(item[which].toString());
+                        break;
+                    case "Gramos":
+                        cantidadMasa.setText(item[which].toString());
+                        break;
+                    case "Libras":
+                        cantidadMasa.setText(item[which].toString());
+                        break;
+                    case "Kilogramos":
+                        cantidadMasa.setText(item[which].toString());
+                        break;
+                    case "Canastas":
+                        cantidadMasa.setText(item[which].toString());
+                        break;
+                    default:
+                        dialog.dismiss();
+
+                }
+            }
+        });
+        alert.show();
+    }
+
+    private void seleccionaCantidadPorPrecio(){
+        final CharSequence[] item = {"Unidad","Gramo","Libra","Kilogramo","Canasta"};
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Seleccione un tipo");
+        alert.setItems(item, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (item[which].toString()){
+                    case "Unidad":
+                        precioPorCantidad.setText(item[which].toString());
+                        break;
+                    case "Gramo":
+                        precioPorCantidad.setText(item[which].toString());
+                        break;
+                    case "Libra":
+                        precioPorCantidad.setText(item[which].toString());
+                        break;
+                    case "Kilogramo":
+                        precioPorCantidad.setText(item[which].toString());
+                        break;
+                    case "Canasta":
+                        precioPorCantidad.setText(item[which].toString());
+                        break;
+                    default:
+                        dialog.dismiss();
+
+                }
+            }
+        });
+        alert.show();
+    }
+
+
 }
