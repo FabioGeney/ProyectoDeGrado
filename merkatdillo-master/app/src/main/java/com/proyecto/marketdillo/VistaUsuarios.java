@@ -27,6 +27,7 @@ public class VistaUsuarios extends AppCompatActivity
 
     private String direccion;
     private TextView nombreUsuario;
+    private TextView correo;
     private SessionManager sessionManager;
     Menu menu;
 
@@ -65,6 +66,9 @@ public class VistaUsuarios extends AppCompatActivity
         nombreUsuario = header.findViewById(R.id.nombre_usuario);
         //cambia los valores del TextView
         nombreUsuario.setText(usuario.getNombre());
+
+        correo = header.findViewById(R.id.usuariocorreo);
+        correo.setText(usuario.getEmail());
         navigationView.setNavigationItemSelectedListener(this);
         // crea un FragmentManager para llamar al FragmentMercadillo
         FragmentManager fragmentManager = getSupportFragmentManager();

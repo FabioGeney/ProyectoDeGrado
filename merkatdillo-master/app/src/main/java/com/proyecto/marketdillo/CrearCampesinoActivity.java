@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +52,19 @@ public class CrearCampesinoActivity extends AppCompatActivity {
     private EditText edtpassword;
     private EditText edtpassword2;
 
+    private static final String CERO = "0";
+    private static final String BARRA = "/";
+
+    //Calendario para obtener fecha & hora
+    public final Calendar calendar = Calendar.getInstance();
+
+    //Variables para obtener la fecha
+    final int mes = calendar.get(Calendar.MONTH);
+    final int dia = calendar.get(Calendar.DAY_OF_MONTH);
+    final int anio = calendar.get(Calendar.YEAR);
+
     private TextInputLayout textInputLayoutNombres;
+    private TextInputLayout textInputFecha;
 
 
     @Override
@@ -59,7 +74,7 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         Toolbar toolbar2 = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar2);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle("Comencemos");
+        this.setTitle("Registro");
 
         edtnombres =findViewById(R.id.edtnombres);
         edtapellidos = findViewById(R.id.edtapellidos);
@@ -73,11 +88,25 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         btncrearcuenta = findViewById(R.id.btncrearcuenta);
         edtpassword = findViewById(R.id.edtpassword);
         edtpassword2 = findViewById(R.id.edtpassword2);
-
+        textInputFecha=findViewById(R.id.textInputLayoutFecha);
         textInputLayoutNombres = findViewById(R.id.textInputLayoutNombres);
 
 
+
         initialize();
+
+
+        edtfechanacimiento.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    obtenerFecha();
+                }
+
+                return false;
+            }
+        });
+
         /*boton para crear cuenta, llama al metodo cuentanueva*/
         btncrearcuenta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,6 +239,31 @@ public class CrearCampesinoActivity extends AppCompatActivity {
 
         }
     };
+
+    private void obtenerFecha(){
+        DatePickerDialog recogerFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
+                final int mesActual = month + 1;
+                //Formateo el día obtenido: antepone el 0 si son menores de 10
+                String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                //Formateo el mes obtenido: antepone el 0 si son menores de 10
+                String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
+                //Muestro la fecha con el formato deseado
+                edtfechanacimiento.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
+
+
+            }
+            //Estos valores deben ir en ese orden, de lo contrario no mostrara la fecha actual
+            /**
+             *También puede cargar los valores que usted desee
+             */
+        },anio, mes, dia);
+        //Muestro el widget
+        recogerFecha.show();
+
+    }
 
 
 }

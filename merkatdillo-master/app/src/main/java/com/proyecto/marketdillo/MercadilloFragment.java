@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +40,7 @@ public class MercadilloFragment extends Fragment {
     private RecyclerView.Adapter mercadilloAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Mercadillo> mercadillos1;
+    private ProgressBar progressBar;
 
 
     public MercadilloFragment() {
@@ -64,6 +66,7 @@ public class MercadilloFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_mercadillo, container, false);
+        progressBar = root.findViewById(R.id.progressBar);
         mercadillos1 = getMercadillos();
 
 
@@ -77,7 +80,7 @@ public class MercadilloFragment extends Fragment {
     public List<Mercadillo> getMercadillos() {
         final ArrayList<Mercadillo> mercadillos = new ArrayList<>();
         mercadillos.add(new Mercadillo("Mercadillo de frutas", "40 min", "4.5", "4500", R.mipmap.ic_merca_image));
-
+        progressBar.setVisibility(View.VISIBLE);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Mercadillo")
                 .get()
@@ -117,7 +120,7 @@ public class MercadilloFragment extends Fragment {
                         }
                     }
                 });
-
+        progressBar.setVisibility(View.INVISIBLE);
         return mercadillos;
     }
 

@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +11,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +61,17 @@ public class ConfiguracionFragment extends Fragment {
     private Button guardar;
     private Button cerrar;
     private SessionManager sessionManager;
+
+    private static final String CERO = "0";
+    private static final String BARRA = "/";
+
+    //Calendario para obtener fecha & hora
+    public final Calendar calendar = Calendar.getInstance();
+
+    //Variables para obtener la fecha
+    final int mes = calendar.get(Calendar.MONTH);
+    final int dia = calendar.get(Calendar.DAY_OF_MONTH);
+    final int anio = calendar.get(Calendar.YEAR);
 
     public ConfiguracionFragment() {
         // Required empty public constructor
@@ -96,6 +111,17 @@ public class ConfiguracionFragment extends Fragment {
         direccion.addTextChangedListener(loginTextWatcher);
         nommercadillo.addTextChangedListener(loginTextWatcher);
         tiempoaprox.addTextChangedListener(loginTextWatcher);
+
+        fechanacimiento.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    obtenerFecha();
+                }
+
+                return false;
+            }
+        });
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,4 +263,29 @@ public class ConfiguracionFragment extends Fragment {
             }
         }
     };
+
+    private void obtenerFecha(){
+        DatePickerDialog recogerFecha = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
+                final int mesActual = month + 1;
+                //Formateo el día obtenido: antepone el 0 si son menores de 10
+                String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                //Formateo el mes obtenido: antepone el 0 si son menores de 10
+                String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
+                //Muestro la fecha con el formato deseado
+                fechanacimiento.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
+
+
+            }
+            //Estos valores deben ir en ese orden, de lo contrario no mostrara la fecha actual
+            /**
+             *También puede cargar los valores que usted desee
+             */
+        },anio, mes, dia);
+        //Muestro el widget
+        recogerFecha.show();
+
+    }
 }
