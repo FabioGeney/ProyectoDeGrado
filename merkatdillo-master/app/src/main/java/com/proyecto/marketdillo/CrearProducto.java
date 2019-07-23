@@ -25,9 +25,11 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -71,6 +73,9 @@ public class CrearProducto extends AppCompatActivity {
     private EditText edtCantidad;
     private EditText precioCantidad;
     private ImageView imagen;
+    private Spinner spinnerCantidad;
+    private Spinner spinnerPrecio;
+    private Spinner spinnerTipo;
     private Button guardar;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -106,6 +111,18 @@ public class CrearProducto extends AppCompatActivity {
         precioCantidad = findViewById(R.id.edtprecio);
         guardar = findViewById(R.id.btnguardar);
         imagen = findViewById(R.id.imagen);
+        spinnerCantidad = findViewById(R.id.spinnerCantidad);
+        spinnerPrecio = findViewById(R.id.spinnerPrecio);
+        spinnerTipo = findViewById(R.id.spinnerTipo);
+
+        String[] tipo = {"Fruta","Vegetal","Grano","Cereal"};
+        spinnerTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipo));
+
+        String[] cantidad = {"Unidades","Gramos","Libras","Kilogramos","Canastas"};
+        spinnerCantidad.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cantidad));
+
+        String[] precio = {"Unidad","Gramo","Libra","Kilogramo", "Canastas"};
+        spinnerPrecio.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, precio));
 
         hStorageRef = FirebaseStorage.getInstance().getReference("Subidas");
         hDatabaseRef = FirebaseDatabase.getInstance().getReference("Subidas");
@@ -396,7 +413,9 @@ public class CrearProducto extends AppCompatActivity {
         String descripcion = edtDescripcion.getText().toString();
         String cantidad = edtCantidad.getText().toString();
         String cantidadP = precioCantidad.getText().toString();
-        Producto producto = new Producto(idCampesino, nombre, descripcion, Integer.parseInt(cantidadP) , cantidad, picture);
+        String precioPorCanditdad = spinnerPrecio.getSelectedItem().toString();
+        String tipo = spinnerTipo.getSelectedItem().toString();
+        Producto producto = new Producto(idCampesino, nombre, descripcion, Integer.parseInt(cantidadP) , cantidad, picture, precioPorCanditdad, tipo);
         enviarProducto.add(producto);
         Toast.makeText(CrearProducto.this, "Producto Guardado", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(CrearProducto.this, VistaCampesino.class);

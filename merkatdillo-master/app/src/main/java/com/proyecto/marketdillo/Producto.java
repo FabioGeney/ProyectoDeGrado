@@ -15,6 +15,8 @@ public class Producto implements Serializable{
     private String cantidad;
     private String imagen;
     private int contador = 0;
+    private String precioPorCantidad;
+
 
     Producto(){
 
@@ -53,6 +55,25 @@ public class Producto implements Serializable{
         this.cantidad = cantidad;
         this.imagen = imagen;
     };
+    Producto(String id, String nombre, String descripcion, int precio, String cantidad, String imagen, String precioPorCantidad, String tipo){
+
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.imagen = imagen;
+        this.precioPorCantidad = precioPorCantidad;
+        this.tipo = tipo;
+    };
+
+    public String getPrecioPorCantidad() {
+        return precioPorCantidad;
+    }
+
+    public void setPrecioPorCantidad(String precioPorCantidad) {
+        this.precioPorCantidad = precioPorCantidad;
+    }
 
     public String getIdDocument() {
         return idDocument;
