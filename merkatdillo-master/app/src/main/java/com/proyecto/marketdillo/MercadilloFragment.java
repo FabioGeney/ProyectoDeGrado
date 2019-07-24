@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,11 +38,15 @@ import static android.support.constraint.Constraints.TAG;
  */
 public class MercadilloFragment extends Fragment {
     private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerViewTipo;
+    private RecyclerView.Adapter categoriaAdapter;
+    private List<Categoria> categorias;
+    private RecyclerView.LayoutManager layoutManagerTipo;
     private RecyclerView.Adapter mercadilloAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Mercadillo> mercadillos1;
     private ProgressBar progressBar;
-
+    private DividerItemDecoration dividerItemDecoration;
 
     public MercadilloFragment() {
         // Required empty public constructor
@@ -66,9 +71,25 @@ public class MercadilloFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_mercadillo, container, false);
-        progressBar = root.findViewById(R.id.progressBar);
-        mercadillos1 = getMercadillos();
 
+        dividerItemDecoration = new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL);
+        //recycler de categorias
+        mRecyclerViewTipo = root.findViewById(R.id.recyclerTipo);
+        layoutManagerTipo = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        categorias = getCategorias();
+
+        categoriaAdapter = new CategoriaAdapter(categorias, R.layout.list_categoria, new CategoriaAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(Categoria categoria, int posicion) {
+
+            }
+        });
+        mRecyclerViewTipo.setLayoutManager(layoutManagerTipo);
+        mRecyclerViewTipo.setAdapter(categoriaAdapter);
+
+        //recycler de mercadillos
+        mercadillos1 = getMercadillos();
 
         layoutManager = new LinearLayoutManager(getContext());
         // Instancia del ListView.
@@ -77,10 +98,19 @@ public class MercadilloFragment extends Fragment {
         return root;
     }
 
+    private List<Categoria> getCategorias() {
+        ArrayList<Categoria> tipos = new ArrayList<>();
+
+        tipos.add(new Categoria("Frutas", R.drawable.frutas));
+        tipos.add(new Categoria("Vegetales", R.drawable.vegetales));
+        tipos.add(new Categoria("Legumbres", R.drawable.legumbres));
+        return tipos;
+    }
+
     public List<Mercadillo> getMercadillos() {
         final ArrayList<Mercadillo> mercadillos = new ArrayList<>();
-        mercadillos.add(new Mercadillo("Mercadillo de frutas", "40 min", "4.5", "4500", R.mipmap.ic_merca_image));
-        progressBar.setVisibility(View.VISIBLE);
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Mercadillo")
                 .get()
@@ -113,6 +143,7 @@ public class MercadilloFragment extends Fragment {
                             //Relacionando la lista con el adaptador
                             mRecyclerView.setLayoutManager(layoutManager);
                             mRecyclerView.setAdapter(mercadilloAdapter);
+                            mRecyclerView.addItemDecoration(dividerItemDecoration);
 
 
                         } else {
@@ -120,7 +151,7 @@ public class MercadilloFragment extends Fragment {
                         }
                     }
                 });
-        progressBar.setVisibility(View.INVISIBLE);
+
         return mercadillos;
     }
 

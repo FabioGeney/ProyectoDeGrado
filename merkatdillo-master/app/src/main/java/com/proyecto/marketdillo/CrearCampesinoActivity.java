@@ -29,6 +29,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +56,8 @@ public class CrearCampesinoActivity extends AppCompatActivity {
     private Button btncrearcuenta;
     private EditText edtCostoDomii;
     private EditText edtTipo;
+    private ArrayList<String> tipos = new ArrayList<>();
+    private boolean[] checkedItems = new boolean[]{false, false, false, false, false, false};
 
     private static final String CERO = "0";
     private static final String BARRA = "/";
@@ -141,6 +144,8 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         edttiempoaprox.addTextChangedListener(loginTextWatcher);
         edtpassword.addTextChangedListener(loginTextWatcher);
         edtpassword2.addTextChangedListener(loginTextWatcher);
+        edtCostoDomii.addTextChangedListener(loginTextWatcher);
+        edtTipo.addTextChangedListener(loginTextWatcher);
 
 
     }
@@ -174,6 +179,7 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         final String tiempoaprox = edttiempoaprox.getText().toString();
         String password = edtpassword.getText().toString();
         String password2 = edtpassword2.getText().toString();
+        final int costo = Integer.parseInt(edtCostoDomii.getText().toString());
         if(password.equals(password2)){
             final Map<String, Object> user = new HashMap<>();
             final Map<String, Object> mercadillo = new HashMap<>();
@@ -196,8 +202,12 @@ public class CrearCampesinoActivity extends AppCompatActivity {
                         mercadillo.put("nombre",mercadillos);
                         mercadillo.put("tiempoEntrega", tiempoaprox);
                         mercadillo.put("calificacion", "--");
+                        mercadillo.put("costoEnvio", costo);
                         db.collection("Campesino").document(firebaseUser.getUid()).set(user);
                         db.collection("Mercadillo").document(firebaseUser.getUid()).set(mercadillo);
+                        for(String temp : tipos){
+                            db.collection("Categorias").document("mercadillos").collection(temp).document(firebaseUser.getUid()).set(mercadillo);
+                        }
                         Toast.makeText(CrearCampesinoActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(CrearCampesinoActivity.this, MainActivity.class);
                         startActivity(i);
@@ -234,8 +244,10 @@ public class CrearCampesinoActivity extends AppCompatActivity {
             String direccionentrada = edtdireccion.getText().toString().trim();
             String mercadilloentrada = edtmercadillo.getText().toString().trim();
             String tiempoaproxentrada = edttiempoaprox.getText().toString().trim();
-            btncrearcuenta.setEnabled(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty());
-            if(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty()){
+            String tipoMercadillo = edtTipo.getText().toString().trim();
+            String costoDomi = edtCostoDomii.getText().toString().trim();
+            btncrearcuenta.setEnabled(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty() && !costoDomi.isEmpty() && !tipoMercadillo.isEmpty());
+            if(!correoentrada.isEmpty() && !claveentrada.isEmpty() && !clave2entrada.isEmpty() && !nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty() && !costoDomi.isEmpty() && !tipoMercadillo.isEmpty()){
                 btncrearcuenta.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             }else {
 
@@ -286,15 +298,35 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Tipos de productos");
 
-        boolean[] checkedItems = new boolean[]{true, false, true, false, true, false};
+
         builder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                Toast.makeText(CrearCampesinoActivity.this, "Position: " + which + " Value: " + listItems[which] + " State: " + (isChecked ? "checked" : "unchecked"), Toast.LENGTH_LONG).show();
+
+                if(isChecked){
+                    tipos.add(listItems[which]);
+                    checkedItems[which] = true;
+
+                }else{
+                    checkedItems[which] = false;
+                    tipos.remove(listItems[which]);
+                }
+
             }
         });
 
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String stringTipos = "";
+                for(String temp : tipos){
+                    stringTipos =  temp + ", "+ stringTipos;
+                }
+                edtTipo.setText(stringTipos);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

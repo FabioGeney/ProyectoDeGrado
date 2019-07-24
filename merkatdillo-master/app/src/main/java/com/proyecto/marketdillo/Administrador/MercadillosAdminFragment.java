@@ -77,7 +77,6 @@ public class MercadillosAdminFragment extends Fragment {
 
     public List<Mercadillo> getMercadillos() {
         final ArrayList<Mercadillo> mercadillos = new ArrayList<>();
-        mercadillos.add(new Mercadillo("Mercadillo de frutas", "40 min", "4.5", "4500", R.mipmap.ic_merca_image));
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Mercadillo")

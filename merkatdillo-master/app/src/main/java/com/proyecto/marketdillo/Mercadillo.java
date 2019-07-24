@@ -9,7 +9,7 @@ public class Mercadillo extends RealmObject {
     private String nombre;
     private String calificacion;
     private String tiempoEntrega;
-    private String costoEnvio;
+    private int costoEnvio;
     private int imagen;
 
     public Mercadillo(){
@@ -25,14 +25,14 @@ public class Mercadillo extends RealmObject {
 
     }
 
-    public Mercadillo( String nombre, String calificacion, String tiempoEntrega, String costoEnvio){
+    public Mercadillo( String nombre, String calificacion, String tiempoEntrega, int costoEnvio){
         this.nombre = nombre;
         this.tiempoEntrega = tiempoEntrega;
         this.calificacion = calificacion;
         this.costoEnvio = costoEnvio;
     }
 
-    public Mercadillo( String nombre, String tiempoEntrega, String calificacion, String costoEnvio, int imagen){
+    public Mercadillo( String nombre, String tiempoEntrega, String calificacion, int costoEnvio, int imagen){
         this.nombre = nombre;
         this.tiempoEntrega = tiempoEntrega;
         this.calificacion = calificacion;
@@ -40,20 +40,21 @@ public class Mercadillo extends RealmObject {
         this.imagen = imagen;
     }
 
-    public Mercadillo( String id, String nombre, String tiempoEntrega, String calificacion, String costoEnvio, int imagen){
+    public Mercadillo( String id, String nombre, String tiempoEntrega, String calificacion, int costoEnvio, int imagen){
         this.id = id;
         this.nombre = nombre;
         this.tiempoEntrega = tiempoEntrega;
         this.calificacion = calificacion;
         this.costoEnvio = costoEnvio;
         this.imagen = imagen;
+
     }
 
     public String getCalificacion() {
         return calificacion;
     }
 
-    public String getCostoEnvio() {
+    public int getCostoEnvio() {
         return costoEnvio;
     }
 
@@ -81,7 +82,7 @@ public class Mercadillo extends RealmObject {
         this.calificacion = calificacion;
     }
 
-    public void setCostoEnvio(String costoEnvio) {
+    public void setCostoEnvio(int costoEnvio) {
         this.costoEnvio = costoEnvio;
     }
 
