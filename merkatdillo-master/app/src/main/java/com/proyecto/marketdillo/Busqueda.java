@@ -98,7 +98,7 @@ public class Busqueda extends AppCompatActivity {
                                 mercadillo.setImagen(R.mipmap.ic_merca_image);
 
                                 String temp = mercadillo.getNombre().toLowerCase();
-                                if(temp.contains(queryTemp)){
+                                if(temp.contains(queryTemp) || queryTemp.contains(temp)){
                                     mercadillos.add(mercadillo);
                                 }
 
@@ -157,7 +157,7 @@ public class Busqueda extends AppCompatActivity {
                                                 producto.setIdDocument(document.getId());
                                                 //agrega porducto de la base de dato al arreglo
                                                 String temp = producto.getNombre().toLowerCase();
-                                                if(temp.contains(queryTemp)){
+                                                if(temp.contains(queryTemp) || queryTemp.contains(temp)){
                                                     queryResult.add(producto);
                                                 }
 
