@@ -154,9 +154,6 @@ public class CrearProducto extends AppCompatActivity {
 
 
 
-        String[] precio = {"Unidad","Gramo","Libra","Kilogramo", "Canastas"};
-
-
         hStorageRef = FirebaseStorage.getInstance().getReference("Subidas");
         hDatabaseRef = FirebaseDatabase.getInstance().getReference("Subidas");
 

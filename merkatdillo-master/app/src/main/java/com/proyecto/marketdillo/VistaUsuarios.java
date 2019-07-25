@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -156,6 +157,9 @@ public class VistaUsuarios extends AppCompatActivity
 
     @Override
     public boolean onQueryTextSubmit(String s) {
+        Intent intent = new Intent(VistaUsuarios.this, Busqueda.class);
+        intent.putExtra("query",s);
+        startActivity(intent);
         return false;
     }
 

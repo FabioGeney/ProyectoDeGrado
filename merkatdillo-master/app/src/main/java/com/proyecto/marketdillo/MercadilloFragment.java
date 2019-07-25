@@ -109,8 +109,6 @@ public class MercadilloFragment extends Fragment {
 
     public List<Mercadillo> getMercadillos() {
         final ArrayList<Mercadillo> mercadillos = new ArrayList<>();
-
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Mercadillo")
                 .get()

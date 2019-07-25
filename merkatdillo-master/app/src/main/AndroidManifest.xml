@@ -21,13 +21,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CrearPhoneCampesinoActivity"
-            android:theme="@style/ThemeMainActivityH">
-
+        <activity android:name=".Busqueda">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".VistaUsuarios" />
         </activity>
-        <activity android:name=".CrearPhoneActivity"
-            android:theme="@style/ThemeMainActivityH"/>
-
+        <activity
+            android:name=".CrearPhoneCampesinoActivity"
+            android:theme="@style/ThemeMainActivityH"></activity>
+        <activity
+            android:name=".CrearPhoneActivity"
+            android:theme="@style/ThemeMainActivityH" />
         <activity android:name=".Administrador.VistaMercadilloAdmin" />
         <activity
             android:name=".Example.Main2Activity"
