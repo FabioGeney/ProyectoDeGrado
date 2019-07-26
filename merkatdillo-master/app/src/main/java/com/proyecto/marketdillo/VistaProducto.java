@@ -16,6 +16,7 @@ public class VistaProducto extends AppCompatActivity {
     ImageView imagen;
     TextView descripcion;
     Button agregar;
+    TextView nombre;
     Producto producto;
     SingletonCanasta singletonCanasta;
     @Override
@@ -33,14 +34,16 @@ public class VistaProducto extends AppCompatActivity {
 
         String titulo = producto.getNombre();
 
-        this.setTitle(titulo);
-        // inicia variablres
+        this.setTitle("Detalles del producto");
+        // inicia variables
+        nombre = findViewById(R.id.nombre);
         imagen = findViewById(R.id.imagen);
         descripcion = findViewById(R.id.descripcion);
         agregar = findViewById(R.id.agregar);
 
         //obtiene datos enviados por VistaProdutosMercadillos y setea variables
         descripcion.setText(producto.getDescripcion());
+        nombre.setText(titulo);
         String img = producto.getImagen();
         Picasso.with(this).load(img).fit().into(imagen);
 
