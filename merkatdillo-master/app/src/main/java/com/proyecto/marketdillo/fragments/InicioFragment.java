@@ -55,7 +55,7 @@ public class InicioFragment extends Fragment{
     /*Codigo para agregar los puntos y la posicion del slider en el que se encuentra en determinado momento*/
     public void addDotsIndicator(int position){
 
-        dots = new TextView[3];
+        dots = new TextView[7];
         dotsLayout.removeAllViews();
 
         for(int i = 0; i < dots.length; i++){

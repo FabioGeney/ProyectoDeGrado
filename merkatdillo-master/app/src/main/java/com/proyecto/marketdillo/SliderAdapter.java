@@ -21,23 +21,33 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     public int[] slide_images = {
-            R.drawable.pineapple,
-            R.drawable.strawberry,
-            R.drawable.banana
+            R.drawable.registro,
+            R.drawable.descubre,
+            R.drawable.buscar,
+            R.drawable.sube,
+            R.drawable.vende,
+            R.drawable.canasta,
+            R.drawable.comunica2
     };
 
     public String[] slide_headings = {
             "BUSCA",
             "DESCUBRE",
-            "OFRECE"
-
+            "OFRECE",
+            "SUBE",
+            "VENDE",
+            "LLENA TU CANASTA",
+            "COMUNÍCATE"
     };
 
     public  String[] slide_desc ={
             "Busca",
             "Descubre",
-            "Ofrece"
-
+            "Ofrece",
+            "Sube",
+            "Vende",
+            "Llena tu canasta",
+            "Comunícate"
     };
 
     @Override
