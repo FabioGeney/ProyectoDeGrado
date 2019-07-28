@@ -1,6 +1,8 @@
 package com.proyecto.marketdillo;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +53,10 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
     private Button bnsiguiente;
     private Usuario usuario;
     private SessionManager sessionManager;
+    private EditText edtCostoDomii;
+    private EditText edtTipo;
+    private ArrayList<String> tipos = new ArrayList<>();
+    private boolean[] checkedItems = new boolean[]{false, false, false, false, false, false};
 
     private static final String CERO = "0";
     private static final String BARRA = "/";
@@ -76,8 +83,20 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         etmercadillo = findViewById(R.id.etmercadillo);
         ettiempoaprox = findViewById(R.id.ettiempoaprox);
         bnsiguiente = findViewById(R.id.bnsiguiente);
+        edtCostoDomii = findViewById(R.id.edtCostoDomii);
+        edtTipo = findViewById(R.id.edtTipo);
 
         initialize();
+        edtTipo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_HOVER_EXIT){
+                    getAlert();
+                }
+
+                return false;
+            }
+        });
 
         etfechanacimiento.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -106,6 +125,8 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         etdireccion.addTextChangedListener(loginTextWatcher);
         etmercadillo.addTextChangedListener(loginTextWatcher);
         ettiempoaprox.addTextChangedListener(loginTextWatcher);
+        edtCostoDomii.addTextChangedListener(loginTextWatcher);
+        edtTipo.addTextChangedListener(loginTextWatcher);
 
 
     }
@@ -139,6 +160,7 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         String mercadillos = etmercadillo.getText().toString();
         String tiempoaprox = ettiempoaprox.getText().toString();
         String password = etcelular.getText().toString();
+        final int costo = Integer.parseInt(edtCostoDomii.getText().toString());
         final Map<String, Object> user = new HashMap<>();
         final Map<String, Object> mercadillo = new HashMap<>();
         user.put("nombre", nombres);
@@ -154,8 +176,12 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         mercadillo.put("nombre", mercadillos);
         mercadillo.put("tiempoEntrega", tiempoaprox);
         mercadillo.put("calificacion", "--");
+        mercadillo.put("costoEnvio", costo);
         db.collection("Campesino").document(firebaseUser.getUid()).set(user);
         db.collection("Mercadillo").document(firebaseUser.getUid()).set(mercadillo);
+        for(String temp : tipos){
+            db.collection("Categorias").document("mercadillos").collection(temp).document(firebaseUser.getUid()).set(mercadillo);
+        }
         Toast.makeText(CrearPhoneCampesinoActivity.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
     }
 
@@ -212,8 +238,10 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
             String direccionentrada = etdireccion.getText().toString().trim();
             String mercadilloentrada = etmercadillo.getText().toString().trim();
             String tiempoaproxentrada = ettiempoaprox.getText().toString().trim();
-            bnsiguiente.setEnabled(!nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty());
-            if (!nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty()) {
+            String tipoMercadillo = edtTipo.getText().toString().trim();
+            String costoDomi = edtCostoDomii.getText().toString().trim();
+            bnsiguiente.setEnabled(!nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty() && !costoDomi.isEmpty() && !tipoMercadillo.isEmpty());
+            if (!nombresentrada.isEmpty() && !apellidosentrada.isEmpty() && !celularentrada.isEmpty() && !fechaentrada.isEmpty() && !didentidadentrada.isEmpty() && !direccionentrada.isEmpty() && !mercadilloentrada.isEmpty() && !tiempoaproxentrada.isEmpty() && !costoDomi.isEmpty() && !tipoMercadillo.isEmpty()) {
                 bnsiguiente.setBackgroundColor(getResources().getColor(R.color.colorPrimary2));
             } else {
 
@@ -261,5 +289,50 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         //Muestro el widget
         recogerFecha.show();
 
+    }
+
+    private void getAlert(){
+        final String[] listItems = {"Frutas","Vegetales","Legumbres","Cereales", "Tubérculos","Otros"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Tipos de productos");
+
+
+        builder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                if(isChecked){
+                    tipos.add(listItems[which]);
+                    checkedItems[which] = true;
+
+                }else{
+                    checkedItems[which] = false;
+                    tipos.remove(listItems[which]);
+                }
+
+            }
+        });
+
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String stringTipos = "";
+                for(String temp : tipos){
+                    stringTipos =  temp + ", "+ stringTipos;
+                }
+                edtTipo.setText(stringTipos);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -41,7 +41,7 @@ public class SliderAdapter extends PagerAdapter {
     };
 
     public  String[] slide_desc ={
-            "Y unete al mercado virtual",
+            "Y únete al mercado virtual",
             "Productores, mercadillos y productos agrícolas",
             "Los productos que más consumas",
             "Los productos que ofreces",
