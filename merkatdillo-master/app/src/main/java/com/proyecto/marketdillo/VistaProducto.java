@@ -19,6 +19,7 @@ public class VistaProducto extends AppCompatActivity {
     TextView nombre;
     Producto producto;
     SingletonCanasta singletonCanasta;
+    CanastaClass canastaClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class VistaProducto extends AppCompatActivity {
         //declara el objeto enviado desde VistaMercadilloPrducto
         producto = (Producto) getIntent().getSerializableExtra("producto");
         final int index = Integer.parseInt(getIntent().getExtras().get("index").toString());
-
+        final int envio = Integer.parseInt(getIntent().getExtras().get("envio").toString());
         String titulo = producto.getNombre();
 
         this.setTitle("Detalles del producto");
@@ -47,16 +48,40 @@ public class VistaProducto extends AppCompatActivity {
         String img = producto.getImagen();
         Picasso.with(this).load(img).fit().into(imagen);
 
+        canastaClass = new CanastaClass(producto.getId(), envio);
+
         agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                producto.setContador(1);
-                singletonCanasta.setCanastas(""+index,producto);
+
+                if(singletonCanasta.getCanasta() != null  ){
+                    if(singletonCanasta.getCanasta().getId().equals(canastaClass.getId())){
+                        canastaClass = singletonCanasta.getCanasta();
+                        agregaProductos(producto, index);
+                    }
+                }else {
+                    agregaProductos(producto, index);
+
+                }
                 Intent intent = new Intent(VistaProducto.this, VistaProductosMercadillo.class);
                 startActivity(intent);
                }
         });
 
 
+    }
+    private void agregaProductos(Producto producto, int position){
+        Producto productoTemp = canastaClass.getProducto(""+position);
+        if(productoTemp!=null){
+            producto.setKey(""+position);
+            canastaClass.aumentaContador(""+position);
+
+        }else {
+            producto.setKey(""+position);
+            canastaClass.agregarProducto(""+position, producto);
+            canastaClass.aumentaContador(""+position);
+
+        }
+        singletonCanasta.setCanasta(canastaClass);
     }
 }

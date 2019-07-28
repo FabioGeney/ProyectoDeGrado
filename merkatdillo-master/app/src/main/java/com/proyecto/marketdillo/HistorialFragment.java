@@ -114,8 +114,8 @@ public class HistorialFragment extends Fragment {
                                 @Override
                                 public void OnItemClick(Pedidos pedidos, int posicion) {
                                     ArrayList<Producto> productos = new ArrayList<>(pedidos.getProductos());
-                                    SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
-                                    singletonCanasta.setHistorial(pedidos.getProductos());
+                                    SingletonHistorial singletonHistorial = SingletonHistorial.getInstance();
+                                    singletonHistorial.setHistorial(pedidos.getProductos());
                                     Intent intent = new Intent(getContext(), VistaDetalles.class);
                                     intent.putExtra("pedido", pedidos);
                                     intent.putExtra("visible", "si");

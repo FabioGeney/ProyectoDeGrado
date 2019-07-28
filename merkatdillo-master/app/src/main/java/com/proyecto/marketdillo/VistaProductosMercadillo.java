@@ -107,13 +107,14 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
 
                             }
                             // Inicializar el adaptador con la fuente de datos.
-                            productoAdapter = new ProductoAdapter(productos, R.layout.list_item_productos, new ProductoAdapter.OnItemClickListener() {
+                            productoAdapter = new ProductoAdapter(mercadillo.getId(), mercadillo.getCostoEnvio(), productos, R.layout.list_item_productos, new ProductoAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Producto producto, int posicion) {
                                     //al hacer click en un mercadillo se va a otro activity
                                     Intent intent = new Intent(VistaProductosMercadillo.this, VistaProducto.class);
                                     Toast.makeText(VistaProductosMercadillo.this,producto.getImagen(), Toast.LENGTH_SHORT).show();
                                     //envia informacion del mercadillo al otro activity
+                                    intent.putExtra("envio", mercadillo.getCostoEnvio());
                                     intent.putExtra("producto", producto);
                                     intent.putExtra("index", posicion);
                                     startActivity(intent);

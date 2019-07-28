@@ -7,6 +7,8 @@ import java.io.Serializable;
 public class Producto implements Serializable{
     //id del campesino
     private String id;
+    //Este parametro permite identificar dicho producto en los adapters Producto y Canasta
+    private String key;
     private String idDocument;
     private String nombre;
     private String descripcion;
@@ -26,6 +28,14 @@ public class Producto implements Serializable{
         this.nombre = nombre;
         this.contador = contador;
         this.imagen = imagen;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     Producto(String nombre, String descripcion, int precio, String imagen){

@@ -41,7 +41,7 @@ public class VistaCanasta extends AppCompatActivity {
     private Mercadillo mercadillo;
     private Usuario usuario;
     private TextView total;
-    private SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+    private CanastaClass canastaClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +49,9 @@ public class VistaCanasta extends AppCompatActivity {
 
         //instancia singleton
         SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
+        SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
         mercadillo = singletonMercadillo.getMercadillo();
+        canastaClass = singletonCanasta.getCanasta();
 
         //singleton usuario
 
@@ -68,7 +70,7 @@ public class VistaCanasta extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 enviarPedido();
-                singletonCanasta.borrarLista();
+                canastaClass.borraLista();
 
             }
         });
@@ -89,7 +91,7 @@ public class VistaCanasta extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //obtiene los productos agregados por el usuario a la canasta
-        canastas = getCanastas();
+        canastas = canastaClass.getList();
         //recycler view
         mRecyclerView = findViewById(R.id.listview);
         layoutManager = new LinearLayoutManager(this);
@@ -125,7 +127,7 @@ public class VistaCanasta extends AppCompatActivity {
 
         });
     }
-
+/*
     private List<Producto> getCanastas(){
         //llama al singleton de canasta para acceder a la informaccion
         SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
@@ -137,7 +139,7 @@ public class VistaCanasta extends AppCompatActivity {
 
         return canasta;
     }
-
+*/
     private void enviarPedido(){
         String idCampesino = mercadillo.getId();
         String idConsumidor = usuario.getId();
@@ -150,7 +152,7 @@ public class VistaCanasta extends AppCompatActivity {
         Date date = new Date();
         CollectionReference enviarPedido = db.collection("Pedidos");
         String fecha = dateFormat.format(date);
-        ArrayList<Producto> canasta = singletonCanasta.getCanastas();
+        ArrayList<Producto> canasta = canastaClass.getList();
         Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreUsuario, nombreMercadillo, direccionEntrega,estado ,canasta, precio, fecha);
         Toast.makeText(this, ""+ canasta.size(), Toast.LENGTH_SHORT).show();
         enviarPedido.add(pedido);

@@ -162,6 +162,7 @@ public class Busqueda extends AppCompatActivity {
                                                 }
 
                                             }
+                                            /*
                                             // Inicializar el adaptador con la fuente de datos.
                                             productoAdapter = new ProductoAdapter(productos, R.layout.list_item_productos, new ProductoAdapter.OnItemClickListener() {
                                                 @Override
@@ -175,6 +176,7 @@ public class Busqueda extends AppCompatActivity {
                                                     startActivity(intent);
                                                 }
                                             });
+                                            */
                                             //Relacionando la lista con el adaptador
                                             mRecyclerView.setLayoutManager(layoutManager);
                                             mRecyclerView.setAdapter(productoAdapter);

@@ -75,7 +75,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
         public void bind( final Producto producto, final OnItemClickListener listener){
             final SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
             //productosCanasta.add(producto);
-            Picasso.with(context).load(R.drawable.fruit).fit().into(imagen);
+            Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
             nombre.setText( producto.getNombre());
             precioProducto.setText( "$ " + producto.getPrecioCantidad());
             cantidad.setText(""+producto.getContador());
@@ -83,7 +83,8 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    singletonCanasta.getCanastas().get(getAdapterPosition()).setContador(producto.getContador()+1);
+
+                    singletonCanasta.getCanasta().aumentaContador(producto.getKey());
                     cantidad.setText(""+ producto.getContador());
                     setTotal(producto, true);
                 }
@@ -93,11 +94,12 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
                 @Override
                 public void onClick(View v) {
                     if(producto.getContador()  != 1) {
-                        singletonCanasta.getCanastas().get(getAdapterPosition()).setContador(producto.getContador()-1);
+
+                        singletonCanasta.getCanasta().restaContador(producto.getKey());
                         cantidad.setText(""+ producto.getContador());
                         setTotal(producto, false);
                     }else{
-                        singletonCanasta.borrarProducto(getAdapterPosition());
+                        singletonCanasta.getCanasta().borraProducto(producto.getKey());
                         canastas.remove(producto);
                         notifyDataSetChanged();
                     }
@@ -121,24 +123,13 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     }
 
     private void getTotal(){
-        int total = 0;
 
-       for(Producto producto : canastas){
-          total = total + producto.getPrecioCantidad()*producto.getContador();
-       }
-
-       textTotal.setText(""+total);
+       textTotal.setText(""+SingletonCanasta.getInstance().getCanasta().getTotal());
     }
 
     private void setTotal(Producto producto, boolean index){
-        int total = Integer.parseInt(textTotal.getText().toString());
 
-        if(index){
-            total = total + producto.getPrecioCantidad();
-        }else{
-            total = total - producto.getPrecioCantidad();
-        }
-        textTotal.setText(""+total);
+        textTotal.setText(""+SingletonCanasta.getInstance().getCanasta().getTotal());
     }
 }
 

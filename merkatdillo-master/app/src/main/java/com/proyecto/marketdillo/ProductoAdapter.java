@@ -24,11 +24,13 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     private OnItemClickListener itemClickListener;
     private Context context;
     private SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+    private CanastaClass canastaClass;
 
-    public  ProductoAdapter(List<Producto> productos, int layout, OnItemClickListener itemClickListener ){
+    public  ProductoAdapter(String id, int domi, List<Producto> productos, int layout, OnItemClickListener itemClickListener ){
         this.productos = productos;
         this.layout = layout;
         this.itemClickListener = itemClickListener;
+        canastaClass = new CanastaClass(id, domi);
     }
     @NonNull
     @Override
@@ -81,21 +83,18 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             agregar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Producto productoTemp = singletonCanasta.getProducto(""+getAdapterPosition());
-                    if(productoTemp!=null){
-                        producto.setContador(productoTemp.getContador()+1);
-                        singletonCanasta.setMap(""+getAdapterPosition());
-                        singletonCanasta.setCanastas(""+getAdapterPosition(), producto);
-
+                    if(singletonCanasta.getCanasta() != null  ){
+                        if(singletonCanasta.getCanasta().getId().equals(canastaClass.getId())){
+                            canastaClass = singletonCanasta.getCanasta();
+                            agregaProductos(producto, getAdapterPosition());
+                        }
                     }else {
-                        producto.setContador(1);
-                        singletonCanasta.setCanastas(""+getAdapterPosition(), producto);
+                        agregaProductos(producto, getAdapterPosition());
 
                     }
 
                 }
             });
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -111,5 +110,20 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     public interface OnItemClickListener{
         void OnItemClick(Producto mercadillo, int posicion);
 
+    }
+
+    private void agregaProductos(Producto producto, int position){
+        Producto productoTemp = canastaClass.getProducto(""+position);
+        if(productoTemp!=null){
+            producto.setKey(""+position);
+            canastaClass.aumentaContador(""+position);
+
+        }else {
+            producto.setKey(""+position);
+            canastaClass.agregarProducto(""+position, producto);
+            canastaClass.aumentaContador(""+position);
+
+        }
+        singletonCanasta.setCanasta(canastaClass);
     }
 }
