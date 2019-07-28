@@ -9,6 +9,7 @@
     <dimen name="tamañotextocuenta">16sp</dimen>
     <dimen name="tamañotexto">30sp</dimen>
     <dimen name="tamañotexto2">20sp</dimen>
+    <dimen name="tamañotexto3">15sp</dimen>
     <dimen name="tamañotextocard">20sp</dimen>
     <dimen name="tamañotextocard2">12sp</dimen>
     <dimen name="height_cardview">200dp</dimen>

@@ -21,23 +21,33 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     public int[] slide_images = {
-            R.drawable.pineapple,
-            R.drawable.strawberry,
-            R.drawable.banana
+            R.drawable.registro,
+            R.drawable.descubre,
+            R.drawable.buscar,
+            R.drawable.sube,
+            R.drawable.vende,
+            R.drawable.canasta,
+            R.drawable.comunica2
     };
 
     public String[] slide_headings = {
-            "BUSCA",
-            "DESCUBRE",
-            "OFRECE"
-
+            "Regístrate",
+            "Descubre",
+            "Busca",
+            "Sube",
+            "Vende",
+            "Llena Tu Canasta",
+            "Comunícate"
     };
 
     public  String[] slide_desc ={
-            "Busca",
-            "Descubre",
-            "Ofrece"
-
+            "Y unete al mercado virtual",
+            "Productores, mercadillos y productos agrícolas",
+            "Los productos que más consumas",
+            "Los productos que ofreces",
+            "Si eres agricultor, y encuentra nuevos clientes",
+            "Con lo que más te gusta",
+            "Con tu cliente o productor"
     };
 
     @Override
