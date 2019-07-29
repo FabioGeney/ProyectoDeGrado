@@ -86,7 +86,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
 
                     singletonCanasta.getCanasta().aumentaContador(producto.getKey());
                     cantidad.setText(""+ producto.getContador());
-                    setTotal(producto, true);
+                    setTotal();
                 }
             });
 
@@ -97,10 +97,11 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
 
                         singletonCanasta.getCanasta().restaContador(producto.getKey());
                         cantidad.setText(""+ producto.getContador());
-                        setTotal(producto, false);
+                        setTotal();
                     }else{
                         singletonCanasta.getCanasta().borraProducto(producto.getKey());
                         canastas.remove(producto);
+                        setTotal();
                         notifyDataSetChanged();
                     }
                 }
@@ -127,7 +128,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
        textTotal.setText(""+SingletonCanasta.getInstance().getCanasta().getTotal());
     }
 
-    private void setTotal(Producto producto, boolean index){
+    private void setTotal(){
 
         textTotal.setText(""+SingletonCanasta.getInstance().getCanasta().getTotal());
     }

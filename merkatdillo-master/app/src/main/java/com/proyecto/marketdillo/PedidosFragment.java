@@ -116,7 +116,7 @@ public class PedidosFragment extends Fragment {
                                 public void OnItemClick(Pedidos pedidos, int posicion) {
                                     SingletonPedido singletonPedido = SingletonPedido.getInstance();
                                     singletonPedido.setPedido(pedidos);
-                                    Toast.makeText(getContext(), ""+pedidos.getCalificacion(), Toast.LENGTH_SHORT).show();
+
                                     startActivity(intent);
 
                                 }

@@ -65,8 +65,8 @@ public class VistaDetalles extends AppCompatActivity {
         String direccionEntrega = pedidos.getDireccionEntrega();
         String totalPedido = pedidos.getTotal();
         String boton = getIntent().getStringExtra("visible");
-        SingletonHistorial singletonHistorial = SingletonHistorial.getInstance();
-        ArrayList<Producto> getProductos = singletonHistorial.getHistorial();
+        //SingletonHistorial singletonHistorial = SingletonHistorial.getInstance();
+        //ArrayList<Producto> getProductos = singletonHistorial.getHistorial();
 
         if(boton.equals("no")){
             pedirNuevo.setVisibility(View.GONE);
@@ -94,7 +94,7 @@ public class VistaDetalles extends AppCompatActivity {
         direccion.setText(direccionEntrega);
         total.setText(totalPedido);
 
-        canastas = getProductos;
+        canastas = pedidos.getProductos();
 
         mRecyclerView = findViewById(R.id.listview);
         layoutManager = new LinearLayoutManager(this);
