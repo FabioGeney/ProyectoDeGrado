@@ -19,6 +19,63 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toTopOf="@+id/guide1"
+        app:layout_constraintBottom_toBottomOf="@+id/guide1"
+        app:layout_constraintStart_toStartOf="@id/guide"
+        app:layout_constraintEnd_toEndOf="@id/guide"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imagen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/sin_contorno"
+            app:civ_border_color="@color/colorPrimary2"
+            app:civ_border_width="3dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTransWhite"
+        app:layout_constraintBottom_toTopOf="@id/gh"
+        app:layout_constraintEnd_toEndOf="@id/gv"
+        app:layout_constraintStart_toStartOf="@id/gv"
+        app:layout_constraintTop_toTopOf="@id/gh"
+        >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/t_tulo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintH"
@@ -216,8 +273,8 @@
 
     <android.support.constraint.Guideline
         android:id="@+id/guide1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
