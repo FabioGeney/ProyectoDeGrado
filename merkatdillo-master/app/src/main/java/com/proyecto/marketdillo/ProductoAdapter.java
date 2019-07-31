@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -125,5 +126,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         }
         singletonCanasta.setCanasta(canastaClass);
+    }
+
+    public void setFilter(ArrayList<Producto> productosFilter){
+        productos = new ArrayList<>();
+        productos.addAll(productosFilter);
+        notifyDataSetChanged();
     }
 }

@@ -105,7 +105,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="#008577"
+        android:background="@drawable/send_button2"
+
         android:text="Agregar"
         android:textAllCaps="false"
         android:textColor="#ffff"

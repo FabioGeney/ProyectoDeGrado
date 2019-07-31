@@ -79,7 +79,28 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
             //productosCanasta.add(producto);
             Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
             nombre.setText( producto.getNombre());
-            precioProducto.setText( "$ " + producto.getPrecioCantidad());
+            String unidad = "kg";
+            switch (producto.getPrecioPorCantidad()){
+                case "Unidad":
+                    unidad = "unidad";
+                    break;
+                case "Gramo":
+                    unidad = "gr";
+                    break;
+                case "Libra":
+                    unidad = "lb";
+                    break;
+                case "Canast":
+                    unidad = "canasta";
+                    break;
+                case "Kilogramo":
+                    unidad = "kg";
+                    break;
+                default:
+                    unidad = "gr";
+                    break;
+            }
+            precioProducto.setText( "$ " + producto.getPrecioCantidad() +" • " + unidad);
             cantidad.setText(""+producto.getContador());
             getTotal();
             add.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +153,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
 
     private void setTotal(){
         textTotal.setText("$ "+SingletonCanasta.getInstance().getCanasta().getTotal());
-        textTotal.setText("$ "+SingletonCanasta.getInstance().getCanasta().getTotal());
+        textSubTotal.setText("$ "+SingletonCanasta.getInstance().getCanasta().getSubTotal());
     }
 }
 

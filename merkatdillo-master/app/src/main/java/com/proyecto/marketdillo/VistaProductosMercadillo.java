@@ -3,6 +3,7 @@ package com.proyecto.marketdillo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,11 +32,11 @@ import static android.support.constraint.Constraints.TAG;
 public class VistaProductosMercadillo extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter productoAdapter;
+    private ProductoAdapter productoAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Producto> productos;
     private Mercadillo mercadillo;
-
+    private CollapsingToolbarLayout ctlLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,10 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         mercadillo = singletonMercadillo.getMercadillo();
         //cambia titulo del activity, con datos del MercadillsoFragment
         String nombreMercadillo = mercadillo.getNombre();
-        this.setTitle(nombreMercadillo);
+
+        ctlLayout = findViewById(R.id.ctlLayout);
+        ctlLayout.setTitle(nombreMercadillo);
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -120,6 +124,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
                                     startActivity(intent);
                                 }
                             });
+
                             //Relacionando la lista con el adaptador
                             mRecyclerView.setLayoutManager(layoutManager);
                             mRecyclerView.setAdapter(productoAdapter);
@@ -144,7 +149,6 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        // User pressed the search button
 
         return false;
 
@@ -152,11 +156,25 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        // User changed the text
+        ArrayList<Producto> productosFilter = filter(productos, newText);
+        productoAdapter.setFilter(productosFilter);
         return false;
 
     }
 
+    private ArrayList<Producto> filter(List<Producto> productosTemp, String query){
+        ArrayList<Producto> temp= new ArrayList<>();
+        String queryTemp = query.toLowerCase();
+        for (Producto producto: productosTemp){
+            String nombre = producto.getNombre().toLowerCase();
+            String descr = producto.getDescripcion().toLowerCase();
+            if( nombre.contains(queryTemp) || queryTemp.contains(nombre) || descr.contains(queryTemp) || queryTemp.contains(descr)){
+                temp.add(producto);
+            }
+
+        }
+        return temp;
+    }
 
 
 }
