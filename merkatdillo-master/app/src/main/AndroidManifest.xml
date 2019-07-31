@@ -15,9 +15,9 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="MarketDillo"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_myicono"
+        android:label="MerkatDillo"
+        android:roundIcon="@mipmap/ic_myicono_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
