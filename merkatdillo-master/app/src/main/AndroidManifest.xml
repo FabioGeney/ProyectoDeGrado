@@ -21,6 +21,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/ThemeMainActivityH">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".PasswordActivity"
             android:parentActivityName=".MainActivity"
@@ -196,11 +204,6 @@
         <activity
             android:name=".BottomActivity"
             android:theme="@style/Color">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CrearCampesinoActivity"
