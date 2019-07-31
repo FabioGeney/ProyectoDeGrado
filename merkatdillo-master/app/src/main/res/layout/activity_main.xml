@@ -96,6 +96,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
+        <TextView
+            android:id="@+id/olvidaste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/olvidaste"
+            android:textColor="@color/colorPrimary2"
+            android:textSize="@dimen/tamañoolvidar"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guiav"
+            app:layout_constraintTop_toTopOf="@id/guiah"
+            app:layout_constraintBottom_toBottomOf="@id/guiah"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guiav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guiah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
     </android.support.constraint.ConstraintLayout>
 
 

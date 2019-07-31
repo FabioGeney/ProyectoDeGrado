@@ -16,4 +16,5 @@
     <color name="backgroundtext_card">#53292929</color>
     <color name="colorTransparentWhite">#cccccc</color>
     <color name="colorTransWhite">#80FFFFFF</color>
+    <color name="colorRed">#FF0000</color>
 </resources>

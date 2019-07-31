@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtpassword;
     private Usuario usuario;
     private SessionManager sessionManager;
+    private TextView olvidaste;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         edtemail = findViewById(R.id.edtemail);
         edtpassword = findViewById(R.id.edtpassword);
         txtelefono = findViewById(R.id.numtelingresa);
+        olvidaste = findViewById(R.id.olvidaste);
 
         initialize();
         /*el boton y el clicklistener, q al clickear llama al metodo iniciar sesion, con el email y la contraseña*/
@@ -92,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, PhoneActivity.class);
+                startActivity(i);
+            }
+        });
+
+        olvidaste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, PasswordActivity.class);
                 startActivity(i);
             }
         });
