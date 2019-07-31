@@ -7,6 +7,7 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="tamañotextocuenta">16sp</dimen>
+    <dimen name="tamañoolvidar">14sp</dimen>
     <dimen name="tamañotexto">30sp</dimen>
     <dimen name="tamañotexto2">20sp</dimen>
     <dimen name="tamañotexto3">15sp</dimen>

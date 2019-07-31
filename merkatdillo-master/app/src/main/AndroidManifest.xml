@@ -21,6 +21,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".PasswordActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/ThemeMainActivityH">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".Busqueda">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -28,7 +36,7 @@
         </activity>
         <activity
             android:name=".CrearPhoneCampesinoActivity"
-            android:theme="@style/ThemeMainActivityH"></activity>
+            android:theme="@style/ThemeMainActivityH" />
         <activity
             android:name=".CrearPhoneActivity"
             android:theme="@style/ThemeMainActivityH" />
