@@ -74,6 +74,9 @@ public class CanastaClass  {
         total = temp;
         return  total;
     }
+    public int getSubTotal(){
+        return total-costoDomi;
+    }
 
     public ArrayList<Producto> getList(){
         Collection<Producto> tempCollection = productos.values();

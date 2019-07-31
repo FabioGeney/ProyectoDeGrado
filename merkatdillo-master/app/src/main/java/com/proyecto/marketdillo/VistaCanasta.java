@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -36,7 +37,7 @@ public class VistaCanasta extends AppCompatActivity {
     private RecyclerView.Adapter canastaAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Producto> canastas;
-
+    private DividerItemDecoration dividerItemDecoration;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Mercadillo mercadillo;
     private Usuario usuario;
@@ -52,7 +53,9 @@ public class VistaCanasta extends AppCompatActivity {
         SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
         mercadillo = singletonMercadillo.getMercadillo();
         canastaClass = singletonCanasta.getCanasta();
-
+        dividerItemDecoration = new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL);
+        //recycler de categorias
         //singleton usuario
 
         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
@@ -60,8 +63,8 @@ public class VistaCanasta extends AppCompatActivity {
 
         //Crea e inicializa variables
         TextView nomreMercadillo = findViewById(R.id.nombreMercadillo);
-        TextView envio = findViewById(R.id.envio);
-        TextView tiempo = findViewById(R.id.tiempo);
+        TextView subTotal = findViewById(R.id.subTotal);
+        TextView domi = findViewById(R.id.domi);
         TextView direccion = findViewById(R.id.direccion);
         total = findViewById(R.id.total);
         Button enviar = findViewById(R.id.finalizar);
@@ -78,8 +81,8 @@ public class VistaCanasta extends AppCompatActivity {
         //setea textViews con datos del mercadillo y usuario
 
         nomreMercadillo.setText(mercadillo.getNombre());
-        envio.setText("Envio $" + mercadillo.getCostoEnvio());
-        tiempo.setText(mercadillo.getTiempoEntrega());
+        domi.setText("$ " + mercadillo.getCostoEnvio());
+        //tiempo.setText(mercadillo.getTiempoEntrega());
         direccion.setText(usuario.getDireccion());
 
 
@@ -91,7 +94,12 @@ public class VistaCanasta extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //obtiene los productos agregados por el usuario a la canasta
-        canastas = canastaClass.getList();
+        if(canastaClass != null){
+            canastas = canastaClass.getList();
+        }else{
+            canastas = new ArrayList<>();
+        }
+
         //recycler view
         mRecyclerView = findViewById(R.id.listview);
         layoutManager = new LinearLayoutManager(this);
@@ -104,6 +112,7 @@ public class VistaCanasta extends AppCompatActivity {
         });
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(canastaAdapter);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         final TextView textView = findViewById(R.id.metodoPago);
 

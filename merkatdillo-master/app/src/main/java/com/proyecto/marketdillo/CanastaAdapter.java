@@ -28,6 +28,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     private OnItemClickListener itemClickListener;
     private Context context;
     public TextView textTotal;
+    public TextView textSubTotal;
 
 
     public  CanastaAdapter(List<Producto> canastas, int layout, OnItemClickListener itemClickListener ){
@@ -70,6 +71,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
             precioProducto = itemView.findViewById(R.id.precio);
             cantidad = itemView.findViewById(R.id.cantidad);
             textTotal = ((VistaCanasta)context).findViewById(R.id.total);
+            textSubTotal = ((VistaCanasta)context).findViewById(R.id.subTotal);
 
         }
         public void bind( final Producto producto, final OnItemClickListener listener){
@@ -124,13 +126,13 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     }
 
     private void getTotal(){
-
-       textTotal.setText(""+SingletonCanasta.getInstance().getCanasta().getTotal());
+       textTotal.setText("$ "+SingletonCanasta.getInstance().getCanasta().getTotal());
+        textSubTotal.setText("$ "+SingletonCanasta.getInstance().getCanasta().getSubTotal());
     }
 
     private void setTotal(){
-
-        textTotal.setText(""+SingletonCanasta.getInstance().getCanasta().getTotal());
+        textTotal.setText("$ "+SingletonCanasta.getInstance().getCanasta().getTotal());
+        textTotal.setText("$ "+SingletonCanasta.getInstance().getCanasta().getTotal());
     }
 }
 
