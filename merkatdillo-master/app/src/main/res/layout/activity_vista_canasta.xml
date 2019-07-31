@@ -1,142 +1,322 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".VistaCanasta">
-    <include android:id="@+id/toolbar" layout="@layout/toolbar" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline54"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline53">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Productos"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline55"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Cantidad"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.68"
+                app:layout_constraintStart_toStartOf="@+id/guideline55"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/listview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.443"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline53"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="111dp"
-        android:layout_below="@+id/toolbar">
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
 
-        <TextView
-            android:id="@+id/nombreMercadillo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Mercadillo de frutas"
-            android:textAppearance="?attr/textAppearanceListItem"/>
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline54"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
 
-        <TextView
-            android:id="@+id/envio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nombreMercadillo"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:text="Envio $4000" />
 
-        <TextView
-            android:id="@+id/tiempo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nombreMercadillo"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/envio"
-            android:layout_toRightOf="@+id/envio"
-            android:text="40 min" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nombreMercadillo"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="49dp"
-            android:text="Forma de Pago"
-            android:textAppearance="?attr/textAppearanceListItem" />
-
-        <TextView
-            android:id="@+id/metodoPago"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nombreMercadillo"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="58dp"
-            android:layout_marginTop="49dp"
-            android:text="Elegir"
-             />
-
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nombreMercadillo"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="95dp"
-            android:text="Dirección de entrega"
-            android:textAppearance="?attr/textAppearanceListItem" />
-
-        <TextView
-            android:id="@+id/direccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:text="Cr 28 # 43-54 Apto 101"
-             />
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="15dp"
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/direccion">
-        </android.support.v7.widget.RecyclerView>
-
-    </RelativeLayout>
-
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="0dp">
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline54">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:text="Total"
-            />
-
-        <TextView
-            android:id="@+id/total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="22dp"
-            android:text="0"
-            android:textAppearance="?attr/textAppearanceListItem" />
-
-        <Button
-            android:id="@+id/finalizar"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
-            android:textColor="#fff"
-            android:textAllCaps="false"
-            android:text="Enviar Pedido"/>
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_marginTop="22dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:text="$" />
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="10dp"
+                android:text="Total"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/finalizar"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="10dp"
+
+                android:text="0"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/finalizar"
+                app:layout_constraintStart_toEndOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="SubTotal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Domicilio"
+                app:layout_constraintBottom_toTopOf="@+id/textView31"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView32"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/subTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="$"
+
+                app:layout_constraintStart_toEndOf="@+id/textView32"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/domi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="$"
+                app:layout_constraintBottom_toTopOf="@+id/textView31"
+                app:layout_constraintStart_toEndOf="@+id/textView33"
+                app:layout_constraintTop_toBottomOf="@+id/textView32"
+                app:layout_constraintVertical_bias="0.0" />
+            <Button
+                android:id="@+id/finalizar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorPrimary"
+                android:text="Enviar Pedido"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
-</RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline53"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/nombreMercadillo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Mercadillo de frutas"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.463"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nombreMercadillo"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Forma de Pago"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nombreMercadillo"
+                app:layout_constraintVertical_bias="0.25" />
+
+            <TextView
+                android:id="@+id/metodoPago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nombreMercadillo"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Elegir"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView30"
+                app:layout_constraintTop_toBottomOf="@+id/nombreMercadillo"
+                app:layout_constraintVertical_bias="0.25" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nombreMercadillo"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Dirección de entrega"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView30"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/direccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Cr 28 # 43-54 Apto 101"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text"
+                app:layout_constraintTop_toBottomOf="@+id/metodoPago"
+                app:layout_constraintVertical_bias="0.07999998" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</android.support.constraint.ConstraintLayout>
