@@ -67,7 +67,7 @@ public class MercadilloFragment extends Fragment {
         }
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_mercadillo, container, false);
@@ -82,7 +82,9 @@ public class MercadilloFragment extends Fragment {
         categoriaAdapter = new CategoriaAdapter(categorias, R.layout.list_categoria, new CategoriaAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(Categoria categoria, int posicion) {
-
+                Intent intent = new Intent(getContext(), VistaCategoria.class);
+                intent.putExtra("categoria", categoria.getNombre());
+                startActivity(intent);
             }
         });
         mRecyclerViewTipo.setLayoutManager(layoutManagerTipo);

@@ -21,7 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SplashActivity"
+        <activity android:name=".VistaCategoria"
+            android:parentActivityName=".VistaUsuarios"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".VistaUsuarios" />
+        </activity>
+        <activity
+            android:name=".SplashActivity"
             android:theme="@style/ThemeMainActivityH">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,10 +57,7 @@
             android:name=".CrearPhoneActivity"
             android:theme="@style/ThemeMainActivityH" />
         <activity android:name=".Administrador.VistaMercadilloAdmin" />
-        <activity
-            android:name=".Example.Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".Administrador.VistaAdmin"
             android:label="@string/title_activity_vista_admin"
@@ -68,7 +73,7 @@
         <activity
             android:name=".CalificarPedido"
             android:parentActivityName=".VistaCampesino"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/ThemeMainActivityH">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaCampesino" />
@@ -98,7 +103,7 @@
         <activity
             android:name=".EstadoPedidoCampesino"
             android:parentActivityName=".VistaCampesino"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/ThemeMainActivityH">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaCampesino" />
@@ -112,7 +117,7 @@
         <activity
             android:name=".EstadoPedido"
             android:parentActivityName=".VistaUsuarios"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/ThemeMainActivityH">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaUsuarios" />
@@ -134,7 +139,7 @@
         <activity
             android:name=".VistaProducto"
             android:parentActivityName=".VistaProductosMercadillo"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/ThemeMainActivityH">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaProductosMercadillo" />
@@ -154,7 +159,7 @@
         <activity
             android:name=".VistaDetalles"
             android:parentActivityName=".VistaUsuarios"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/ThemeMainActivityH">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaUsuarios" />
@@ -168,7 +173,7 @@
         <activity
             android:name=".VistaCanasta"
             android:parentActivityName=".VistaProductosMercadillo"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/ThemeMainActivityH">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaProductosMercadillo" />
@@ -176,7 +181,7 @@
         <activity
             android:name=".VistaProductosMercadillo"
             android:parentActivityName=".VistaUsuarios"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/ThemeMainActivityH">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaUsuarios" />
@@ -203,8 +208,7 @@
         </activity>
         <activity
             android:name=".BottomActivity"
-            android:theme="@style/Color">
-        </activity>
+            android:theme="@style/Color"></activity>
         <activity
             android:name=".CrearCampesinoActivity"
             android:parentActivityName=".MainActivity"

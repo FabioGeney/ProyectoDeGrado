@@ -86,5 +86,15 @@ public class CanastaClass  {
     public void borraLista(){
         productos = new HashMap<>();
     }
+
+    public void setContador( String key, int contador){
+        Producto producto = productos.get(key);
+        if(producto.getContador() == 0){
+            productos.get(key).setContador(contador);
+        }else {
+            productos.get(key).setContador(producto.getContador() + contador);
+        }
+
+    }
 }
 

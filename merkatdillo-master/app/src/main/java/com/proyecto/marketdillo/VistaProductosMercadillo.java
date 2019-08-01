@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
     private List<Producto> productos;
     private Mercadillo mercadillo;
     private CollapsingToolbarLayout ctlLayout;
+    private DividerItemDecoration dividerItemDecoration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +57,8 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         ctlLayout = findViewById(R.id.ctlLayout);
         ctlLayout.setTitle(nombreMercadillo);
 
-
+        dividerItemDecoration = new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +88,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(productoAdapter);
 
-
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
     }
 
     public List<Producto> getProductos(){
@@ -116,7 +119,6 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
                                 public void OnItemClick(Producto producto, int posicion) {
                                     //al hacer click en un mercadillo se va a otro activity
                                     Intent intent = new Intent(VistaProductosMercadillo.this, VistaProducto.class);
-                                    Toast.makeText(VistaProductosMercadillo.this,producto.getImagen(), Toast.LENGTH_SHORT).show();
                                     //envia informacion del mercadillo al otro activity
                                     intent.putExtra("envio", mercadillo.getCostoEnvio());
                                     intent.putExtra("producto", producto);
