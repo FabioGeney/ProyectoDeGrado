@@ -36,7 +36,7 @@ public class PasswordActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle("Te ayudamos a recuperar tu contraseña");
+        this.setTitle("Recupera tu contraseña");
 
         edtemail = findViewById(R.id.edtemail);
         enviarcorreo = findViewById(R.id.enviarcorreo);
