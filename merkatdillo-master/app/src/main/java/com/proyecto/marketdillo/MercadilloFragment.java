@@ -52,13 +52,11 @@ public class MercadilloFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     public static MercadilloFragment newInstance(/*parámetros*/) {
         MercadilloFragment fragment = new MercadilloFragment();
         // Setup parámetros
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +122,6 @@ public class MercadilloFragment extends Fragment {
                                 mercadillo.setId(document.getId());
                                 mercadillo.setImagen(R.mipmap.ic_merca_image);
                                 mercadillos.add(mercadillo);
-
 
                             }
                             // Inicializar el adaptador con la fuente de datos.

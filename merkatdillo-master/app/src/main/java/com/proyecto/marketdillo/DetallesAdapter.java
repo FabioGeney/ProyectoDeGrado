@@ -63,8 +63,29 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.ViewHo
         public void bind( final Producto producto, final OnItemClickListener listener){
             Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
             nombre.setText( producto.getNombre());
-            precioProducto.setText( "$ " + producto.getPrecioCantidad());
-            cantidad.setText("x "+producto.getContador());
+            String unidad = "kg";
+            switch (producto.getPrecioPorCantidad()){
+                case "Unidad":
+                    unidad = "unidad";
+                    break;
+                case "Gramo":
+                    unidad = "gr";
+                    break;
+                case "Libra":
+                    unidad = "lb";
+                    break;
+                case "Canasta":
+                    unidad = "canasta";
+                    break;
+                case "Kilogramo":
+                    unidad = "kg";
+                    break;
+                default:
+                    unidad = "gr";
+                    break;
+            }
+            precioProducto.setText( "$ " + producto.getPrecioCantidad()  +" • " + unidad);
+            cantidad.setText(""+producto.getContador() +" • " + unidad+"(s)");
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
