@@ -31,7 +31,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         String tipo = remoteMessage.getData().get("tipo");
 
 
-
         NotificationCompat.Builder builder = new NotificationCompat.Builder(FirebaseMessagingService.this, getString(R.string.default_notification_channel_id))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(titulo)
@@ -42,10 +41,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         if(tipo.equals("Pedido")){
             String idPedido = remoteMessage.getData().get("pedidoID");
-            getPedido(idPedido);
-            SingletonPedido singletonPedido = SingletonPedido.getInstance();
-            Pedidos pedido=singletonPedido.getPedido();
-            intent.putExtra("pedido", pedido);
+            intent.putExtra("idPedido", idPedido);
             if(click_action.equals("com.proyecto.marketdillo.NOTIFICACIONCONSUMIDORFIN")){
                 intent.putExtra("visible", "si");
             }else {
@@ -71,6 +67,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     }
 
     private void getPedido(String id){
+        final SingletonPedido singletonPedido = SingletonPedido.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Pedidos").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
              @Override
@@ -79,7 +76,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                      DocumentSnapshot document = task.getResult();
                      Pedidos pedido = document.toObject(Pedidos.class);
                      pedido.setIdDocument(document.getId());
-                     SingletonPedido singletonPedido = SingletonPedido.getInstance();
                      singletonPedido.setPedido(pedido);
                  }
              }

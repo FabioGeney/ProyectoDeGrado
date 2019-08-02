@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,15 +39,21 @@ import static android.support.constraint.Constraints.TAG;
  */
 public class MercadilloFragment extends Fragment {
     private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerViewFav;
     private RecyclerView mRecyclerViewTipo;
     private RecyclerView.Adapter categoriaAdapter;
+    private RecyclerView.Adapter favAdapter;
     private List<Categoria> categorias;
     private RecyclerView.LayoutManager layoutManagerTipo;
+    private RecyclerView.LayoutManager layoutManagerFav;
     private RecyclerView.Adapter mercadilloAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Mercadillo> mercadillos1;
+    private List<Mercadillo> favoritos;
     private ProgressBar progressBar;
     private DividerItemDecoration dividerItemDecoration;
+    private Realm realm;
+    private CardView cardView;
 
     public MercadilloFragment() {
         // Required empty public constructor
@@ -70,13 +77,22 @@ public class MercadilloFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_mercadillo, container, false);
 
+        cardView = root.findViewById(R.id.card);
+
         dividerItemDecoration = new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL);
-        //recycler de categorias
+        layoutManager = new LinearLayoutManager(getContext());
+        layoutManagerFav = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        //recycler fav
+        mRecyclerViewFav = root.findViewById(R.id.recyclerFav);
+        //recycler mercadillos
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.mercadillo_Recycler);
+        //recycler de tipo
         mRecyclerViewTipo = root.findViewById(R.id.recyclerTipo);
         layoutManagerTipo = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        //listCategorias
         categorias = getCategorias();
-
+        //Adapter categorias
         categoriaAdapter = new CategoriaAdapter(categorias, R.layout.list_categoria, new CategoriaAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(Categoria categoria, int posicion) {
@@ -88,12 +104,38 @@ public class MercadilloFragment extends Fragment {
         mRecyclerViewTipo.setLayoutManager(layoutManagerTipo);
         mRecyclerViewTipo.setAdapter(categoriaAdapter);
 
-        //recycler de mercadillos
+        //List de mercadillos
         mercadillos1 = getMercadillos();
 
-        layoutManager = new LinearLayoutManager(getContext());
-        // Instancia del ListView.
-        mRecyclerView = (RecyclerView) root.findViewById(R.id.mercadillo_Recycler);
+        //list favoritos
+        realm = Realm.getDefaultInstance();
+        favoritos = realm.where(Mercadillo.class).findAll();
+
+        if(favoritos.size()!=0){
+            //adapter Favoritos
+            favAdapter = new MercadilloAdapter(favoritos, R.layout.list_item_mercadillo, new MercadilloAdapter.OnItemClickListener() {
+                @Override
+                public void OnItemClick(Mercadillo mercadillo, int posicion) {
+                    Intent intent = new Intent(getContext(), VistaProductosMercadillo.class);
+                    //crea el singleotnMercadillo para almacenar en memoria los detos del mercadillo seleccionado por el usuario
+                    SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
+                    //en caso de que ya haya un mercadillo almacenado será reemplazado por otro seleccionado por el usuario
+                    singletonMercadillo.setMercadillo(mercadillo);
+                    Toast.makeText(getContext(), mercadillo.getId(), Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }
+            });
+
+            mRecyclerViewFav.setLayoutManager(layoutManagerFav);
+            mRecyclerViewFav.setAdapter(favAdapter);
+        }else {
+            cardView.setVisibility(View.GONE);
+        }
+
+
+
+
+
 
         return root;
     }

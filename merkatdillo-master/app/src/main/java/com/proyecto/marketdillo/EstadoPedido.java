@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,9 +10,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class EstadoPedido extends AppCompatActivity {
+
+    private ImageView checkConf;
+    private ImageView checkSend;
+    private ImageView checkFinal;
+    private TextView verDetalles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,36 +33,44 @@ public class EstadoPedido extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ImageView checkConf = findViewById(R.id.checkConfirmado);
-        ImageView checkSend = findViewById(R.id.checkEnviado);
-        ImageView checkFinal = findViewById(R.id.checkFinalizado);
-        TextView verDetalles = findViewById(R.id.detalles);
+        checkConf = findViewById(R.id.checkConfirmado);
+        checkSend = findViewById(R.id.checkEnviado);
+        checkFinal = findViewById(R.id.checkFinalizado);
+        verDetalles = findViewById(R.id.detalles);
 
-        SingletonPedido singletonPedido = SingletonPedido.getInstance();
-        final Pedidos pedido = singletonPedido.getPedido();
+        String id = getIntent().getStringExtra("idPedido");
 
-        switch (pedido.getEstado()){
-            case "Confirmado":
-                checkConf.setImageResource(R.drawable.check_circle);
-                break;
-            case "Enviado":
-                checkConf.setImageResource(R.drawable.check_circle);
-                checkSend.setImageResource(R.drawable.check_circle);
-                break;
-            case "Finalizado":
-                checkConf.setImageResource(R.drawable.check_circle);
-                checkSend.setImageResource(R.drawable.check_circle);
-                checkFinal.setImageResource(R.drawable.check_circle);
-                nextActivity(pedido,"si");
-                break;
+        if(id==null){
+            SingletonPedido singletonPedido = SingletonPedido.getInstance();
+            final Pedidos pedido = singletonPedido.getPedido();
+
+            switch (pedido.getEstado()){
+                case "Confirmado":
+                    checkConf.setImageResource(R.drawable.check_circle);
+                    break;
+                case "Enviado":
+                    checkConf.setImageResource(R.drawable.check_circle);
+                    checkSend.setImageResource(R.drawable.check_circle);
+                    break;
+                case "Finalizado":
+                    checkConf.setImageResource(R.drawable.check_circle);
+                    checkSend.setImageResource(R.drawable.check_circle);
+                    checkFinal.setImageResource(R.drawable.check_circle);
+                    nextActivity(pedido,"si");
+                    break;
+            }
+
+            verDetalles.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    nextActivity(pedido,"no");
+                }
+            });
+        }else {
+            getPedido(id);
         }
 
-        verDetalles.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextActivity(pedido,"no");
-            }
-        });
+
     }
     private void nextActivity(Pedidos pedido, String visible){
         ArrayList<Producto> productos = new ArrayList<>(pedido.getProductos());
@@ -60,5 +79,47 @@ public class EstadoPedido extends AppCompatActivity {
         intent.putExtra("pedido", pedido);
         intent.putExtra("visible", visible);
         startActivity(intent);
+    }
+
+    private void getPedido(String id){
+        final SingletonPedido singletonPedido = SingletonPedido.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Pedidos").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    Pedidos pedido = document.toObject(Pedidos.class);
+                    pedido.setIdDocument(document.getId());
+                    singletonPedido.setPedido(pedido);
+                }
+                SingletonPedido singletonPedido = SingletonPedido.getInstance();
+                final Pedidos pedido = singletonPedido.getPedido();
+
+                switch (pedido.getEstado()){
+                    case "Confirmado":
+                        checkConf.setImageResource(R.drawable.check_circle);
+                        break;
+                    case "Enviado":
+                        checkConf.setImageResource(R.drawable.check_circle);
+                        checkSend.setImageResource(R.drawable.check_circle);
+                        break;
+                    case "Finalizado":
+                        checkConf.setImageResource(R.drawable.check_circle);
+                        checkSend.setImageResource(R.drawable.check_circle);
+                        checkFinal.setImageResource(R.drawable.check_circle);
+                        nextActivity(pedido,"si");
+                        break;
+                }
+
+                verDetalles.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        nextActivity(pedido,"no");
+                    }
+                });
+
+            }
+        });
     }
 }

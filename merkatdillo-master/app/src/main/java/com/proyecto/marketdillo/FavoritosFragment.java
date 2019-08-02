@@ -71,7 +71,6 @@ public class FavoritosFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         mercadillos = realm.where(Mercadillo.class).findAll();
 
-
         layoutManager = new LinearLayoutManager(getContext());
         // Instancia del ListView.
         mRecyclerView = (RecyclerView) root.findViewById(R.id.mercadillo_Recycler);

@@ -68,7 +68,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             costoCantidad = (TextView)itemView.findViewById(R.id.precio);
             agregar = itemView.findViewById(R.id.agregar);
 
-
         }
         public void bind( final Producto producto, final OnItemClickListener listener){
             Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
@@ -80,7 +79,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             }else {
                 costoCantidad.setText("Lleve 1 gr por $ " + Integer.toString(producto.getPrecioCantidad()));
             }
-
             agregar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -38,6 +38,7 @@ public class VistaDetalles extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private RatingBar ratingBar;
     private List<Producto> productos;
+    double cal=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,7 @@ public class VistaDetalles extends AppCompatActivity {
         final String idDocumentPedido = pedidos.getIdDocument();
         final String idMercadillo = pedidos.getIdCampesino();
         String nombreUsuario = pedidos.getNombreComprador();
-        final double cal = pedidos.getCalificacion();
+        cal = pedidos.getCalificacion();
         String direccionEntrega = pedidos.getDireccionEntrega();
         String totalPedido = pedidos.getTotal();
         String boton = getIntent().getStringExtra("visible");
@@ -182,6 +183,7 @@ public class VistaDetalles extends AppCompatActivity {
                 //actualiza el ratingBar con la nueva calificacion
                 float numStar = (float)calificacion;
                 ratingBar.setRating(numStar);
+                cal = numStar;
                 //cierra el alertDialog
                 alertDialog.dismiss();
             }
