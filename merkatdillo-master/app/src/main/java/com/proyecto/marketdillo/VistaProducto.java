@@ -1,5 +1,7 @@
 package com.proyecto.marketdillo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ public class VistaProducto extends AppCompatActivity {
     TextView precioPorCantidad;
     TextView cantidad;
     int contador = 1;
+    int envio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,7 @@ public class VistaProducto extends AppCompatActivity {
         //declara el objeto enviado desde VistaMercadilloPrducto
         producto = (Producto) getIntent().getSerializableExtra("producto");
         final int index = Integer.parseInt(getIntent().getExtras().get("index").toString());
-        final int envio = Integer.parseInt(getIntent().getExtras().get("envio").toString());
+        envio = Integer.parseInt(getIntent().getExtras().get("envio").toString());
         String titulo = producto.getNombre();
 
         this.setTitle("Detalles del producto");
@@ -64,18 +67,21 @@ public class VistaProducto extends AppCompatActivity {
         agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(VistaProducto.this, VistaProductosMercadillo.class);
                 if(singletonCanasta.getCanasta() != null  ){
                     if(singletonCanasta.getCanasta().getId().equals(canastaClass.getId())){
                         canastaClass = singletonCanasta.getCanasta();
                         agregaProductos(producto, index);
+                        startActivity(intent);
+                    }else{
+                        nuevaCanasta(intent , index);
+
                     }
                 }else {
                     agregaProductos(producto, index);
-
+                    startActivity(intent);
                 }
-                Intent intent = new Intent(VistaProducto.this, VistaProductosMercadillo.class);
-                startActivity(intent);
+
                }
         });
         add.setOnClickListener(new View.OnClickListener() {
@@ -112,5 +118,25 @@ public class VistaProducto extends AppCompatActivity {
 
         }
         singletonCanasta.setCanasta(canastaClass);
+    }
+    private void nuevaCanasta( final Intent intent, final int index){
+
+        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+        alerta.setTitle("Aviso");
+        alerta.setMessage("Para agregar porductos de este mercadillo debes vaciar la canasta");
+        alerta.setPositiveButton("Vaciar Canasta", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                canastaClass = new CanastaClass(producto.getId(), envio);
+                agregaProductos( producto, index);
+                singletonCanasta.setCanasta(canastaClass);
+                startActivity(intent);
+            }
+        });
+        alerta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+
+            }
+        });
+        alerta.show();
     }
 }

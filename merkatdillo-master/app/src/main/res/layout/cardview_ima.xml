@@ -28,7 +28,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="70dp"
             android:layout_gravity="bottom"
             android:background="@color/backgroundtext_card"
             android:orientation="vertical"
@@ -42,6 +42,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="Limones"
                 android:textColor="@color/colorIcons"
                 android:textSize="@dimen/tamañotextocard"
@@ -56,7 +59,6 @@
                 android:id="@+id/primerapalabra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="Precio:"
                 android:textColor="@color/colorIcons"
                 android:textSize="@dimen/tamañotextocard2"
@@ -67,7 +69,8 @@
                 android:id="@+id/preciocard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
                 android:text="$5.000"
                 android:textColor="@color/colorIcons"
                 android:textSize="@dimen/tamañotextocard2"
@@ -81,7 +84,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Fabio"
                 android:textColor="@color/colorIcons"
                 android:textSize="20dp"
                 cardview:layout_constraintBottom_toBottomOf="@id/guideline21"
@@ -96,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5" />
+                app:layout_constraintGuide_percent="0.77" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline22"

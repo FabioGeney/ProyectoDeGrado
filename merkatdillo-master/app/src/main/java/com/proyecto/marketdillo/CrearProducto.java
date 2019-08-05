@@ -527,6 +527,9 @@ public class CrearProducto extends AppCompatActivity {
                     case "Otro":
                         tipo.setText(item[which].toString());
                         break;
+                    case "Tubérculo":
+                        tipo.setText(item[which].toString());
+                        break;
                     default:
                         dialog.dismiss();
 

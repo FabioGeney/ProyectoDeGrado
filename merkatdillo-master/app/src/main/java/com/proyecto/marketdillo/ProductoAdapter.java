@@ -1,7 +1,9 @@
 package com.proyecto.marketdillo;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
@@ -26,11 +28,14 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     private Context context;
     private SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
     private CanastaClass canastaClass;
-
+    private String id;
+    private int domi;
     public  ProductoAdapter(String id, int domi, List<Producto> productos, int layout, OnItemClickListener itemClickListener ){
         this.productos = productos;
         this.layout = layout;
         this.itemClickListener = itemClickListener;
+        this.domi = domi;
+        this.id = id;
         canastaClass = new CanastaClass(id, domi);
     }
     @NonNull
@@ -86,6 +91,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                         if(singletonCanasta.getCanasta().getId().equals(canastaClass.getId())){
                             canastaClass = singletonCanasta.getCanasta();
                             agregaProductos(producto, getAdapterPosition());
+                        }else{
+                            nuevaCanasta(producto, getAdapterPosition());
                         }
                     }else {
                         agregaProductos(producto, getAdapterPosition());
@@ -130,5 +137,26 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         productos = new ArrayList<>();
         productos.addAll(productosFilter);
         notifyDataSetChanged();
+    }
+
+    private void nuevaCanasta(final Producto producto, final int index){
+
+        AlertDialog.Builder alerta = new AlertDialog.Builder(context);
+        alerta.setTitle("Aviso");
+        alerta.setMessage("Para agregar porductos de este mercadillo debes vaciar la canasta");
+        alerta.setPositiveButton("Vaciar Canasta", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                canastaClass = new CanastaClass(producto.getId(), domi);
+                agregaProductos( producto, index);
+                singletonCanasta.setCanasta(canastaClass);
+            }
+        });
+        alerta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+
+            }
+        });
+
+        alerta.show();
     }
 }

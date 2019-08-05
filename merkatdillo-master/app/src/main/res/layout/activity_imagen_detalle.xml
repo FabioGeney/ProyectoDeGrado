@@ -45,12 +45,18 @@
 
     <TextView
         android:id="@+id/producto"
-        android:layout_width="wrap_content"
-        android:layout_height="17dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:text="Producto"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toStartOf="@+id/vendedor"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline13"
         app:layout_constraintTop_toBottomOf="@+id/guideline10"
         app:layout_constraintVertical_bias="1.0" />
@@ -59,18 +65,14 @@
         android:id="@+id/vendedor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="Vendedor"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
-        app:layout_constraintEnd_toEndOf="@id/guideline14"
-        app:layout_constraintHorizontal_bias="0.987"
-        app:layout_constraintStart_toEndOf="@+id/producto"
-        app:layout_constraintTop_toBottomOf="@+id/guideline10"
+        app:layout_constraintEnd_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@+id/guideline10"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView

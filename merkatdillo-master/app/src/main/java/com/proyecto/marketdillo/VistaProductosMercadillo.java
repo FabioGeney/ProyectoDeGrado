@@ -173,7 +173,6 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
             if( nombre.contains(queryTemp) || queryTemp.contains(nombre) || descr.contains(queryTemp) || queryTemp.contains(descr)){
                 temp.add(producto);
             }
-
         }
         return temp;
     }

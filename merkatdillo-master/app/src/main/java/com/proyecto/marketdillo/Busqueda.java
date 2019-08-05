@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,7 @@ public class Busqueda extends AppCompatActivity {
     private Button btnMercadillos;
     private Button btnProductos;
     private String query;
+    private GridLayoutManager gridLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ public class Busqueda extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         mercadillos = getMercadillos();
 
+        gridLayoutManager = new GridLayoutManager(this, 2);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         btnMercadillos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,23 +166,25 @@ public class Busqueda extends AppCompatActivity {
                                                 }
 
                                             }
-                                            /*
+
                                             // Inicializar el adaptador con la fuente de datos.
-                                            productoAdapter = new ProductoAdapter(productos, R.layout.list_item_productos, new ProductoAdapter.OnItemClickListener() {
+                                            productoAdapter = new AdapterProductosBusqueda(productos, R.layout.cardview_ima, new ProductoAdapter.OnItemClickListener() {
                                                 @Override
                                                 public void OnItemClick(Producto producto, int posicion) {
+
+                                                    /*
                                                     //al hacer click en un mercadillo se va a otro activity
                                                     Intent intent = new Intent(Busqueda.this, VistaProducto.class);
                                                     Toast.makeText(Busqueda.this,producto.getImagen(), Toast.LENGTH_SHORT).show();
                                                     //envia informacion del mercadillo al otro activity
                                                     intent.putExtra("producto", producto);
                                                     intent.putExtra("index", posicion);
-                                                    startActivity(intent);
+                                                    startActivity(intent);    */
                                                 }
                                             });
-                                            */
+
                                             //Relacionando la lista con el adaptador
-                                            mRecyclerView.setLayoutManager(layoutManager);
+                                            mRecyclerView.setLayoutManager(gridLayoutManager);
                                             mRecyclerView.setAdapter(productoAdapter);
                                         }else {
 
