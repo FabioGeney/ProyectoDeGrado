@@ -118,7 +118,10 @@ public class ChatsFragment extends Fragment {
                 String nombre = dataSnapshot.child("nombre").getValue(String.class);
                 String ultimoMensaje = dataSnapshot.child("ultimoMensaje").getValue(String.class);
                 Contacto contacto = new Contacto(id, imagen, nombre, ultimoMensaje);
-                chatsAdapter.agregarMensaje(id, contacto);
+                if(id != null){
+                    chatsAdapter.agregarMensaje(id, contacto);
+                }
+
 
             }
 

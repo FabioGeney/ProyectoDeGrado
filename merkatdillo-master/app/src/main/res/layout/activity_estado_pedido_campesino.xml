@@ -10,6 +10,39 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/colorDivider"
+        app:layout_constraintBottom_toTopOf="@+id/checkConf"
+        app:layout_constraintEnd_toEndOf="@+id/checkConf"
+        app:layout_constraintStart_toStartOf="@+id/checkConf"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+
+    </View>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/colorDivider"
+        app:layout_constraintBottom_toTopOf="@+id/chekSend"
+        app:layout_constraintEnd_toEndOf="@+id/chekSend"
+        app:layout_constraintStart_toStartOf="@+id/chekSend"
+        app:layout_constraintTop_toBottomOf="@+id/checkConf">
+
+    </View>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/colorDivider"
+        app:layout_constraintBottom_toTopOf="@+id/checkFinal"
+        app:layout_constraintEnd_toEndOf="@+id/checkFinal"
+        app:layout_constraintStart_toStartOf="@+id/checkFinal"
+        app:layout_constraintTop_toBottomOf="@+id/chekSend">
+
+    </View>
+
     <android.support.constraint.Guideline
         android:id="@+id/guideline24"
         android:layout_width="wrap_content"

@@ -24,6 +24,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 import static android.support.constraint.Constraints.TAG;
 
 
@@ -41,7 +44,7 @@ public class PedidosFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private List<Pedidos> pedidos;
     private Intent intent;
-
+    private Realm realm = Realm.getDefaultInstance();
 
     public PedidosFragment() {
         // Required empty public constructor
@@ -115,8 +118,8 @@ public class PedidosFragment extends Fragment {
                                 @Override
                                 public void OnItemClick(Pedidos pedidos, int posicion) {
                                     SingletonPedido singletonPedido = SingletonPedido.getInstance();
+                                    eliminarIdPedido( pedidos.getIdDocument());
                                     singletonPedido.setPedido(pedidos);
-
                                     startActivity(intent);
 
                                 }
@@ -133,6 +136,20 @@ public class PedidosFragment extends Fragment {
                 });
 
         return pedidosRequest;
+    }
+
+    private void eliminarIdPedido(String id){
+        PedidosToRealm pedidosToRealm = new PedidosToRealm(id);
+        final RealmResults<PedidosToRealm> res = realm.where(PedidosToRealm.class).equalTo("idPedido", String.valueOf(pedidosToRealm.getIdPedido()))
+                .findAll();
+        if(res.isValid() && !res.isEmpty()) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    res.deleteAllFromRealm();
+                }
+            });
+        }
     }
 
 }

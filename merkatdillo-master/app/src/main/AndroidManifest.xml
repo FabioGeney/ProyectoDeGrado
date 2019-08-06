@@ -147,7 +147,13 @@
         <activity
             android:name=".VistaCampesino"
             android:label="@string/title_activity_vista_campesino"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="com.proyecto.marketdillo.NOTIFICACIONVISTACAMPESINO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".VistaDetalles"
             android:parentActivityName=".VistaUsuarios"
@@ -189,7 +195,13 @@
         <activity
             android:name=".VistaUsuarios"
             android:label="@string/title_activity_mercadillos"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="com.proyecto.marketdillo.NOTIFICACIONVISTAUSUARIO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:parentActivityName=".BottomActivity"

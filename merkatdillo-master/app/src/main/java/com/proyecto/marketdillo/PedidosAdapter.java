@@ -6,7 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -43,30 +46,43 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-
+        public ImageView imagen;
         public TextView nombre ;
-        public TextView total ;
         public TextView estado ;
+        public TextView fecha ;
+        public TextView pendiente ;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            imagen = itemView.findViewById(R.id.imagen);
             nombre = (TextView) itemView.findViewById(R.id.nombre);
+            fecha = (TextView)itemView.findViewById(R.id.fecha);
             estado = (TextView)itemView.findViewById(R.id.estado);
-            total = itemView.findViewById(R.id.total);
+            pendiente = (TextView)itemView.findViewById(R.id.nuevo);
 
         }
         public void bind( final Pedidos pedidos, final OnItemClickListener listener){
 
             SingletonUsuario singletonUsuario  =SingletonUsuario.getInstance();
+            estado.setText( " "+ pedidos.getEstado() + " ");
 
             if(singletonUsuario.getUsuario().getTipoUsuario().equals("campesino")){
                 nombre.setText(pedidos.getNombreComprador());
+                imagen.setVisibility(View.GONE);
+                if(pedidos.getEstado().equals("Creado")){
+                    pendiente.setText(" NUEVO ");
+                }else {
+                    pendiente.setText(" PENDIENTE! ");
+                    pendiente.setBackgroundColor(context.getResources().getColor(R.color.pendiente));
+                    pendiente.setTextColor(context.getResources().getColor(R.color.colorIcons));
+                }
             }else {
+                pendiente.setVisibility(View.GONE);
                 nombre.setText(pedidos.getNombreMercadillo());
+                Picasso.with(context).load(R.mipmap.ic_merca_image).fit().into(imagen);
             }
 
-            estado.setText("Estado: "+ pedidos.getEstado());
-            total.setText(pedidos.getTotal());
+
+            fecha.setText(pedidos.getFecha());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -52,7 +53,6 @@ public class MercadilloFragment extends Fragment {
     private List<Mercadillo> favoritos;
     private ProgressBar progressBar;
     private DividerItemDecoration dividerItemDecoration;
-    private Realm realm;
     private CardView cardView;
 
     public MercadilloFragment() {
@@ -108,10 +108,11 @@ public class MercadilloFragment extends Fragment {
         mercadillos1 = getMercadillos();
 
         //list favoritos
-        realm = Realm.getDefaultInstance();
-        favoritos = realm.where(Mercadillo.class).findAll();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Mercadillo> query = realm.where(Mercadillo.class).findAll();
 
-        if(favoritos.size()!=0){
+        if(query.size()!=0){
+            favoritos = query;
             //adapter Favoritos
             favAdapter = new MercadilloAdapter(favoritos, R.layout.list_item_mercadillo, new MercadilloAdapter.OnItemClickListener() {
                 @Override
@@ -125,16 +126,12 @@ public class MercadilloFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-
+            favAdapter.notifyDataSetChanged();
             mRecyclerViewFav.setLayoutManager(layoutManagerFav);
             mRecyclerViewFav.setAdapter(favAdapter);
         }else {
             cardView.setVisibility(View.GONE);
         }
-
-
-
-
 
 
         return root;

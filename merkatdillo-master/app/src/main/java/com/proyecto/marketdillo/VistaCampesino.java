@@ -80,13 +80,20 @@ public class VistaCampesino extends AppCompatActivity
         correo.setText(usuario.getEmail());
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Enviar id del Campesino a PtsFragment para consultar los productos del campesino
+        //Obtiene datos del intent
+        String fragment = getIntent().getStringExtra("fragment");
 
-        PtsCampesinoFragment ptsCampesinoFragment = new PtsCampesinoFragment();
 
+        if(fragment!=null && fragment.equals("pedido")){
+            PedidosFragment pedidosFragmentFragment = new PedidosFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content, pedidosFragmentFragment).commit();
+        }else {
+            PtsCampesinoFragment ptsCampesinoFragment = new PtsCampesinoFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content, ptsCampesinoFragment).commit();
+        }
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.campesinos_content, ptsCampesinoFragment).commit();
     }
 
     @Override

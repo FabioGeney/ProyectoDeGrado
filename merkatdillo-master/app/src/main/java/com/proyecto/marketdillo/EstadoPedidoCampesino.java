@@ -43,7 +43,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String id = getIntent().getStringExtra("idPedido");
-
+        this.setTitle("Estado del pedido");
 
 
         confirmar = findViewById(R.id.confirmarLayout);

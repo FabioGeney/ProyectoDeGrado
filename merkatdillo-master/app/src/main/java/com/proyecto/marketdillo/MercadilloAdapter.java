@@ -57,30 +57,33 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
         public ImageView imagen;
         public TextView nombre ;
         public TextView costoEnvio ;
-        public TextView tiempoEnvio;
         public TextView calificacion ;
+        public boolean[] click = {true};
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
              favorito = (ImageView) itemView.findViewById(R.id.favorito);
              imagen = (ImageView) itemView.findViewById(R.id.imagen);
              nombre = (TextView) itemView.findViewById(R.id.nombre);
              costoEnvio = (TextView)itemView.findViewById(R.id.costoEnvio);
-             tiempoEnvio = (TextView)itemView.findViewById(R.id.tiempoEnvio);
              calificacion = (TextView) itemView.findViewById(R.id.calificacion);
         }
         public void bind( final Mercadillo mercadillo, final OnItemClickListener listener){
             Picasso.with(context).load(mercadillo.getImagen()).fit().into(imagen);
             nombre.setText( mercadillo.getNombre());
-            costoEnvio.setText("Envio $ " +mercadillo.getCostoEnvio() );
-            tiempoEnvio.setText( mercadillo.getTiempoEntrega());
+            if(mercadillo.getCostoEnvio() == 0){
+                costoEnvio.setText("Envio GRATIS • " + mercadillo.getTiempoEntrega());
+            }else{
+                costoEnvio.setText("Envio $ " +mercadillo.getCostoEnvio() +" • " + mercadillo.getTiempoEntrega());
+            }
+
             calificacion.setText(  mercadillo.getCalificacion());
 
             realm = Realm.getDefaultInstance();
 
-            final boolean[] click = {true};
 
             if(getMercadillo(mercadillo)){
                 favorito.setImageResource(R.drawable.ic_fav);
+                click[0] = false;
             }
             favorito.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,7 +96,6 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
                         favorito.setImageResource(R.drawable.ic_favorito);
                         eliminarFavorito(mercadillo);
                         click[0] = true;
-                        notifyDataSetChanged();
                     }
                 }
             });

@@ -32,7 +32,7 @@ public class EstadoPedido extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        this.setTitle("Estado del pedido");
         checkConf = findViewById(R.id.checkConfirmado);
         checkSend = findViewById(R.id.checkEnviado);
         checkFinal = findViewById(R.id.checkFinalizado);
