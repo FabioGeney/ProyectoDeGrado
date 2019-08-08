@@ -305,9 +305,9 @@ public class CrearProducto extends AppCompatActivity {
                 //String pat = getIntent().getStringExtra("data");
 
                 //hImagenUri = data.getData();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                thumbnail.compress(Bitmap.CompressFormat.JPEG, 75, baos);
-                Bitmap l = thumbnail.createScaledBitmap(thumbnail, 1024, 1024, false);
+                //ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                //thumbnail.compress(Bitmap.CompressFormat.JPEG, 75, baos);
+                Bitmap l = thumbnail.createScaledBitmap(thumbnail, 3024, 4032, false);
                 //l.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                 hImagenUri = getImageUri(l);
                 imagen.setImageBitmap(l);
@@ -317,7 +317,7 @@ public class CrearProducto extends AppCompatActivity {
 
     public Uri getImageUri(Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        //inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
