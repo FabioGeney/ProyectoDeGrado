@@ -111,6 +111,12 @@ public class VistaCampesino extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

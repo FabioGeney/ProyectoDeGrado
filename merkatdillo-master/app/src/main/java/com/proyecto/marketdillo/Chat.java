@@ -169,5 +169,11 @@ public class Chat extends AppCompatActivity {
         firebaseDatabase.getReference(usuario.getId()).child(idDestinatario).child("Datos").updateChildren(resultRemitente);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
 }

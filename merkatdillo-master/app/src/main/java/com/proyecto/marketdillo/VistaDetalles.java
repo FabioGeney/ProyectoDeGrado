@@ -259,4 +259,10 @@ public class VistaDetalles extends AppCompatActivity {
         alerta.show();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 }

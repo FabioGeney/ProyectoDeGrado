@@ -164,6 +164,12 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private ArrayList<Producto> filter(List<Producto> productosTemp, String query){
         ArrayList<Producto> temp= new ArrayList<>();
         String queryTemp = query.toLowerCase();

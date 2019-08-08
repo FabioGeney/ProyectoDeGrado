@@ -125,4 +125,10 @@ public class VistaMercadilloAdmin extends AppCompatActivity {
                 });
         return request;
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }
