@@ -93,10 +93,10 @@ public class HistorialFragment extends Fragment {
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Query dbUser = db.collection("Pedidos").whereEqualTo("idConsumidor", id);
+        Query dbUser = db.collection("Consumidor").document(usuario.getId()).collection("Pedidos");
 
         if(usuario.getTipoUsuario().equals("campesino")){
-            dbUser = db.collection("Pedidos").whereEqualTo("idCampesino", id);
+            dbUser = db.collection("Campesino").document(usuario.getId()).collection("Pedidos");
         }
 
         dbUser.whereEqualTo("estado", "Finalizado").get()
