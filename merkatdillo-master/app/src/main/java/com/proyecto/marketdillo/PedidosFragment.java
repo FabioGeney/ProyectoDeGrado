@@ -88,7 +88,7 @@ public class PedidosFragment extends Fragment {
         String id = usuario.getId();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Query dbUser = db.collection("Pedidos").whereEqualTo("idConsumidor", id);
+        Query dbUser = db.collection("Consumidor").document(usuario.getId()).collection("Pedidos").orderBy("fecha");
         intent = new Intent(getContext(), EstadoPedido.class);
         if(usuario.getTipoUsuario().equals("campesino")){
             dbUser = db.collection("Campesino").document(usuario.getId()).collection("Pedidos").orderBy("fecha");
@@ -118,7 +118,6 @@ public class PedidosFragment extends Fragment {
                                 @Override
                                 public void OnItemClick(Pedidos pedidos, int posicion) {
                                     SingletonPedido singletonPedido = SingletonPedido.getInstance();
-                                    eliminarIdPedido( pedidos.getIdDocument());
                                     singletonPedido.setPedido(pedidos);
                                     startActivity(intent);
 
@@ -138,18 +137,6 @@ public class PedidosFragment extends Fragment {
         return pedidosRequest;
     }
 
-    private void eliminarIdPedido(String id){
-        PedidosToRealm pedidosToRealm = new PedidosToRealm(id);
-        final RealmResults<PedidosToRealm> res = realm.where(PedidosToRealm.class).equalTo("idPedido", String.valueOf(pedidosToRealm.getIdPedido()))
-                .findAll();
-        if(res.isValid() && !res.isEmpty()) {
-            realm.executeTransaction(new Realm.Transaction() {
-                @Override
-                public void execute(Realm realm) {
-                    res.deleteAllFromRealm();
-                }
-            });
-        }
-    }
+
 
 }

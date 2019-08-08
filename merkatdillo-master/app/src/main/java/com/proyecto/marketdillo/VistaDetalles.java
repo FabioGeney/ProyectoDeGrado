@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -125,7 +126,7 @@ public class VistaDetalles extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(cal==0){
-                    alertDialog(idMercadillo, idDocumentPedido);
+                    alertDialog(idMercadillo, idDocumentPedido, pedidos);
                 }
 
             }
@@ -155,7 +156,10 @@ public class VistaDetalles extends AppCompatActivity {
     }
 
     //este metodo muestra un alertDialog para calificar el pedido
-    private void alertDialog(String docMercadillo, String docPedido){
+    private void alertDialog(String docMercadillo, String docPedido, final Pedidos pedido){
+        //id de campesino y consumidor
+        final String idCampesino = pedido.getIdCampesino();
+        final String idConsumidor = pedido.getIdConsumidor();
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Calificar pedido");
         LayoutInflater inflater = getLayoutInflater();
@@ -192,8 +196,9 @@ public class VistaDetalles extends AppCompatActivity {
                 promedio.put("promedio", calificacion);
                 //envia el promedio a la coleccion de calificacion en la base de datos para que se ejecute una CloudFunction y calcule el promedio de todos los pedidos
                 db.collection("Mercadillo").document(idMercadillo).collection("Calificacion").document().set(promedio);
-                //actualiza la calificacion del promedio en la base de datos
-                db.collection("Pedidos").document(idDocumentPedido).update(update);
+                //actualiza el promedio en la base de datos
+                db.collection("Consumidor").document(idConsumidor).collection("Pedidos").document(idDocumentPedido).update(update);
+                calificaPedidoCampesino(idCampesino, idDocumentPedido, update);
                 //actualiza el ratingBar con la nueva calificacion
                 float numStar = (float)calificacion;
                 ratingBar.setRating(numStar);
@@ -205,6 +210,22 @@ public class VistaDetalles extends AppCompatActivity {
 
         alertDialog.setView(v);
         alertDialog.show();
+    }
+    //este metodo busca y actualiza la calificacion en la coleccion del campesino
+    private void calificaPedidoCampesino(final String idCampesino, String idDocumentConsumidor, final Map<String, Object> update){
+        db.collection("Campesino").document(idCampesino).collection("Pedidos")
+                .whereEqualTo("idDocumentConsumidor",idDocumentConsumidor)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot : task.getResult()){
+                        String id = documentSnapshot.getId();
+                        db.collection("Campesino").document(idCampesino).collection("Pedidos").document(id).update(update);
+                    }
+                }
+            }
+        });
     }
     //este metodo busca el mercadillo en la base de datos
     private void buscaMercadillo(String idMercadillo){

@@ -19,6 +19,7 @@ public class Pedidos implements Serializable {
     private String total;
     private String fecha;
     private double calificacion;
+    private String idDocumentConsumidor;
 
     public Pedidos() {
     }
@@ -46,6 +47,14 @@ public class Pedidos implements Serializable {
         this.total = total;
         this.fecha = fecha;
         this.calificacion = calificacion;
+    }
+
+    public void setIdDocumentConsumidor(String idDocumentConsumidor) {
+        this.idDocumentConsumidor = idDocumentConsumidor;
+    }
+
+    public String getIdDocumentConsumidor() {
+        return idDocumentConsumidor;
     }
 
     public double getCalificacion() {

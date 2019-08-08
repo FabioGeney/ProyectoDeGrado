@@ -140,9 +140,14 @@ public class ConfiguracionFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (item[which].equals("Si")) {
-                            FirebaseAuth.getInstance().signOut();
+
                             sessionManager = new SessionManager(getActivity());
                             sessionManager.logout();
+                            //setea token_id en la base de datos
+                            Map<String, Object> token = new HashMap<>();
+                            token.put("token_id", "");
+                            db.collection("Campesino").document(firebaseAuth.getUid()).update(token);
+                            FirebaseAuth.getInstance().signOut();
                         } else if (item[which].equals("No")) {
                             dialog.dismiss();
                         }

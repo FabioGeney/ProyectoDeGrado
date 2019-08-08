@@ -3,6 +3,7 @@ package com.proyecto.marketdillo;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,10 +19,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -150,25 +155,54 @@ public class VistaCanasta extends AppCompatActivity {
     }
 */
     private void enviarPedido(){
+        //obtiene datos para hacer pedido
         String idCampesino = mercadillo.getId();
         String idConsumidor = usuario.getId();
         String nombreMercadillo = mercadillo.getNombre();
         String direccionEntrega = usuario.getDireccion();
         String nombreUsuario = usuario.getNombre();
+        //estado iniciaol del pedido
         String estado = "Creado";
         String precio = total.getText().toString();
+        //fecha del pedido
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-        CollectionReference enviarPedidoCampesino = db.collection("Campesino").document(idCampesino).collection("Pedidos");
+        //direccion donde se guardara el pedido en la coleccion del usuario
         CollectionReference guardaPedidoConsumidor = db.collection("Consumidor").document(idConsumidor).collection("Pedidos");
         String fecha = dateFormat.format(date);
         ArrayList<Producto> canasta = canastaClass.getList();
+        //crea el objeto pedido para enviar a la base de datos
         Pedidos pedido = new Pedidos(idCampesino, idConsumidor, nombreUsuario, nombreMercadillo, direccionEntrega,estado ,canasta, precio, fecha);
-        Toast.makeText(this, ""+ canasta.size(), Toast.LENGTH_SHORT).show();
-        enviarPedidoCampesino.add(pedido);
+        //envia el pedido a la base de datos
         guardaPedidoConsumidor.add(pedido);
-
+        //llama el metodo que setea idDocumentConsumidor
+        idPedidoConsumidor(idConsumidor, idCampesino);
+        //Va a otro activity al enviar pedido
         Intent intent = new Intent(VistaCanasta.this, VistaUsuarios.class );
         startActivity(intent);
+    }
+
+    private void idPedidoConsumidor(String idConsumidor, String idCampesino){
+        final CollectionReference enviarPedidoCampesino = db.collection("Campesino").document(idCampesino).collection("Pedidos");
+        db.collection("Consumidor").document(idConsumidor).
+           collection("Pedidos").
+           whereEqualTo("idCampesino", idCampesino).
+           get().
+           addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Pedidos pedido = document.toObject(Pedidos.class);
+                        if(pedido.getIdDocumentConsumidor()==null){
+                            pedido.setIdDocumentConsumidor(document.getId());
+                            enviarPedidoCampesino.add(pedido);
+                        }
+
+                    }
+                }
+            }
+        });
+
     }
 }

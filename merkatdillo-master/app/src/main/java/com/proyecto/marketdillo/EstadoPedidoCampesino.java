@@ -35,6 +35,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
     private String idDocument;
     private String idCampesino;
     private String idConsumidor;
+    private String idDocmentConsumidor;
 
 
     @Override
@@ -69,7 +70,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
             idDocument = pedido.getIdDocument();
             idConsumidor = pedido.getIdConsumidor();
             idCampesino = pedido.getIdCampesino();
-
+            idDocmentConsumidor = pedido.getIdDocumentConsumidor();
             //setea elementos de la vista segun el estado del pedido
             switch (pedido.getEstado()){
                 case "Creado":
@@ -148,11 +149,11 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> estadoPedido = new HashMap<>();
         estadoPedido.put("estado", estado);
-        db.collection("Consumidor").document(idConsumidor).collection("Pedidos").document(idDocument).update(estadoPedido);
+        db.collection("Consumidor").document(idConsumidor).collection("Pedidos").document(idDocmentConsumidor).update(estadoPedido);
         db.collection("Campesino").document(idCampesino).collection("Pedidos").document(idDocument).update(estadoPedido);
         //db.collection("Pedidos").document(idDocument).update(estadoPedido);
     }
-
+    //este metodo se ejecuta cuando se abre este activity mediante una notificacion
     private void getPedido(String id){
         final SingletonPedido singletonPedido = SingletonPedido.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -170,6 +171,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                 idDocument = pedido.getIdDocument();
                 idConsumidor = pedido.getIdConsumidor();
                 idCampesino = pedido.getIdCampesino();
+                idDocmentConsumidor = pedido.getIdDocumentConsumidor();
 
                 //setea elementos de la vista segun el estado del pedido
                 switch (pedido.getEstado()){

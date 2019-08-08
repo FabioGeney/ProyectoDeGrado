@@ -22,8 +22,10 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -121,9 +123,14 @@ public class ConfiguracionUsuarioFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (item[which].equals("Si")) {
-                            FirebaseAuth.getInstance().signOut();
+
                             sessionManager = new SessionManager(getActivity());
                             sessionManager.logout();
+                            //setea token_id en la base de datos
+                            Map<String, Object> token = new HashMap<>();
+                            token.put("token_id", "");
+                            db.collection("Consumidor").document(firebaseAuth.getUid()).update(token);
+                            FirebaseAuth.getInstance().signOut();
                         } else if (item[which].equals("No")) {
                             dialog.dismiss();
                         }
