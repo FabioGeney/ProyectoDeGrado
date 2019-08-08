@@ -8,8 +8,8 @@ exports.notificaCreacionPedido = functions.firestore.document('Campesino/{campes
  
 
   const idPedidos = context.params.pedidosId;
-
-  return admin.firestore().collection("Pedidos").doc(idPedidos).get().then((dataSnap)=>{
+  const idCampesino = context.params.campesinoId;
+  return admin.firestore().collection("Campesino").doc(idCampesino).collection("Pedidos").doc(idPedidos).get().then((dataSnap)=>{
     const compradorId = dataSnap.data().idConsumidor;
     const campesinoId = dataSnap.data().idCampesino;
     
@@ -45,8 +45,8 @@ exports.notificaCreacionPedido = functions.firestore.document('Campesino/{campes
 
 exports.notificacionPedidoConsumidor = functions.firestore.document('Consumidor/{idConsumidor}/Pedidos/{pedidosId}').onWrite((snap, context) =>{
   const idPedido = context.params.pedidosId;
-
-  return admin.firestore().collection("Pedidos").doc(idPedido).get().then((dataSnap)=>{
+  const idConsumidor = context.params.idConsumidor;
+  return admin.firestore().collection("Consumidor").doc(idConsumidor).collection("Pedidos").doc(idPedido).get().then((dataSnap)=>{
     const compradorId = dataSnap.data().idConsumidor;
     const campesinoId = dataSnap.data().idCampesino;
     const estadoPedido = dataSnap.data().estado;

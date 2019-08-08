@@ -84,7 +84,8 @@ public class EstadoPedido extends AppCompatActivity {
     private void getPedido(String id){
         final SingletonPedido singletonPedido = SingletonPedido.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Pedidos").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        String idUsuario = SingletonUsuario.getInstance().getUsuario().getId();
+        db.collection("Consumidor").document(idUsuario).collection("Pedidos").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
