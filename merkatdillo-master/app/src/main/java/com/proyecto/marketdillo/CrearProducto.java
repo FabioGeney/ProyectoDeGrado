@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -66,6 +67,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 import id.zelory.compressor.Compressor;
 
 public class CrearProducto extends AppCompatActivity {
@@ -163,6 +166,12 @@ public class CrearProducto extends AppCompatActivity {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ACProgressFlower dialog = new ACProgressFlower.Builder(CrearProducto.this)
+                        .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                        .themeColor(Color.WHITE)
+                        .text("Cargando Producto")
+                        .fadeColor(Color.DKGRAY).build();
+                dialog.show();
                 uploadFile();
             }
         });

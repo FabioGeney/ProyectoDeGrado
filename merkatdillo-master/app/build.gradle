@@ -44,6 +44,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'id.zelory:compressor:2.1.0'
     apply plugin: 'realm-android'
+    implementation 'cc.cloudist.acplibrary:library:1.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
