@@ -3,7 +3,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.notificaCreacionPedido = functions.firestore.document('Pedidos/{pedidosId}')
+exports.notificaCreacionPedido = functions.firestore.document('Campesino/{campesinoId}/Pedidos/{pedidosId}')
 .onCreate((snap, context) => {
  
 
@@ -26,7 +26,7 @@ exports.notificaCreacionPedido = functions.firestore.document('Pedidos/{pedidosI
           title : "Tienes un nuevo pedido ",
           body : "el usuario " + nombreComprador + " te ha hecho un pedido" ,
           icon: "default",
-          click_action: "com.proyecto.marketdillo.NOTIFICACIONCAMPESINO",
+          click_action: "com.proyecto.marketdillo.NOTIFICACIONVISTACAMPESINO",
           pedidoID : idPedidos,
           tipo : "Pedido"
         },
@@ -43,7 +43,7 @@ exports.notificaCreacionPedido = functions.firestore.document('Pedidos/{pedidosI
   
 });
 
-exports.notificacionPedidoConsumidor = functions.firestore.document('Pedidos/{pedidosId}').onWrite((snap, context) =>{
+exports.notificacionPedidoConsumidor = functions.firestore.document('Consumidor/{idConsumidor}/Pedidos/{pedidosId}').onWrite((snap, context) =>{
   const idPedido = context.params.pedidosId;
 
   return admin.firestore().collection("Pedidos").doc(idPedido).get().then((dataSnap)=>{

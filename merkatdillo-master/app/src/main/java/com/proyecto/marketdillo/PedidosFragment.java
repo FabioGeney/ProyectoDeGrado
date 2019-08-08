@@ -88,10 +88,10 @@ public class PedidosFragment extends Fragment {
         String id = usuario.getId();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Query dbUser = db.collection("Pedidos").whereEqualTo("idConsumidor", id);
+        Query dbUser = db.collection("Consumidor").document(usuario.getId()).collection("Pedidos").orderBy("fecha");
         intent = new Intent(getContext(), EstadoPedido.class);
         if(usuario.getTipoUsuario().equals("campesino")){
-            dbUser = db.collection("Pedidos").whereEqualTo("idCampesino", id);
+            dbUser = db.collection("Campesino").document(usuario.getId()).collection("Pedidos").orderBy("fecha");
             intent = new Intent(getContext(), EstadoPedidoCampesino.class);
         }
 

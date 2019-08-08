@@ -152,13 +152,25 @@ public class ConfiguracionUsuarioFragment extends Fragment {
     public void editarPerfil(){
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         DocumentReference editarperf = db.collection("Consumidor").document(firebaseUser.getUid());
-
+        //obtiene la informacion actual del usuario
+        SingletonUsuario singletonUsuario =SingletonUsuario.getInstance();
+        Usuario usuario = singletonUsuario.getUsuario();
+        //obtiene datos de los edtitext
         String nombre1 = nombre.getText().toString();
         String apellido1 = apellido.getText().toString();
         String documentoidentidad1 = documentoidentidad.getText().toString();
         String fechanacimiento1 = fechanacimiento.getText().toString();
         String direccion1 = direccion.getText().toString();
-
+        //setea usuario
+        usuario.setNombre(nombre1);
+        usuario.setApellidos(apellido1);
+        usuario.setDoc_identidad(documentoidentidad1);
+        usuario.setFecha(fechanacimiento1);
+        usuario.setDireccion(direccion1);
+        //modifica usuario en sessionManager y singlton
+        SessionManager sessionManager = new SessionManager(getContext());
+        sessionManager.actualizaUsuario(usuario, usuario.getTipoUsuario());
+        singletonUsuario.setUsuario(usuario);
         final Map<String, Object> updat = new HashMap<>();
 
         updat.put("nombre", nombre1);

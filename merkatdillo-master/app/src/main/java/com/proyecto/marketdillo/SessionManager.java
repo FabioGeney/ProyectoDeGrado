@@ -63,6 +63,15 @@ public class SessionManager {
         user.put(USERNAME, sharedPreferences.getString(USERNAME, null));
         return user;
     }*/
+    public void actualizaUsuario(Usuario usuario, String tipoUsuario){
+        editor.clear();
+        editor.commit();
+        Gson gson = new Gson();
+        editor.putBoolean(LOGIN, true);
+        editor.putString(USUARIO, gson.toJson(usuario));
+        editor.putString(TIPOUSUARIO, tipoUsuario);
+        editor.apply();
+    }
 
     public void logout(){
         editor.clear();

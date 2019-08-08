@@ -51,9 +51,24 @@ public class VistaCampesino extends AppCompatActivity
         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
         singletonUsuario.setUsuario(usuario);
 
+        //Obtiene datos del intent
+        String idPedido = getIntent().getStringExtra("idPedido");
 
-        //Modifica titulo del Toolbar
-        this.setTitle("Mis Productos");
+        if(idPedido!=null){
+            //Modifica titulo del Toolbar
+            this.setTitle("Pedidos");
+            PedidosFragment pedidosFragment = new PedidosFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content, pedidosFragment).commit();
+        }else {
+            //Modifica titulo del Toolbar
+            this.setTitle("Mis Productos");
+            PtsCampesinoFragment ptsCampesinoFragment = new PtsCampesinoFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.campesinos_content, ptsCampesinoFragment).commit();
+        }
+
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,19 +95,10 @@ public class VistaCampesino extends AppCompatActivity
         correo.setText(usuario.getEmail());
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Obtiene datos del intent
-        String fragment = getIntent().getStringExtra("fragment");
 
 
-        if(fragment!=null && fragment.equals("pedido")){
-            PedidosFragment pedidosFragmentFragment = new PedidosFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.campesinos_content, pedidosFragmentFragment).commit();
-        }else {
-            PtsCampesinoFragment ptsCampesinoFragment = new PtsCampesinoFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.campesinos_content, ptsCampesinoFragment).commit();
-        }
+
+
 
     }
 

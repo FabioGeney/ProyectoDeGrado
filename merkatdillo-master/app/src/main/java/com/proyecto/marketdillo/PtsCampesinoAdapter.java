@@ -83,7 +83,28 @@ public class PtsCampesinoAdapter extends RecyclerView.Adapter<PtsCampesinoAdapte
             Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
             nombre.setText( producto.getNombre());
             descripcion.setText( producto.getDescripcion() );
-            costoCantidad.setText("$ "+producto.getPrecioCantidad());
+            String unidad = "kg";
+            switch (producto.getPrecioPorCantidad()){
+                case "Unidad":
+                    unidad = "unidad";
+                    break;
+                case "Gramo":
+                    unidad = "gr";
+                    break;
+                case "Libra":
+                    unidad = "lb";
+                    break;
+                case "Canast":
+                    unidad = "canasta";
+                    break;
+                case "Kilogramo":
+                    unidad = "kg";
+                    break;
+                default:
+                    unidad = "gr";
+                    break;
+            }
+            costoCantidad.setText("$ "+producto.getPrecioCantidad()+" • " + unidad);
 
             options.setOnClickListener(new View.OnClickListener() {
                 @Override

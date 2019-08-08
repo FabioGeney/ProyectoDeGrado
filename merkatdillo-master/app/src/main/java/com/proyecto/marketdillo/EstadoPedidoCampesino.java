@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,6 +33,8 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
     private ImageView checkSend;
     private ImageView checkFinal;
     private String idDocument;
+    private String idCampesino;
+    private String idConsumidor;
 
 
     @Override
@@ -62,10 +65,12 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
         if(id==null){
             SingletonPedido singletonPedido = SingletonPedido.getInstance();
             Pedidos pedido = singletonPedido.getPedido();
-
+            //obtiene id para hacer operaciones en la base de datos
             idDocument = pedido.getIdDocument();
+            idConsumidor = pedido.getIdConsumidor();
+            idCampesino = pedido.getIdCampesino();
 
-
+            //setea elementos de la vista segun el estado del pedido
             switch (pedido.getEstado()){
                 case "Creado":
                     finalizado.setVisibility(View.GONE);
@@ -87,7 +92,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                     break;
 
             }
-
+           //setea elementos de la vista cuando el campesino presiona aceptar
             aceptar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -99,7 +104,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
 
                 }
             });
-
+            //setea elementos de la vista cuando el campesino presiona enviar
             enviarPedido.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,7 +114,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                     modificaPedido("Enviado");
                 }
             });
-
+            //setea elementos de la vista cuando el campesino presiona finalizar
             finalizarPedido.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -118,7 +123,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                     modificaPedido("Finalizado");
                 }
             });
-
+            // muestra los detalles del pedido
             detalles.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -138,12 +143,14 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
 
 
     }
-
+    //modifica el estado del pedido en la base de datos
     private void modificaPedido(String estado){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> estadoPedido = new HashMap<>();
         estadoPedido.put("estado", estado);
-        db.collection("Pedidos").document(idDocument).update(estadoPedido);
+        db.collection("Consumidor").document(idConsumidor).collection("Pedidos").document(idDocument).update(estadoPedido);
+        db.collection("Campesino").document(idCampesino).collection("Pedidos").document(idDocument).update(estadoPedido);
+        //db.collection("Pedidos").document(idDocument).update(estadoPedido);
     }
 
     private void getPedido(String id){
@@ -159,8 +166,12 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                     singletonPedido.setPedido(pedido);
                 }
                 final Pedidos pedido = singletonPedido.getPedido();
+                //almacena id para operaciones en la base de datos
+                idDocument = pedido.getIdDocument();
+                idConsumidor = pedido.getIdConsumidor();
+                idCampesino = pedido.getIdCampesino();
 
-
+                //setea elementos de la vista segun el estado del pedido
                 switch (pedido.getEstado()){
                     case "Creado":
                         finalizado.setVisibility(View.GONE);
@@ -213,7 +224,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                         modificaPedido("Finalizado");
                     }
                 });
-
+                //muestra los detalles del pedido
                 detalles.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -2,6 +2,7 @@ package com.proyecto.marketdillo;
 
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -134,7 +135,20 @@ public class VistaDetalles extends AppCompatActivity {
         pedirNuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscaMercadillo(idMercadillo);
+                SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+                CanastaClass canastaClass = singletonCanasta.getCanasta();
+                if(singletonCanasta.getCanasta() != null  ){
+                    if(singletonCanasta.getCanasta().getId().equals(idMercadillo)){
+                        buscaMercadillo(idMercadillo);
+
+                    }else{
+                        AlertDialogPedir(idMercadillo);
+                    }
+                }else {
+
+                    buscaMercadillo(idMercadillo);
+                }
+
             }
         });
 
@@ -214,7 +228,7 @@ public class VistaDetalles extends AppCompatActivity {
             }
         });
     }
-
+    //crea una nueva canasta con los productos del pedido realizado
     private void setCanastaClass(Mercadillo mercadillo, List<Producto> productos  ){
         //crea una nueva canasta
         CanastaClass canastaClass = new CanastaClass(mercadillo.getId(), mercadillo.getCostoEnvio() );
@@ -225,6 +239,24 @@ public class VistaDetalles extends AppCompatActivity {
         //setea el singletonCanasta con la nueva canasta
         SingletonCanasta.getInstance().setCanasta(canastaClass);
 
+    }
+
+    private void AlertDialogPedir(final String idMercadillo){
+        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+        alerta.setTitle("Aviso");
+        alerta.setMessage("Para agregar porductos de este mercadillo debes vaciar la canasta");
+        alerta.setPositiveButton("Vaciar Canasta", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                buscaMercadillo(idMercadillo);
+            }
+        });
+        alerta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+
+            }
+        });
+
+        alerta.show();
     }
 
 }

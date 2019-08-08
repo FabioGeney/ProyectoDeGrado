@@ -119,15 +119,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     }
 
     private void agregaProductos(Producto producto, int position){
-        Producto productoTemp = canastaClass.getProducto(""+position);
+        Producto productoTemp = canastaClass.getProducto(producto.getIdDocument());
         if(productoTemp!=null){
-            producto.setKey(""+position);
-            canastaClass.aumentaContador(""+position);
+            producto.setKey(producto.getIdDocument());
+            canastaClass.aumentaContador(producto.getIdDocument());
 
         }else {
-            producto.setKey(""+position);
-            canastaClass.agregarProducto(""+position, producto);
-            canastaClass.aumentaContador(""+position);
+            producto.setKey(producto.getIdDocument());
+            canastaClass.agregarProducto(producto.getIdDocument(), producto);
+            canastaClass.aumentaContador(producto.getIdDocument());
 
         }
         singletonCanasta.setCanasta(canastaClass);
