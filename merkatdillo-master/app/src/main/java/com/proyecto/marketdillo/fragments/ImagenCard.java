@@ -10,6 +10,7 @@ public class ImagenCard implements Serializable {
     private String mercadillo;
     private String id;
     private String descripcion;
+    private String unidad;
 
     public ImagenCard() {
     };
@@ -21,14 +22,23 @@ public class ImagenCard implements Serializable {
         this.mercadillo = mercadillo;
     };
 
-    ImagenCard(String id, String nombre, String descripcion, String precioCantidad, String imagen){
+    public ImagenCard(String id, String nombre, String descripcion, String precioCantidad, String imagen, String unidad){
 
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioCantidad = precioCantidad;
         this.imagen = imagen;
+        this.unidad = unidad;
     };
+
+    public String getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
+    }
 
     public String getImagen() {
         return imagen;

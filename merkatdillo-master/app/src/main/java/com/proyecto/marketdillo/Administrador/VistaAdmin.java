@@ -1,9 +1,12 @@
 package com.proyecto.marketdillo.Administrador;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,12 +16,15 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.proyecto.marketdillo.ChatsFragment;
 import com.proyecto.marketdillo.R;
 
 public class VistaAdmin extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private boolean twice = false;
+    private final String TAG = this.getClass().getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +62,28 @@ public class VistaAdmin extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
+            Log.d(TAG, "click");
+
+            if(twice){
+                Intent i = new Intent(Intent.ACTION_MAIN);
+                i.addCategory(Intent.CATEGORY_HOME);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+                System.exit(0);
+            }
+            twice = true;
+            Log.d(TAG, "twice" + twice);
+
+            Toast.makeText(VistaAdmin.this, "Vuelva a oprimir para salir", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    twice = false;
+                    Log.d(TAG, "twice" + twice);
+                }
+            }, 2000);
         }
     }
     /*

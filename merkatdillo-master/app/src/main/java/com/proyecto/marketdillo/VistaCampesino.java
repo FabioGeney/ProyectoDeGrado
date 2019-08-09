@@ -2,10 +2,12 @@ package com.proyecto.marketdillo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -33,6 +35,8 @@ public class VistaCampesino extends AppCompatActivity
     private SessionManager sessionManager;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FloatingActionButton fab;
+    private boolean twice = false;
+    private final String TAG = this.getClass().getName();
 
 
     @Override
@@ -108,8 +112,31 @@ public class VistaCampesino extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
+            Log.d(TAG, "click");
+
+            if(twice){
+                Intent i = new Intent(Intent.ACTION_MAIN);
+                i.addCategory(Intent.CATEGORY_HOME);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+                System.exit(0);
+            }
+            twice = true;
+            Log.d(TAG, "twice" + twice);
+
+            Toast.makeText(VistaCampesino.this, "Vuelva a oprimir para salir", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    twice = false;
+                    Log.d(TAG, "twice" + twice);
+                }
+            }, 2000);
         }
+
+
     }
 
     @Override

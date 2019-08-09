@@ -83,7 +83,7 @@ public class VitrinaFragment extends Fragment {
 
                                     for(QueryDocumentSnapshot document1 : task1.getResult()){
                                         ImagenCard imagen = new ImagenCard(document1.getData().get("id").toString(), document1.getData().get("nombre").toString(),
-                                        document1.getData().get("descripcion").toString(), ""+document1.getData().get("precioCantidad"), document1.getData().get("imagen").toString());
+                                        document1.getData().get("descripcion").toString(), ""+document1.getData().get("precioCantidad"), document1.getData().get("imagen").toString(),document1.getData().get("precioPorCantidad").toString() );
                                         imagenes.add(imagen);
                                     }
                                     imagenAdapter = new ImagenAdapter(imagenes1, R.layout.cardview_ima, getActivity(), new ImagenAdapter.OnItemClickListener() {

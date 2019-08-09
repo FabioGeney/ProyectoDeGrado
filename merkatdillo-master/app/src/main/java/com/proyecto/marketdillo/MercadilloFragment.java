@@ -172,7 +172,7 @@ public class MercadilloFragment extends Fragment {
                                     SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
                                     //en caso de que ya haya un mercadillo almacenado será reemplazado por otro seleccionado por el usuario
                                     singletonMercadillo.setMercadillo(mercadillo);
-                                    Toast.makeText(getContext(), mercadillo.getId(), Toast.LENGTH_SHORT).show();
+
                                     startActivity(intent);
                                 }
                             });

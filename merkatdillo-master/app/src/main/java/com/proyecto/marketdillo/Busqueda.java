@@ -48,19 +48,21 @@ public class Busqueda extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        //obtiene informacion del intent
         query = getIntent().getStringExtra("query");
         this.setTitle(query);
-
+        //inicializa variables de la vista
         mRecyclerView = findViewById(R.id.recycler_result);
         btnMercadillos = findViewById(R.id.mercadillos);
         btnProductos = findViewById(R.id.productos);
 
+        //inicializa layout para recycler
         layoutManager = new LinearLayoutManager(this);
         mercadillos = getMercadillos();
 
         gridLayoutManager = new GridLayoutManager(this, 2);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        //boton para buscar los mercadillos con la entrada dada por el usuario
         btnMercadillos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +73,7 @@ public class Busqueda extends AppCompatActivity {
                 mercadillos = getMercadillos();
             }
         });
-
+        //boton para buscar los productos con la entrada dada por el usuario
         btnProductos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,14 +174,13 @@ public class Busqueda extends AppCompatActivity {
                                                 @Override
                                                 public void OnItemClick(Producto producto, int posicion) {
 
-                                                    /*
+
                                                     //al hacer click en un mercadillo se va a otro activity
-                                                    Intent intent = new Intent(Busqueda.this, VistaProducto.class);
-                                                    Toast.makeText(Busqueda.this,producto.getImagen(), Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(Busqueda.this, ImagenDetalle.class);
+                                                    ImagenCard imagen = new ImagenCard(producto.getId(), producto.getNombre(), producto.getDescripcion(), ""+producto.getPrecioCantidad(), producto.getImagen(), producto.getPrecioPorCantidad());
                                                     //envia informacion del mercadillo al otro activity
-                                                    intent.putExtra("producto", producto);
-                                                    intent.putExtra("index", posicion);
-                                                    startActivity(intent);    */
+                                                    intent.putExtra("imagen", imagen);
+                                                    startActivity(intent);
                                                 }
                                             });
 
