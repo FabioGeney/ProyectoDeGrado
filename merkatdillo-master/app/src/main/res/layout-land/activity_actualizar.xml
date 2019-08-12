@@ -1,290 +1,325 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Actualizar">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
-    <ScrollView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/guideline19"
-        app:layout_constraintEnd_toEndOf="@id/guideline18"
-        app:layout_constraintStart_toStartOf="@id/guideline17"
-        app:layout_constraintTop_toTopOf="@id/guideline16"
-        app:layout_constraintVertical_bias="0.05">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/edtnombre1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="11"
-            android:hint="Nombre"
-            android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/guideline19"
-        app:layout_constraintEnd_toEndOf="@id/guideline18"
-        app:layout_constraintStart_toStartOf="@id/guideline17"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout31"
-        app:layout_constraintVertical_bias="0.045"
-        app:passwordToggleEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/edtdescripcion1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="11"
-            android:hint="Descripción"
-            android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="1dp"
-        app:layout_constraintEnd_toEndOf="@id/guideline18"
-        app:layout_constraintStart_toStartOf="@id/guideline17"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout32"
-        app:passwordToggleEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/edtcantidad1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="11"
-            android:hint="Cantidad"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/guideline19"
-        app:layout_constraintEnd_toEndOf="@id/guideline18"
-        app:layout_constraintStart_toStartOf="@+id/guideline17"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout21"
-        app:layout_constraintVertical_bias="0.136"
-        app:passwordToggleEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/edtprecio1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="11"
-            android:hint="Precio"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/btneditar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/send_button2"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Editar"
-        android:textAllCaps="false"
-        android:textColor="@color/colorIcons"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guidelinemitad" />
-
-    <Button
-        android:id="@+id/btncancelar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/send_button2"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Cancelar"
-        android:textAllCaps="false"
-        android:textColor="@color/colorIcons"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelinemitad"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@id/guideline16"
-        app:layout_constraintEnd_toEndOf="@id/guide18"
-        app:layout_constraintStart_toStartOf="@id/guide17"
-        app:layout_constraintTop_toTopOf="@+id/guideline15">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imagen1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/fruit"
-            app:civ_border_color="@color/colorPrimary2"
-            app:civ_border_width="2dp"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-
-        <android.support.constraint.Guideline
-            android:id="@+id/adentro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.72" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/adentro2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.690" />
-
-
-    </android.support.constraint.ConstraintLayout>
-
-            <ImageView
-                android:id="@+id/imageView22"
-                android:layout_width="57dp"
-                android:layout_height="51dp"
-                app:layout_constraintStart_toStartOf="@id/guv"
-                app:layout_constraintBottom_toBottomOf="@id/guh"
-                app:layout_constraintEnd_toEndOf="@id/guv"
-                app:layout_constraintTop_toTopOf="@id/guh"
-                app:srcCompat="@drawable/ic_camera_alt_" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guv"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="1dp"
+                app:layout_constraintStart_toStartOf="@id/guideline17"
+                app:layout_constraintTop_toTopOf="@id/guideline16">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtnombre1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="11"
+                    android:hint="Nombre"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="1dp"
+                app:layout_constraintStart_toStartOf="@id/guideline17"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayout31"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtdescripcion1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="11"
+                    android:hint="Escriba acerca del producto"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="1dp"
+                app:layout_constraintStart_toStartOf="@id/guideline17"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout32"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtcantidad1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:hint="Cantidad disponible"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutTipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintStart_toEndOf="@+id/textInputLayout21"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout32"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtCategoria1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Peso"
+                    android:text="Kilogramos"
+                    android:ems="5"
+                    android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutPre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="1dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline17"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout21"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtprecio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:hint="Precio unidad"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="1dp"
+                app:layout_constraintStart_toEndOf="@+id/textInputLayoutPre"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTipo"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtCategoria2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:hint="Unidad"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutCategoriaTipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="1dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline17"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPre"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtTipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:hint="Tipo de producto"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btneditar"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/send_button2"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="Editar"
+                android:textAllCaps="false"
+                android:textColor="@color/colorIcons"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutCategoriaTipo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelinemitad" />
+
+            <Button
+                android:id="@+id/btncancelar"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/send_button2"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textColor="@color/colorIcons"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutCategoriaTipo"
+                app:layout_constraintEnd_toStartOf="@+id/guidelinemitad"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="bottom"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.575" />
+                app:layout_constraintBottom_toBottomOf="@id/guideline16"
+                app:layout_constraintEnd_toEndOf="@id/guide18"
+                app:layout_constraintStart_toStartOf="@id/guide17"
+                app:layout_constraintTop_toTopOf="@+id/guideline15">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imagen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/fruit"
+                    app:civ_border_color="@color/colorPrimary2"
+                    app:civ_border_width="2dp"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView22"
+                    android:layout_width="57dp"
+                    android:layout_height="51dp"
+                    app:layout_constraintStart_toStartOf="@id/adentro2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srcCompat="@drawable/ic_camera_alt_" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/adentro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.72" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/adentro2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.690" />
+
+
+            </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.Guideline
-                android:id="@+id/guh"
+                android:id="@+id/guideline15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.35" />
+                app:layout_constraintGuide_percent="0.107" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.107" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.400" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.400" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.14" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.8" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guide17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guide17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guide18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guide18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.8" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelinemitad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guidelinemitad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guidesi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guidesi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guidesi2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guidesi2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
 
         </android.support.constraint.ConstraintLayout>
 
-    </ScrollView>
+    </android.support.constraint.ConstraintLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+</ScrollView>
