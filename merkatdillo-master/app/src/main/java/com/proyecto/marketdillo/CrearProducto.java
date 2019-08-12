@@ -169,7 +169,7 @@ public class CrearProducto extends AppCompatActivity {
                 ACProgressFlower dialog = new ACProgressFlower.Builder(CrearProducto.this)
                         .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                         .themeColor(Color.WHITE)
-                        .text("Cargando Producto")
+                        .text("Subiendo Producto")
                         .fadeColor(Color.DKGRAY).build();
                 dialog.show();
                 uploadFile();

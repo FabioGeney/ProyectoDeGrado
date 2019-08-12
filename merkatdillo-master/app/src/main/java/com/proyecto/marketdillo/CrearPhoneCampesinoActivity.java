@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class CrearPhoneCampesinoActivity extends AppCompatActivity {
 
@@ -112,6 +116,12 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         bnsiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ACProgressFlower dialog = new ACProgressFlower.Builder(CrearPhoneCampesinoActivity.this)
+                        .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                        .themeColor(Color.WHITE)
+                        .text("Creando Cuenta")
+                        .fadeColor(Color.DKGRAY).build();
+                dialog.show();
                 llenandodatos();
                 busqueda();
             }

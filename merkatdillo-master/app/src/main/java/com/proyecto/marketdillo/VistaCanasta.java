@@ -3,6 +3,7 @@ package com.proyecto.marketdillo;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class VistaCanasta extends AppCompatActivity {
 
@@ -77,6 +81,12 @@ public class VistaCanasta extends AppCompatActivity {
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ACProgressFlower dialog = new ACProgressFlower.Builder(VistaCanasta.this)
+                        .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                        .themeColor(Color.WHITE)
+                        .text("Haciendo Pedido")
+                        .fadeColor(Color.DKGRAY).build();
+                dialog.show();
                 enviarPedido();
                 canastaClass.borraLista();
 

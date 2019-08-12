@@ -2,6 +2,7 @@ package com.proyecto.marketdillo;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /*clase usada para crear la cuenta de un comprador*/
 public class CrearCuentaActivity extends AppCompatActivity {
 
@@ -100,6 +105,12 @@ public class CrearCuentaActivity extends AppCompatActivity {
         btncrearcuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ACProgressFlower dialog = new ACProgressFlower.Builder(CrearCuentaActivity.this)
+                        .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                        .themeColor(Color.WHITE)
+                        .text("Creando Cuenta")
+                        .fadeColor(Color.DKGRAY).build();
+                dialog.show();
                 cuentanueva();
             }
         });

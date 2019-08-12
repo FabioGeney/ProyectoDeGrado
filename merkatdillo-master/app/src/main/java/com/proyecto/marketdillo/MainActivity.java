@@ -1,6 +1,7 @@
 package com.proyecto.marketdillo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,9 @@ import com.proyecto.marketdillo.Administrador.VistaAdmin;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
 /*Se le da el nombre de main activity porque es donde se inicia sesion*/
 public class MainActivity extends AppCompatActivity {
@@ -141,6 +145,12 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
+                        ACProgressFlower dialog = new ACProgressFlower.Builder(MainActivity.this)
+                                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                                .themeColor(Color.WHITE)
+                                .text("Iniciando")
+                                .fadeColor(Color.DKGRAY).build();
+                        dialog.show();
                         Toast.makeText(MainActivity.this, "Inicio exitoso", Toast.LENGTH_SHORT).show();
                         getTipo(email);
 
