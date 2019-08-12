@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -52,6 +53,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class Actualizar extends AppCompatActivity {
 
@@ -99,13 +103,14 @@ public class Actualizar extends AppCompatActivity {
 
         producto = (Producto) getIntent().getSerializableExtra("produ");
         String titulo = producto.getNombre();
-        this.setTitle("Editar: "+ titulo);
+        this.setTitle("Editar: " + titulo);
         edtNombre1.setText(producto.getNombre());
         edtDescripcion1.setText(producto.getDescripcion());
         edtCantidad1.setText(producto.getCantidad());
         precioCantidad1.setText("" + producto.getPrecioCantidad());
         String img = producto.getImagen();
         Picasso.with(this).load(img).fit().into(imagen1);
+        picture = img;
 
         hStorageRef = FirebaseStorage.getInstance().getReference("Subidas");
 
@@ -121,6 +126,12 @@ public class Actualizar extends AppCompatActivity {
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ACProgressFlower dialog = new ACProgressFlower.Builder(Actualizar.this)
+                        .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                        .themeColor(Color.WHITE)
+                        .text("Editando Producto")
+                        .fadeColor(Color.DKGRAY).build();
+                dialog.show();
                 uploadFile();
             }
         });
@@ -139,7 +150,7 @@ public class Actualizar extends AppCompatActivity {
 
     }
 
-    private void seleccionarImagen(){
+    private void seleccionarImagen() {
 
         final CharSequence[] items = {"Tomar foto", "Galería", "Cancelar"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -152,14 +163,14 @@ public class Actualizar extends AppCompatActivity {
                 if (items[item].equals("Tomar foto")) {
                     eleccionusuario = "Tomar foto";
 
-                    if(result) {
+                    if (result) {
                         camaraIntent();
                     } else
                         Toast.makeText(Actualizar.this, "Intente de nuevo", Toast.LENGTH_SHORT).show();
-                } else if (items[item].equals("Galería")){
+                } else if (items[item].equals("Galería")) {
                     eleccionusuario = "Galería";
 
-                    if(result) {
+                    if (result) {
                         galeriaIntent();
                     } else
                         Toast.makeText(Actualizar.this, "Intente de nuevo", Toast.LENGTH_SHORT).show();
@@ -171,17 +182,17 @@ public class Actualizar extends AppCompatActivity {
         builder.show();
     }
 
-    private void galeriaIntent(){
+    private void galeriaIntent() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Seleccione Archivo"), SELECT_FILE);
     }
 
-    private void camaraIntent(){
+    private void camaraIntent() {
         requestStoragePermission();
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getPackageManager()) != null){
+        if (intent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
             try {
                 photoFile = createImageFile();
@@ -201,13 +212,13 @@ public class Actualizar extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode , @NonNull String[] permissions, @NonNull int[] grantResults){
-        switch (requestCode){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
             case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(eleccionusuario.equals("Tomar foto"))
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (eleccionusuario.equals("Tomar foto"))
                         camaraIntent();
-                    else if(eleccionusuario.equals("Galería"))
+                    else if (eleccionusuario.equals("Galería"))
                         galeriaIntent();
                 } else {
                     Toast.makeText(this, "Denegado", Toast.LENGTH_SHORT).show();
@@ -215,6 +226,7 @@ public class Actualizar extends AppCompatActivity {
                 break;
         }
     }
+
     //Permiso Dexter para solicitar un multiple permiso
     private void requestStoragePermission() {
         Dexter.withActivity(this)
@@ -249,17 +261,17 @@ public class Actualizar extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK){
-            if(requestCode == SELECT_FILE) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE) {
                 onSelectFromGalleryResult(data);
-            }else if (requestCode == REQUEST_CAMERA) {
+            } else if (requestCode == REQUEST_CAMERA) {
                 Bundle extras = data.getExtras();
                 Bitmap thumbnail = (Bitmap) extras.get("data");
                 hImagenUri = data.getData();
 
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                thumbnail.compress(Bitmap.CompressFormat.JPEG, 75, baos);
-                Bitmap l = thumbnail.createScaledBitmap(thumbnail, 1024, 1024, false);
+                //ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                //thumbnail.compress(Bitmap.CompressFormat.JPEG, 75, baos);
+                Bitmap l = thumbnail.createScaledBitmap(thumbnail, 3024, 4032, false);
 
                 hImagenUri = getImageUri(l);
                 imagen1.setImageBitmap(l);
@@ -269,7 +281,7 @@ public class Actualizar extends AppCompatActivity {
 
     public Uri getImageUri(Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        //inImage.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
@@ -289,13 +301,13 @@ public class Actualizar extends AppCompatActivity {
         return ima;
     }
 
-    private void onSelectFromGalleryResult(Intent data){
+    private void onSelectFromGalleryResult(Intent data) {
         Bitmap b = null;
 
-        if(data != null){
+        if (data != null) {
             try {
                 b = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -303,14 +315,14 @@ public class Actualizar extends AppCompatActivity {
         hImagenUri = data.getData();
     }
 
-    private String getFileExtension(Uri uri){
+    private String getFileExtension(Uri uri) {
         ContentResolver c = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(c.getType(uri));
     }
 
-    private void uploadFile(){
-        if(hImagenUri != null) {
+    private void uploadFile() {
+        if (hImagenUri != null) {
 
             final StorageReference fileReference = hStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(hImagenUri));
 
@@ -328,13 +340,12 @@ public class Actualizar extends AppCompatActivity {
                     });
                 }
             });
-        }
-        else {
-
+        } else {
+            editarProducto();
         }
     }
 
-    private void editarProducto(){
+    private void editarProducto() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         DocumentReference editarProducto = db.collection("Mercadillo").document(firebaseUser.getUid()).collection("Productos").document(producto.getIdDocument());
 
@@ -354,13 +365,13 @@ public class Actualizar extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void initialize(){
+    private void initialize() {
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null){
+                if (firebaseUser != null) {
                     Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getUid());
                     Log.w(TAG, "onAuthStateChanged - inició sesión" + firebaseUser.getEmail());
                 } else {
@@ -383,9 +394,9 @@ public class Actualizar extends AppCompatActivity {
             String cantidad = edtCantidad1.getText().toString();
             String cantidadP = precioCantidad1.getText().toString();
             editar.setEnabled(!nombre.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !cantidadP.isEmpty());
-            if(!nombre.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !cantidadP.isEmpty()){
+            if (!nombre.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !cantidadP.isEmpty()) {
                 editar.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
-            }else {
+            } else {
                 editar.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
             }
 
@@ -393,9 +404,9 @@ public class Actualizar extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if(!editar.isEnabled()){
+            if (!editar.isEnabled()) {
                 editar.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
-            }else {
+            } else {
                 editar.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
             }
         }
