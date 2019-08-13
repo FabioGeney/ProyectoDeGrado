@@ -34,6 +34,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +62,10 @@ public class ConfiguracionFragment extends Fragment {
     private Button guardar;
     private Button cerrar;
     private SessionManager sessionManager;
+    private EditText edtCostoDomii;
+    private EditText edtTipo;
+    private ArrayList<String> tipos = new ArrayList<>();
+    private boolean[] checkedItems = new boolean[]{false, false, false, false, false, false};
 
     private static final String CERO = "0";
     private static final String BARRA = "/";
@@ -100,6 +105,8 @@ public class ConfiguracionFragment extends Fragment {
         tiempoaprox = (EditText) root.findViewById(R.id.tiempoaprox);
         guardar = (Button) root.findViewById(R.id.guardaarr);
         cerrar = (Button) root.findViewById(R.id.cerrar);
+        edtCostoDomii = root.findViewById(R.id.edtCostoDomii);
+        //edtTipo = root.findViewById(R.id.edtTipo);
         initialize();
         cargar();
         ((VistaCampesino) getActivity()).hideFloatingActionButton();
@@ -111,6 +118,19 @@ public class ConfiguracionFragment extends Fragment {
         direccion.addTextChangedListener(loginTextWatcher);
         nommercadillo.addTextChangedListener(loginTextWatcher);
         tiempoaprox.addTextChangedListener(loginTextWatcher);
+        edtCostoDomii.addTextChangedListener(loginTextWatcher);
+        //edtTipo.addTextChangedListener(loginTextWatcher);
+
+        /*edtTipo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_HOVER_EXIT){
+                    getAlert();
+                }
+
+                return false;
+            }
+        });*/
 
         fechanacimiento.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -182,6 +202,7 @@ public class ConfiguracionFragment extends Fragment {
                     singletonMercadillo.setMercadillo(mercadillo);
                     nommercadillo.setText(mercadillo.getNombre());
                     tiempoaprox.setText(mercadillo.getTiempoEntrega());
+                    edtCostoDomii.setText("" + mercadillo.getCostoEnvio());
                 }
             }
         });
@@ -202,6 +223,7 @@ public class ConfiguracionFragment extends Fragment {
         String direccion1 = direccion.getText().toString();
         String nommercadillo1 = nommercadillo.getText().toString();
         String tiempoaprox1 = tiempoaprox.getText().toString();
+        final int costo = Integer.parseInt(edtCostoDomii.getText().toString());
         final Map<String, Object> updat = new HashMap<>();
         final Map<String, Object> updat2 = new HashMap<>();
         //setea usuario
@@ -223,6 +245,10 @@ public class ConfiguracionFragment extends Fragment {
 
         updat2.put("nombre", nommercadillo1);
         updat2.put("tiempoEntrega", tiempoaprox1);
+        updat2.put("costoEnvio", costo);
+        /*for(String temp : tipos){
+            db.collection("Categorias").document("mercadillos").collection(temp).document(firebaseUser.getUid()).set(mercadillo);
+        }*/
 
         editarperf.update(updat);
 
@@ -264,8 +290,10 @@ public class ConfiguracionFragment extends Fragment {
             String direccion1 = direccion.getText().toString();
             String nommercadillo1 = nommercadillo.getText().toString();
             String tiempoaprox1 = tiempoaprox.getText().toString();
-            guardar.setEnabled(!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty());
-            if (!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty()) {
+            //String tipoMercadillo = edtTipo.getText().toString().trim();
+            String costoDomi = edtCostoDomii.getText().toString().trim();
+            guardar.setEnabled(!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty() && !costoDomi.isEmpty());
+            if (!nombre1.isEmpty() && !apellido1.isEmpty() && !celular1.isEmpty() && !documentoidentidad1.isEmpty() && !fechanacimiento1.isEmpty() && !direccion1.isEmpty() && !nommercadillo1.isEmpty() && !tiempoaprox1.isEmpty() && !costoDomi.isEmpty()) {
                 guardar.setBackgroundDrawable(getResources().getDrawable(R.drawable.save_button2));
             } else {
                 guardar.setBackgroundDrawable(getResources().getDrawable(R.drawable.save_button));
@@ -306,5 +334,50 @@ public class ConfiguracionFragment extends Fragment {
         //Muestro el widget
         recogerFecha.show();
 
+    }
+
+    private void getAlert(){
+        final String[] listItems = {"Frutas","Vegetales","Legumbres","Cereales", "Tubérculos","Otros"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Tipos de productos");
+
+
+        builder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                if(isChecked){
+                    tipos.add(listItems[which]);
+                    checkedItems[which] = true;
+
+                }else{
+                    checkedItems[which] = false;
+                    tipos.remove(listItems[which]);
+                }
+
+            }
+        });
+
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String stringTipos = "";
+                for(String temp : tipos){
+                    stringTipos =  temp + ", "+ stringTipos;
+                }
+                edtTipo.setText(stringTipos);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

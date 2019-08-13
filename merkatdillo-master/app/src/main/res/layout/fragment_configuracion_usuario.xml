@@ -85,7 +85,8 @@
                     android:id="@+id/nnnnombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="textPersonName"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -121,7 +122,8 @@
                     android:id="@+id/aaaapellido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="textPersonName"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -220,7 +222,8 @@
                     android:id="@+id/identitydocument"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="number"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -256,7 +259,8 @@
                     android:id="@+id/birth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="date"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -290,7 +294,8 @@
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="text"/>
 
             </android.support.design.widget.TextInputLayout>
 
