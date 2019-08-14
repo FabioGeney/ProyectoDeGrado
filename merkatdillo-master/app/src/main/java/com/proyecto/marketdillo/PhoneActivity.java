@@ -137,36 +137,34 @@ public class PhoneActivity extends AppCompatActivity {
         firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                     sessionManager = new SessionManager(PhoneActivity.this);
-                    db.collection("Consumidor").whereEqualTo("celular",phoneNumber)
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            usuario = document.toObject(Usuario.class);
-                                            usuario.setTipoUsuario("consumidor");
-                                        }
-
-                                    } else {
-                                        Toast.makeText(PhoneActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                                    }
-                                    if (usuario != null && usuario.getTipoUsuario().equals("consumidor")) {
-                                        tokenID("Consumidor");
-                                        Intent intent = new Intent(PhoneActivity.this, VistaUsuarios.class);
-                                        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
-                                        singletonUsuario.setUsuario(usuario);
-                                        sessionManager.createSession(usuario, usuario.getTipoUsuario());
-                                        startActivity(intent);
-
-                                    }
+                    db.collection("Consumidor").whereEqualTo("celular", phoneNumber).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    usuario = document.toObject(Usuario.class);
+                                    usuario.setTipoUsuario("consumidor");
                                 }
+
+                            } else {
+                                Toast.makeText(PhoneActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                            }
+                            if (usuario != null && usuario.getTipoUsuario().equals("consumidor")) {
+                                tokenID("Consumidor");
+                                Intent intent = new Intent(PhoneActivity.this, VistaUsuarios.class);
+                                SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                                singletonUsuario.setUsuario(usuario);
+                                sessionManager.createSession(usuario, usuario.getTipoUsuario());
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
                     });
 
-                    db.collection("Campesino").whereEqualTo("celular",phoneNumber)
+                    db.collection("Campesino").whereEqualTo("celular", phoneNumber)
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
@@ -177,33 +175,37 @@ public class PhoneActivity extends AppCompatActivity {
                                             usuario.setTipoUsuario("campesino");
                                         }
 
-                                    }else{
+                                    } else {
                                         Toast.makeText(PhoneActivity.this, "Error", Toast.LENGTH_SHORT).show();
                                     }
-                                    if(usuario!=null && usuario.getTipoUsuario().equals("campesino")){
+                                    if (usuario != null && usuario.getTipoUsuario().equals("campesino")) {
                                         tokenID("Campesino");
                                         Intent intent = new Intent(PhoneActivity.this, VistaCampesino.class);
                                         SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
                                         sessionManager.createSession(usuario, usuario.getTipoUsuario());
                                         singletonUsuario.setUsuario(usuario);
                                         startActivity(intent);
+                                        finish();
                                     }
                                 }
-                    });
-                    if(usuario != null){
-                        final CharSequence[] itemss = {"Productor","Comprador"};
+                            });
+
+                    if (usuario == null) {
+                        final CharSequence[] itemss = {"Productor", "Comprador"};
                         AlertDialog.Builder alert = new AlertDialog.Builder(PhoneActivity.this);
                         alert.setTitle("Bienvenido, ¿Eres Productor o Comprador?");
                         alert.setItems(itemss, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if(itemss[which].equals("Productor")){
+                                if (itemss[which].equals("Productor")) {
                                     Intent iproductor = new Intent(PhoneActivity.this, CrearPhoneCampesinoActivity.class);
                                     startActivity(iproductor);
-                                } else if(itemss[which].equals("Comprador")){
+                                    finish();
+                                } else if (itemss[which].equals("Comprador")) {
                                     Intent icomprador = new Intent(PhoneActivity.this, CrearPhoneActivity.class);
                                     startActivity(icomprador);
-                                }else {
+                                    finish();
+                                } else {
                                     dialog.dismiss();
                                 }
                             }
@@ -220,14 +222,14 @@ public class PhoneActivity extends AppCompatActivity {
 
     private void ingresar() {
         String code = codigoingresar.getText().toString();
-        if(TextUtils.isEmpty(code))
+        if (TextUtils.isEmpty(code))
             return;
 
         singInWithCredential(PhoneAuthProvider.getCredential(mVerificationId, code));
 
     }
 
-    private void tokenID(final String coleccion){
+    private void tokenID(final String coleccion) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         String token_id = FirebaseInstanceId.getInstance().getToken();
         Map<String, Object> token = new HashMap<>();
@@ -248,16 +250,16 @@ public class PhoneActivity extends AppCompatActivity {
             String sms = numerocelular.getText().toString();
             String codigo = codigoingresar.getText().toString();
             enviarsms.setEnabled(!sms.isEmpty());
-            if(!sms.isEmpty()){
+            if (!sms.isEmpty()) {
                 enviarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
-            }else {
+            } else {
                 enviarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
             }
 
             ingresarsms.setEnabled(!codigo.isEmpty());
-            if(!codigo.isEmpty()){
+            if (!codigo.isEmpty()) {
                 ingresarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
-            }else {
+            } else {
                 ingresarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
             }
 
@@ -265,15 +267,15 @@ public class PhoneActivity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if(!enviarsms.isEnabled()){
+            if (!enviarsms.isEnabled()) {
                 enviarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
-            }else {
+            } else {
                 enviarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
             }
 
-            if(!ingresarsms.isEnabled()){
+            if (!ingresarsms.isEnabled()) {
                 ingresarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button));
-            }else {
+            } else {
                 ingresarsms.setBackgroundDrawable(getResources().getDrawable(R.drawable.send_button2));
             }
 
