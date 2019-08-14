@@ -91,6 +91,7 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         edtTipo = findViewById(R.id.edtTipo);
 
         initialize();
+        edtTipo.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
         edtTipo.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -101,7 +102,7 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        etfechanacimiento.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
         etfechanacimiento.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

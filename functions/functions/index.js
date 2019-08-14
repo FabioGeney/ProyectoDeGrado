@@ -60,7 +60,7 @@ exports.notificacionPedidoConsumidor = functions.firestore.document('Consumidor/
         const tokenComprador = result[0].data().token_id;
         const nombreMercadillo = result[1].data().nombre;
   
-        var mensaje = "Tu pedido ha sido creado y enviado al campesino";
+        var mensaje = "Tu pedido ha sido rechazado por el campesino";
         var check = "com.proyecto.marketdillo.NOTIFICACIONCONSUMIDOR";
   
         if(estadoPedido === "Confirmado"){

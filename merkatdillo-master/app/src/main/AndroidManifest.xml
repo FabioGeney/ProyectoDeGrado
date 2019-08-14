@@ -21,9 +21,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".VistaCategoria"
-            android:parentActivityName=".VistaUsuarios"
-            >
+        <activity
+            android:name=".example.example3"
+            android:label="@string/title_activity_example3"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".VistaCategoria"
+            android:parentActivityName=".VistaUsuarios">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".VistaUsuarios" />
@@ -57,7 +61,6 @@
             android:name=".CrearPhoneActivity"
             android:theme="@style/ThemeMainActivityH" />
         <activity android:name=".Administrador.VistaMercadilloAdmin" />
-
         <activity
             android:name=".Administrador.VistaAdmin"
             android:label="@string/title_activity_vista_admin"
@@ -147,7 +150,7 @@
         <activity
             android:name=".VistaCampesino"
             android:label="@string/title_activity_vista_campesino"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.proyecto.marketdillo.NOTIFICACIONVISTACAMPESINO" />
 
@@ -195,7 +198,7 @@
         <activity
             android:name=".VistaUsuarios"
             android:label="@string/title_activity_mercadillos"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.proyecto.marketdillo.NOTIFICACIONVISTAUSUARIO" />
 
@@ -212,7 +215,7 @@
         </activity>
         <activity
             android:name=".BottomActivity"
-            android:theme="@style/Color"></activity>
+            android:theme="@style/Color" />
         <activity
             android:name=".CrearCampesinoActivity"
             android:parentActivityName=".MainActivity"

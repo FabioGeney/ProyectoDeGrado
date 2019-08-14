@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -90,7 +91,7 @@ public class PtsCampesinoFragment extends Fragment {
         final ArrayList<Producto> p = new ArrayList<>();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Mercadillo").document(id).collection("Productos")
+        db.collection("Mercadillo").document(id).collection("Productos").orderBy("nombre", Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

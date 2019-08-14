@@ -63,7 +63,7 @@
         app:layout_anchor="@id/appbarLayout"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/ic_botonmensajes"
-        app:backgroundTint="@color/colorPrimary2"/>
+        app:backgroundTint="@color/colorAccent2"/>
 
 
     <android.support.design.widget.FloatingActionButton

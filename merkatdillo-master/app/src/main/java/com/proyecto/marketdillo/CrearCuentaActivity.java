@@ -90,7 +90,7 @@ public class CrearCuentaActivity extends AppCompatActivity {
 
 
         initialize();
-
+        edtfechanacimiento.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
         edtfechanacimiento.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

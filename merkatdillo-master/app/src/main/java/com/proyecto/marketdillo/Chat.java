@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,6 +42,8 @@ public class Chat extends AppCompatActivity {
     private DatabaseReference databaseReferenceDestinatario;
     private DatabaseReference databaseReferenceRemitente;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    SessionManager sessionManager;
+    Usuario usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,15 +63,16 @@ public class Chat extends AppCompatActivity {
         enviar = findViewById(R.id.enviar);
         texto = findViewById(R.id.texto);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        final String useriD = firebaseUser.getUid();
+        sessionManager = new SessionManager(this);
+        Gson gson = new Gson();
+        String userGson = sessionManager.getUsuario();
+        usuario = gson.fromJson(userGson,Usuario.class);
+        final String useriD = usuario.getId();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReferenceDestinatario = firebaseDatabase.getReference(idDestinatario).child(useriD).child("Mensajes");
         databaseReferenceRemitente = firebaseDatabase.getReference(useriD).child(idDestinatario).child("Mensajes");
-
-
-
-
+        Toast.makeText(this, idDestinatario+" "+nombreDestinatario, Toast.LENGTH_SHORT).show();
 
 
         layoutManager = new LinearLayoutManager(this);
@@ -149,8 +154,10 @@ public class Chat extends AppCompatActivity {
 
     //Este metodo almacena la informacion del usuario en el objeto contacto y la envia a la sala de chat del Destinatario
     private void sendInfoChat(String idDestinatario, String texto, String nombreDestinatario) {
-        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
-        Usuario usuario = singletonUsuario.getUsuario();
+
+        //almacena los datos del sessionManger en el objeto usuario
+
+
         HashMap<String, Object> resultDestino = new HashMap<>();
         HashMap<String, Object> resultRemitente = new HashMap<>();
         resultDestino.put("nombre", usuario.getNombre());
@@ -163,8 +170,6 @@ public class Chat extends AppCompatActivity {
         resultRemitente.put("imagen", "1231");
 
         resultRemitente.put("ultimoMensaje", texto);
-
-
         firebaseDatabase.getReference(idDestinatario).child(usuario.getId()).child("Datos").updateChildren(resultDestino);
         firebaseDatabase.getReference(usuario.getId()).child(idDestinatario).child("Datos").updateChildren(resultRemitente);
     }

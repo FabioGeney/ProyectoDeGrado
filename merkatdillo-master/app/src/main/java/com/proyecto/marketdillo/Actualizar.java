@@ -106,8 +106,9 @@ public class Actualizar extends AppCompatActivity {
         imagen1 = findViewById(R.id.imagen1);
         cantidadMasa1 = findViewById(R.id.edtCategoria1);
         precioPorCantidad1 = findViewById(R.id.edtCategoria2);
-        tipo1 = findViewById(R.id.edtTipo);
 
+        tipo1 = findViewById(R.id.edtTipo);
+        tipo1.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
         tipo1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -119,7 +120,7 @@ public class Actualizar extends AppCompatActivity {
                 return false;
             }
         });
-
+        cantidadMasa1.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
         cantidadMasa1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -130,7 +131,7 @@ public class Actualizar extends AppCompatActivity {
                 return false;
             }
         });
-
+        precioPorCantidad1.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
         precioPorCantidad1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

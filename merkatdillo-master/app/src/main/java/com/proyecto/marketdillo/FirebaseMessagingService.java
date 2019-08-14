@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.RemoteMessage;
@@ -27,7 +29,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentTitle(titulo)
                 .setContentText(cuerpo)
                 .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_MAX);
+                .setLights(Color.GREEN, 1000, 2000)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         //click_action indica que activity abrir
         Intent intent = new Intent(click_action);
         //determina si la notificacion es de mensajes o de pedidos

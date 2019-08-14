@@ -1,5 +1,6 @@
 package com.proyecto.marketdillo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,6 +40,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
     private Mercadillo mercadillo;
     private CollapsingToolbarLayout ctlLayout;
     private DividerItemDecoration dividerItemDecoration;
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,19 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         dividerItemDecoration = new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL);
 
+        SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+        CanastaClass canastaClass = singletonCanasta.getCanasta();
         FloatingActionButton fab = findViewById(R.id.fab);
+
+        if(canastaClass!=null){
+            if(canastaClass.getId() != mercadillo.getId() && canastaClass.getList().size()==0){
+                fab.setVisibility(View.GONE);
+            }
+
+        }else {
+            fab.setVisibility(View.GONE);
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

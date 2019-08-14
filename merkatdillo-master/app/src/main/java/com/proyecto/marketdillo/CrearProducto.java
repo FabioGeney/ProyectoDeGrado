@@ -119,7 +119,7 @@ public class CrearProducto extends AppCompatActivity {
         cantidadMasa = findViewById(R.id.edtCategoria1);
         precioPorCantidad = findViewById(R.id.edtCategoria2);
         tipo = findViewById(R.id.edtTipo);
-
+        tipo.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
         tipo.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -131,7 +131,7 @@ public class CrearProducto extends AppCompatActivity {
                 return false;
             }
         });
-
+        cantidadMasa.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
         cantidadMasa.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -142,7 +142,7 @@ public class CrearProducto extends AppCompatActivity {
                 return false;
             }
         });
-
+        precioPorCantidad.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
         precioPorCantidad.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
