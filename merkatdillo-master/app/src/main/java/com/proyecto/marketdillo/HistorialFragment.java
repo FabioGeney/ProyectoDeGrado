@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,7 +44,7 @@ public class HistorialFragment extends Fragment {
     private RecyclerView.Adapter historialAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Pedidos> historialList;
-
+    private DividerItemDecoration dividerItemDecoration;
 
 
     public HistorialFragment() {
@@ -74,7 +75,8 @@ public class HistorialFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         // Instancia del ListView.
         mRecyclerView = (RecyclerView) root.findViewById(R.id.historial_recycler);
-
+        dividerItemDecoration = new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL);
 
 
 
@@ -125,7 +127,7 @@ public class HistorialFragment extends Fragment {
 
                             mRecyclerView.setLayoutManager(layoutManager);
                             mRecyclerView.setAdapter(historialAdapter);
-
+                            mRecyclerView.addItemDecoration(dividerItemDecoration);
 
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

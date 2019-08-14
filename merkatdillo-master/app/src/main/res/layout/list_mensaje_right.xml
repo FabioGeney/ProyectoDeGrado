@@ -11,8 +11,9 @@
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardBackgroundColor="#dcf8c6"
         app:cardCornerRadius="10dp"
+        android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,7 +33,7 @@
                 android:layout_marginRight="8dp"
                 android:text="TextView"
                 android:textAppearance="?attr/textAppearanceListItem"
-                android:textColor="#ffff"
+                android:textColor="#2E2B2B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +48,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="4dp"
                 android:text="TextView"
-                android:textColor="#ffff"
+                android:textColor="#FF2E2B2B"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

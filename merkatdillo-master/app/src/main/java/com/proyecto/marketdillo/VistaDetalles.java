@@ -125,7 +125,8 @@ public class VistaDetalles extends AppCompatActivity {
         cardCalif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cal==0){
+                SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                if(cal==0 && singletonUsuario.getUsuario().getTipoUsuario().equals("consumidor")){
                     alertDialog(idMercadillo, idDocumentPedido, pedidos);
                 }
 

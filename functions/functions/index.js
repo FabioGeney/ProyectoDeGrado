@@ -55,7 +55,7 @@ exports.notificacionPedidoConsumidor = functions.firestore.document('Consumidor/
     const compradorDatos = admin.firestore().collection("Consumidor").doc(compradorId).get();
     const mercadilloDatos = admin.firestore().collection("Mercadillo").doc(campesinoId).get();
 
-    if(cal === 0){
+    if(cal === 0 && estadoPedido !== "Creado"){
       return Promise.all([compradorDatos, mercadilloDatos]).then(result=>{
         const tokenComprador = result[0].data().token_id;
         const nombreMercadillo = result[1].data().nombre;
@@ -130,6 +130,7 @@ onWrite((snap, context) => {
             icon: "default",
             click_action: check,
             remitenteID : de,
+            nombre : nombreRemintente,
             tipo : "Mensaje"
           },
         };

@@ -88,10 +88,10 @@ public class PedidosFragment extends Fragment {
         String id = usuario.getId();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Query dbUser = db.collection("Consumidor").document(usuario.getId()).collection("Pedidos").orderBy("fecha");
+        Query dbUser = db.collection("Consumidor").document(usuario.getId()).collection("Pedidos").orderBy("fecha", Query.Direction.DESCENDING);
         intent = new Intent(getContext(), EstadoPedido.class);
         if(usuario.getTipoUsuario().equals("campesino")){
-            dbUser = db.collection("Campesino").document(usuario.getId()).collection("Pedidos").orderBy("fecha");
+            dbUser = db.collection("Campesino").document(usuario.getId()).collection("Pedidos").orderBy("fecha", Query.Direction.DESCENDING);
             intent = new Intent(getContext(), EstadoPedidoCampesino.class);
         }
 
@@ -104,7 +104,7 @@ public class PedidosFragment extends Fragment {
 
                                 String estado = document.getData().get("estado").toString();
 
-                                if(estado.equals("Finalizado")){
+                                if(estado.equals("Finalizado")|| estado.equals("Rechazado")){
 
                                 }else {
                                     Pedidos pedido = document.toObject(Pedidos.class);

@@ -187,6 +187,8 @@ public class VistaCanasta extends AppCompatActivity {
         guardaPedidoConsumidor.add(pedido);
         //llama el metodo que setea idDocumentConsumidor
         idPedidoConsumidor(idConsumidor, idCampesino);
+        SingletonCanasta singletonCanasta = SingletonCanasta.getInstance();
+        singletonCanasta.setCanasta(null);
         //Va a otro activity al enviar pedido
         Intent intent = new Intent(VistaCanasta.this, VistaUsuarios.class );
         startActivity(intent);
@@ -194,6 +196,7 @@ public class VistaCanasta extends AppCompatActivity {
 
     private void idPedidoConsumidor(String idConsumidor, String idCampesino){
         final CollectionReference enviarPedidoCampesino = db.collection("Campesino").document(idCampesino).collection("Pedidos");
+        final CollectionReference guardaPedidoConsumidor = db.collection("Consumidor").document(idConsumidor).collection("Pedidos");
         db.collection("Consumidor").document(idConsumidor).
            collection("Pedidos").
            whereEqualTo("idCampesino", idCampesino).
@@ -205,8 +208,11 @@ public class VistaCanasta extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Pedidos pedido = document.toObject(Pedidos.class);
                         if(pedido.getIdDocumentConsumidor()==null){
+                            Map<String, Object> idDocument = new HashMap<>();
+                            idDocument.put("idDocumentConsumidor",  document.getId());
                             pedido.setIdDocumentConsumidor(document.getId());
                             enviarPedidoCampesino.add(pedido);
+                            guardaPedidoConsumidor.document(document.getId()).update(idDocument);
                         }
 
                     }

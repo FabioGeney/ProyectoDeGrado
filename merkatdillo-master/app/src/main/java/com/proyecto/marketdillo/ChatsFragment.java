@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class ChatsFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-
+    private DividerItemDecoration dividerItemDecoration;
     public ChatsFragment() {
         // Required empty public constructor
     }
@@ -58,6 +59,8 @@ public class ChatsFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         // Instancia del ListView.
         mRecyclerView = root.findViewById(R.id.mercadillo_Recycler);
+        dividerItemDecoration = new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL);
 
         final SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
 
@@ -76,7 +79,7 @@ public class ChatsFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(chatsAdapter);
-
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

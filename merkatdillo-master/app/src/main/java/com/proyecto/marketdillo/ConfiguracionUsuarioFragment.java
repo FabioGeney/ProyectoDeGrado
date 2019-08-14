@@ -128,8 +128,10 @@ public class ConfiguracionUsuarioFragment extends Fragment {
                             sessionManager.logout();
                             //setea token_id en la base de datos
                             Map<String, Object> token = new HashMap<>();
-                            token.put("token_id", "");
-                            db.collection("Consumidor").document(firebaseAuth.getUid()).update(token);
+                            String id = "    ";
+                            token.put("token_id", id);
+                            SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                            db.collection("Consumidor").document(singletonUsuario.getUsuario().getId()).update(token);
                             FirebaseAuth.getInstance().signOut();
                         } else if (item[which].equals("No")) {
                             dialog.dismiss();

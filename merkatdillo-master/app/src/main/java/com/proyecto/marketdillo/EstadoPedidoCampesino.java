@@ -105,6 +105,17 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
 
                 }
             });
+            rechazar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    confirmar.setVisibility(View.GONE);
+                    checkConf.setImageResource(R.drawable.check_circle);
+                    enviado.setVisibility(View.VISIBLE);
+                    modificaPedido("Rechazado");
+
+
+                }
+            });
             //setea elementos de la vista cuando el campesino presiona enviar
             enviarPedido.setOnClickListener(new View.OnClickListener() {
                 @Override

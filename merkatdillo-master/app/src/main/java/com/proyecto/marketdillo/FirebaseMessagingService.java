@@ -27,7 +27,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentTitle(titulo)
                 .setContentText(cuerpo)
                 .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_MAX);
         //click_action indica que activity abrir
         Intent intent = new Intent(click_action);
         //determina si la notificacion es de mensajes o de pedidos
@@ -39,7 +39,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         }else{
             //notificacion de mensajes
             String id = remoteMessage.getData().get("remitenteID");
-            intent.putExtra("nombreDestinatario", titulo);
+            String nombre = remoteMessage.getData().get("nombre");
+            intent.putExtra("nombreDestinatario", nombre);
             intent.putExtra("idDestinatario", id);
 
         }

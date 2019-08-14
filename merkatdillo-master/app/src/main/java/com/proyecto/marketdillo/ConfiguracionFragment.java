@@ -102,7 +102,7 @@ public class ConfiguracionFragment extends Fragment {
         cerrar = (Button) root.findViewById(R.id.cerrar);
         initialize();
         cargar();
-        ((VistaCampesino) getActivity()).hideFloatingActionButton();
+        //((VistaCampesino) getActivity()).hideFloatingActionButton();
         nombre.addTextChangedListener(loginTextWatcher);
         apellido.addTextChangedListener(loginTextWatcher);
         celular.addTextChangedListener(loginTextWatcher);
@@ -145,8 +145,10 @@ public class ConfiguracionFragment extends Fragment {
                             sessionManager.logout();
                             //setea token_id en la base de datos
                             Map<String, Object> token = new HashMap<>();
-                            token.put("token_id", "");
-                            db.collection("Campesino").document(firebaseAuth.getUid()).update(token);
+                            SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+                            String id = "    ";
+                            token.put("token_id", id);
+                            db.collection("Campesino").document(singletonUsuario.getUsuario().getId()).update(token);
                             FirebaseAuth.getInstance().signOut();
                         } else if (item[which].equals("No")) {
                             dialog.dismiss();
