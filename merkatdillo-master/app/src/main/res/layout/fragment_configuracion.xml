@@ -85,7 +85,8 @@
                     android:id="@+id/nnnnombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="textPersonName"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -121,7 +122,8 @@
                     android:id="@+id/aaaapellido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="textPersonName"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -219,7 +221,8 @@
                     android:id="@+id/identitydocument"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="number"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -255,7 +258,8 @@
                     android:id="@+id/birth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="date"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -291,7 +295,8 @@
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="text"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -326,7 +331,8 @@
                     android:id="@+id/nommercadillo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="text"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -361,10 +367,46 @@
                     android:id="@+id/tiempoaprox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="12" />
+                    android:ems="12"
+                    android:inputType="text"/>
 
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Costo de Domicilio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout11" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutDomi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView27">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtCostoDomii"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="12"
+                    android:inputType="number" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/guardaarr"
@@ -385,7 +427,7 @@
                 android:textColor="@color/colorIcons"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout11" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDomi" />
 
             <Button
                 android:id="@+id/cerrar"

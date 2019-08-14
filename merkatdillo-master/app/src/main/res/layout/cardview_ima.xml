@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:text="Precio:"
                 android:textColor="@color/colorIcons"
-                android:textSize="@dimen/tamañotextocard2"
+                android:textSize="11dp"
                 cardview:layout_constraintStart_toStartOf="parent"
                 cardview:layout_constraintTop_toTopOf="@+id/guideline21" />
 
@@ -73,7 +73,7 @@
                 android:layout_marginLeft="4dp"
                 android:text="$5.000"
                 android:textColor="@color/colorIcons"
-                android:textSize="@dimen/tamañotextocard2"
+                android:textSize="11dp"
                 cardview:layout_constraintEnd_toEndOf="@id/guideline22"
                 cardview:layout_constraintHorizontal_bias="0.012"
                 cardview:layout_constraintStart_toEndOf="@+id/primerapalabra"
