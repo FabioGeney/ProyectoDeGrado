@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,6 +60,7 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private EditText edtCostoDomii;
     private EditText edtTipo;
+    private TextView terminos;
     private ArrayList<String> tipos = new ArrayList<>();
     private boolean[] checkedItems = new boolean[]{false, false, false, false, false, false};
 
@@ -89,6 +91,7 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
         bnsiguiente = findViewById(R.id.bnsiguiente);
         edtCostoDomii = findViewById(R.id.edtCostoDomii);
         edtTipo = findViewById(R.id.edtTipo);
+        terminos = findViewById(R.id.terminos);
 
         initialize();
         edtTipo.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
@@ -125,6 +128,13 @@ public class CrearPhoneCampesinoActivity extends AppCompatActivity {
                 dialog.show();
                 llenandodatos();
                 busqueda();
+            }
+        });
+
+        terminos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { Intent i = new Intent(CrearPhoneCampesinoActivity.this, TerminosActivity.class);
+                startActivity(i);
             }
         });
 

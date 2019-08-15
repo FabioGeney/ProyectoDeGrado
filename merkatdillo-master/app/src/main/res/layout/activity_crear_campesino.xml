@@ -345,6 +345,23 @@
                     android:textSize="17sp" />
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:id="@+id/terminos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="110dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/blue"
+                android:text="@string/terminos"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutConfirmar"
+                 />
+
             <Button
                 android:id="@+id/btncrearcuenta"
                 android:layout_width="match_parent"
