@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -61,6 +63,7 @@ public class CrearCampesinoActivity extends AppCompatActivity {
     private Button btncrearcuenta;
     private EditText edtCostoDomii;
     private EditText edtTipo;
+    private TextView terminos;
     private ArrayList<String> tipos = new ArrayList<>();
     private boolean[] checkedItems = new boolean[]{false, false, false, false, false, false};
 
@@ -104,6 +107,7 @@ public class CrearCampesinoActivity extends AppCompatActivity {
         textInputLayoutNombres = findViewById(R.id.textInputLayoutNombres);
         edtCostoDomii = findViewById(R.id.edtCostoDomii);
         edtTipo = findViewById(R.id.edtTipo);
+        terminos = findViewById(R.id.terminos);
 
 
 
@@ -143,6 +147,13 @@ public class CrearCampesinoActivity extends AppCompatActivity {
                         .fadeColor(Color.DKGRAY).build();
                 dialog.show();
                 cuentanueva();
+            }
+        });
+
+        terminos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { Intent i = new Intent(CrearCampesinoActivity.this, TerminosActivity.class);
+            startActivity(i);
             }
         });
 

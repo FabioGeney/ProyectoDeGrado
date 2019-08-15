@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +51,7 @@ public class CrearCuentaActivity extends AppCompatActivity {
     private Button btncrearcuenta;
     private EditText edtpassword;
     private EditText edtpassword2;
+    private TextView terminos;
 
     private TextInputLayout textInputLayoutNombres;
 
@@ -85,6 +87,7 @@ public class CrearCuentaActivity extends AppCompatActivity {
         btncrearcuenta = findViewById(R.id.btncrearcuenta);
         edtpassword = findViewById(R.id.edtpassword);
         edtpassword2 = findViewById(R.id.edtpassword2);
+        terminos = findViewById(R.id.terminos);
 
         textInputLayoutNombres = findViewById(R.id.textInputLayoutNombres);
 
@@ -112,6 +115,13 @@ public class CrearCuentaActivity extends AppCompatActivity {
                         .fadeColor(Color.DKGRAY).build();
                 dialog.show();
                 cuentanueva();
+            }
+        });
+
+        terminos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { Intent i = new Intent(CrearCuentaActivity.this, TerminosActivity.class);
+                startActivity(i);
             }
         });
 

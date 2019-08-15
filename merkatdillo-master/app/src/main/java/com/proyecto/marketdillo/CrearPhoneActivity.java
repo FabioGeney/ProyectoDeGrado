@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -52,6 +53,7 @@ public class CrearPhoneActivity extends AppCompatActivity {
     private Button bnsiguiente;
     private Usuario usuario;
     private SessionManager sessionManager;
+    private TextView terminos;
 
     private static final String CERO = "0";
     private static final String BARRA = "/";
@@ -76,6 +78,7 @@ public class CrearPhoneActivity extends AppCompatActivity {
         etdidentidad = findViewById(R.id.etdidentidad);
         etdireccion = findViewById(R.id.etdireccion);
         bnsiguiente = findViewById(R.id.bnsiguiente);
+        terminos = findViewById(R.id.terminos);
 
         initialize();
         etfechanacimiento.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
@@ -101,6 +104,13 @@ public class CrearPhoneActivity extends AppCompatActivity {
                 dialog.show();
                 llenandodatos();
                 busqueda();
+            }
+        });
+
+        terminos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { Intent i = new Intent(CrearPhoneActivity.this, TerminosActivity.class);
+                startActivity(i);
             }
         });
 
