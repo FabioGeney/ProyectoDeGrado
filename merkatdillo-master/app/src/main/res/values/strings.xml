@@ -57,6 +57,7 @@
     <string name="menu_send">Send</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_example3">example3</string>
+    <string name="contactanos"><u>Contáctanos</u></string>
 
 
 </resources>

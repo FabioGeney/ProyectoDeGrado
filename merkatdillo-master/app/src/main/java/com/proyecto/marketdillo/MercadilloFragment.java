@@ -143,6 +143,9 @@ public class MercadilloFragment extends Fragment {
         tipos.add(new Categoria("Frutas", R.drawable.frutas));
         tipos.add(new Categoria("Vegetales", R.drawable.vegetales));
         tipos.add(new Categoria("Legumbres", R.drawable.legumbres));
+        tipos.add(new Categoria("Cereales", R.drawable.cereales));
+        tipos.add(new Categoria("Tubérculos", R.drawable.lostuberculos));
+        tipos.add(new Categoria("Otros", R.drawable.productosagricolas));
         return tipos;
     }
 

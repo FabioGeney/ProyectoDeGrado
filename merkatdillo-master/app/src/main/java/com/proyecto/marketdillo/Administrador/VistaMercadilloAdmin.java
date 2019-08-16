@@ -58,16 +58,7 @@ public class VistaMercadilloAdmin extends AppCompatActivity {
 
 
 
-        FloatingActionButton mensaje = findViewById(R.id.enviarMensaje);
-        mensaje.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(VistaMercadilloAdmin.this, Chat.class);
-                intent.putExtra("idDestinatario", mercadillo.getId());
-                intent.putExtra("nombreDestinatario", mercadillo.getNombre());
-                startActivity(intent);
-            }
-        });
+
 
 
         productos = getProductos();
@@ -104,13 +95,14 @@ public class VistaMercadilloAdmin extends AppCompatActivity {
                             productoAdapter = new ProductosAdminAdapter(productos, R.layout.list_producto_admin, new ProductosAdminAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(Producto producto, int posicion) {
-                                    //al hacer click en un mercadillo se va a otro activity
+                                   /* //al hacer click en un mercadillo se va a otro activity
                                     Intent intent = new Intent(VistaMercadilloAdmin.this, VistaProducto.class);
                                     Toast.makeText(VistaMercadilloAdmin.this,producto.getImagen(), Toast.LENGTH_SHORT).show();
                                     //envia informacion del mercadillo al otro activity
                                     intent.putExtra("producto", producto);
                                     intent.putExtra("index", posicion);
                                     startActivity(intent);
+                                    */
                                 }
                             });
                             //Relacionando la lista con el adaptador

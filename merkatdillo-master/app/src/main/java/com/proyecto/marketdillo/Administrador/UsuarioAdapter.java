@@ -134,7 +134,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
                                 @Override
                                 public void onSuccess(Void aVoid) {
 
-                                    Toast.makeText(context, "Mercadillo eliminado", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Usuario eliminado", Toast.LENGTH_SHORT).show();
                                     usuarios.remove(index);
                                     notifyDataSetChanged();
                                 }
@@ -145,9 +145,26 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
                                     Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             });
+                    if(colleccion.equals("Campesino")){
+                        db.collection("Mercadillo").document(id)
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
                 } else if(item[which].equals("No")){
                     dialog.dismiss();
                 }
+
             }
         });
         alert.show();

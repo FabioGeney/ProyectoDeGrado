@@ -37,8 +37,12 @@ public class VistaAdmin extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                setTitle();
+                ChatsFragment chatsFragment = new ChatsFragment();
+
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_vista_admin, chatsFragment).commit();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -132,5 +136,9 @@ public class VistaAdmin extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setTitle(){
+        this.setTitle("Mensajes");
     }
 }

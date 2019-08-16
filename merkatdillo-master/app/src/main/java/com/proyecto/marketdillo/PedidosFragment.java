@@ -101,17 +101,17 @@ public class PedidosFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
                                 String estado = document.getData().get("estado").toString();
-
-                                if(estado.equals("Finalizado")|| estado.equals("Rechazado")){
-
-                                }else {
-                                    Pedidos pedido = document.toObject(Pedidos.class);
-                                    pedido.setIdDocument(document.getId());
-                                    pedidosRequest.add(pedido);
+                                Pedidos pedido = document.toObject(Pedidos.class);
+                                pedido.setIdDocument(document.getId());
+                                switch (estado){
+                                    case "Creado":
+                                        pedidosRequest.add(pedido);
+                                        break;
+                                    case "Confirmado":
+                                        pedidosRequest.add(pedido);
+                                        break;
                                 }
-
                             }
                             // Inicializar el adaptador con la fuente de datos.
                             pedidosAdapter = new PedidosAdapter(pedidos, R.layout.list_item_pedido, new PedidosAdapter.OnItemClickListener() {

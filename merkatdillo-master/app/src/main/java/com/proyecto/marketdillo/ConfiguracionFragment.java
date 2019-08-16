@@ -57,6 +57,7 @@ public class ConfiguracionFragment extends Fragment {
     private EditText nommercadillo;
     private EditText tiempoaprox;
     private FirebaseAuth firebaseAuth;
+    private TextView contactar;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth.AuthStateListener authStateListener;
     private Button guardar;
@@ -96,6 +97,7 @@ public class ConfiguracionFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_configuracion, container, false);
         nombre = (EditText) root.findViewById(R.id.nnnnombre);
         apellido = (EditText) root.findViewById(R.id.aaaapellido);
+        contactar = (TextView) root.findViewById(R.id.contacto);
         correo = (TextView) root.findViewById(R.id.ccorreoespacio);
         celular = (TextView) root.findViewById(R.id.celuco);
         documentoidentidad = (EditText) root.findViewById(R.id.identitydocument);
@@ -106,6 +108,16 @@ public class ConfiguracionFragment extends Fragment {
         guardar = (Button) root.findViewById(R.id.guardaarr);
         cerrar = (Button) root.findViewById(R.id.cerrar);
         edtCostoDomii = root.findViewById(R.id.edtCostoDomii);
+
+        contactar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Chat.class);
+                intent.putExtra("nombreDestinatario", "Administrador");
+                intent.putExtra("idDestinatario", "KVLkzNPmORTXVuYeF0xuRU9noIm2");
+                startActivity(intent);
+            }
+        });
         //edtTipo = root.findViewById(R.id.edtTipo);
         initialize();
         cargar();

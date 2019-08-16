@@ -72,8 +72,6 @@ public class Chat extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReferenceDestinatario = firebaseDatabase.getReference(idDestinatario).child(useriD).child("Mensajes");
         databaseReferenceRemitente = firebaseDatabase.getReference(useriD).child(idDestinatario).child("Mensajes");
-        Toast.makeText(this, idDestinatario+" "+nombreDestinatario, Toast.LENGTH_SHORT).show();
-
 
         layoutManager = new LinearLayoutManager(this);
         // Instancia del recyclertView.

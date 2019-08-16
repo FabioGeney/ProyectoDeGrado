@@ -110,8 +110,10 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                 public void onClick(View v) {
                     confirmar.setVisibility(View.GONE);
                     checkConf.setImageResource(R.drawable.check_circle);
-                    enviado.setVisibility(View.VISIBLE);
                     modificaPedido("Rechazado");
+                    Intent intent = new Intent(EstadoPedidoCampesino.this, VistaCampesino.class);
+                    intent.putExtra("idPedido", "dsd");
+                    startActivity(intent);
 
 
                 }
@@ -133,6 +135,7 @@ public class EstadoPedidoCampesino extends AppCompatActivity {
                     finalizado.setVisibility(View.GONE);
                     checkFinal.setImageResource(R.drawable.check_circle);
                     modificaPedido("Finalizado");
+
                 }
             });
             // muestra los detalles del pedido

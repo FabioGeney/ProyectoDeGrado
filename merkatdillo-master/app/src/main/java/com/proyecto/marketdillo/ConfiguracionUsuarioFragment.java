@@ -4,6 +4,7 @@ package com.proyecto.marketdillo;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,7 @@ public class ConfiguracionUsuarioFragment extends Fragment {
     private EditText apellido;
     private TextView correo;
     private TextView celular;
+    private TextView contactar;
     private EditText documentoidentidad;
     private EditText fechanacimiento;
     private EditText direccion;
@@ -80,6 +82,7 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         nombre = (EditText) root.findViewById(R.id.nnnnombre);
         apellido = (EditText) root.findViewById(R.id.aaaapellido);
         correo = (TextView) root.findViewById(R.id.correo);
+        contactar = (TextView) root.findViewById(R.id.contacto);
         celular = (TextView) root.findViewById(R.id.celuco);
         documentoidentidad = (EditText) root.findViewById(R.id.identitydocument);
         fechanacimiento = (EditText) root.findViewById(R.id.birth);
@@ -94,6 +97,16 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         documentoidentidad.addTextChangedListener(loginTextWatcher);
         fechanacimiento.addTextChangedListener(loginTextWatcher);
         direccion.addTextChangedListener(loginTextWatcher);
+
+        contactar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Chat.class);
+                intent.putExtra("nombreDestinatario", "Administrador");
+                intent.putExtra("idDestinatario", "KVLkzNPmORTXVuYeF0xuRU9noIm2");
+                startActivity(intent);
+            }
+        });
 
         fechanacimiento.setOnTouchListener(new View.OnTouchListener() {
             @Override

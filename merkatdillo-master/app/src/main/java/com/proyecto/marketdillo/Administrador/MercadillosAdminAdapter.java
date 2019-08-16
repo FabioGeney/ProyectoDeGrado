@@ -136,6 +136,20 @@ public class MercadillosAdminAdapter extends RecyclerView.Adapter<MercadillosAdm
                                     Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             });
+                    db.collection("Campesino").document(id)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 } else if(item[which].equals("No")){
                     dialog.dismiss();
                 }
