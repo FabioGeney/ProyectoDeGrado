@@ -54,6 +54,16 @@ public class VistaUsuarios extends AppCompatActivity
         //almacena los datos del singleton en la variable usuario
         singletonUsuario.setUsuario(usuario);
 
+        String nombreDestinatario = getIntent().getStringExtra("nombreDestinatario");
+        String idDestinatario = getIntent().getStringExtra("idDestinatario");
+        //Solo se ejecuta cuando llega una notificacion y la app esta cerrada
+        if(idDestinatario!=null && nombreDestinatario != null){
+            Intent intent = new Intent(VistaUsuarios.this, Chat.class);
+            intent.putExtra("nombreDestinatario", nombreDestinatario);
+            intent.putExtra("idDestinatario", idDestinatario);
+            startActivity(intent);
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

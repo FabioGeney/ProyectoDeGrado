@@ -67,7 +67,7 @@ public class VistaProductosMercadillo extends AppCompatActivity implements Searc
         FloatingActionButton fab = findViewById(R.id.fab);
 
         if(canastaClass!=null){
-            if(canastaClass.getId() != mercadillo.getId() && canastaClass.getList().size()==0){
+            if(canastaClass.getId() != mercadillo.getId()){
                 fab.setVisibility(View.GONE);
             }
 

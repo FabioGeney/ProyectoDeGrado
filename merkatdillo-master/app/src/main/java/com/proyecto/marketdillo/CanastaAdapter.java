@@ -4,6 +4,7 @@ package com.proyecto.marketdillo;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public class CanastaAdapter extends RecyclerView.Adapter<CanastaAdapter.ViewHold
     private Context context;
     public TextView textTotal;
     public TextView textSubTotal;
+
 
 
     public  CanastaAdapter(List<Producto> canastas, int layout, OnItemClickListener itemClickListener ){

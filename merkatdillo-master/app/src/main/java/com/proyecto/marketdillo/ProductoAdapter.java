@@ -1,10 +1,12 @@
 package com.proyecto.marketdillo;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -30,6 +32,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     private CanastaClass canastaClass;
     private String id;
     private int domi;
+    public FloatingActionButton fab;
+
     public  ProductoAdapter(String id, int domi, List<Producto> productos, int layout, OnItemClickListener itemClickListener ){
         this.productos = productos;
         this.layout = layout;
@@ -65,6 +69,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         public TextView costoCantidad;
         public Button agregar;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imagen = (ImageView) itemView.findViewById(R.id.imagen);
@@ -72,7 +77,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             descripcion = (TextView)itemView.findViewById(R.id.descripcion);
             costoCantidad = (TextView)itemView.findViewById(R.id.precio);
             agregar = itemView.findViewById(R.id.agregar);
-
+            fab = ((VistaProductosMercadillo)context).findViewById(R.id.fab);
         }
         public void bind( final Producto producto, final OnItemClickListener listener){
             Picasso.with(context).load(producto.getImagen()).fit().into(imagen);
@@ -85,6 +90,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                 costoCantidad.setText("Lleve 1 gr por $ " + Integer.toString(producto.getPrecioCantidad()));
             }
             agregar.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("RestrictedApi")
                 @Override
                 public void onClick(View v) {
                     if(singletonCanasta.getCanasta() != null  ){
@@ -93,8 +99,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                             agregaProductos(producto, getAdapterPosition());
                         }else{
                             nuevaCanasta(producto, getAdapterPosition());
+
                         }
                     }else {
+                        fab.setVisibility(View.VISIBLE);
                         agregaProductos(producto, getAdapterPosition());
 
                     }
@@ -145,10 +153,12 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         alerta.setTitle("Aviso");
         alerta.setMessage("Para agregar porductos de este mercadillo debes vaciar la canasta");
         alerta.setPositiveButton("Vaciar Canasta", new DialogInterface.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             public void onClick(DialogInterface dialogo1, int id) {
                 canastaClass = new CanastaClass(producto.getId(), domi);
                 agregaProductos( producto, index);
                 singletonCanasta.setCanasta(canastaClass);
+                fab.setVisibility(View.VISIBLE);
             }
         });
         alerta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

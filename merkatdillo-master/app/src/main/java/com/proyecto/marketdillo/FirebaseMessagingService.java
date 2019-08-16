@@ -8,8 +8,10 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.gson.Gson;
 
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
@@ -33,6 +35,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         //click_action indica que activity abrir
+        if(!tipo.equals("Pedido") && getTipoUsuario().equals("campesino")){
+            click_action = "com.proyecto.marketdillo.NOTIFICACIONVISTACAMPESINO";
+        }else {
+            if(!tipo.equals("Pedido")){
+              click_action = "com.proyecto.marketdillo.NOTIFICACIONVISTAUSUARIO";
+            }
+        }
         Intent intent = new Intent(click_action);
         //determina si la notificacion es de mensajes o de pedidos
         if(tipo.equals("Pedido")){
@@ -48,6 +57,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             intent.putExtra("idDestinatario", id);
 
         }
+
+
         //al hacer clilck en la noificacion
         PendingIntent intentFilter = PendingIntent.getActivity(  this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(intentFilter);
@@ -56,6 +67,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(mNotificationID, builder.build());
 
+    }
+
+    private String getTipoUsuario(){
+        SessionManager sessionManager = new SessionManager(this);
+        Gson gson = new Gson();
+        String userGson = sessionManager.getUsuario();
+        Usuario usuario = gson.fromJson(userGson,Usuario.class);
+        return usuario.getTipoUsuario();
     }
 
 

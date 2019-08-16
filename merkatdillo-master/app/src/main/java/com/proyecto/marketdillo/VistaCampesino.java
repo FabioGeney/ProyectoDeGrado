@@ -57,6 +57,15 @@ public class VistaCampesino extends AppCompatActivity
 
         //Obtiene datos del intent
         String idPedido = getIntent().getStringExtra("idPedido");
+        //Solo se ejecuta cuando llega una notificacion y la app esta cerrada
+        String nombreDestinatario = getIntent().getStringExtra("nombreDestinatario");
+        String idDestinatario = getIntent().getStringExtra("idDestinatario");
+        if(idDestinatario!=null && nombreDestinatario != null){
+            Intent intent = new Intent(VistaCampesino.this, Chat.class);
+            intent.putExtra("nombreDestinatario", nombreDestinatario);
+            intent.putExtra("idDestinatario", idDestinatario);
+            startActivity(intent);
+        }
 
         if(idPedido!=null){
             //Modifica titulo del Toolbar
@@ -98,10 +107,6 @@ public class VistaCampesino extends AppCompatActivity
         correo = header.findViewById(R.id.usuariocorreo);
         correo.setText(usuario.getEmail());
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
-
 
 
     }
