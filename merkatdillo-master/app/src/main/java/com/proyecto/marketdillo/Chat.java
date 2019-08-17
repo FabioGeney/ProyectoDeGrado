@@ -63,11 +63,9 @@ public class Chat extends AppCompatActivity {
         enviar = findViewById(R.id.enviar);
         texto = findViewById(R.id.texto);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        sessionManager = new SessionManager(this);
-        Gson gson = new Gson();
-        String userGson = sessionManager.getUsuario();
-        usuario = gson.fromJson(userGson,Usuario.class);
-        final String useriD = usuario.getId();
+        final String useriD = firebaseUser.getUid();
+
+
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReferenceDestinatario = firebaseDatabase.getReference(idDestinatario).child(useriD).child("Mensajes");
@@ -154,6 +152,11 @@ public class Chat extends AppCompatActivity {
     private void sendInfoChat(String idDestinatario, String texto, String nombreDestinatario) {
 
         //almacena los datos del sessionManger en el objeto usuario
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+        Usuario usuario = singletonUsuario.getUsuario();
+        if(usuario == null){
+            usuario =  getUsuario();
+        }
 
 
         HashMap<String, Object> resultDestino = new HashMap<>();
@@ -176,6 +179,16 @@ public class Chat extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private Usuario getUsuario(){
+        sessionManager = new SessionManager(this);
+        Gson gson = new Gson();
+        String userGson = sessionManager.getUsuario();
+        usuario = gson.fromJson(userGson,Usuario.class);
+        SingletonUsuario singletonUsuario = SingletonUsuario.getInstance();
+        singletonUsuario.setUsuario(usuario);
+        return usuario;
     }
 
 

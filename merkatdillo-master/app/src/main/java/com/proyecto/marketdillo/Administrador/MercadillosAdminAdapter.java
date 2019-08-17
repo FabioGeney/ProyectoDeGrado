@@ -3,6 +3,7 @@ package com.proyecto.marketdillo.Administrador;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.proyecto.marketdillo.Chat;
 import com.proyecto.marketdillo.Mercadillo;
 import com.proyecto.marketdillo.R;
 import com.squareup.picasso.Picasso;
@@ -87,6 +89,10 @@ public class MercadillosAdminAdapter extends RecyclerView.Adapter<MercadillosAdm
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if(item[which].equals("Contactar")){
+                                Intent intent = new Intent(context, Chat.class);
+                                intent.putExtra("nombreDestinatario", mercadillo.getNombre() );
+                                intent.putExtra("idDestinatario", mercadillo.getId());
+                                context.startActivity(intent);
 
                             } else if(item[which].equals("Eliminar")){
                                 deleteMercadillo(mercadillo.getId(), getAdapterPosition());
@@ -125,7 +131,6 @@ public class MercadillosAdminAdapter extends RecyclerView.Adapter<MercadillosAdm
                                 @Override
                                 public void onSuccess(Void aVoid) {
 
-                                    Toast.makeText(context, "Mercadillo eliminado", Toast.LENGTH_SHORT).show();
                                     mercadillos.remove(index);
                                     notifyDataSetChanged();
                                 }
