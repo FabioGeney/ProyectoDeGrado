@@ -75,7 +75,7 @@ public class EstadoPedido extends AppCompatActivity {
     private void nextActivity(Pedidos pedido, String visible){
         ArrayList<Producto> productos = new ArrayList<>(pedido.getProductos());
         Intent intent = new Intent(EstadoPedido.this, VistaDetalles.class);
-        Toast.makeText(this, ""+pedido.getProductos().get(0), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ""+pedido.getProductos().get(0), Toast.LENGTH_SHORT).show();
         intent.putExtra("pedido", pedido);
         intent.putExtra("visible", visible);
         startActivity(intent);

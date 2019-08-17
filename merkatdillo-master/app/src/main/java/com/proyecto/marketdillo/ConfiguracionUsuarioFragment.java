@@ -168,7 +168,7 @@ public class ConfiguracionUsuarioFragment extends Fragment {
         documentoidentidad.setText(usuario.getDoc_identidad());
         fechanacimiento.setText(usuario.getFecha());
         direccion.setText(usuario.getDireccion());
-        Toast.makeText(getContext(), usuario.getFecha(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), usuario.getFecha(), Toast.LENGTH_SHORT).show();
     }
 
     public void editarPerfil(){

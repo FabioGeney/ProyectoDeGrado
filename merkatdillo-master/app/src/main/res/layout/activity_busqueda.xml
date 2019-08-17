@@ -40,7 +40,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/boton_espera"
-        android:text="Produtos"
+        android:text="Productos"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary2"
         app:layout_constraintEnd_toStartOf="@+id/guideline49"

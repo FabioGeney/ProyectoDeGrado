@@ -376,7 +376,7 @@ public class Actualizar extends AppCompatActivity {
             fileReference.putFile(hImagenUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Actualizar.this, "Imagen cargada", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Actualizar.this, "Imagen cargada", Toast.LENGTH_SHORT).show();
 
                     fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
