@@ -50,7 +50,6 @@ public class MercadilloFragment extends Fragment {
     private RecyclerView.Adapter mercadilloAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Mercadillo> mercadillos1;
-    private List<Mercadillo> favoritos;
     private ProgressBar progressBar;
     private DividerItemDecoration dividerItemDecoration;
     private CardView cardView;
@@ -79,6 +78,7 @@ public class MercadilloFragment extends Fragment {
 
         cardView = root.findViewById(R.id.card);
 
+
         dividerItemDecoration = new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL);
         layoutManager = new LinearLayoutManager(getContext());
@@ -103,16 +103,16 @@ public class MercadilloFragment extends Fragment {
         });
         mRecyclerViewTipo.setLayoutManager(layoutManagerTipo);
         mRecyclerViewTipo.setAdapter(categoriaAdapter);
-
         //List de mercadillos
         mercadillos1 = getMercadillos();
 
+        /*
         //list favoritos
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<Mercadillo> query = realm.where(Mercadillo.class).findAll();
+        List<Mercadillo> favoritos;
+        SingletonFavoritos singletonFavoritos = SingletonFavoritos.getInstance();
 
-        if(query.size()!=0){
-            favoritos = query;
+        if(singletonFavoritos.getFavoritos()!=null && singletonFavoritos.getFavoritos().size()!=0){
+            favoritos = singletonFavoritos.getFavoritos();
             //adapter Favoritos
             favAdapter = new MercadilloAdapter(favoritos, R.layout.list_item_mercadillo, new MercadilloAdapter.OnItemClickListener() {
                 @Override
@@ -122,17 +122,16 @@ public class MercadilloFragment extends Fragment {
                     SingletonMercadillo singletonMercadillo = SingletonMercadillo.getInstance();
                     //en caso de que ya haya un mercadillo almacenado será reemplazado por otro seleccionado por el usuario
                     singletonMercadillo.setMercadillo(mercadillo);
-                    Toast.makeText(getContext(), mercadillo.getId(), Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
             });
-            favAdapter.notifyDataSetChanged();
+
             mRecyclerViewFav.setLayoutManager(layoutManagerFav);
             mRecyclerViewFav.setAdapter(favAdapter);
         }else {
             cardView.setVisibility(View.GONE);
         }
-
+        */
 
         return root;
     }
@@ -147,6 +146,22 @@ public class MercadilloFragment extends Fragment {
         tipos.add(new Categoria("Tubérculos", R.drawable.lostuberculos));
         tipos.add(new Categoria("Otros", R.drawable.productosagricolas));
         return tipos;
+    }
+
+
+    private void getFavoritos(){
+        Realm realm = Realm.getDefaultInstance();
+        ArrayList<Mercadillo> mercadillos = new ArrayList<>();
+        SingletonFavoritos singletonFavoritos = SingletonFavoritos.getInstance();
+        RealmResults<Mercadillo> query = realm.where(Mercadillo.class).findAll();
+        if(query.size()!=0){
+            for(Mercadillo mercadillo:query){
+                mercadillos.add(mercadillo);
+            }
+
+            singletonFavoritos.setFavoritos(mercadillos);
+        }
+
     }
 
     public List<Mercadillo> getMercadillos() {

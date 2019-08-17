@@ -39,8 +39,6 @@ public class VistaAdmin extends AppCompatActivity
             public void onClick(View view) {
                 setTitle();
                 ChatsFragment chatsFragment = new ChatsFragment();
-
-
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_vista_admin, chatsFragment).commit();
             }

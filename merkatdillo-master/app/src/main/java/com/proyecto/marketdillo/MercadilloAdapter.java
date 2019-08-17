@@ -47,6 +47,7 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
         viewHolder.bind(mercadillos.get(i),itemClickListener);
     }
 
+
     @Override
     public int getItemCount() {
         return mercadillos.size();
@@ -59,6 +60,7 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
         public TextView costoEnvio ;
         public TextView calificacion ;
         public boolean[] click = {true};
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
              favorito = (ImageView) itemView.findViewById(R.id.favorito);
@@ -66,6 +68,7 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
              nombre = (TextView) itemView.findViewById(R.id.nombre);
              costoEnvio = (TextView)itemView.findViewById(R.id.costoEnvio);
              calificacion = (TextView) itemView.findViewById(R.id.calificacion);
+
         }
         public void bind( final Mercadillo mercadillo, final OnItemClickListener listener){
             Picasso.with(context).load(mercadillo.getImagen()).fit().into(imagen);
@@ -92,11 +95,14 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
                         favorito.setImageResource(R.drawable.ic_fav);
                         click[0] = false;
                         agregarFavoritos(mercadillo);
+
                     }else {
                         favorito.setImageResource(R.drawable.ic_favorito);
                         eliminarFavorito(mercadillo);
                         click[0] = true;
+
                     }
+                    notifyItemChanged(getAdapterPosition());
                 }
             });
 
@@ -144,6 +150,10 @@ public class MercadilloAdapter extends RecyclerView.Adapter<MercadilloAdapter.Vi
     public interface OnItemClickListener{
         void OnItemClick(Mercadillo mercadillo, int posicion);
 
+    }
+    public void setData(RealmResults<Mercadillo> clases) {
+        this.mercadillos = clases;
+        notifyDataSetChanged();
     }
 }
 
